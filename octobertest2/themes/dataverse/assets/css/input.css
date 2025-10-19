@@ -1,5 +1,10 @@
+/* Import your local fonts first */
+@import "./fonts.css";
+
+/* Import Tailwind’s base + utilities */
 @import "tailwindcss";
 
+/* Define your theme variables */
 @theme {
   --font-tilt: 'Tilt Neon', 'Inter', ui-sans-serif, system-ui;
   --color-dv-bg: #000000;
@@ -8,8 +13,7 @@
   --color-dv-accent2: #ff00ff;
 }
 
-
-
+/* Global font-family fallback (enforces it across everything) */
 body {
-  font-family: "Tilt Neon", Inter, ui-sans-serif, system-ui;
+  font-family: var(--font-tilt);
 }
