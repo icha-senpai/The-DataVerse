@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<permissions>
+  <permission permission_group_id="ahGamerProfiles" permission_id="canViewGamerCards" permission_type="flag" interface_group_id="ahGamerProfiles" display_order="2"/>
+  <permission permission_group_id="ahGamerProfiles" permission_id="canViewIcons" permission_type="flag" interface_group_id="ahGamerProfiles" display_order="1"/>
+</permissions>

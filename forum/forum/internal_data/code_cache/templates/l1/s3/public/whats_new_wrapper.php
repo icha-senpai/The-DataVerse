@@ -16,7 +16,36 @@ return array(
 	<a class="' . $__templater->escape($__vars['baseClass']) . ' ' . (($__vars['pageSelected'] == 'featured') ? $__templater->escape($__vars['selectedClass']) : '') . '" href="' . $__templater->func('link', array('featured', ), true) . '">' . 'Featured content' . '</a>
 	' . '
 	<a class="' . $__templater->escape($__vars['baseClass']) . ' ' . (($__vars['pageSelected'] == 'new_thread') ? $__templater->escape($__vars['selectedClass']) : '') . '" href="' . $__templater->func('link', array('whats-new/posts', ), true) . '" rel="nofollow">' . 'New posts' . '</a>
-	' . '
+	';
+	if ($__templater->method($__vars['xf']['visitor'], 'canViewMedia', array())) {
+		$__finalCompiled .= '
+	<a class="' . $__templater->escape($__vars['baseClass']) . ' ' . (($__vars['pageSelected'] == 'xfmg_new_media') ? $__templater->escape($__vars['selectedClass']) : '') . '" href="' . $__templater->func('link', array('whats-new/media', ), true) . '" rel="nofollow">' . 'New media' . '</a>
+	<a class="' . $__templater->escape($__vars['baseClass']) . ' ' . (($__vars['pageSelected'] == 'xfmg_new_comment') ? $__templater->escape($__vars['selectedClass']) : '') . '" href="' . $__templater->func('link', array('whats-new/media-comments', ), true) . '" rel="nofollow">' . 'New media comments' . '</a>
+';
+	}
+	$__finalCompiled .= '
+';
+	if ($__templater->method($__vars['xf']['visitor'], 'canViewAmsArticles', array())) {
+		$__finalCompiled .= '
+	<a class="' . $__templater->escape($__vars['baseClass']) . ' ' . (($__vars['pageSelected'] == 'ams_new_article') ? $__templater->escape($__vars['selectedClass']) : '') . '" href="' . $__templater->func('link', array('whats-new/ams-articles', ), true) . '" rel="nofollow">' . 'New articles' . '</a>
+	';
+		if ($__templater->method($__vars['xf']['visitor'], 'canViewAmsComments', array())) {
+			$__finalCompiled .= '
+		<a class="' . $__templater->escape($__vars['baseClass']) . ' ' . (($__vars['pageSelected'] == 'ams_new_comment') ? $__templater->escape($__vars['selectedClass']) : '') . '" href="' . $__templater->func('link', array('whats-new/ams-comments', ), true) . '" rel="nofollow">' . 'New article comments' . '</a>
+	';
+		}
+		$__finalCompiled .= '
+';
+	}
+	$__finalCompiled .= '
+' . '
+';
+	if ($__templater->method($__vars['xf']['visitor'], 'canViewResources', array())) {
+		$__finalCompiled .= '
+	<a class="' . $__templater->escape($__vars['baseClass']) . ' ' . (($__vars['pageSelected'] == 'new_resource') ? $__templater->escape($__vars['selectedClass']) : '') . '" href="' . $__templater->func('link', array('whats-new/resources', ), true) . '" rel="nofollow">' . 'New resources' . '</a>
+';
+	}
+	$__finalCompiled .= '
 	';
 	if ($__templater->method($__vars['xf']['visitor'], 'canViewProfilePosts', array())) {
 		$__finalCompiled .= '

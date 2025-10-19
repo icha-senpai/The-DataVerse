@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<phrases>
+  <phrase title="ah_gamerprofiles_member_view_tab" version_id="1" version_string="1.0.0"><![CDATA[Gamer cards]]></phrase>
+  <phrase title="ah_gamerprofiles_signature_code" version_id="1" version_string="1.0.0"><![CDATA[Signature code]]></phrase>
+  <phrase title="ah_gamerprofiles_xs_gamercards" version_id="1" version_string="1.0.0"><![CDATA[{name}'s gamer cards]]></phrase>
+  <phrase title="ah_gp_battlenet" version_id="205" version_string="2.0.5"><![CDATA[Battle.net]]></phrase>
+  <phrase title="ah_gp_bluesky" version_id="3000093" version_string="3.1.0"><![CDATA[Bluesky]]></phrase>
+  <phrase title="ah_gp_discord" version_id="1" version_string="1.0.0"><![CDATA[Discord]]></phrase>
+  <phrase title="ah_gp_epicgames" version_id="205" version_string="2.0.5"><![CDATA[Epic Games]]></phrase>
+  <phrase title="ah_gp_facebookgaming" version_id="215" version_string="2.1.5"><![CDATA[Facebook Gaming]]></phrase>
+  <phrase title="ah_gp_github" version_id="3000092" version_string="3.0.0 Patch Level 2"><![CDATA[GitHub]]></phrase>
+  <phrase title="ah_gp_gitlab" version_id="3000092" version_string="3.0.0 Patch Level 2"><![CDATA[GitLab]]></phrase>
+  <phrase title="ah_gp_guilded" version_id="300" version_string="3.0.0 Beta 1"><![CDATA[Guilded]]></phrase>
+  <phrase title="ah_gp_icons" version_id="1" version_string="1.0.0"><![CDATA[Icons]]></phrase>
+  <phrase title="ah_gp_instagram" version_id="3000092" version_string="3.0.0 Patch Level 2"><![CDATA[Instagram]]></phrase>
+  <phrase title="ah_gp_kick" version_id="3000092" version_string="3.0.0 Patch Level 2"><![CDATA[Kick]]></phrase>
+  <phrase title="ah_gp_mixer" version_id="2" version_string="2.0.0"><![CDATA[Mixer]]></phrase>
+  <phrase title="ah_gp_nintendo" version_id="3000092" version_string="3.0.0 Patch Level 2"><![CDATA[Nintendo]]></phrase>
+  <phrase title="ah_gp_oculus" version_id="213" version_string="2.1.3"><![CDATA[Oculus]]></phrase>
+  <phrase title="ah_gp_origin" version_id="205" version_string="2.0.5"><![CDATA[Origin]]></phrase>
+  <phrase title="ah_gp_playstation" version_id="1" version_string="1.0.0"><![CDATA[PlayStation]]></phrase>
+  <phrase title="ah_gp_reddit" version_id="3000092" version_string="3.0.0 Patch Level 2"><![CDATA[Reddit]]></phrase>
+  <phrase title="ah_gp_roblox" version_id="3000092" version_string="3.0.0 Patch Level 2"><![CDATA[Roblox]]></phrase>
+  <phrase title="ah_gp_secondlife" version_id="211" version_string="2.1.1"><![CDATA[Second Life]]></phrase>
+  <phrase title="ah_gp_steam" version_id="1" version_string="1.0.0"><![CDATA[Steam]]></phrase>
+  <phrase title="ah_gp_telegram" version_id="3000092" version_string="3.0.0 Patch Level 2"><![CDATA[Telegram]]></phrase>
+  <phrase title="ah_gp_tiktok" version_id="3000092" version_string="3.0.0 Patch Level 2"><![CDATA[TikTok]]></phrase>
+  <phrase title="ah_gp_twitch" version_id="1" version_string="1.0.0"><![CDATA[Twitch]]></phrase>
+  <phrase title="ah_gp_xbox" version_id="1" version_string="1.0.0"><![CDATA[Xbox]]></phrase>
+  <phrase title="ah_gp_youtube" version_id="1" version_string="1.0.0"><![CDATA[YouTube]]></phrase>
+  <phrase title="ah_mixer" version_id="2" version_string="2.0.0"><![CDATA[Mixer]]></phrase>
+  <phrase title="permission.ahGamerProfiles_canViewGamerCards" version_id="2" version_string="2.0.0"><![CDATA[View member gamer cards]]></phrase>
+  <phrase title="permission.ahGamerProfiles_canViewIcons" version_id="2" version_string="2.0.0"><![CDATA[View gamer profile icons]]></phrase>
+  <phrase title="permission_interface.ahGamerProfiles" version_id="2" version_string="2.0.0"><![CDATA[[AH] Gamer Profiles]]></phrase>
+  <phrase title="style_prop.ahGPColorBattlenet" version_id="205" version_string="2.0.5"><![CDATA[Battle.net icon color]]></phrase>
+  <phrase title="style_prop.ahGPColorBlueSky" version_id="3000093" version_string="3.1.0"><![CDATA[Bluesky icon color]]></phrase>
+  <phrase title="style_prop.ahGPColorDiscord" version_id="1" version_string="1.0.0"><![CDATA[Discord icon color]]></phrase>
+  <phrase title="style_prop.ahGPColorEpicGames" version_id="205" version_string="2.0.5"><![CDATA[Epic Games icon color]]></phrase>
+  <phrase title="style_prop.ahGPColorFacebook" version_id="2" version_string="2.0.0"><![CDATA[Facebook icon color]]></phrase>
+  <phrase title="style_prop.ahGPColorGitHub" version_id="3000092" version_string="3.0.0 Patch Level 2"><![CDATA[GitHub icon color]]></phrase>
+  <phrase title="style_prop.ahGPColorGitLab" version_id="3000092" version_string="3.0.0 Patch Level 2"><![CDATA[GitLab icon color]]></phrase>
+  <phrase title="style_prop.ahGPColorGuilded" version_id="300" version_string="3.0.0 Beta 1"><![CDATA[Guilded icon color]]></phrase>
+  <phrase title="style_prop.ahGPColorInstagram" version_id="3000092" version_string="3.0.0 Patch Level 2"><![CDATA[Instagram icon color]]></phrase>
+  <phrase title="style_prop.ahGPColorKick" version_id="3000092" version_string="3.0.0 Patch Level 2"><![CDATA[Kick icon color]]></phrase>
+  <phrase title="style_prop.ahGPColorNintendo" version_id="3000092" version_string="3.0.0 Patch Level 2"><![CDATA[Nintendo icon color]]></phrase>
+  <phrase title="style_prop.ahGPColorOrigin" version_id="3000092" version_string="3.0.0 Patch Level 2"><![CDATA[EA icon color]]></phrase>
+  <phrase title="style_prop.ahGPColorPlayStation" version_id="1" version_string="1.0.0"><![CDATA[PlayStation icon color]]></phrase>
+  <phrase title="style_prop.ahGPColorReddit" version_id="3000092" version_string="3.0.0 Patch Level 2"><![CDATA[Reddit icon color]]></phrase>
+  <phrase title="style_prop.ahGPColorRoblox" version_id="3000092" version_string="3.0.0 Patch Level 2"><![CDATA[Roblox icon color]]></phrase>
+  <phrase title="style_prop.ahGPColorSecondLife" version_id="211" version_string="2.1.1"><![CDATA[Second Life icon color]]></phrase>
+  <phrase title="style_prop.ahGPColorSteam" version_id="1" version_string="1.0.0"><![CDATA[Steam icon color]]></phrase>
+  <phrase title="style_prop.ahGPColorTelegram" version_id="3000092" version_string="3.0.0 Patch Level 2"><![CDATA[Telegram icon color]]></phrase>
+  <phrase title="style_prop.ahGPColorTikTok" version_id="3000092" version_string="3.0.0 Patch Level 2"><![CDATA[TikTok icon color]]></phrase>
+  <phrase title="style_prop.ahGPColorTwitch" version_id="1" version_string="1.0.0"><![CDATA[Twitch icon color]]></phrase>
+  <phrase title="style_prop.ahGPColorTwitter" version_id="3000092" version_string="3.0.0 Patch Level 2"><![CDATA[Twitter/X icon color]]></phrase>
+  <phrase title="style_prop.ahGPColorXbox" version_id="1" version_string="1.0.0"><![CDATA[Xbox icon color]]></phrase>
+  <phrase title="style_prop.ahGPColorYouTube" version_id="1" version_string="1.0.0"><![CDATA[YouTube icon color]]></phrase>
+  <phrase title="style_prop.ahGPGamerCardMargin" version_id="203" version_string="2.0.3 Beta"><![CDATA[Gamer card margin-top]]></phrase>
+  <phrase title="style_prop.ahGPIconHeight" version_id="215" version_string="2.1.5"><![CDATA[Icon height]]></phrase>
+  <phrase title="style_prop.ahGPIconStyle" version_id="3000092" version_string="3.0.0 Patch Level 2"><![CDATA[Postbit icon style]]></phrase>
+  <phrase title="style_prop.ahGPIconWidth" version_id="215" version_string="2.1.5"><![CDATA[Icon width]]></phrase>
+  <phrase title="style_prop.ahGPIconsContainer" version_id="1" version_string="1.0.0"><![CDATA[Icons container]]></phrase>
+  <phrase title="style_prop.ahGPMemberProfile" version_id="3010300" version_string="3.1.3"><![CDATA[Display social profile icons in member profile.]]></phrase>
+  <phrase title="style_prop.ahGPMemberTooltip" version_id="1" version_string="1.0.0"><![CDATA[Member tooltip container]]></phrase>
+  <phrase title="style_prop.ahGPMessage" version_id="1" version_string="1.0.0"><![CDATA[Message user info container]]></phrase>
+  <phrase title="style_prop.ahGPStatus" version_id="1" version_string="1.0.0"><![CDATA[Status]]></phrase>
+  <phrase title="style_prop.ahGPTooltip" version_id="3010300" version_string="3.1.3"><![CDATA[Display social profile icons in member tooltip.]]></phrase>
+  <phrase title="style_prop.ahGPUnifiedIconColor" version_id="300" version_string="3.0.0"><![CDATA[Unified icon color]]></phrase>
+  <phrase title="style_prop.ahGPUnifyColorsCheck" version_id="300" version_string="3.0.0"><![CDATA[Unify icon colors when user has a profile banner]]></phrase>
+  <phrase title="style_prop_desc.ahGPColorBattlenet" version_id="205" version_string="2.0.5"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.ahGPColorBlueSky" version_id="3000093" version_string="3.1.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.ahGPColorDiscord" version_id="1" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.ahGPColorEpicGames" version_id="205" version_string="2.0.5"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.ahGPColorFacebook" version_id="2" version_string="2.0.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.ahGPColorGitHub" version_id="3000092" version_string="3.0.0 Patch Level 2"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.ahGPColorGitLab" version_id="3000092" version_string="3.0.0 Patch Level 2"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.ahGPColorGuilded" version_id="300" version_string="3.0.0 Beta 1"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.ahGPColorInstagram" version_id="3000092" version_string="3.0.0 Patch Level 2"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.ahGPColorKick" version_id="3000092" version_string="3.0.0 Patch Level 2"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.ahGPColorNintendo" version_id="3000092" version_string="3.0.0 Patch Level 2"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.ahGPColorOrigin" version_id="205" version_string="2.0.5"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.ahGPColorPlayStation" version_id="1" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.ahGPColorReddit" version_id="3000092" version_string="3.0.0 Patch Level 2"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.ahGPColorRoblox" version_id="3000092" version_string="3.0.0 Patch Level 2"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.ahGPColorSecondLife" version_id="211" version_string="2.1.1"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.ahGPColorSteam" version_id="1" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.ahGPColorTelegram" version_id="3000092" version_string="3.0.0 Patch Level 2"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.ahGPColorTikTok" version_id="3000092" version_string="3.0.0 Patch Level 2"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.ahGPColorTwitch" version_id="1" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.ahGPColorTwitter" version_id="2" version_string="2.0.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.ahGPColorXbox" version_id="1" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.ahGPColorYouTube" version_id="1" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.ahGPGamerCardMargin" version_id="203" version_string="2.0.3 Beta"><![CDATA[This adjusts the margin-top property of the gamer card popup. You may have to adjust this depending on how you decide to style the icons in the postbit.]]></phrase>
+  <phrase title="style_prop_desc.ahGPIconHeight" version_id="215" version_string="2.1.5"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.ahGPIconStyle" version_id="3000092" version_string="3.0.0 Patch Level 2"><![CDATA[You can choose which style to display the icons in. This uses justify-content to control the style. Feel free to choose "None" and make your own using the the "Message user icon container" style property below.]]></phrase>
+  <phrase title="style_prop_desc.ahGPIconWidth" version_id="215" version_string="2.1.5"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.ahGPIconsContainer" version_id="1" version_string="1.0.0"><![CDATA[Affects all icons regardless of placement]]></phrase>
+  <phrase title="style_prop_desc.ahGPMemberProfile" version_id="3010300" version_string="3.1.3"><![CDATA[This will not affect the gamer cards tab.]]></phrase>
+  <phrase title="style_prop_desc.ahGPMemberTooltip" version_id="1" version_string="1.0.0"><![CDATA[Only affects icons in the member tooltip container]]></phrase>
+  <phrase title="style_prop_desc.ahGPMessage" version_id="1" version_string="1.0.0"><![CDATA[Only affects icons in the message user info]]></phrase>
+  <phrase title="style_prop_desc.ahGPStatus" version_id="3010400" version_string="3.1.4"><![CDATA[The elements selected here will be displayed in the message user info, member tooltip, and member profile.]]></phrase>
+  <phrase title="style_prop_desc.ahGPTooltip" version_id="1" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.ahGPUnifiedIconColor" version_id="300" version_string="3.0.0"><![CDATA[This setting only works when you check the above setting. Use this to unify all icon colors when users have a profile banner.]]></phrase>
+  <phrase title="style_prop_desc.ahGPUnifyColorsCheck" version_id="300" version_string="3.0.0"><![CDATA[Check this setting if you wish to unify all icon colors when users have a profile banner.]]></phrase>
+  <phrase title="style_prop_group.ah_gamerprofiles" version_id="3000092" version_string="3.0.0 Patch Level 2"><![CDATA[[AH] Social Profiles]]></phrase>
+  <phrase title="style_prop_group_desc.ah_gamerprofiles" version_id="3000092" version_string="3.0.0 Patch Level 2"><![CDATA[Style properties for [AH] Social Profiles]]></phrase>
+  <phrase title="user_field_desc.ah_battlenet" version_id="205" version_string="2.0.5"><![CDATA[Enter your Battletag here]]></phrase>
+  <phrase title="user_field_desc.ah_bluesky" version_id="3000095" version_string="3.1.1 Hotfix"><![CDATA[For normal accounts, please include your entire handle extension, highlighted in red. 
+<br>
+bsky.app/profile/<span style="color:red">handle.bsky.social</span>
+<br><br>
+For verified accounts, please include only your handle, highlighted in red.  
+<br>
+bsky.app/profile/<span style="color:red">handle</span>]]></phrase>
+  <phrase title="user_field_desc.ah_discord" version_id="201" version_string="2.0.1 Beta"><![CDATA[Enter your discord username here]]></phrase>
+  <phrase title="user_field_desc.ah_epicgames" version_id="205" version_string="2.0.5"><![CDATA[Enter your Epic Games username here.]]></phrase>
+  <phrase title="user_field_desc.ah_github" version_id="3000093" version_string="3.1.0"><![CDATA[Please enter your GitHub username here.]]></phrase>
+  <phrase title="user_field_desc.ah_gitlab" version_id="3000093" version_string="3.1.0"><![CDATA[Please enter your GitLab username here.]]></phrase>
+  <phrase title="user_field_desc.ah_guilded" version_id="3000093" version_string="3.1.0"><![CDATA[Enter your Guilded.gg username here.]]></phrase>
+  <phrase title="user_field_desc.ah_instagram" version_id="3000093" version_string="3.1.0"><![CDATA[Please enter your Instagram username here.]]></phrase>
+  <phrase title="user_field_desc.ah_kick" version_id="3000093" version_string="3.1.0"><![CDATA[Please enter your Kick username here.]]></phrase>
+  <phrase title="user_field_desc.ah_nintendo" version_id="3000093" version_string="3.1.0"><![CDATA[Please include your unique 12-digit Nintendo online friend code here.]]></phrase>
+  <phrase title="user_field_desc.ah_origin" version_id="3000093" version_string="3.1.0"><![CDATA[Enter your Origin username here to link to your Origin stats on http://exophase.com]]></phrase>
+  <phrase title="user_field_desc.ah_playstation" version_id="201" version_string="2.0.1 Beta"><![CDATA[Enter your PSN ID here to link to your Playstation stats on http://exophase.com]]></phrase>
+  <phrase title="user_field_desc.ah_reddit" version_id="3000093" version_string="3.1.0"><![CDATA[Please enter your Reddit username here.]]></phrase>
+  <phrase title="user_field_desc.ah_roblox" version_id="3000093" version_string="3.1.0"><![CDATA[Please enter your Roblox username here.]]></phrase>
+  <phrase title="user_field_desc.ah_secondlife" version_id="211" version_string="2.1.1"><![CDATA[Enter your Second Life username here.]]></phrase>
+  <phrase title="user_field_desc.ah_steam" version_id="201" version_string="2.0.1 Beta"><![CDATA[Enter your Steam name here to link to your Steam stats on http://exophase.com
+NOTE: This is not your steam username or display name. It is your custom Profile ID. Look at the image for details:: http://prntscr.com/7b2340]]></phrase>
+  <phrase title="user_field_desc.ah_telegram" version_id="3000093" version_string="3.1.0"><![CDATA[Please enter your Telegram username here.]]></phrase>
+  <phrase title="user_field_desc.ah_tiktok" version_id="3000093" version_string="3.1.0"><![CDATA[Please enter your TikTok username here. Do not include the @ sign.]]></phrase>
+  <phrase title="user_field_desc.ah_twitch" version_id="3000093" version_string="3.1.0"><![CDATA[Enter your Twitch username here.]]></phrase>
+  <phrase title="user_field_desc.ah_xbox" version_id="201" version_string="2.0.1 Beta"><![CDATA[Enter your Xbox Live user ID here to link to your Xbox Live stats on http://exophase.com]]></phrase>
+  <phrase title="user_field_desc.ah_youtube" version_id="3000093" version_string="3.1.0"><![CDATA[Enter you YouTube channel username here.]]></phrase>
+  <phrase title="user_field_title.ah_battlenet" version_id="205" version_string="2.0.5"><![CDATA[Battle.net]]></phrase>
+  <phrase title="user_field_title.ah_bluesky" version_id="3000093" version_string="3.1.0"><![CDATA[Bluesky]]></phrase>
+  <phrase title="user_field_title.ah_discord" version_id="201" version_string="2.0.1 Beta"><![CDATA[Discord]]></phrase>
+  <phrase title="user_field_title.ah_epicgames" version_id="205" version_string="2.0.5"><![CDATA[Epic Games]]></phrase>
+  <phrase title="user_field_title.ah_github" version_id="3000093" version_string="3.1.0"><![CDATA[GitHub]]></phrase>
+  <phrase title="user_field_title.ah_gitlab" version_id="3000093" version_string="3.1.0"><![CDATA[GitLab]]></phrase>
+  <phrase title="user_field_title.ah_guilded" version_id="300" version_string="3.0.0 Beta 1"><![CDATA[Guilded.gg]]></phrase>
+  <phrase title="user_field_title.ah_instagram" version_id="3000093" version_string="3.1.0"><![CDATA[Instagram]]></phrase>
+  <phrase title="user_field_title.ah_kick" version_id="3000093" version_string="3.1.0"><![CDATA[Kick]]></phrase>
+  <phrase title="user_field_title.ah_nintendo" version_id="3000093" version_string="3.1.0"><![CDATA[Nintendo Friend Code]]></phrase>
+  <phrase title="user_field_title.ah_origin" version_id="205" version_string="2.0.5"><![CDATA[Origin]]></phrase>
+  <phrase title="user_field_title.ah_playstation" version_id="201" version_string="2.0.1 Beta"><![CDATA[PlayStation ID]]></phrase>
+  <phrase title="user_field_title.ah_reddit" version_id="3000093" version_string="3.1.0"><![CDATA[Reddit]]></phrase>
+  <phrase title="user_field_title.ah_roblox" version_id="3000093" version_string="3.1.0"><![CDATA[Roblox]]></phrase>
+  <phrase title="user_field_title.ah_secondlife" version_id="211" version_string="2.1.1"><![CDATA[Second Life]]></phrase>
+  <phrase title="user_field_title.ah_steam" version_id="201" version_string="2.0.1 Beta"><![CDATA[Steam ID]]></phrase>
+  <phrase title="user_field_title.ah_telegram" version_id="3000093" version_string="3.1.0"><![CDATA[Telegram]]></phrase>
+  <phrase title="user_field_title.ah_tiktok" version_id="3000093" version_string="3.1.0"><![CDATA[TikTok]]></phrase>
+  <phrase title="user_field_title.ah_twitch" version_id="201" version_string="2.0.1 Beta"><![CDATA[Twitch]]></phrase>
+  <phrase title="user_field_title.ah_xbox" version_id="201" version_string="2.0.1 Beta"><![CDATA[Xbox Live Gamertag]]></phrase>
+  <phrase title="user_field_title.ah_youtube" version_id="201" version_string="2.0.1 Beta"><![CDATA[YouTube]]></phrase>
+</phrases>

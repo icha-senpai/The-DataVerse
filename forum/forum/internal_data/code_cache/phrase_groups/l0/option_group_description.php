@@ -32,4 +32,7 @@ You may set a user into \'discouraged\' mode by editing their user profile, or d
   'option_group_description.th_uix' => 'Options in this group allow you to customize your UI.X experience.',
   'option_group_description.users' => '',
   'option_group_description.usersAndRegistration' => '',
+  'option_group_description.xaAms' => 'Options that control the article management system add-on.',
+  'option_group_description.xfmg' => 'Options that control the media gallery add-on.',
+  'option_group_description.xfrm' => 'Options that control the resource manager add-on.',
 );

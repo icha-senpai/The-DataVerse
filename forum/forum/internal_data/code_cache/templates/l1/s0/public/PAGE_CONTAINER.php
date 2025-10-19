@@ -484,7 +484,18 @@ return array(
 	}
 	$__compilerTemp1 .= '
 
-						';
+										';
+	if ($__vars['xf']['session']['amsArticlesQueue']['pendingCount'] AND ($__vars['xf']['visitor']['is_moderator'] AND ($__templater->method($__vars['xf']['visitor'], 'canViewAmsArticles', array()) AND $__templater->method($__vars['xf']['visitor'], 'canViewAmsArticlesQueue', array())))) {
+		$__compilerTemp1 .= '
+					<a href="' . $__templater->func('link', array('ams/articles-queue', ), true) . '"class="p-staffBar-link badgeContainer badgeContainer--highlighted" data-badge="' . $__templater->filter($__vars['xf']['session']['amsArticlesQueue']['pendingCount'], array(array('number', array()),), true) . '">
+						' . 'Articles queue' . '
+					</a>
+				';
+	}
+	$__compilerTemp1 .= '
+
+
+				';
 	if ($__vars['xf']['visitor']['is_moderator'] AND ((!$__vars['xf']['options']['reportIntoForumId']) AND $__vars['xf']['session']['reportCounts']['total'])) {
 		$__compilerTemp1 .= '
 							<a href="' . $__templater->func('link', array('reports', ), true) . '"
@@ -515,7 +526,15 @@ return array(
 										';
 	}
 	$__compilerTemp2 .= '
-										' . '
+										';
+	if ($__vars['xf']['visitor']['is_moderator'] AND ($__templater->method($__vars['xf']['visitor'], 'canViewAmsArticles', array()) AND $__templater->method($__vars['xf']['visitor'], 'canViewAmsArticlesQueue', array()))) {
+		$__compilerTemp2 .= '
+	<a href="' . $__templater->func('link', array('ams/articles-queue', ), true) . '" class="menu-linkRow">' . 'Articles queue' . '</a>
+';
+	}
+	$__compilerTemp2 .= '
+
+' . '
 									';
 	if (strlen(trim($__compilerTemp2)) > 0) {
 		$__compilerTemp1 .= '

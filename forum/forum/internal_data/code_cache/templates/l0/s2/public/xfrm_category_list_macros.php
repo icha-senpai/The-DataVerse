@@ -187,7 +187,7 @@ return array(
 				<div class="node-meta">
 					<div class="node-statsMeta">
 						<dl class="pairs pairs--inline">
-							<dt>' . 'xfrm_resources' . '</dt>
+							<dt>' . 'Resources' . '</dt>
 							<dd>' . $__templater->filter($__vars['extras']['resource_count'], array(array('number', array()),), true) . '</dd>
 						</dl>
 					</div>
@@ -204,7 +204,7 @@ return array(
 
 			<div class="node-stats node-stats--single">
 				<dl class="pairs pairs--rows">
-					<dt>' . 'xfrm_resources' . '</dt>
+					<dt>' . 'Resources' . '</dt>
 					<dd>' . $__templater->filter($__vars['extras']['resource_count'], array(array('number', array()),), true) . '</dd>
 				</dl>
 			</div>

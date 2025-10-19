@@ -19,7 +19,10 @@ return array(
 			'canViewAttachments' => $__vars['canView'],
 		), $__vars) . '
 
-			<a class="file-preview ' . ($__vars['canView'] ? 'js-lbImage' : '') . '" href="' . $__templater->escape($__vars['attachment']['direct_url']) . '" target="_blank">
+			';
+		$__vars['args'] = array('attachment' => $__vars['attachment'], );
+		$__finalCompiled .= '
+<a class="file-preview ' . ($__vars['canView'] ? 'js-lbImage' : '') . '" data-lb-sidebar-href="' . $__templater->filter($__templater->func('call_macro', array('xfmg_attachment_mirror_macros::lightbox_sidebar_href', $__vars['args'], ), false), array(array('for_attr', array()),), true) . '" data-lb-caption-extra-html="' . $__templater->filter($__templater->func('call_macro', array('xfmg_attachment_mirror_macros::lightbox_caption', $__vars['args'], ), false), array(array('for_attr', array()),), true) . '" href="' . $__templater->escape($__vars['attachment']['direct_url']) . '" target="_blank">
 				<img src="' . $__templater->escape($__vars['attachment']['thumbnail_url']) . '" alt="' . $__templater->escape($__vars['attachment']['filename']) . '"
 					width="' . $__templater->escape($__vars['attachment']['thumbnail_width']) . '" height="' . $__templater->escape($__vars['attachment']['thumbnail_height']) . '" loading="lazy" />
 			</a>

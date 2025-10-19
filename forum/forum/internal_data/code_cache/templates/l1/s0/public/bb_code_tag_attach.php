@@ -49,7 +49,12 @@ return array(
 	';
 		} else {
 			$__compilerTemp1 .= '
-		' . $__templater->callMacro(null, 'lightbox_macros::single_image', array(
+		';
+			$__vars['args'] = array('attachment' => $__vars['attachment'], );
+			$__compilerTemp1 .= '
+' . $__templater->callMacro(null, 'lightbox_macros::single_image', array(
+				'sidebarHref' => $__templater->func('call_macro', array('xfmg_attachment_mirror_macros::lightbox_sidebar_href', $__vars['args'], ), false),
+				'captionExtraHtml' => $__templater->func('call_macro', array('xfmg_attachment_mirror_macros::lightbox_caption', $__vars['args'], ), false),
 				'canViewAttachments' => $__vars['canView'],
 				'id' => 'attachment' . $__vars['attachment']['attachment_id'],
 				'src' => $__templater->func('link', array('full:attachments', $__vars['attachment'], array('hash' => $__vars['attachment']['temp_hash'], ), ), false),
@@ -66,12 +71,14 @@ return array(
 	' . $__compilerTemp1 . '
 '), false);
 	} else if ($__vars['canView'] AND (!$__vars['noLightbox'])) {
+		$__vars['args'] = array('attachment' => $__vars['attachment'], );
 		$__finalCompiled .= $__templater->func('trim', array('
 	' . $__templater->callMacro(null, 'lightbox_macros::setup', array(
 			'canViewAttachments' => $__vars['canView'],
 		), $__vars) . '
-	<a href="' . $__templater->func('link', array('full:attachments', $__vars['attachment'], array('hash' => $__vars['attachment']['temp_hash'], ), ), true) . '"
-		target="_blank" class="js-lbImage"><img src="' . $__templater->escape($__vars['attachment']['thumbnail_url_full']) . '"
+	' . '' . '
+<a href="' . $__templater->func('link', array('full:attachments', $__vars['attachment'], array('hash' => $__vars['attachment']['temp_hash'], ), ), true) . '"
+		target="_blank" class="js-lbImage" data-lb-sidebar-href="' . $__templater->filter($__templater->func('call_macro', array('xfmg_attachment_mirror_macros::lightbox_sidebar_href', $__vars['args'], ), false), array(array('for_attr', array()),), true) . '" data-lb-caption-extra-html="' . $__templater->filter($__templater->func('call_macro', array('xfmg_attachment_mirror_macros::lightbox_caption', $__vars['args'], ), false), array(array('for_attr', array()),), true) . '"><img src="' . $__templater->escape($__vars['attachment']['thumbnail_url_full']) . '"
 		class="bbImage ' . $__templater->escape($__vars['alignClass']) . '"
 		style="' . $__templater->escape($__vars['styleAttr']) . '"
 		alt="' . $__templater->escape($__vars['alt']) . '"

@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<options>
+  <option option_id="xaAmsAllowedFileExtensions" edit_format="textbox" data_type="string">
+    <default_value>zip
+txt
+pdf
+png
+jpg
+jpeg
+jpe
+gif</default_value>
+    <edit_format_params>rows=6</edit_format_params>
+    <relation group_id="xaAms" display_order="6114"/>
+  </option>
+  <option option_id="xaAmsArticleAttachmentMaxFileSize" edit_format="spinbox" data_type="unsigned_integer">
+    <default_value>2048</default_value>
+    <edit_format_params>min=0
+step=1
+units={{ phrase('units_kb') }}</edit_format_params>
+    <relation group_id="xaAms" display_order="6110"/>
+  </option>
+  <option option_id="xaAmsArticleDeleteThreadAction" edit_format="template" data_type="array">
+    <default_value>{"action":"close","update_title":"1","title_template":"{title} [Deleted]","add_post":"1"}</default_value>
+    <edit_format_params>option_template_xaAmsArticleDeleteThreadAction</edit_format_params>
+    <sub_options>action
+update_title
+title_template
+add_post</sub_options>
+    <relation group_id="xaAms" display_order="5500"/>
+  </option>
+  <option option_id="xaAmsArticleListLayoutType" edit_format="radio" data_type="string">
+    <default_value>list_view</default_value>
+    <edit_format_params>list_view={{ phrase('xa_ams_list_view_layout') }}
+grid_view={{ phrase('xa_ams_grid_view_layout') }}
+tile_view={{ phrase('xa_ams_tile_view_layout') }}
+article_view={{ phrase('xa_ams_article_view_layout') }}</edit_format_params>
+    <relation group_id="xaAms" display_order="1082"/>
+  </option>
+  <option option_id="xaAmsArticleMaxLength" edit_format="spinbox" data_type="unsigned_integer">
+    <default_value>50000</default_value>
+    <edit_format_params>min=0</edit_format_params>
+    <relation group_id="xaAms" display_order="2010"/>
+  </option>
+  <option option_id="xaAmsArticlesPerPage" edit_format="spinbox" data_type="positive_integer">
+    <default_value>20</default_value>
+    <edit_format_params>min=1</edit_format_params>
+    <relation group_id="xaAms" display_order="1085"/>
+  </option>
+  <option option_id="xaAmsArticlesPerPageAV" edit_format="spinbox" data_type="positive_integer">
+    <default_value>10</default_value>
+    <edit_format_params>min=1</edit_format_params>
+    <relation group_id="xaAms" display_order="1088"/>
+  </option>
+  <option option_id="xaAmsArticlesPerPageGV" edit_format="spinbox" data_type="positive_integer">
+    <default_value>18</default_value>
+    <edit_format_params>min=1</edit_format_params>
+    <relation group_id="xaAms" display_order="1086"/>
+  </option>
+  <option option_id="xaAmsArticlesPerPageTV" edit_format="spinbox" data_type="positive_integer">
+    <default_value>18</default_value>
+    <edit_format_params>min=1</edit_format_params>
+    <relation group_id="xaAms" display_order="1086"/>
+  </option>
+  <option option_id="xaAmsAuthorOtherArticlesCount" edit_format="spinbox" data_type="unsigned_integer">
+    <default_value>5</default_value>
+    <edit_format_params>min=0</edit_format_params>
+    <relation group_id="xaAms" display_order="2320"/>
+  </option>
+  <option option_id="xaAmsAutoUnfeatureArticles" edit_format="onofftextbox" data_type="array">
+    <default_value>{"enabled":"0","days":"180"}</default_value>
+    <edit_format_params>onoff=enabled
+value=days
+type=spinbox
+min=1
+default=180
+units={{ phrase('units_days') }}</edit_format_params>
+    <sub_options>enabled
+days</sub_options>
+    <relation group_id="xaAms" display_order="5100"/>
+  </option>
+  <option option_id="xaAmsCategoryOtherArticlesCount" edit_format="spinbox" data_type="unsigned_integer">
+    <default_value>5</default_value>
+    <edit_format_params>min=0</edit_format_params>
+    <relation group_id="xaAms" display_order="2310"/>
+  </option>
+  <option option_id="xaAmsCommentMaxLength" edit_format="spinbox" data_type="unsigned_integer">
+    <default_value>10000</default_value>
+    <edit_format_params>min=0</edit_format_params>
+    <relation group_id="xaAms" display_order="2014"/>
+  </option>
+  <option option_id="xaAmsCommentsPerPage" edit_format="spinbox" data_type="positive_integer">
+    <default_value>20</default_value>
+    <edit_format_params>min=1</edit_format_params>
+    <relation group_id="xaAms" display_order="2112"/>
+  </option>
+  <option option_id="xaAmsDisplayShareBelowArticle" edit_format="onoff" data_type="boolean">
+    <default_value>0</default_value>
+    <relation group_id="xaAms" display_order="2405"/>
+  </option>
+  <option option_id="xaAmsDisplayUserProfileAboutMe" edit_format="onoff" data_type="boolean">
+    <default_value>0</default_value>
+    <relation group_id="xaAms" display_order="2420"/>
+  </option>
+  <option option_id="xaAmsExcludeFeaturedArticlesFromListing" edit_format="onoff" data_type="boolean">
+    <default_value>0</default_value>
+    <relation group_id="xaAms" display_order="1002"/>
+  </option>
+  <option option_id="xaAmsExcludeFeaturedSeriesFromListing" edit_format="onoff" data_type="boolean">
+    <default_value>0</default_value>
+    <relation group_id="xaAms" display_order="3002"/>
+  </option>
+  <option option_id="xaAmsExpandCategoryNav" edit_format="onoff" data_type="boolean">
+    <default_value>0</default_value>
+    <relation group_id="xaAms" display_order="210"/>
+  </option>
+  <option option_id="xaAmsFeaturedArticlesDisplayType" edit_format="radio" data_type="string">
+    <default_value>carousel</default_value>
+    <edit_format_params>carousel={{ phrase('xa_ams_carousel') }}
+featured_grid={{ phrase('xa_ams_grid_block') }}</edit_format_params>
+    <relation group_id="xaAms" display_order="1000"/>
+  </option>
+  <option option_id="xaAmsFeaturedArticlesLimit" edit_format="spinbox" data_type="unsigned_integer">
+    <default_value>5</default_value>
+    <edit_format_params>min=0</edit_format_params>
+    <relation group_id="xaAms" display_order="1001"/>
+  </option>
+  <option option_id="xaAmsFeaturedSeriesLimit" edit_format="spinbox" data_type="unsigned_integer">
+    <default_value>5</default_value>
+    <edit_format_params>min=0</edit_format_params>
+    <relation group_id="xaAms" display_order="3001"/>
+  </option>
+  <option option_id="xaAmsFilesLocation" edit_format="radio" data_type="string">
+    <default_value>sidebar</default_value>
+    <edit_format_params>below_article={{ phrase('xa_ams_below_article') }}
+sidebar={{ phrase('xa_ams_sidebar_block') }}</edit_format_params>
+    <relation group_id="xaAms" display_order="2512"/>
+  </option>
+  <option option_id="xaAmsGalleryLocation" edit_format="radio" data_type="string">
+    <default_value>own_tab</default_value>
+    <edit_format_params>own_tab={{ phrase('xa_ams_own_tab') }}
+below_article={{ phrase('xa_ams_below_article') }}
+no_gallery={{ phrase('xa_ams_no_gallery') }}</edit_format_params>
+    <relation group_id="xaAms" display_order="2510"/>
+  </option>
+  <option option_id="xaAmsGoogleMapsEmbedApiKey" edit_format="textbox" data_type="string">
+    <default_value></default_value>
+    <relation group_id="xaAms" display_order="2610"/>
+  </option>
+  <option option_id="xaAmsIncludePagesImages" edit_format="onoff" data_type="boolean">
+    <default_value>0</default_value>
+    <relation group_id="xaAms" display_order="2511"/>
+  </option>
+  <option option_id="xaAmsIndexPageType" edit_format="radio" data_type="string">
+    <default_value>standard</default_value>
+    <edit_format_params>standard={{ phrase('xa_ams_standard_index_page') }}
+modular={{ phrase('xa_ams_modular_index_page') }}</edit_format_params>
+    <relation group_id="xaAms" display_order="110"/>
+  </option>
+  <option option_id="xaAmsLatestReviewsCutOffDays" edit_format="spinbox" data_type="integer">
+    <default_value>90</default_value>
+    <edit_format_params>min=0</edit_format_params>
+    <relation group_id="xaAms" display_order="5200"/>
+  </option>
+  <option option_id="xaAmsLimitedViewArticleLength" edit_format="spinbox" data_type="positive_integer">
+    <default_value>500</default_value>
+    <relation group_id="xaAms" display_order="2012"/>
+  </option>
+  <option option_id="xaAmsListDefaultOrder" edit_format="select" data_type="string">
+    <default_value>publish_date</default_value>
+    <edit_format_params>publish_date={{ phrase('xa_ams_publish_date') }}
+last_update={{ phrase('xa_ams_last_update') }}
+rating_weighted={{ phrase('rating') }}
+reaction_score={{ phrase('reaction_score') }}
+comment_count={{ phrase('comments') }}
+view_count={{ phrase('views') }}
+title={{ phrase('title') }}</edit_format_params>
+    <relation group_id="xaAms" display_order="1010"/>
+  </option>
+  <option option_id="xaAmsLocalizeGoogleMaps" edit_format="onoff" data_type="boolean">
+    <default_value>1</default_value>
+    <relation group_id="xaAms" display_order="2615"/>
+  </option>
+  <option option_id="xaAmsLocationDisplayType" edit_format="radio" data_type="string">
+    <default_value>link</default_value>
+    <edit_format_params>link={{ phrase('xa_ams_display_link_article_info_block') }}
+map={{ phrase('xa_ams_display_as_map_in_sidebar_block') }}
+map_below_content={{ phrase('xa_ams_display_as_map_below_item') }}
+map_own_tab={{ phrase('xa_ams_display_as_map_in_own_tab') }}</edit_format_params>
+    <relation group_id="xaAms" display_order="2605"/>
+  </option>
+  <option option_id="xaAmsMaxAllowedContributors" edit_format="spinbox" data_type="positive_integer">
+    <default_value>10</default_value>
+    <edit_format_params>min=1
+max=25</edit_format_params>
+    <relation group_id="xaAms" display_order="2000"/>
+  </option>
+  <option option_id="xaAmsMetaDescription" edit_format="textbox" data_type="string">
+    <default_value>Articles index</default_value>
+    <relation group_id="xaAms" display_order="5001"/>
+  </option>
+  <option option_id="xaAmsMinimumReviewLength" edit_format="spinbox" data_type="unsigned_integer">
+    <default_value>0</default_value>
+    <edit_format_params>min=0</edit_format_params>
+    <relation group_id="xaAms" display_order="2018"/>
+  </option>
+  <option option_id="xaAmsMoreFromAuthorLayoutType" edit_format="radio" data_type="string">
+    <default_value>list_view</default_value>
+    <edit_format_params>list_view={{ phrase('xa_ams_list_view_layout') }}
+grid_view={{ phrase('xa_ams_grid_view_layout') }}
+tile_view={{ phrase('xa_ams_tile_view_layout') }}
+article_view={{ phrase('xa_ams_article_view_layout') }}</edit_format_params>
+    <relation group_id="xaAms" display_order="2322"/>
+  </option>
+  <option option_id="xaAmsMoreFromAuthorLocation" edit_format="radio" data_type="string">
+    <default_value>sidebar</default_value>
+    <edit_format_params>below_article={{ phrase('xa_ams_below_article') }}
+sidebar={{ phrase('xa_ams_sidebar_block') }}</edit_format_params>
+    <relation group_id="xaAms" display_order="2321"/>
+  </option>
+  <option option_id="xaAmsMoreInCategoryLayoutType" edit_format="radio" data_type="string">
+    <default_value>list_view</default_value>
+    <edit_format_params>list_view={{ phrase('xa_ams_list_view_layout') }}
+grid_view={{ phrase('xa_ams_grid_view_layout') }}
+tile_view={{ phrase('xa_ams_tile_view_layout') }}
+article_view={{ phrase('xa_ams_article_view_layout') }}</edit_format_params>
+    <relation group_id="xaAms" display_order="2312"/>
+  </option>
+  <option option_id="xaAmsMoreInCategoryLocation" edit_format="radio" data_type="string">
+    <default_value>sidebar</default_value>
+    <edit_format_params>below_article={{ phrase('xa_ams_below_article') }}
+sidebar={{ phrase('xa_ams_sidebar_block') }}</edit_format_params>
+    <relation group_id="xaAms" display_order="2311"/>
+  </option>
+  <option option_id="xaAmsOverrideStyle" edit_format="callback" data_type="unsigned_integer">
+    <default_value>0</default_value>
+    <edit_format_params>XenAddons\AMS\Option\Style::renderSelect</edit_format_params>
+    <relation group_id="xaAms" display_order="60"/>
+  </option>
+  <option option_id="xaAmsRecentReviewsCount" edit_format="spinbox" data_type="unsigned_integer">
+    <default_value>3</default_value>
+    <edit_format_params>min=0</edit_format_params>
+    <relation group_id="xaAms" display_order="2110"/>
+  </option>
+  <option option_id="xaAmsReviewMaxLength" edit_format="spinbox" data_type="unsigned_integer">
+    <default_value>10000</default_value>
+    <edit_format_params>min=0</edit_format_params>
+    <relation group_id="xaAms" display_order="2016"/>
+  </option>
+  <option option_id="xaAmsReviewsPerPage" edit_format="spinbox" data_type="positive_integer">
+    <default_value>20</default_value>
+    <edit_format_params>min=1</edit_format_params>
+    <relation group_id="xaAms" display_order="2114"/>
+  </option>
+  <option option_id="xaAmsSeriesDetailsMaxLength" edit_format="spinbox" data_type="unsigned_integer">
+    <default_value>50000</default_value>
+    <edit_format_params>min=0</edit_format_params>
+    <relation group_id="xaAms" display_order="3100"/>
+  </option>
+  <option option_id="xaAmsSeriesListShowTitleFilters" edit_format="onoff" data_type="boolean">
+    <default_value>0</default_value>
+    <relation group_id="xaAms" display_order="3110"/>
+  </option>
+  <option option_id="xaAmsSeriesMinTags" edit_format="spinbox" data_type="integer">
+    <default_value>0</default_value>
+    <edit_format_params>min=0</edit_format_params>
+    <relation group_id="xaAms" display_order="3110"/>
+  </option>
+  <option option_id="xaAmsSeriesPartsPerPage" edit_format="spinbox" data_type="positive_integer">
+    <default_value>20</default_value>
+    <edit_format_params>min=1</edit_format_params>
+    <relation group_id="xaAms" display_order="3015"/>
+  </option>
+  <option option_id="xaAmsSeriesPerPage" edit_format="spinbox" data_type="positive_integer">
+    <default_value>20</default_value>
+    <edit_format_params>min=1</edit_format_params>
+    <relation group_id="xaAms" display_order="3010"/>
+  </option>
+  <option option_id="xaAmsShowRatingFilters" edit_format="onoff" data_type="boolean">
+    <default_value>0</default_value>
+    <relation group_id="xaAms" display_order="1115"/>
+  </option>
+  <option option_id="xaAmsShowTitleFilters" edit_format="onoff" data_type="boolean">
+    <default_value>1</default_value>
+    <relation group_id="xaAms" display_order="1110"/>
+  </option>
+  <option option_id="xaAmsSignatureOnComments" edit_format="onoff" data_type="boolean">
+    <default_value>1</default_value>
+    <relation group_id="xaAms" display_order="2410"/>
+  </option>
+  <option option_id="xaAmsSnippetLengthAV" edit_format="spinbox" data_type="integer">
+    <default_value>500</default_value>
+    <edit_format_params>min=150</edit_format_params>
+    <relation group_id="xaAms" display_order="1084"/>
+  </option>
+  <option option_id="xaAmsSnippetLengthLV" edit_format="spinbox" data_type="integer">
+    <default_value>300</default_value>
+    <edit_format_params>min=150</edit_format_params>
+    <relation group_id="xaAms" display_order="1083"/>
+  </option>
+  <option option_id="xaAmsUnreadCounter" edit_format="onoff" data_type="boolean">
+    <default_value>0</default_value>
+    <relation group_id="xaAms" display_order="50"/>
+  </option>
+  <option option_id="xaAmsViewFullArticle" edit_format="onoff" data_type="boolean">
+    <default_value>1</default_value>
+    <relation group_id="xaAms" display_order="2400"/>
+  </option>
+</options>

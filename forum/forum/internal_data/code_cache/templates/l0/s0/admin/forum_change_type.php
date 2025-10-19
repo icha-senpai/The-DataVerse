@@ -9,8 +9,16 @@ return array(
 
 ';
 	$__compilerTemp1 = '';
-	if ($__vars['newForumTypeId']) {
+	if ($__vars['isResourceForum'] AND ($__vars['currentForumTypeId'] == 'discussion')) {
 		$__compilerTemp1 .= '
+	<div class="blockMessage blockMessage--important">
+		' . 'This forum is assigned to a resource category and may contain resource threads. Changing the type to anything other than "General discussion" may cause the existing resource threads to lose their type association with resource items.' . '
+	</div>
+';
+	}
+	$__compilerTemp2 = '';
+	if ($__vars['newForumTypeId']) {
+		$__compilerTemp2 .= '
 				' . $__templater->formRow('
 					' . $__templater->escape($__vars['newForumTypeTitle']) . '
 				', array(
@@ -19,23 +27,23 @@ return array(
 		)) . '
 				';
 		if ($__vars['typeConfigTemplate']) {
-			$__compilerTemp1 .= '
+			$__compilerTemp2 .= '
 					' . $__templater->includeTemplate($__vars['typeConfigTemplate'], $__vars) . '
 				';
 		}
-		$__compilerTemp1 .= '
+		$__compilerTemp2 .= '
 				' . $__templater->formHiddenVal('new_forum_type_id', $__vars['newForumTypeId'], array(
 		)) . '
 				' . $__templater->formHiddenVal('confirm', '1', array(
 		)) . '
 			';
 	} else {
-		$__compilerTemp1 .= '
+		$__compilerTemp2 .= '
 				';
-		$__compilerTemp2 = array();
+		$__compilerTemp3 = array();
 		if ($__templater->isTraversable($__vars['forumTypesInfo'])) {
 			foreach ($__vars['forumTypesInfo'] AS $__vars['forumTypeId'] => $__vars['forumTypeInfo']) {
-				$__compilerTemp2[] = array(
+				$__compilerTemp3[] = array(
 					'value' => $__vars['forumTypeId'],
 					'label' => $__templater->escape($__vars['forumTypeInfo']['title']),
 					'hint' => $__templater->escape($__vars['forumTypeInfo']['description']),
@@ -43,24 +51,24 @@ return array(
 				);
 			}
 		}
-		$__compilerTemp1 .= $__templater->formRadioRow(array(
+		$__compilerTemp2 .= $__templater->formRadioRow(array(
 			'name' => 'new_forum_type_id',
 			'value' => $__vars['currentForumTypeId'],
-		), $__compilerTemp2, array(
+		), $__compilerTemp3, array(
 			'label' => 'New forum type',
 		)) . '
 			';
 	}
-	$__compilerTemp3 = '';
+	$__compilerTemp4 = '';
 	if ($__vars['newForumTypeId']) {
-		$__compilerTemp3 .= '
+		$__compilerTemp4 .= '
 			' . $__templater->formSubmitRow(array(
 			'submit' => 'Change type',
 		), array(
 		)) . '
 		';
 	} else {
-		$__compilerTemp3 .= '
+		$__compilerTemp4 .= '
 			' . $__templater->formSubmitRow(array(
 			'submit' => 'Continue' . $__vars['xf']['language']['ellipsis'],
 		), array(
@@ -71,7 +79,8 @@ return array(
 	<div class="block-container">
 		<div class="block-body">
 			' . $__templater->formInfoRow('
-				<div class="blockMessage blockMessage--warning">
+				' . $__compilerTemp1 . '
+<div class="blockMessage blockMessage--warning">
 					' . 'Changing a forum\'s type will change the type of all threads within the forum to a type that is allowed in the forum. This may cause some data loss. Please be sure that you select the correct options before proceeding.' . '
 				</div>
 			', array(
@@ -84,9 +93,9 @@ return array(
 		'explain' => $__templater->escape($__vars['currentForumTypeDesc']),
 	)) . '
 
-			' . $__compilerTemp1 . '
+			' . $__compilerTemp2 . '
 		</div>
-		' . $__compilerTemp3 . '
+		' . $__compilerTemp4 . '
 	</div>
 ', array(
 		'action' => $__templater->func('link', array('forums/change-type', $__vars['node'], ), false),

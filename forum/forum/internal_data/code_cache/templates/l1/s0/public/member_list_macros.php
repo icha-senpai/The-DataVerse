@@ -41,6 +41,52 @@ return array(
 						<dd>' . $__templater->filter($__vars['user']['message_count'], array(array('number', array()),), true) . '</dd>
 					</dl></li>
 					' . '
+';
+	if ($__templater->method($__vars['xf']['visitor'], 'canViewResources', array()) AND $__vars['user']['xfrm_resource_count']) {
+		$__finalCompiled .= '
+	<li><dl class="pairs pairs--inline">
+		<dt>' . 'Resources' . '</dt>
+		<dd>' . $__templater->filter($__vars['user']['xfrm_resource_count'], array(array('number', array()),), true) . '</dd>
+	</dl></li>
+';
+	}
+	$__finalCompiled .= '
+';
+	if ($__templater->method($__vars['xf']['visitor'], 'canViewMedia', array())) {
+		$__finalCompiled .= '
+	';
+		if ($__vars['user']['xfmg_media_count']) {
+			$__finalCompiled .= '
+		<li><dl class="pairs pairs--inline">
+			<dt>' . 'Media' . '</dt>
+			<dd>' . $__templater->filter($__vars['user']['xfmg_media_count'], array(array('number', array()),), true) . '</dd>
+		</dl></li>
+	';
+		}
+		$__finalCompiled .= '
+	';
+		if ($__vars['user']['xfmg_album_count']) {
+			$__finalCompiled .= '
+		<li><dl class="pairs pairs--inline">
+			<dt>' . 'Albums' . '</dt>
+			<dd>' . $__templater->filter($__vars['user']['xfmg_album_count'], array(array('number', array()),), true) . '</dd>
+		</dl></li>
+	';
+		}
+		$__finalCompiled .= '
+';
+	}
+	$__finalCompiled .= '
+';
+	if ($__templater->method($__vars['xf']['visitor'], 'canViewAmsArticles', array()) AND $__vars['user']['xa_ams_article_count']) {
+		$__finalCompiled .= '
+	<li><dl class="pairs pairs--inline">
+		<dt>' . 'Articles' . '</dt>
+		<dd>' . $__templater->filter($__vars['user']['xa_ams_article_count'], array(array('number', array()),), true) . '</dd>
+	</dl></li>
+';
+	}
+	$__finalCompiled .= '
 					';
 	if ($__vars['user']['question_solution_count']) {
 		$__finalCompiled .= '

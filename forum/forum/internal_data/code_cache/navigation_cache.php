@@ -292,6 +292,76 @@ return function($__templater, $__selectedNav, array $__vars)
 			$__flat['whatsNewPosts'] =& $__tree['whatsNew']['children']['whatsNewPosts'];
 		}
 
+		if ($__templater->method($__vars['xf']['visitor'], 'canViewMedia', array())) {
+			$__navTemp = [
+		'title' => \XF::phrase('nav.xfmgWhatsNewNewMedia'),
+		'href' => $__templater->func('link', array('whats-new/media', ), false),
+		'attributes' => [
+			'rel' => 'nofollow',
+		],
+	];
+			if ($__navTemp) {
+				$__tree['whatsNew']['children']['xfmgWhatsNewNewMedia'] = $__navTemp;
+				$__flat['xfmgWhatsNewNewMedia'] =& $__tree['whatsNew']['children']['xfmgWhatsNewNewMedia'];
+			}
+		}
+
+		if ($__templater->method($__vars['xf']['visitor'], 'canViewAmsArticles', array())) {
+			$__navTemp = [
+		'title' => \XF::phrase('nav.xaAmsWhatsNewNewArticles'),
+		'href' => $__templater->func('link', array('whats-new/ams-articles', ), false),
+		'attributes' => [
+			'rel' => 'nofollow',
+		],
+	];
+			if ($__navTemp) {
+				$__tree['whatsNew']['children']['xaAmsWhatsNewNewArticles'] = $__navTemp;
+				$__flat['xaAmsWhatsNewNewArticles'] =& $__tree['whatsNew']['children']['xaAmsWhatsNewNewArticles'];
+			}
+		}
+
+		if ($__templater->method($__vars['xf']['visitor'], 'canViewMedia', array())) {
+			$__navTemp = [
+		'title' => \XF::phrase('nav.xfmgWhatsNewMediaComments'),
+		'href' => $__templater->func('link', array('whats-new/media-comments', ), false),
+		'attributes' => [
+			'rel' => 'nofollow',
+		],
+	];
+			if ($__navTemp) {
+				$__tree['whatsNew']['children']['xfmgWhatsNewMediaComments'] = $__navTemp;
+				$__flat['xfmgWhatsNewMediaComments'] =& $__tree['whatsNew']['children']['xfmgWhatsNewMediaComments'];
+			}
+		}
+
+		if (($__templater->method($__vars['xf']['visitor'], 'canViewAmsArticles', array()) AND $__templater->method($__vars['xf']['visitor'], 'canViewAmsComments', array()))) {
+			$__navTemp = [
+		'title' => \XF::phrase('nav.xaAmsWhatsNewArticleComments'),
+		'href' => $__templater->func('link', array('whats-new/ams-comments', ), false),
+		'attributes' => [
+			'rel' => 'nofollow',
+		],
+	];
+			if ($__navTemp) {
+				$__tree['whatsNew']['children']['xaAmsWhatsNewArticleComments'] = $__navTemp;
+				$__flat['xaAmsWhatsNewArticleComments'] =& $__tree['whatsNew']['children']['xaAmsWhatsNewArticleComments'];
+			}
+		}
+
+		if ($__templater->method($__vars['xf']['visitor'], 'canViewResources', array())) {
+			$__navTemp = [
+		'title' => \XF::phrase('nav.xfrmNewResources'),
+		'href' => $__templater->func('link', array('whats-new/resources', ), false),
+		'attributes' => [
+			'rel' => 'nofollow',
+		],
+	];
+			if ($__navTemp) {
+				$__tree['whatsNew']['children']['xfrmNewResources'] = $__navTemp;
+				$__flat['xfrmNewResources'] =& $__tree['whatsNew']['children']['xfrmNewResources'];
+			}
+		}
+
 		if ($__templater->method($__vars['xf']['visitor'], 'canViewProfilePosts', array())) {
 			$__navTemp = [
 		'title' => \XF::phrase('nav.whatsNewProfilePosts'),
@@ -334,6 +404,436 @@ return function($__templater, $__selectedNav, array $__vars)
 			}
 		}
 
+	}
+
+	if ($__templater->method($__vars['xf']['visitor'], 'canViewMedia', array())) {
+		$__navTemp = [
+		'title' => \XF::phrase('nav.xfmg'),
+		'href' => $__templater->func('link', array('media', ), false),
+		'attributes' => [],
+	];
+		if ($__navTemp) {
+			$__tree['xfmg'] = $__navTemp;
+			$__flat['xfmg'] =& $__tree['xfmg'];
+			if (empty($__tree['xfmg']['children'])) { $__tree['xfmg']['children'] = []; }
+
+			$__navTemp = [
+		'title' => \XF::phrase('nav.xfmgNewMedia'),
+		'href' => $__templater->func('link', array('whats-new/media', ), false),
+		'attributes' => [
+			'rel' => 'nofollow',
+		],
+	];
+			if ($__navTemp) {
+				$__tree['xfmg']['children']['xfmgNewMedia'] = $__navTemp;
+				$__flat['xfmgNewMedia'] =& $__tree['xfmg']['children']['xfmgNewMedia'];
+			}
+
+			$__navTemp = [
+		'title' => \XF::phrase('nav.xfmgNewComments'),
+		'href' => $__templater->func('link', array('whats-new/media-comments', ), false),
+		'attributes' => [
+			'rel' => 'nofollow',
+		],
+	];
+			if ($__navTemp) {
+				$__tree['xfmg']['children']['xfmgNewComments'] = $__navTemp;
+				$__flat['xfmgNewComments'] =& $__tree['xfmg']['children']['xfmgNewComments'];
+			}
+
+			if ($__templater->method($__vars['xf']['visitor'], 'canAddMedia', array())) {
+				$__navTemp = [
+		'title' => \XF::phrase('nav.xfmgAddMedia'),
+		'href' => $__templater->func('link', array('media/add', ), false),
+		'attributes' => [
+			'data-xf-click' => 'overlay',
+		],
+	];
+				if ($__navTemp) {
+					$__tree['xfmg']['children']['xfmgAddMedia'] = $__navTemp;
+					$__flat['xfmgAddMedia'] =& $__tree['xfmg']['children']['xfmgAddMedia'];
+				}
+			}
+
+			if ($__vars['xf']['visitor']['user_id']) {
+				$__navTemp = [
+		'title' => \XF::phrase('nav.xfmgYourContent'),
+		'href' => $__templater->func('link', array('media/users', $__vars['xf']['visitor'], ), false),
+		'attributes' => [],
+	];
+				if ($__navTemp) {
+					$__tree['xfmg']['children']['xfmgYourContent'] = $__navTemp;
+					$__flat['xfmgYourContent'] =& $__tree['xfmg']['children']['xfmgYourContent'];
+					if (empty($__tree['xfmg']['children']['xfmgYourContent']['children'])) { $__tree['xfmg']['children']['xfmgYourContent']['children'] = []; }
+
+					if ($__vars['xf']['visitor']['user_id']) {
+						$__navTemp = [
+		'title' => \XF::phrase('nav.xfmgYourMedia'),
+		'href' => $__templater->func('link', array('media/users', $__vars['xf']['visitor'], ), false),
+		'attributes' => [],
+	];
+						if ($__navTemp) {
+							$__tree['xfmg']['children']['xfmgYourContent']['children']['xfmgYourMedia'] = $__navTemp;
+							$__flat['xfmgYourMedia'] =& $__tree['xfmg']['children']['xfmgYourContent']['children']['xfmgYourMedia'];
+						}
+					}
+
+					if ($__vars['xf']['visitor']['user_id']) {
+						$__navTemp = [
+		'title' => \XF::phrase('nav.xfmgYourAlbums'),
+		'href' => $__templater->func('link', array('media/albums/users', $__vars['xf']['visitor'], ), false),
+		'attributes' => [],
+	];
+						if ($__navTemp) {
+							$__tree['xfmg']['children']['xfmgYourContent']['children']['xfmgYourAlbums'] = $__navTemp;
+							$__flat['xfmgYourAlbums'] =& $__tree['xfmg']['children']['xfmgYourContent']['children']['xfmgYourAlbums'];
+						}
+					}
+
+				}
+			}
+
+			if ($__vars['xf']['visitor']['user_id']) {
+				$__navTemp = [
+		'title' => \XF::phrase('nav.xfmgWatchedContent'),
+		'href' => $__templater->func('link', array('watched/media', ), false),
+		'attributes' => [],
+	];
+				if ($__navTemp) {
+					$__tree['xfmg']['children']['xfmgWatchedContent'] = $__navTemp;
+					$__flat['xfmgWatchedContent'] =& $__tree['xfmg']['children']['xfmgWatchedContent'];
+					if (empty($__tree['xfmg']['children']['xfmgWatchedContent']['children'])) { $__tree['xfmg']['children']['xfmgWatchedContent']['children'] = []; }
+
+					if ($__vars['xf']['visitor']['user_id']) {
+						$__navTemp = [
+		'title' => \XF::phrase('nav.xfmgWatchedMedia'),
+		'href' => $__templater->func('link', array('watched/media', ), false),
+		'attributes' => [],
+	];
+						if ($__navTemp) {
+							$__tree['xfmg']['children']['xfmgWatchedContent']['children']['xfmgWatchedMedia'] = $__navTemp;
+							$__flat['xfmgWatchedMedia'] =& $__tree['xfmg']['children']['xfmgWatchedContent']['children']['xfmgWatchedMedia'];
+						}
+					}
+
+					if ($__vars['xf']['visitor']['user_id']) {
+						$__navTemp = [
+		'title' => \XF::phrase('nav.xfmgWatchedAlbums'),
+		'href' => $__templater->func('link', array('watched/media-albums', ), false),
+		'attributes' => [],
+	];
+						if ($__navTemp) {
+							$__tree['xfmg']['children']['xfmgWatchedContent']['children']['xfmgWatchedAlbums'] = $__navTemp;
+							$__flat['xfmgWatchedAlbums'] =& $__tree['xfmg']['children']['xfmgWatchedContent']['children']['xfmgWatchedAlbums'];
+						}
+					}
+
+					if ($__vars['xf']['visitor']['user_id']) {
+						$__navTemp = [
+		'title' => \XF::phrase('nav.xfmgWatchedCategories'),
+		'href' => $__templater->func('link', array('watched/media-categories', ), false),
+		'attributes' => [],
+	];
+						if ($__navTemp) {
+							$__tree['xfmg']['children']['xfmgWatchedContent']['children']['xfmgWatchedCategories'] = $__navTemp;
+							$__flat['xfmgWatchedCategories'] =& $__tree['xfmg']['children']['xfmgWatchedContent']['children']['xfmgWatchedCategories'];
+						}
+					}
+
+				}
+			}
+
+			if ($__templater->method($__vars['xf']['visitor'], 'canSearch', array())) {
+				$__navTemp = [
+		'title' => \XF::phrase('nav.xfmgSearchMedia'),
+		'href' => $__templater->func('link', array('search', null, array('type' => 'xfmg_media', ), ), false),
+		'attributes' => [],
+	];
+				if ($__navTemp) {
+					$__tree['xfmg']['children']['xfmgSearchMedia'] = $__navTemp;
+					$__flat['xfmgSearchMedia'] =& $__tree['xfmg']['children']['xfmgSearchMedia'];
+				}
+			}
+
+			if ($__vars['xf']['visitor']['user_id']) {
+				$__navTemp = [
+		'title' => \XF::phrase('nav.xfmgMarkViewed'),
+		'href' => $__templater->func('link', array('media/mark-viewed', null, array('date' => $__vars['xf']['time'], ), ), false),
+		'attributes' => [
+			'data-xf-click' => 'overlay',
+		],
+	];
+				if ($__navTemp) {
+					$__tree['xfmg']['children']['xfmgMarkViewed'] = $__navTemp;
+					$__flat['xfmgMarkViewed'] =& $__tree['xfmg']['children']['xfmgMarkViewed'];
+				}
+			}
+
+		}
+	}
+
+	if ($__templater->method($__vars['xf']['visitor'], 'canViewResources', array())) {
+		$__navTemp = [
+		'title' => \XF::phrase('nav.xfrm'),
+		'href' => $__templater->func('link', array('resources', ), false),
+		'attributes' => [],
+	];
+		if ($__navTemp) {
+			$__tree['xfrm'] = $__navTemp;
+			$__flat['xfrm'] =& $__tree['xfrm'];
+			if (empty($__tree['xfrm']['children'])) { $__tree['xfrm']['children'] = []; }
+
+			$__navTemp = [
+		'title' => \XF::phrase('nav.xfrmLatestReviews'),
+		'href' => $__templater->func('link', array('resources/latest-reviews', ), false),
+		'attributes' => [],
+	];
+			if ($__navTemp) {
+				$__tree['xfrm']['children']['xfrmLatestReviews'] = $__navTemp;
+				$__flat['xfrmLatestReviews'] =& $__tree['xfrm']['children']['xfrmLatestReviews'];
+			}
+
+			if ($__vars['xf']['visitor']['user_id']) {
+				$__navTemp = [
+		'title' => \XF::phrase('nav.xfrmYourResources'),
+		'href' => $__templater->func('link', array('resources/authors', $__vars['xf']['visitor'], ), false),
+		'attributes' => [],
+	];
+				if ($__navTemp) {
+					$__tree['xfrm']['children']['xfrmYourResources'] = $__navTemp;
+					$__flat['xfrmYourResources'] =& $__tree['xfrm']['children']['xfrmYourResources'];
+				}
+			}
+
+			if ($__vars['xf']['visitor']['user_id']) {
+				$__navTemp = [
+		'title' => \XF::phrase('nav.xfrmWatched'),
+		'href' => $__templater->func('link', array('watched/resources', ), false),
+		'attributes' => [],
+	];
+				if ($__navTemp) {
+					$__tree['xfrm']['children']['xfrmWatched'] = $__navTemp;
+					$__flat['xfrmWatched'] =& $__tree['xfrm']['children']['xfrmWatched'];
+					if (empty($__tree['xfrm']['children']['xfrmWatched']['children'])) { $__tree['xfrm']['children']['xfrmWatched']['children'] = []; }
+
+					if ($__vars['xf']['visitor']['user_id']) {
+						$__navTemp = [
+		'title' => \XF::phrase('nav.xfrmWatchedResources'),
+		'href' => $__templater->func('link', array('watched/resources', ), false),
+		'attributes' => [],
+	];
+						if ($__navTemp) {
+							$__tree['xfrm']['children']['xfrmWatched']['children']['xfrmWatchedResources'] = $__navTemp;
+							$__flat['xfrmWatchedResources'] =& $__tree['xfrm']['children']['xfrmWatched']['children']['xfrmWatchedResources'];
+						}
+					}
+
+					if ($__vars['xf']['visitor']['user_id']) {
+						$__navTemp = [
+		'title' => \XF::phrase('nav.xfrmWatchedCategories'),
+		'href' => $__templater->func('link', array('watched/resource-categories', ), false),
+		'attributes' => [],
+	];
+						if ($__navTemp) {
+							$__tree['xfrm']['children']['xfrmWatched']['children']['xfrmWatchedCategories'] = $__navTemp;
+							$__flat['xfrmWatchedCategories'] =& $__tree['xfrm']['children']['xfrmWatched']['children']['xfrmWatchedCategories'];
+						}
+					}
+
+				}
+			}
+
+			if ($__templater->method($__vars['xf']['visitor'], 'canSearch', array())) {
+				$__navTemp = [
+		'title' => \XF::phrase('nav.xfrmSearchResources'),
+		'href' => $__templater->func('link', array('search', null, array('type' => 'resource', ), ), false),
+		'attributes' => [],
+	];
+				if ($__navTemp) {
+					$__tree['xfrm']['children']['xfrmSearchResources'] = $__navTemp;
+					$__flat['xfrmSearchResources'] =& $__tree['xfrm']['children']['xfrmSearchResources'];
+				}
+			}
+
+		}
+	}
+
+	if ($__templater->method($__vars['xf']['visitor'], 'canViewAmsArticles', array())) {
+		$__navTemp = [
+		'title' => \XF::phrase('nav.xa_ams'),
+		'href' => $__templater->func('link', array('ams', ), false),
+		'attributes' => [],
+	];
+		if ($__navTemp) {
+			$__tree['xa_ams'] = $__navTemp;
+			$__flat['xa_ams'] =& $__tree['xa_ams'];
+			if (empty($__tree['xa_ams']['children'])) { $__tree['xa_ams']['children'] = []; }
+
+			$__navTemp = [
+		'title' => \XF::phrase('nav.xa_amsNewArticles'),
+		'href' => $__templater->func('link', array('whats-new/ams-articles', ), false),
+		'attributes' => [
+			'rel' => 'nofollow',
+		],
+	];
+			if ($__navTemp) {
+				$__tree['xa_ams']['children']['xa_amsNewArticles'] = $__navTemp;
+				$__flat['xa_amsNewArticles'] =& $__tree['xa_ams']['children']['xa_amsNewArticles'];
+			}
+
+			if ($__templater->method($__vars['xf']['visitor'], 'canViewAmsComments', array())) {
+				$__navTemp = [
+		'title' => \XF::phrase('nav.xa_amsNewComments'),
+		'href' => $__templater->func('link', array('whats-new/ams-comments', ), false),
+		'attributes' => [
+			'rel' => 'nofollow',
+		],
+	];
+				if ($__navTemp) {
+					$__tree['xa_ams']['children']['xa_amsNewComments'] = $__navTemp;
+					$__flat['xa_amsNewComments'] =& $__tree['xa_ams']['children']['xa_amsNewComments'];
+				}
+			}
+
+			if ($__templater->method($__vars['xf']['visitor'], 'canViewAmsSeries', array())) {
+				$__navTemp = [
+		'title' => \XF::phrase('nav.xa_amsSeries'),
+		'href' => $__templater->func('link', array('ams/series', ), false),
+		'attributes' => [],
+	];
+				if ($__navTemp) {
+					$__tree['xa_ams']['children']['xa_amsSeries'] = $__navTemp;
+					$__flat['xa_amsSeries'] =& $__tree['xa_ams']['children']['xa_amsSeries'];
+				}
+			}
+
+			if ($__vars['xf']['visitor']['user_id']) {
+				$__navTemp = [
+		'title' => \XF::phrase('nav.xa_amsYourArticles'),
+		'href' => $__templater->func('link', array('ams/authors', $__vars['xf']['visitor'], ), false),
+		'attributes' => [],
+	];
+				if ($__navTemp) {
+					$__tree['xa_ams']['children']['xa_amsYourArticles'] = $__navTemp;
+					$__flat['xa_amsYourArticles'] =& $__tree['xa_ams']['children']['xa_amsYourArticles'];
+					if (empty($__tree['xa_ams']['children']['xa_amsYourArticles']['children'])) { $__tree['xa_ams']['children']['xa_amsYourArticles']['children'] = []; }
+
+					if ($__vars['xf']['visitor']['user_id']) {
+						$__navTemp = [
+		'title' => \XF::phrase('nav.xa_amsYourPublishedArticles'),
+		'href' => $__templater->func('link', array('ams/authors', $__vars['xf']['visitor'], ), false),
+		'attributes' => [],
+	];
+						if ($__navTemp) {
+							$__tree['xa_ams']['children']['xa_amsYourArticles']['children']['xa_amsYourPublishedArticles'] = $__navTemp;
+							$__flat['xa_amsYourPublishedArticles'] =& $__tree['xa_ams']['children']['xa_amsYourArticles']['children']['xa_amsYourPublishedArticles'];
+						}
+					}
+
+					if ($__vars['xf']['visitor']['user_id']) {
+						$__navTemp = [
+		'title' => \XF::phrase('nav.xa_amsYourDraftArticles'),
+		'href' => $__templater->func('link', array('ams/authors/draft-articles', $__vars['xf']['visitor'], ), false),
+		'attributes' => [],
+	];
+						if ($__navTemp) {
+							$__tree['xa_ams']['children']['xa_amsYourArticles']['children']['xa_amsYourDraftArticles'] = $__navTemp;
+							$__flat['xa_amsYourDraftArticles'] =& $__tree['xa_ams']['children']['xa_amsYourArticles']['children']['xa_amsYourDraftArticles'];
+						}
+					}
+
+					if ($__vars['xf']['visitor']['user_id']) {
+						$__navTemp = [
+		'title' => \XF::phrase('nav.xa_amsYourAwaitingArticles'),
+		'href' => $__templater->func('link', array('ams/authors/awaiting-articles', $__vars['xf']['visitor'], ), false),
+		'attributes' => [],
+	];
+						if ($__navTemp) {
+							$__tree['xa_ams']['children']['xa_amsYourArticles']['children']['xa_amsYourAwaitingArticles'] = $__navTemp;
+							$__flat['xa_amsYourAwaitingArticles'] =& $__tree['xa_ams']['children']['xa_amsYourArticles']['children']['xa_amsYourAwaitingArticles'];
+						}
+					}
+
+				}
+			}
+
+			if ($__vars['xf']['visitor']['user_id']) {
+				$__navTemp = [
+		'title' => \XF::phrase('nav.xa_amsWatchedContent'),
+		'href' => $__templater->func('link', array('watched/ams-articles', ), false),
+		'attributes' => [],
+	];
+				if ($__navTemp) {
+					$__tree['xa_ams']['children']['xa_amsWatchedContent'] = $__navTemp;
+					$__flat['xa_amsWatchedContent'] =& $__tree['xa_ams']['children']['xa_amsWatchedContent'];
+					if (empty($__tree['xa_ams']['children']['xa_amsWatchedContent']['children'])) { $__tree['xa_ams']['children']['xa_amsWatchedContent']['children'] = []; }
+
+					if ($__vars['xf']['visitor']['user_id']) {
+						$__navTemp = [
+		'title' => \XF::phrase('nav.xa_amsWatchedArticles'),
+		'href' => $__templater->func('link', array('watched/ams-articles', ), false),
+		'attributes' => [],
+	];
+						if ($__navTemp) {
+							$__tree['xa_ams']['children']['xa_amsWatchedContent']['children']['xa_amsWatchedArticles'] = $__navTemp;
+							$__flat['xa_amsWatchedArticles'] =& $__tree['xa_ams']['children']['xa_amsWatchedContent']['children']['xa_amsWatchedArticles'];
+						}
+					}
+
+					if ($__vars['xf']['visitor']['user_id']) {
+						$__navTemp = [
+		'title' => \XF::phrase('nav.xa_amsWatchedSeries'),
+		'href' => $__templater->func('link', array('watched/ams-series', ), false),
+		'attributes' => [],
+	];
+						if ($__navTemp) {
+							$__tree['xa_ams']['children']['xa_amsWatchedContent']['children']['xa_amsWatchedSeries'] = $__navTemp;
+							$__flat['xa_amsWatchedSeries'] =& $__tree['xa_ams']['children']['xa_amsWatchedContent']['children']['xa_amsWatchedSeries'];
+						}
+					}
+
+					if ($__vars['xf']['visitor']['user_id']) {
+						$__navTemp = [
+		'title' => \XF::phrase('nav.xa_amsWatchedCategories'),
+		'href' => $__templater->func('link', array('watched/ams-categories', ), false),
+		'attributes' => [],
+	];
+						if ($__navTemp) {
+							$__tree['xa_ams']['children']['xa_amsWatchedContent']['children']['xa_amsWatchedCategories'] = $__navTemp;
+							$__flat['xa_amsWatchedCategories'] =& $__tree['xa_ams']['children']['xa_amsWatchedContent']['children']['xa_amsWatchedCategories'];
+						}
+					}
+
+				}
+			}
+
+			if ($__templater->method($__vars['xf']['visitor'], 'canSearch', array())) {
+				$__navTemp = [
+		'title' => \XF::phrase('nav.xa_amsSearchArticles'),
+		'href' => $__templater->func('link', array('search', null, array('type' => 'ams_article', ), ), false),
+		'attributes' => [],
+	];
+				if ($__navTemp) {
+					$__tree['xa_ams']['children']['xa_amsSearchArticles'] = $__navTemp;
+					$__flat['xa_amsSearchArticles'] =& $__tree['xa_ams']['children']['xa_amsSearchArticles'];
+				}
+			}
+
+			if ($__vars['xf']['visitor']['user_id']) {
+				$__navTemp = [
+		'title' => \XF::phrase('nav.xa_amsMarkRead'),
+		'href' => $__templater->func('link', array('ams/mark-read', null, array('date' => $__vars['xf']['time'], ), ), false),
+		'attributes' => [
+			'data-xf-click' => 'overlay',
+		],
+	];
+				if ($__navTemp) {
+					$__tree['xa_ams']['children']['xa_amsMarkRead'] = $__navTemp;
+					$__flat['xa_amsMarkRead'] =& $__tree['xa_ams']['children']['xa_amsMarkRead'];
+				}
+			}
+
+		}
 	}
 
 	if ($__templater->method($__vars['xf']['visitor'], 'canViewMemberList', array())) {

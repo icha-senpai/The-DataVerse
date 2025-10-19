@@ -519,7 +519,7 @@ a.ui
 		@media (max-width: @xf-responsiveMedium) { content: "Medium < @{xf-responsiveMedium}"; }
 		@media (max-width: @xf-responsiveNarrow) { content: "Narrow < @{xf-responsiveNarrow}"; }
 	}
-}';
+}' . $__templater->includeTemplate('core_xa_ams.less', $__vars) . $__templater->includeTemplate('core_xfmg.less', $__vars) . $__templater->includeTemplate('core_xfrm.less', $__vars);
 	return $__finalCompiled;
 }
 );

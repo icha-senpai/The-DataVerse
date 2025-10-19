@@ -648,7 +648,14 @@ return array(
 		$__finalCompiled .= '
 			<div class="structItem-cell structItem-cell--newThread js-prefixListenContainer">
 
-				' . $__templater->formRow('
+				';
+	$__compilerTemp1 = '';
+	if ($__templater->method($__vars['forum'], 'isSimilarThreadSuggestionsEnabled', array())) {
+		$__compilerTemp1 .= '
+	' . $__templater->includeTemplate('xfes_suggested_threads_container', $__vars) . '
+';
+	}
+	$__finalCompiled .= $__templater->formRow('
 
 					' . $__templater->formPrefixInput($__vars['prefixes'], array(
 		'maxlength' => $__templater->func('max_length', array('XF:Thread', 'title', ), false),
@@ -656,13 +663,16 @@ return array(
 		'title' => 'Post a new thread in this forum',
 		'prefix-value' => $__vars['forum']['default_prefix_id'],
 		'type' => 'thread',
-		'data-xf-init' => 'tooltip',
+		'data-xf-init' => ($__templater->method($__vars['forum'], 'isSimilarThreadSuggestionsEnabled', array()) ? 'suggested-threads' : ''),
 		'rows' => '1',
 		'help-href' => $__templater->func('link', array('forums/prefix-help', $__vars['forum'], ), false),
 		'help-skip-initial' => true,
+		'data-search-url' => $__templater->func('link', array('forums/find-suggested-threads', $__vars['forum'], ), false),
 	)) . '
 
-					' . '
+					' . ' 
+
+' . $__compilerTemp1 . '
 				', array(
 		'rowtype' => 'noGutter noLabel fullWidth noPadding mergeNext',
 		'label' => 'Title',

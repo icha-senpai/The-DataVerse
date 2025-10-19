@@ -1,5 +1,7 @@
 <?php
 return array (
+  'ad_pos_desc.ams_article_view_above_article' => 'Advertising position above the article content when viewing an article.',
+  'ad_pos_desc.ams_article_view_below_article' => 'Advertising position below the article content when viewing an article.',
   'ad_pos_desc.container_breadcrumb_bottom_above' => 'Inside the page container, directly above the bottom breadcrumb on every page.',
   'ad_pos_desc.container_breadcrumb_bottom_below' => 'Inside the page container, directly below the bottom breadcrumb on every page.',
   'ad_pos_desc.container_breadcrumb_top_above' => 'Inside the page container, directly above the top breadcrumb on every page.',

@@ -367,6 +367,13 @@ return array(
 		'label' => 'Include threads from this forum when users click "New posts"',
 		'hint' => 'If disabled, threads from this forum will never appear in the list of new / unread posts.',
 		'_type' => 'option',
+	),
+	array(
+		'name' => 'similar_threads_include',
+		'selected' => !$__templater->func('in_array', array($__vars['forum']['node_id'], $__vars['xf']['options']['xfesSimilarThreadsExcludedForums'], ), false),
+		'label' => 'Display similar threads suggestions when creating new threads in this forum',
+		'hint' => 'If disabled, similar thread suggestions will not be displayed when creating threads in this forum.',
+		'_type' => 'option',
 	)), array(
 		'rowid' => 'advancedToggles',
 	)) . '
@@ -499,7 +506,9 @@ return array(
 	)) . '
 			</div>
 
-			' . $__templater->formNumberBoxRow(array(
+			' . $__templater->includeTemplate('xfmg_forum_edit_mirror', $__vars) . '
+
+' . $__templater->formNumberBoxRow(array(
 		'name' => 'min_tags',
 		'value' => $__vars['forum'],
 	), array(

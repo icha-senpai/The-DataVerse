@@ -121,6 +121,20 @@ return array(
 						</div>
 					';
 	}
+	$__compilerTemp11 = '';
+	if ($__templater->func('property', array('ahGPTooltip', ), false)) {
+		$__compilerTemp11 .= '
+	';
+		if ($__templater->method($__vars['xf']['visitor'], 'canViewIcons', array())) {
+			$__compilerTemp11 .= '
+		' . $__templater->callMacro('ah_gamerprofiles_macros', 'ah_gamerprofiles_icons_container', array(
+				'user' => $__vars['user'],
+			), $__vars) . '
+	';
+		}
+		$__compilerTemp11 .= '
+';
+	}
 	$__finalCompiled .= $__templater->func('profile_banner', array($__vars['user'], 'm', false, array(
 		'class' => 'memberTooltip-header',
 		'toggle' => 'memberTooltip--withBanner',
@@ -157,6 +171,8 @@ return array(
 					</div>
 
 					' . $__compilerTemp9 . '
+
+' . $__compilerTemp11 . '
 				</div>
 			</div>
 		')) . '
@@ -172,19 +188,19 @@ return array(
 		</div>
 
 		';
-	$__compilerTemp11 = '';
-	$__compilerTemp11 .= '
+	$__compilerTemp12 = '';
+	$__compilerTemp12 .= '
 				' . $__templater->callMacro(null, 'member_macros::member_action_buttons', array(
 		'user' => $__vars['user'],
 		'context' => 'tooltip',
 	), $__vars) . '
 			';
-	if (strlen(trim($__compilerTemp11)) > 0) {
+	if (strlen(trim($__compilerTemp12)) > 0) {
 		$__finalCompiled .= '
 			<hr class="memberTooltip-separator" />
 
 			<div class="memberTooltip-actions">
-			' . $__compilerTemp11 . '
+			' . $__compilerTemp12 . '
 			</div>
 		';
 	}

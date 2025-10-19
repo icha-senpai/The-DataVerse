@@ -351,14 +351,14 @@ return array(
 		$__compilerTemp4 .= '
 						' . $__templater->button('
 
-							' . 'xfmg_add_note_tag' . '
+							' . 'Add note/tag' . '
 						', array(
 			'id' => 'js-noterToggle',
 			'class' => 'button--icon',
 			'data-active-label' => 'xfmg_stop_adding_note_tag',
 			'data-active-icon' => 'ban',
 			'data-active-message' => 'xfmg_note_tag_mode_activated',
-			'data-inactive-label' => 'xfmg_add_note_tag',
+			'data-inactive-label' => 'Add note/tag',
 			'data-inactive-icon' => '',
 			'data-inactive-message' => 'xfmg_note_tag_mode_deactivated',
 		), '', array(

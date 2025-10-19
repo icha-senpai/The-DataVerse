@@ -1,0 +1,19 @@
+{
+    "legacy_addon_id": "",
+    "title": "[AH] Social Profiles",
+    "description": "Display social profiles in various areas.",
+    "version_id": 3010500,
+    "version_string": "3.1.5",
+    "dev": "Matt C.",
+    "dev_url": "https://xenforo.com/community/members/matt-c.157252/",
+    "faq_url": "https://xenforo.com/community/resources/ah-social-profiles.6822/field?field=faq",
+    "support_url": "https://xenforo.com/community/threads/ah-social-profiles.156864/",
+    "extra_urls": [],
+    "require": {
+        "XF": [
+            2030070,
+            "XenForo 2.3.0+"
+        ]
+    },
+    "icon": "fa-user-circle"
+}

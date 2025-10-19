@@ -1,5 +1,6 @@
 <?php
 return array (
+  'style_prop_group.ah_gamerprofiles' => '[AH] Social Profiles',
   'style_prop_group.avatar' => 'Avatars',
   'style_prop_group.basic' => 'Basic options',
   'style_prop_group.bbCode' => 'BB code elements',
@@ -30,4 +31,6 @@ return array (
   'style_prop_group.th_uix_staffMessages' => 'Staff messages',
   'style_prop_group.th_uix_threadStarterMessages' => 'Thread starter messages',
   'style_prop_group.tooltip' => 'Tooltips',
+  'style_prop_group.xaAmsAppearance' => 'AMS: Appearance',
+  'style_prop_group.xfmgAppearance' => 'XFMG: Appearance',
 );

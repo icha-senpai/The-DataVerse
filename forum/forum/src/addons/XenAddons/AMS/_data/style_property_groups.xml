@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style_property_groups>
+  <style_property_group group_name="xaAmsAppearance" title="AMS: Appearance" description="A number of properties to control the appearance of XenAddons Article Management System" display_order="7500"/>
+</style_property_groups>

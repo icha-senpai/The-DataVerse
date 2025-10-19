@@ -337,6 +337,50 @@ return array(
 
 		' . '
 
+';
+	if ($__templater->method($__vars['xf']['visitor'], 'canViewMedia', array()) AND $__vars['user']['xfmg_media_count']) {
+		$__finalCompiled .= '
+	<a href="' . $__templater->func('link', array('media/users', $__vars['user'], ), true) . '"
+	   class="tabs-tab"
+	   id="xfmgMedia"
+	   role="tab">' . 'Media' . '</a>
+';
+	}
+	$__finalCompiled .= '
+
+';
+	if ($__templater->method($__vars['xf']['visitor'], 'canViewMedia', array()) AND $__vars['user']['xfmg_album_count']) {
+		$__finalCompiled .= '
+	<a href="' . $__templater->func('link', array('media/albums/users', $__vars['user'], ), true) . '"
+	   class="tabs-tab"
+	   id="xfmgAlbums"
+	   role="tab">' . 'Albums' . '</a>
+';
+	}
+	$__finalCompiled .= '
+
+';
+	if ($__templater->method($__vars['xf']['visitor'], 'canViewResources', array()) AND $__vars['user']['xfrm_resource_count']) {
+		$__finalCompiled .= '
+	<a href="' . $__templater->func('link', array('resources/authors', $__vars['user'], ), true) . '"
+	   class="tabs-tab"
+	   id="resources"
+	   role="tab">' . 'Resources' . '</a>
+';
+	}
+	$__finalCompiled .= '
+
+';
+	if ($__templater->method($__vars['xf']['visitor'], 'canViewAmsArticles', array()) AND $__vars['user']['xa_ams_article_count']) {
+		$__finalCompiled .= '
+	<a href="' . $__templater->func('link', array('ams/authors', $__vars['user'], ), true) . '"
+	   class="tabs-tab"
+	   id="ams_articles"
+	   role="tab">' . 'Articles' . '</a>
+';
+	}
+	$__finalCompiled .= '
+
 		<a href="' . $__templater->func('link', array('members/about', $__vars['user'], ), true) . '"
 		   class="tabs-tab"
 		   id="about"
@@ -353,6 +397,10 @@ return array(
 	}
 	$__finalCompiled .= '
 		' . '
+
+' . $__templater->callMacro('ah_gamerprofiles_member_view_tab', 'tab', array(
+		'user' => $__vars['user'],
+	), $__vars) . '
 	</span>
 </h2>
 
@@ -522,6 +570,46 @@ return array(
 
 	' . '
 
+';
+	if ($__templater->method($__vars['xf']['visitor'], 'canViewMedia', array()) AND $__vars['user']['xfmg_media_count']) {
+		$__finalCompiled .= '
+	<li data-href="' . $__templater->func('link', array('media/users', $__vars['user'], ), true) . '" role="tabpanel" aria-labelledby="xfmgMedia">
+		<div class="blockMessage">' . 'Loading' . $__vars['xf']['language']['ellipsis'] . '</div>
+	</li>
+';
+	}
+	$__finalCompiled .= '
+
+';
+	if ($__templater->method($__vars['xf']['visitor'], 'canViewMedia', array()) AND $__vars['user']['xfmg_album_count']) {
+		$__finalCompiled .= '
+	<li data-href="' . $__templater->func('link', array('media/albums/users', $__vars['user'], ), true) . '" role="tabpanel" aria-labelledby="xfmgAlbums">
+		<div class="blockMessage">' . 'Loading' . $__vars['xf']['language']['ellipsis'] . '</div>
+	</li>
+';
+	}
+	$__finalCompiled .= '
+
+';
+	if ($__templater->method($__vars['xf']['visitor'], 'canViewResources', array()) AND $__vars['user']['xfrm_resource_count']) {
+		$__finalCompiled .= '
+	<li data-href="' . $__templater->func('link', array('resources/authors', $__vars['user'], ), true) . '" role="tabpanel" aria-labelledby="resources">
+		<div class="blockMessage">' . 'Loading' . $__vars['xf']['language']['ellipsis'] . '</div>
+	</li>
+';
+	}
+	$__finalCompiled .= '
+
+';
+	if ($__templater->method($__vars['xf']['visitor'], 'canViewAmsArticles', array()) AND $__vars['user']['xa_ams_article_count']) {
+		$__finalCompiled .= '
+	<li data-href="' . $__templater->func('link', array('ams/authors', $__vars['user'], array('from_profile' => 1, ), ), true) . '" role="tabpanel" aria-labelledby="ams_articles">
+		<div class="blockMessage">' . 'Loading' . $__vars['xf']['language']['ellipsis'] . '</div>
+	</li>
+';
+	}
+	$__finalCompiled .= '
+
 	<li data-href="' . $__templater->func('link', array('members/about', $__vars['user'], ), true) . '" role="tabpanel" aria-labelledby="about">
 		<div class="blockMessage">' . 'Loading' . $__vars['xf']['language']['ellipsis'] . '</div>
 	</li>
@@ -536,6 +624,8 @@ return array(
 	}
 	$__finalCompiled .= '
 	' . '
+
+' . $__templater->includeTemplate('ah_gamerprofiles_member_view_tab', $__vars) . '
 </ul>
 
 ';

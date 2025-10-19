@@ -12,7 +12,7 @@ return array(
 		$__finalCompiled .= '
 		<ul class="listInline listInline--bullet">
 			<li><a href="' . $__templater->func('link', array('resources/categories', $__vars['content']['Category'], ), true) . '">' . $__templater->escape($__vars['content']['Category']['title']) . '</a></li>
-			<li>' . $__templater->escape($__vars['content']['download_count']) . ' ' . 'xfrm_downloads' . '</li>
+			<li>' . $__templater->escape($__vars['content']['download_count']) . ' ' . 'Downloads' . '</li>
 			<li>' . $__templater->escape($__vars['content']['rating_count']) . ' ' . 'ratings' . '</li>
 		</ul>
 	';

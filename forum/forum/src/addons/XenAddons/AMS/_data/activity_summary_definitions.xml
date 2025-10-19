@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<activity_summary_definitions>
+  <activity_summary_definition definition_id="xa_ams_latest_articles" definition_class="XenAddons\AMS\ActivitySummary\LatestArticles"/>
+  <activity_summary_definition definition_id="xa_ams_latest_comments" definition_class="XenAddons\AMS\ActivitySummary\LatestComments"/>
+  <activity_summary_definition definition_id="xa_ams_latest_reviews" definition_class="XenAddons\AMS\ActivitySummary\LatestReviews"/>
+</activity_summary_definitions>

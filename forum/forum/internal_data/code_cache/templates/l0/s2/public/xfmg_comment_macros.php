@@ -112,7 +112,7 @@ return array(
 				';
 	} else {
 		$__finalCompiled .= '
-					<div class="blockMessage js-replyNoMessages">' . 'xfmg_there_no_comments_to_display' . '</div>
+					<div class="blockMessage js-replyNoMessages">' . 'There are no comments to display.' . '</div>
 				';
 	}
 	$__finalCompiled .= '

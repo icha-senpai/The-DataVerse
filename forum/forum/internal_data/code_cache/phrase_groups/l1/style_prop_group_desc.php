@@ -1,5 +1,6 @@
 <?php
 return array (
+  'style_prop_group_desc.ah_gamerprofiles' => 'Style properties for [AH] Social Profiles',
   'style_prop_group_desc.avatar' => 'Avatars are graphical representations of users. Some users may upload their own images, while others will use the default letter-based imagery. Styling for both of these types is controlled here.',
   'style_prop_group_desc.basic' => 'Defines the location of various commonly-used assets etc.',
   'style_prop_group_desc.bbCode' => 'This section contains properties and options relating to BB codes used to style messages and other user-generated content.',
@@ -30,4 +31,6 @@ return array (
   'style_prop_group_desc.th_uix_staffMessages' => '',
   'style_prop_group_desc.th_uix_threadStarterMessages' => '',
   'style_prop_group_desc.tooltip' => 'Tooltips are (usually) small hints that appear when the mouse pointer hovers over page elements that may require additional information to convey their purpose or content.',
+  'style_prop_group_desc.xaAmsAppearance' => 'A number of properties to control the appearance of XenAddons Article Management System',
+  'style_prop_group_desc.xfmgAppearance' => 'A number of properties to control the appearance of XenForo Media Gallery',
 );

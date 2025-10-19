@@ -30,4 +30,7 @@ return array (
   'option_group.th_uix' => '[UI.X] Options',
   'option_group.users' => 'User options',
   'option_group.usersAndRegistration' => 'User registration',
+  'option_group.xaAms' => 'Article Management System',
+  'option_group.xfmg' => 'XenForo Media Gallery',
+  'option_group.xfrm' => 'XenForo Resource Manager',
 );

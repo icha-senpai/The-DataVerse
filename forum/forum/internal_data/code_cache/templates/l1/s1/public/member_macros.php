@@ -103,7 +103,55 @@ return array(
 	';
 	}
 	$__finalCompiled .= '
-	' . '
+	';
+	if ($__templater->method($__vars['xf']['visitor'], 'canViewMedia', array())) {
+		$__finalCompiled .= '
+	';
+		if ($__vars['user']['xfmg_media_count']) {
+			$__finalCompiled .= '
+		<dl class="pairs pairs--rows pairs--rows--centered menu-fauxLinkRow">
+			<dt>' . 'Media' . '</dt>
+			<dd>
+				<a href="' . $__templater->func('link', array('media/users', $__vars['user'], ), true) . '" class="menu-fauxLinkRow-linkRow u-concealed">
+					' . $__templater->filter($__vars['user']['xfmg_media_count'], array(array('number', array()),), true) . '
+				</a>
+			</dd>
+		</dl>
+	';
+		}
+		$__finalCompiled .= '
+';
+	}
+	$__finalCompiled .= '
+';
+	if ($__templater->method($__vars['xf']['visitor'], 'canViewAmsArticles', array()) AND $__vars['user']['xa_ams_article_count']) {
+		$__finalCompiled .= '
+	<dl class="pairs pairs--rows pairs--rows--centered menu-fauxLinkRow">
+		<dt>' . 'Articles' . '</dt>
+		<dd>
+			<a href="' . $__templater->func('link', array('ams/authors', $__vars['user'], ), true) . '" class="menu-fauxLinkRow-linkRow u-concealed">
+				' . $__templater->filter($__vars['user']['xa_ams_article_count'], array(array('number', array()),), true) . '
+			</a>
+		</dd>
+	</dl>
+';
+	}
+	$__finalCompiled .= '
+';
+	if ($__templater->method($__vars['xf']['visitor'], 'canViewResources', array()) AND $__vars['user']['xfrm_resource_count']) {
+		$__finalCompiled .= '
+	<dl class="pairs pairs--rows pairs--rows--centered menu-fauxLinkRow">
+		<dt>' . 'Resources' . '</dt>
+		<dd>
+			<a href="' . $__templater->func('link', array('resources/authors', $__vars['user'], ), true) . '" class="menu-fauxLinkRow-linkRow u-concealed">
+				' . $__templater->filter($__vars['user']['xfrm_resource_count'], array(array('number', array()),), true) . '
+			</a>
+		</dd>
+	</dl>
+';
+	}
+	$__finalCompiled .= '
+' . '
 	' . '
 	<dl class="pairs pairs--rows pairs--rows--centered">
 		<dt>' . 'Reaction score' . '</dt>
@@ -236,7 +284,15 @@ return array(
 							' . '
 							<a href="' . $__templater->func('link', array('search/member', null, array('user_id' => $__vars['user']['user_id'], ), ), true) . '" rel="nofollow" class="menu-linkRow">' . 'Find all content by ' . $__templater->escape($__vars['user']['username']) . '' . '</a>
 							<a href="' . $__templater->func('link', array('search/member', null, array('user_id' => $__vars['user']['user_id'], 'content' => 'thread', ), ), true) . '" rel="nofollow" class="menu-linkRow">' . 'Find all threads by ' . $__templater->escape($__vars['user']['username']) . '' . '</a>
-							' . '
+							';
+		if ($__templater->method($__vars['xf']['visitor'], 'canViewAmsArticles', array()) AND $__vars['user']['xa_ams_article_count']) {
+			$__compilerTemp2 .= '
+	<a href="' . $__templater->func('link', array('search/member', null, array('user_id' => $__vars['user']['user_id'], 'content' => 'ams_article', ), ), true) . '" rel="nofollow" class="menu-linkRow">' . 'Find all articles by ' . $__templater->escape($__vars['user']['username']) . '' . '</a>
+';
+		}
+		$__compilerTemp2 .= '
+
+' . '
 						</div>
 					</div>
 				</div>

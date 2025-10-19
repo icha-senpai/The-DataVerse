@@ -372,6 +372,17 @@ return array(
 									';
 		}
 		$__compilerTemp1 .= '
+
+';
+		if ($__templater->method($__vars['xf']['visitor'], 'canViewIcons', array())) {
+			$__compilerTemp1 .= '
+	' . $__templater->callMacro('ah_gamerprofiles_macros', 'ah_gamerprofiles_icons_container', array(
+				'user' => $__vars['user'],
+			), $__vars) . '
+';
+		}
+		$__compilerTemp1 .= '
+
 								';
 		if (strlen(trim($__compilerTemp1)) > 0) {
 			$__finalCompiled .= '

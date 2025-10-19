@@ -1,0 +1,19 @@
+{
+    "legacy_addon_id": "NFLJ_AMS",
+    "title": "XenAddons Article Management System",
+    "description": "Article Management System is an add-on that allows you and your users to create articles and article type content that is organized into admin-defined categories.",
+    "version_id": 2020970,
+    "version_string": "2.2.9",
+    "dev": "XenAddons",
+    "dev_url": "https://xenaddons.com/",
+    "faq_url": "",
+    "support_url": "https://xenaddons.com/#article-management-system-support-forums.56",
+    "extra_urls": [],
+    "require": {
+        "XF": [
+            2020270,
+            "XenForo 2.2.2"
+        ]
+    },
+    "icon": "xa.png"
+}

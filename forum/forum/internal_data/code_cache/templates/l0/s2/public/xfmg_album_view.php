@@ -321,7 +321,7 @@ return array(
 	';
 		$__templater->pageParams['pageAction'] = $__templater->preEscaped('
 		' . $__templater->button('
-			' . 'xfmg_add_media' . '
+			' . 'Add media' . '
 		', array(
 			'href' => $__templater->func('link', array('media/albums/add', $__vars['album'], ), false),
 			'class' => 'button--cta',

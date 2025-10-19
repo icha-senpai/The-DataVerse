@@ -1,5 +1,7 @@
 <?php
 return array (
+  'ad_pos.ams_article_view_above_article' => 'AMS Article view: Above article content',
+  'ad_pos.ams_article_view_below_article' => 'AMS Article view: Below article content',
   'ad_pos.container_breadcrumb_bottom_above' => 'Container breadcrumb (bottom): Above',
   'ad_pos.container_breadcrumb_bottom_below' => 'Container breadcrumb (bottom): Below',
   'ad_pos.container_breadcrumb_top_above' => 'Container breadcrumb (top): Above',

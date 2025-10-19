@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style_properties>
+  <style_property property_name="ahGPColorBattlenet" group_name="ah_gamerprofiles" title="Battle.net icon color" property_type="value" value_type="color" has_variations="1" value_group="IconColors" display_order="2070">
+    <value>{
+    "default": "#148EFF",
+    "alternate": "#FFF"
+}</value>
+  </style_property>
+  <style_property property_name="ahGPColorBlueSky" group_name="ah_gamerprofiles" title="Bluesky icon color" property_type="value" value_type="color" has_variations="1" value_group="IconColors" display_order="2141">
+    <value>{
+    "default": "#0886FE",
+    "alternate": "#FFF"
+}</value>
+  </style_property>
+  <style_property property_name="ahGPColorDiscord" group_name="ah_gamerprofiles" title="Discord icon color" property_type="value" value_type="color" has_variations="1" value_group="IconColors" display_order="2090">
+    <value>{
+    "default": "#5865F2",
+    "alternate": "#FFF"
+}</value>
+  </style_property>
+  <style_property property_name="ahGPColorEpicGames" group_name="ah_gamerprofiles" title="Epic Games icon color" property_type="value" value_type="color" has_variations="1" value_group="IconColors" display_order="2060">
+    <value>{
+    "default": "#000",
+    "alternate": "#FFF"
+}</value>
+  </style_property>
+  <style_property property_name="ahGPColorFacebook" group_name="ah_gamerprofiles" title="Facebook icon color" property_type="value" value_type="color" has_variations="1" value_group="IconColors" display_order="2120">
+    <value>{
+    "default": "#1877F2",
+    "alternate": "#FFF"
+}</value>
+  </style_property>
+  <style_property property_name="ahGPColorGitHub" group_name="ah_gamerprofiles" title="GitHub icon color" property_type="value" value_type="color" has_variations="1" value_group="IconColors" display_order="2210">
+    <value>{
+    "default": "#000",
+    "alternate": "#FFF"
+}</value>
+  </style_property>
+  <style_property property_name="ahGPColorGitLab" group_name="ah_gamerprofiles" title="GitLab icon color" property_type="value" value_type="color" has_variations="1" value_group="IconColors" display_order="2220">
+    <value>{
+    "default": "#E24329",
+    "alternate": "#FFF"
+}</value>
+  </style_property>
+  <style_property property_name="ahGPColorGuilded" group_name="ah_gamerprofiles" title="Guilded icon color" property_type="value" value_type="color" has_variations="1" value_group="IconColors" display_order="2100">
+    <value>{
+    "default": "#F5C400",
+    "alternate": "#FFF"
+}</value>
+  </style_property>
+  <style_property property_name="ahGPColorInstagram" group_name="ah_gamerprofiles" title="Instagram icon color" property_type="value" value_type="color" has_variations="1" value_group="IconColors" display_order="2170">
+    <value>{
+    "default": "#C13584",
+    "alternate": "#FFF"
+}</value>
+  </style_property>
+  <style_property property_name="ahGPColorKick" group_name="ah_gamerprofiles" title="Kick icon color" property_type="value" value_type="color" has_variations="1" value_group="IconColors" display_order="2200">
+    <value>{
+    "default": "#000",
+    "alternate": "#FFF"
+}</value>
+  </style_property>
+  <style_property property_name="ahGPColorNintendo" group_name="ah_gamerprofiles" title="Nintendo icon color" property_type="value" value_type="color" has_variations="1" value_group="IconColors" display_order="2050">
+    <value>{
+    "default": "#E60012",
+    "alternate": "#FFF"
+}</value>
+  </style_property>
+  <style_property property_name="ahGPColorOrigin" group_name="ah_gamerprofiles" title="EA icon color" property_type="value" value_type="color" has_variations="1" value_group="IconColors" display_order="2040">
+    <value>{
+    "default": "#6E34EB",
+    "alternate": "#FFF"
+}</value>
+  </style_property>
+  <style_property property_name="ahGPColorPlayStation" group_name="ah_gamerprofiles" title="PlayStation icon color" property_type="value" value_type="color" has_variations="1" value_group="IconColors" display_order="2010">
+    <value>{
+    "default": "#0070CC",
+    "alternate": "#FFF"
+}</value>
+  </style_property>
+  <style_property property_name="ahGPColorReddit" group_name="ah_gamerprofiles" title="Reddit icon color" property_type="value" value_type="color" has_variations="1" value_group="IconColors" display_order="2160">
+    <value>{
+    "default": "#FF4500",
+    "alternate": "#FFF"
+}</value>
+  </style_property>
+  <style_property property_name="ahGPColorRoblox" group_name="ah_gamerprofiles" title="Roblox icon color" property_type="value" value_type="color" has_variations="1" value_group="IconColors" display_order="2081">
+    <value>{
+    "default": "#000",
+    "alternate": "#FFF"
+}</value>
+  </style_property>
+  <style_property property_name="ahGPColorSecondLife" group_name="ah_gamerprofiles" title="Second Life icon color" property_type="value" value_type="color" has_variations="1" value_group="IconColors" display_order="2080">
+    <value>{
+    "default": "#000",
+    "alternate": "#FFF"
+}</value>
+  </style_property>
+  <style_property property_name="ahGPColorSteam" group_name="ah_gamerprofiles" title="Steam icon color" property_type="value" value_type="color" has_variations="1" value_group="IconColors" display_order="2030">
+    <value>{
+    "default": "#000",
+    "alternate": "#FFF"
+}</value>
+  </style_property>
+  <style_property property_name="ahGPColorTelegram" group_name="ah_gamerprofiles" title="Telegram icon color" property_type="value" value_type="color" has_variations="1" value_group="IconColors" display_order="2190">
+    <value>{
+    "default": "#24A1DE",
+    "alternate": "#FFF"
+}</value>
+  </style_property>
+  <style_property property_name="ahGPColorTikTok" group_name="ah_gamerprofiles" title="TikTok icon color" property_type="value" value_type="color" has_variations="1" value_group="IconColors" display_order="2180">
+    <value>{
+    "default": "#FE2C55",
+    "alternate": "#FFF"
+}</value>
+  </style_property>
+  <style_property property_name="ahGPColorTwitch" group_name="ah_gamerprofiles" title="Twitch icon color" property_type="value" value_type="color" has_variations="1" value_group="IconColors" display_order="2110">
+    <value>{
+    "default": "#8956FB",
+    "alternate": "#FFF"
+}</value>
+  </style_property>
+  <style_property property_name="ahGPColorTwitter" group_name="ah_gamerprofiles" title="Twitter/X icon color" property_type="value" value_type="color" has_variations="1" value_group="IconColors" display_order="2140">
+    <value>{
+    "default": "#000",
+    "alternate": "#FFF"
+}</value>
+  </style_property>
+  <style_property property_name="ahGPColorXbox" group_name="ah_gamerprofiles" title="Xbox icon color" property_type="value" value_type="color" has_variations="1" value_group="IconColors" display_order="2020">
+    <value>{
+    "default": "#0C7A1F",
+    "alternate": "#FFF"
+}</value>
+  </style_property>
+  <style_property property_name="ahGPColorYouTube" group_name="ah_gamerprofiles" title="YouTube icon color" property_type="value" value_type="color" has_variations="1" value_group="IconColors" display_order="2130">
+    <value>{
+    "default": "#FF0000",
+    "alternate": "#FFF"
+}</value>
+  </style_property>
+  <style_property property_name="ahGPGamerCardMargin" group_name="ah_gamerprofiles" title="Gamer card margin-top" description="This adjusts the margin-top property of the gamer card popup. You may have to adjust this depending on how you decide to style the icons in the postbit." property_type="value" value_type="unit" has_variations="0" display_order="400">
+    <value>"-170px"</value>
+  </style_property>
+  <style_property property_name="ahGPIconHeight" group_name="ah_gamerprofiles" title="Icon height" property_type="value" value_type="unit" has_variations="0" value_group="IconDimensions" display_order="1000">
+    <value>"21px"</value>
+  </style_property>
+  <style_property property_name="ahGPIconStyle" group_name="ah_gamerprofiles" title="Postbit icon style" description="You can choose which style to display the icons in. This uses justify-content to control the style. Feel free to choose &quot;None&quot; and make your own using the the &quot;Message user icon container&quot; style property below." property_type="value" value_type="radio" has_variations="0" display_order="500">
+    <value_parameters>={{ phrase('none') }}
+spacearound=Space Around
+spacebetween=Space Between
+spaceevenly=Space Evenly</value_parameters>
+    <value>""</value>
+  </style_property>
+  <style_property property_name="ahGPIconWidth" group_name="ah_gamerprofiles" title="Icon width" property_type="value" value_type="unit" has_variations="0" value_group="IconDimensions" display_order="1010">
+    <value>"21px"</value>
+  </style_property>
+  <style_property property_name="ahGPIconsContainer" group_name="ah_gamerprofiles" title="Icons container" description="Affects all icons regardless of placement" property_type="css" has_variations="0" display_order="20000" css_components="text,background,border,border_radius,border_width_simple,border_color_simple,border_radius_simple,padding,extra">
+    <value>[]</value>
+  </style_property>
+  <style_property property_name="ahGPMemberProfile" group_name="ah_gamerprofiles" title="Display social profile icons in member profile." description="This will not affect the gamer cards tab." property_type="value" value_type="boolean" has_variations="0" display_order="300">
+    <value>1</value>
+  </style_property>
+  <style_property property_name="ahGPMemberTooltip" group_name="ah_gamerprofiles" title="Member tooltip container" description="Only affects icons in the member tooltip container" property_type="css" has_variations="0" display_order="22000" css_components="text,background,border,border_radius,border_width_simple,border_color_simple,border_radius_simple,padding,extra">
+    <value>{
+    "padding-top": "5px"
+}</value>
+  </style_property>
+  <style_property property_name="ahGPMessage" group_name="ah_gamerprofiles" title="Message user info container" description="Only affects icons in the message user info" property_type="css" has_variations="0" display_order="21000" css_components="text,background,border,border_radius,border_width_simple,border_color_simple,border_radius_simple,padding,extra">
+    <value>{
+    "padding-top": "10px",
+    "extra": "display: flex;\nflex-wrap: wrap;\nalign-items: center;"
+}</value>
+  </style_property>
+  <style_property property_name="ahGPStatus" group_name="ah_gamerprofiles" title="Status" description="The elements selected here will be displayed in the message user info, member tooltip, and member profile." property_type="value" value_type="template" has_variations="0" display_order="100">
+    <value_parameters>template=style_property_template_ah_gamerprofiles_status
+type=array</value_parameters>
+    <value>{
+    "ah_playstation": "1",
+    "ah_xbox": "1",
+    "ah_steam": "1",
+    "ah_nintendo": "1",
+    "ah_epicgames": "1",
+    "ah_origin": "1",
+    "ah_battlenet": "1",
+    "ah_secondlife": "1",
+    "ah_roblox": "1",
+    "ah_discord": "1",
+    "ah_guilded": "1",
+    "ah_twitch": "1",
+    "ah_youtube": "1",
+    "facebook": "1",
+    "twitter": "1",
+    "ah_bluesky": "1",
+    "ah_reddit": "1",
+    "ah_instagram": "1",
+    "ah_tiktok": "1",
+    "ah_telegram": "1",
+    "ah_kick": "1",
+    "ah_github": "1",
+    "ah_gitlab": "1"
+}</value>
+  </style_property>
+  <style_property property_name="ahGPTooltip" group_name="ah_gamerprofiles" title="Display social profile icons in member tooltip." property_type="value" value_type="boolean" has_variations="0" display_order="200">
+    <value>1</value>
+  </style_property>
+  <style_property property_name="ahGPUnifiedIconColor" group_name="ah_gamerprofiles" title="Unified icon color" description="This setting only works when you check the above setting. Use this to unify all icon colors when users have a profile banner." property_type="value" value_type="color" has_variations="1" depends_on="ahGPUnifyColorsCheck" value_group="IconColors" display_order="2001">
+    <value>{
+    "default": "#FFF"
+}</value>
+  </style_property>
+  <style_property property_name="ahGPUnifyColorsCheck" group_name="ah_gamerprofiles" title="Unify icon colors when user has a profile banner" description="Check this setting if you wish to unify all icon colors when users have a profile banner." property_type="value" value_type="boolean" has_variations="0" value_group="IconColors" display_order="2000">
+    <value>1</value>
+  </style_property>
+</style_properties>

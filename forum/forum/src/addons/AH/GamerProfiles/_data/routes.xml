@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<routes>
+  <route route_type="public" route_prefix="members" sub_name="gamerprofiles" format=":int&lt;user_id,username&gt;/gamerprofiles/:page" controller="XF:Member" context="members" action_prefix="gamerprofiles"/>
+</routes>
