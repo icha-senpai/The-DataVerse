@@ -1,0 +1,15 @@
+<?php return array (
+  'dataverse\\core\\Plugin' => 'plugins/dataverse/core/Plugin.php',
+  'october\\demo\\Plugin' => 'plugins/october/demo/Plugin.php',
+  'rainlab\\blog\\Plugin' => 'plugins/rainlab/blog/Plugin.php',
+  'rainlab\\builder\\Plugin' => 'plugins/rainlab/builder/Plugin.php',
+  'rainlab\\location\\Plugin' => 'plugins/rainlab/location/Plugin.php',
+  'rainlab\\pages\\Plugin' => 'plugins/rainlab/pages/Plugin.php',
+  'rainlab\\translate\\Plugin' => 'plugins/rainlab/translate/Plugin.php',
+  'rainlab\\user\\Plugin' => 'plugins/rainlab/user/Plugin.php',
+  'rainlab\\userplus\\Plugin' => 'plugins/rainlab/userplus/Plugin.php',
+  'tailor\\Controllers\\entries' => 'modules/tailor/controllers/entries.php',
+  'dashboard\\Controllers\\index' => 'modules/dashboard/controllers/index.php',
+  'backend\\Controllers\\index' => 'modules/backend/controllers/index.php',
+  'backend\\Controllers\\auth' => 'modules/backend/controllers/auth.php',
+);

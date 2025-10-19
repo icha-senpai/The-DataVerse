@@ -1,0 +1,47 @@
+uuid: 1c68bb14-f81e-41e9-b9e7-8b9379d8e2ef
+handle: Wiki\Revision
+name: Wiki Revision
+type: entry
+
+navigation:
+  parent: Wiki\Entry
+  label: Revisions
+  icon: icon-history
+  order: 50
+  code: wiki-revisions
+  mode: secondary
+
+relations:
+  entry:
+    label: Entry
+    type: belongsTo
+    source: Wiki\Entry
+
+fields:
+  # entry:
+  #   label: Entry
+  #   type: relation
+  #   source: Wiki\Entry
+  #   span: left
+
+  author:
+    label: Author
+    type: text
+    span: left
+
+  change_summary:
+    label: Change Summary
+    type: textarea
+    span: right
+
+  revision_date:
+    label: Revision Date
+    type: datepicker
+    mode: datetime
+    span: left
+
+  content_snapshot:
+    label: Content Snapshot
+    type: markdown
+    size: large
+    span: full

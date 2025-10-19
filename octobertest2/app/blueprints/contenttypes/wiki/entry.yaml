@@ -1,0 +1,121 @@
+uuid: a9dc302f-3ab9-47ee-b37a-21b4420b5a82
+handle: Wiki\Entry
+name: Wiki Entry
+type: entry
+multisite: false
+
+navigation:
+  primaryNavigation:
+    label: Wiki
+    icon: icon-book
+    order: 150
+  label: Entries
+  icon: icon-file-text
+  order: 10
+  mode: primary  
+
+relations:
+  category:
+    label: Category
+    type: belongsTo
+    source: Wiki\Category
+
+  tags:
+    label: Tags
+    type: belongsToMany
+    source: Wiki\Tag
+
+  related_entries:
+    label: Related Articles
+    type: belongsToMany
+    source: Wiki\Entry
+
+  sources:
+    label: References / Citations
+    type: hasMany
+    source: Wiki\Source
+
+  revision_log:
+    label: Revision History
+    type: hasMany
+    source: Wiki\Revision
+
+fields:
+  title:
+    label: Title
+    type: text
+    span: left
+
+  slug:
+    label: Slug
+    type: text
+    preset: title
+    span: right
+
+  summary:
+    label: Summary
+    type: textarea
+    size: small
+    span: full
+
+  featured_image:
+    label: Featured Image
+    type: mediafinder
+    mode: image
+    span: full
+
+  infobox:
+    label: Infobox
+    type: repeater
+    comment: Structured facts or attributes for the entry.
+    form:
+      fields:
+        label:
+          label: Label
+          type: text
+        value:
+          label: Value
+          type: text
+
+  content:
+    label: Main Content
+    type: markdown
+    span: full
+
+  # category:
+  #   label: Category
+  #   type: relation
+  #   source: Wiki\Category
+  #   span: left
+
+  # tags:
+  #   label: Tags
+  #   type: relation
+  #   source: Wiki\Tag
+  #   span: right
+
+  # related_entries:
+  #   label: Related Articles
+  #   type: relation
+  #   source: Wiki\Entry
+  #   mode: relation
+
+  # sources:
+  #   label: References / Citations
+  #   type: relation
+  #   source: Wiki\Source
+
+  allow_comments:
+    label: Allow Comments
+    type: switch
+    default: true
+
+  # revision_log:
+  #   label: Revision History
+  #   type: relation
+  #   source: Wiki\Revision
+  #   mode: relation
+  #   readOnly: true
+
+use:
+  list: app/contenttypes/tailor/wiki/entry/columns.yaml

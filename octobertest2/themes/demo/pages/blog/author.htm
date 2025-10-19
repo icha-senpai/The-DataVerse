@@ -1,0 +1,23 @@
+##
+url = "/blog/author/:slug"
+layout = "default"
+title = "Display a Blog Author"
+
+[section author]
+handle = "Blog\Author"
+identifier = "slug"
+
+[collection blog]
+handle = "Blog\Post"
+
+[resources]
+vars[activeNavLink] = 'blog'
+==
+{% if author is empty %}
+    {% do abort(404) %}
+{% endif %}
+
+{% set authorPosts = blog.whereRelation('author', 'slug', author.slug).paginate(16) %}
+{% put pageTitle = author.title %}
+
+

@@ -1,0 +1,22 @@
+==
+url = "/blog/post/:slug/:id"
+layout = "blog"
+title = "Display a Blog Post"
+meta_title = "{{ blog.title }} - Blog"
+
+[section post]
+handle = "Blog\Post"
+identifier = "id"
+
+[collection blogCategories]
+handle = "Blog\Category"
+
+[resources]
+vars[activeNavLink] = 'blog'
+==
+{% if post is empty %}
+    {% do abort(404) %}
+{% elseif post.slug and post.slug != this.param.slug %}
+    {% do redirect('blog/post'|page({ slug: post.slug }), 301) %}
+{% endif %}
+

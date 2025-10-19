@@ -1,0 +1,47 @@
+title = "Wiki"
+url = "/wiki"
+layout = "default"
+==
+{% set entries = tailor.entries('Wiki\\Entry').paginate(10) %}
+{% set categories = tailor.entries('Wiki\\Category') %}
+{% set tags = tailor.entries('Wiki\\Tag') %}
+
+<div class="max-w-5xl mx-auto text-gray-200 py-12">
+  <h1 class="text-4xl font-orbitron mb-6 text-dv-accent">The DataVerse Wiki</h1>
+
+  <div class="grid grid-cols-3 gap-4 mb-10">
+    <div>
+      <h2 class="text-xl text-dv-accent2 mb-2">Categories</h2>
+      <ul>
+        {% for cat in categories %}
+          <li><a href="/wiki/category/{{ cat.slug }}" class="hover:text-dv-accent2">{{ cat.name }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="text-xl text-dv-accent2 mb-2">Tags</h2>
+      <ul class="flex flex-wrap gap-2">
+        {% for tag in tags %}
+          <a href="?tag={{ tag.slug }}" class="px-2 py-1 bg-dv-surface/50 border border-dv-accent rounded">{{ tag.name }}</a>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <div class="space-y-6">
+    {% for entry in entries %}
+      <article class="bg-dv-surface/60 p-6 rounded-2xl shadow-md">
+        <a href="/wiki/{{ entry.slug }}" class="text-2xl text-dv-accent hover:text-dv-accent2">{{ entry.title }}</a>
+        <p class="text-gray-400 text-sm mb-3">{{ entry.category.name }}</p>
+        <p class="text-gray-300">{{ entry.summary|raw }}</p>
+      </article>
+    {% else %}
+      <p>No entries found.</p>
+    {% endfor %}
+  </div>
+
+  <div class="mt-8">
+    {{ entries.render|raw }}
+  </div>
+</div>

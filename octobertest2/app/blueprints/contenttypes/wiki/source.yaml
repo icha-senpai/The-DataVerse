@@ -1,0 +1,32 @@
+uuid: 7c7f19d1-45b2-4cb5-84b2-c5dbecc82fd8
+handle: Wiki\Source
+name: Wiki Source
+type: entry
+
+navigation:
+  parent: Wiki\Entry      # or: a9dc302f-3ab9-47ee-b37a-21b4420b5a82
+  label: Sources
+  icon: icon-link
+  order: 40
+  code: wiki-sources
+  mode: secondary
+
+fields:
+  title:
+    label: Title
+    type: text
+  url:
+    label: URL
+    type: text
+  description:
+    label: Description
+    type: textarea
+  source_type:
+    label: Type
+    type: dropdown
+    options:
+      book: Book
+      article: Article
+      website: Website
+      video: Video
+      other: Other

@@ -1,0 +1,7 @@
+### Ignore RSS/template files that contain XML-like tags (link is void in HTML parser)
+themes/dataverse/pages/blog/rss.htm
+
+# Never format OctoberCMS page files (they contain YAML-like front-matter that Prettier's HTML parser can mangle)
+themes/**/pages/**
+themes/**/content/**
+themes/**/blueprints/**

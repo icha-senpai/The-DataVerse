@@ -1,0 +1,32 @@
+uuid: 3d05b6ae-9e27-41b1-8a7b-dcc7f76a153b
+handle: Wiki\Category
+name: Wiki Category
+type: structure
+
+navigation:
+  parent: Wiki\Entry      # or: a9dc302f-3ab9-47ee-b37a-21b4420b5a82
+  label: Categories
+  icon: icon-folder
+  order: 20
+  mode: secondary
+
+structure:
+  maxDepth: 2
+  reorder: true
+  showTree: true
+
+fields:
+  name:
+    label: Category Name
+    type: text
+    span: left
+  slug:
+    label: Slug
+    type: text
+    preset: name
+    span: right
+  description:
+    label: Description
+    type: textarea
+    size: small
+    span: full

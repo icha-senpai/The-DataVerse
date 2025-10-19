@@ -1,0 +1,7 @@
+Vendored Formula.js provenance
+
+Source inspected: https://unpkg.com/formulajs/dist/formula.js
+Inspected on: 2025-10-14
+Notes: The vendored file `formula.js` begins with a webpackUniversalModuleDefinition wrapper (UMD/webpack bundle). No replacement was required because this is already a UMD bundle suitable for direct inclusion.
+
+Policy: Per repository policy, we prefer unminified upstream builds. This file was fetched from unpkg (unminified). If you want a specific release tag (e.g., formulajs@2.x), provide the exact version and I will fetch that and update this provenance file.

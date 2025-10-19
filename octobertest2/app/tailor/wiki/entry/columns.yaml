@@ -1,0 +1,23 @@
+columns:
+  title:
+    label: Title
+    searchable: true
+    sortable: true
+
+  category:
+    label: Category
+    relation: category
+    valueFrom: name
+    sortable: false
+
+  tags:
+    label: Tags
+    relation: tags
+    valueFrom: name
+    sortable: false
+
+  updated_at:
+    label: 🕒 Updated
+    type: datetime
+    sortable: true
+    format: 'M d, Y h:i A'

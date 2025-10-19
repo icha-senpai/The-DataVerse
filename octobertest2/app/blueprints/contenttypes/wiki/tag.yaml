@@ -1,0 +1,24 @@
+uuid: 14dfe87c-6db0-4f88-bd42-272c2d8740cf
+handle: Wiki\Tag
+name: Wiki Tag
+type: structure
+
+navigation:
+  parent: Wiki\Entry      # or: a9dc302f-3ab9-47ee-b37a-21b4420b5a82
+  label: Tags
+  icon: icon-tags
+  order: 30
+  mode: secondary
+
+
+structure:
+  showTree: false
+
+fields:
+  name:
+    label: Tag Name
+    type: text
+  slug:
+    label: Slug
+    type: text
+    preset: name

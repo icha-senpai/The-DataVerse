@@ -1,0 +1,23 @@
+{
+    "legacy_addon_id": "uix",
+    "title": "[TH] UI.X",
+    "description": "Add-on required to add additional functionality to all ThemeHouse styles",
+    "version_id": 2030091,
+    "version_string": "2.3.0 Patch Level 1",
+    "dev": "ThemeHouse",
+    "dev_url": "https://www.themehouse.com",
+    "faq_url": "https://www.themehouse.com/help/documentation/uix2/faqs",
+    "support_url": "https://www.themehouse.com/help",
+    "extra_urls": [],
+    "require": {
+        "XF": [
+            2030010,
+            "XenForo 2.3.0+"
+        ],
+        "php": [
+            "7.4.0",
+            "PHP 7.4.0+"
+        ]
+    },
+    "icon": "icon.png"
+}
