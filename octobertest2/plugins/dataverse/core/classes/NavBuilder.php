@@ -9,41 +9,36 @@ class NavBuilder
 {
     public static function rebuild()
     {
-        $path = themes_path('dataverse/meta/navigation.yaml');
-        $existing = File::exists($path)
-            ? Yaml::parseFile($path)
-            : ['main' => []];
+        $basePath = themes_path('dataverse/meta/navigation.base.yaml');
+        $targetPath = themes_path('dataverse/meta/navigation.yaml');
 
-        // Locate "The Verse"
+        if (!File::exists($basePath)) {
+            throw new \Exception("Base navigation file not found at {$basePath}");
+        }
+
+        // Parse the base file — this structure stays untouched
+        $nav = Yaml::parseFile($basePath);
+
+        // Find "The Verse" node
         $verseIndex = null;
-        foreach ($existing['main'] as $i => $item) {
+        foreach ($nav['main'] as $i => $item) {
             if (isset($item['title']) && strtolower($item['title']) === 'the verse') {
                 $verseIndex = $i;
                 break;
             }
         }
 
-        // Create "The Verse" if missing
         if ($verseIndex === null) {
-            $existing['main'][] = ['title' => 'The Verse', 'children' => []];
-            $verseIndex = count($existing['main']) - 1;
+            throw new \Exception("'The Verse' section not found in base YAML");
         }
 
-        $verseChildren = $existing['main'][$verseIndex]['children'] ?? [];
+        // Gather current "The Verse" children
+        $verseChildren = $nav['main'][$verseIndex]['children'] ?? [];
 
-        // Recursive helper: collect all existing URLs
-        $collectUrls = function ($children) use (&$collectUrls) {
-            $urls = [];
-            foreach ($children as $child) {
-                if (isset($child['url'])) $urls[] = $child['url'];
-                if (isset($child['children'])) {
-                    $urls = array_merge($urls, $collectUrls($child['children']));
-                }
-            }
-            return $urls;
-        };
-        $existingUrls = $collectUrls($verseChildren);
+        // Collect existing URLs
+        $existingUrls = self::collectUrls($verseChildren);
 
+        // Add new CMS pages
         $pages = Page::all();
         $added = 0;
 
@@ -51,19 +46,10 @@ class NavBuilder
             if (property_exists($page, 'hidden') && $page->hidden) continue;
 
             $url = $page->url;
-
-            // Skip system / utility pages
-            if (
-                !$url ||
-                $url === '/' ||
-                Str::contains($url, '404') ||
-                Str::startsWith($page->fileName, '_')
-            ) continue;
-
-            // Skip duplicates
+            if (!$url || $url === '/' || Str::contains($url, '404') || Str::startsWith($page->fileName, '_')) continue;
             if (in_array($url, $existingUrls)) continue;
 
-            // Try to find a parent section based on URL prefix (e.g. /minecraft/)
+            // Infer parent by URL prefix
             $placed = false;
             foreach ($verseChildren as &$child) {
                 if (isset($child['url']) && Str::startsWith($url, $child['url'] . '/')) {
@@ -77,7 +63,6 @@ class NavBuilder
                 }
             }
 
-            // No match → append to bottom of The Verse
             if (!$placed) {
                 $verseChildren[] = [
                     'title' => $page->title ?: $page->fileName,
@@ -88,13 +73,25 @@ class NavBuilder
             $added++;
         }
 
-        // Update the structure
-        $existing['main'][$verseIndex]['children'] = $verseChildren;
+        // Update the final structure
+        $nav['main'][$verseIndex]['children'] = $verseChildren;
 
-        // Write back to YAML
-        $yaml = Yaml::dump($existing, 4);
-        File::put($path, $yaml);
+        // Write the new generated file
+        $yaml = Yaml::dump($nav, 6, 2);
+        File::put($targetPath, $yaml);
 
         return $added;
+    }
+
+    protected static function collectUrls($children)
+    {
+        $urls = [];
+        foreach ($children as $child) {
+            if (isset($child['url'])) $urls[] = $child['url'];
+            if (isset($child['children'])) {
+                $urls = array_merge($urls, self::collectUrls($child['children']));
+            }
+        }
+        return $urls;
     }
 }

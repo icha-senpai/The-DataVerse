@@ -1,13 +1,30 @@
 main:
-    -
-        title: Home
-        url: /
-    -
-        title: 'The Verse'
+  -
+    title: Home
+    url: /
+  -
+    title: 'The Verse'
+    children:
+      -
+        title: Forum
+        url: forum_link
+      -
+        title: Minecraft
         children:
-            - { title: Forum, url: "{% if this.app.url contains '.test' %}https://forum.test/forum/{% else %}https://forum.ichaa.net/forum/{% endif %}" }
-            - { title: Minecraft, children: [{ title: Overview, url: /minecraft }, { title: Modpack, url: /minecraft/modpack }, { title: Changelog, url: /minecraft/changelog }] }
-            - { title: 'Star Citizen', children: [{ title: 'Star Citizen', url: /starcitizen }, { title: 'Cargo Tracker', url: /starcitizen/table }] }
-            - { title: Twitch, url: /twitch }
-            - { title: Osu!, url: /osu }
-            - { title: Wiki, url: "{% if this.app.url contains '.test' %}https://wiki.test/index.php/Main_Page{% else %}https://wiki.ichaa.net/index.php/Main_Page{% endif %}" }
+          - { title: Overview, url: /minecraft }
+          - { title: Modpack, url: /minecraft/modpack }
+          - { title: Changelog, url: /minecraft/changelog }
+      -
+        title: 'Star Citizen'
+        children:
+          - { title: Overview, url: /starcitizen }
+          - { title: 'Cargo Tracker', url: /starcitizen/table }
+      -
+        title: Twitch
+        url: /twitch
+      -
+        title: Osu!
+        url: /osu
+      -
+        title: Wiki
+        url: wiki_link
