@@ -73,3 +73,11 @@ rootCertificates/mds/lastMdsFetch.txt
 php_cs.cache
 *.tmproj
 *~
+# prevent binaries from being committed again
+*.exe
+*.zip
+*.rar
+*.7z
+*.tar
+*.gz
+*.iso
