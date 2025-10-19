@@ -29,7 +29,11 @@ class Plugin extends PluginBase
      */
     public function register()
     {
-        // Nothing here for now
+    // Register the artisan command
+    $this->registerConsoleCommand(
+        'dataverse.rebuildnav',
+        'Dataverse\Core\Console\RebuildNav'
+    );
     }
 
     /**
