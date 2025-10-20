@@ -3,6 +3,37 @@ layout = "default"
 title = "Star Citizen" 
 ==
 
+{# ---------------------------------------------- #}
+{# Manually toggle between local and production   #}
+{# ---------------------------------------------- #}
 
-<h1>Welcome to The Star Citizen Page</h1>
-<p>Locally running on Laragon.</p>
+{# LOCAL (Laragon) #}
+{% set wiki_url = 'http://wiki.test/index.php/Star_Citizen' %}
+
+{# PRODUCTION (ichaa.net) - uncomment for deployment #}
+{#
+{% set wiki_url = 'https://wiki.ichaa.net/index.php/Star_Citizen' %}
+#}
+
+<section class="tv min-h-[90vh] pt-28 pb-16 bg-dv-surface/90 text-dv-text">
+  <div class="max-w-5xl mx-auto px-6 text-center">
+
+    <h1 class="text-5xl font-tilt text-dv-accent mb-4">Star Citizen</h1>
+    <p class="text-gray-300 mb-10">
+      The command hub for your DataVerse Star Citizen tools and info.
+    </p>
+
+    <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
+      <a href="{{ 'starcitizen/table'|page }}"
+         class="px-8 py-3 rounded-lg border border-dv-accent text-dv-accent hover:text-dv-accent2 hover:border-dv-accent2 transition-colors duration-300 font-tilt">
+        Cargo Tracker
+      </a>
+      <a href="{{ wiki_url }}"
+         target="_blank"
+         class="px-8 py-3 rounded-lg border border-dv-accent text-dv-accent hover:text-dv-accent2 hover:border-dv-accent2 transition-colors duration-300 font-tilt">
+        Open Wiki
+      </a>
+    </div>
+
+  </div>
+</section>
