@@ -17,3 +17,6 @@
     - test.php
 1.0.5:
     - 'Auto-bumped from 1.0.4 to 1.0.5'
+1.0.6:
+    - 'Auto-bumped from 1.0.5 to 1.0.6'
+    - create_uex_vehicles_table.php

@@ -5,133 +5,164 @@ use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 use Dataverse\Core\Classes\UexApiClient;
 use Dataverse\Core\Models\{
-    Commodity,
-    Price,
-    StarSystem,
-    Planet,
-    City,
-    Outpost,
-    SpaceStation,
-    Poi,
-    Terminal
+    Commodity, Price, StarSystem, Planet, City,
+    Outpost, SpaceStation, Poi, Terminal, Vehicle
 };
 
-/**
- * Console command: uex:import-all
- *
- * Fetches all data from the UEX 2.0 API and stores it in local tables.
- * Respects the 10 requests per minute API limit (7-second delay between calls).
- * Logs all actions and results to storage/logs/system.log.
- */
 class ImportUexAll extends Command
 {
-    protected $signature = 'uex:import-all';
-    protected $description = 'Imports all UEX 2.0 API data (commodities, locations, prices, etc.) into the database';
-    protected int $delay = 7;
+    protected $name = 'uex:import-all';
+    protected $description = 'Imports all UEX 2.0 API data (commodities, locations, vehicles, etc.) into the database.';
 
-    public function handle(): int
+    protected UexApiClient $api;
+
+    public function handle()
     {
-        $api = new UexApiClient();
-        $start = now();
+        $this->api = new UexApiClient();
 
-        $this->banner('Starting full UEX import');
-        Log::info("[UEX Import] Starting full UEX import at {$start}");
+        $this->banner("Starting full UEX import");
 
-        try {
-            $this->importSimple('star_systems', StarSystem::class, $api);
-            $this->importSimple('planets', Planet::class, $api);
-            $this->importSimple('cities', City::class, $api);
-            $this->importSimple('outposts', Outpost::class, $api);
-            $this->importSimple('space_stations', SpaceStation::class, $api);
-            $this->importSimple('poi', Poi::class, $api);
-            $this->importSimple('terminals', Terminal::class, $api);
-            $this->importSimple('commodities', Commodity::class, $api);
+        $this->importStarSystems();
+        $this->importPlanets();
+        $this->importCities();
+        $this->importOutposts();
+        $this->importSpaceStations();
+        $this->importPoi();
+        $this->importTerminals();
+        $this->importCommodities();
+        $this->importVehicles();
+        $this->importPrices();
 
-            $this->importPrices($api);
-
-            $end = now();
-            $this->banner('✅ All UEX data imported successfully!');
-            Log::info("[UEX Import] Completed successfully at {$end}");
-        } catch (\Throwable $e) {
-            Log::error('[UEX Import] Exception: '.$e->getMessage(), ['trace' => $e->getTraceAsString()]);
-            $this->error('Import failed: '.$e->getMessage());
-            return Command::FAILURE;
-        }
-
-        return Command::SUCCESS;
+        $this->banner("✅ All UEX data imported successfully!");
     }
 
-    protected function importSimple(string $endpoint, string $model, UexApiClient $api): void
+    /* -----------------------------------------------------------
+       Import Methods
+    ----------------------------------------------------------- */
+
+    protected function importStarSystems()
     {
-        $this->info("Fetching {$endpoint} ...");
-        Log::info("[UEX Import] Fetching {$endpoint}");
-
-        $data = $api->fetch($endpoint);
-        if (empty($data)) {
-            $this->warn("No data returned for {$endpoint}");
-            Log::warning("[UEX Import] No data returned for {$endpoint}");
-            return;
-        }
-
-        $count = 0;
-        foreach ($data as $row) {
-            $id = $row['id'] ?? null;
-            if (!$id) continue;
-
-            $model::updateOrCreate(['id' => $id], $row);
-            $count++;
-        }
-
-        $this->line(" → Imported {$count} records for {$endpoint}");
-        Log::info("[UEX Import] Imported {$count} records for {$endpoint}");
+        $this->importGeneric('star_systems', StarSystem::class);
     }
 
-    protected function importPrices(UexApiClient $api): void
+    protected function importPlanets()
     {
-        $this->info('Fetching commodity prices (respecting rate limit)...');
-        Log::info('[UEX Import] Fetching commodity prices...');
+        $this->importGeneric('planets', Planet::class);
+    }
 
-        $total = 0;
-        foreach (Commodity::all() as $commodity) {
+    protected function importCities()
+    {
+        $this->importGeneric('cities', City::class);
+    }
+
+    protected function importOutposts()
+    {
+        $this->importGeneric('outposts', Outpost::class);
+    }
+
+    protected function importSpaceStations()
+    {
+        $this->importGeneric('space_stations', SpaceStation::class);
+    }
+
+    protected function importPoi()
+    {
+        $this->importGeneric('poi', Poi::class);
+    }
+
+    protected function importTerminals()
+    {
+        $this->importGeneric('terminals', Terminal::class);
+    }
+
+    protected function importCommodities()
+    {
+        $this->importGeneric('commodities', Commodity::class);
+    }
+
+    protected function importVehicles()
+    {
+        $this->importGeneric('vehicles', Vehicle::class);
+    }
+
+    protected function importPrices()
+    {
+        $this->section("Fetching commodity prices (rate-limited)");
+
+        $commodities = Commodity::all();
+        foreach ($commodities as $commodity) {
             $encoded = urlencode($commodity->name);
             $endpoint = "commodities_prices?commodity_name={$encoded}";
-            $prices = $api->fetch($endpoint);
+            $data = $this->api->fetch($endpoint);
 
-            if (empty($prices)) {
-                $this->warn(" × No price data for {$commodity->name}");
-                Log::warning("[UEX Import] No price data for {$commodity->name}");
-                continue;
-            }
-
-            foreach ($prices as $p) {
+            $records = $data['data'] ?? $data ?? [];
+            foreach ($records as $row) {
                 Price::updateOrCreate(
                     [
                         'commodity_id' => $commodity->id,
-                        'terminal_id'  => $p['id_terminal'] ?? null,
+                        'terminal_id'  => $row['id_terminal'] ?? null,
                     ],
                     [
-                        'price_buy'  => $p['price_buy'] ?? null,
-                        'price_sell' => $p['price_sell'] ?? null,
+                        'price_buy'  => $row['price_buy'] ?? null,
+                        'price_sell' => $row['price_sell'] ?? null,
                         'fetched_at' => Carbon::now(),
                     ]
                 );
             }
 
-            $count = count($prices);
-            $total += $count;
-            $this->line(" ↳ {$commodity->name}: {$count} entries");
-            Log::info("[UEX Import] Imported {$count} price entries for {$commodity->name}");
-            sleep($this->delay);
+            $this->line("   ↳ Imported prices for {$commodity->name}");
+            sleep(1);
         }
-
-        $this->info("Stored {$total} price rows total.");
-        Log::info("[UEX Import] Stored {$total} price rows total.");
     }
 
-    protected function banner(string $text): void
+    /* -----------------------------------------------------------
+       Helper Methods
+    ----------------------------------------------------------- */
+
+    /**
+     * Imports generic endpoint → model mapping with safe unwrap + logging.
+     */
+    protected function importGeneric(string $endpoint, string $modelClass)
     {
-        $this->line(str_repeat('-', 40));
+        $this->section("Fetching {$endpoint} ...");
+
+        $response = $this->api->fetch($endpoint);
+        $records = $response['data'] ?? $response ?? [];
+
+        if (empty($records)) {
+            $this->warn(" → No data returned for {$endpoint}");
+            Log::warning("[UEX Import] No data for {$endpoint}");
+            return;
+        }
+
+        $count = 0;
+        foreach ($records as $row) {
+            if (!isset($row['id'])) continue;
+
+            try {
+                $modelClass::updateOrCreate(['id' => $row['id']], $row);
+                $count++;
+            } catch (\Exception $e) {
+                Log::error("[UEX Import] Failed {$endpoint} ID {$row['id']}: {$e->getMessage()}");
+            }
+        }
+
+        $this->info(" → Imported {$count} records for {$endpoint}");
+        Log::info("[UEX Import] Imported {$count} records for {$endpoint}");
+    }
+
+    /**
+     * Pretty console banners
+     */
+    protected function banner(string $text)
+    {
+        $this->line("\n----------------------------------------");
         $this->info($text);
-        $this->line(str_repeat('-', 40));
+        $this->line("----------------------------------------");
+    }
+
+    protected function section(string $text)
+    {
+        $this->line("\n" . $text);
     }
 }

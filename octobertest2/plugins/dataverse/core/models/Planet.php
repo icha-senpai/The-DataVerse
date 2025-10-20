@@ -9,24 +9,15 @@ class Planet extends Model
 
     protected $table = 'uex_planets';
     protected $guarded = ['*'];
-    protected $fillable = ['id_star_system', 'name', 'code', 'is_landable'];
-    public $timestamps = true;
-
+    protected $fillable = [
+        'code','date_added','date_modified','faction_name','id_faction','id_jurisdiction','id_star_system',
+        'is_available','is_available_live','is_default','is_visible','jurisdiction_name',
+        'name','name_origin','star_system_name'
+    ];
+    public $rules = [];
     protected $casts = [
-        'is_landable' => 'boolean',
-    ];
-
-    public $belongsTo = [
-        'star_system' => [StarSystem::class, 'key' => 'id_star_system']
-    ];
-
-    public $hasMany = [
-        'cities' => [City::class, 'key' => 'id_planet'],
-        'outposts' => [Outpost::class, 'key' => 'id_planet'],
-        'poi' => [Poi::class, 'key' => 'id_planet']
-    ];
-
-    public $rules = [
-        'name' => 'required|string|max:255'
+        'date_added'=>'integer','date_modified'=>'integer',
+        'is_available'=>'boolean','is_available_live'=>'boolean',
+        'is_default'=>'boolean','is_visible'=>'boolean'
     ];
 }
