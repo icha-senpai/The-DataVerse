@@ -1,21 +1,24 @@
 <?php namespace Dataverse\Core\Updates;
 
 use Schema;
+use October\Rain\Database\Schema\Blueprint;
 use October\Rain\Database\Updates\Migration;
 
-class CreateUexCitiesTable extends Migration
+return new class extends Migration
 {
     public function up()
     {
-        Schema::create('uex_cities', function ($t) {
-            $t->increments('id');
-            $t->unsignedInteger('id_star_system')->nullable();
-            $t->unsignedInteger('id_planet')->nullable();
-            $t->string('name')->index();
-            $t->string('code')->nullable();
-            $t->boolean('is_landable')->default(false);
-            $t->boolean('has_trade_terminal')->default(false);
-            $t->timestamps();
+        Schema::create('uex_cities', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_unicode_ci';
+
+            $table->increments('id');
+            $table->unsignedInteger('id_planet')->nullable();
+            $table->string('name')->index();
+            $table->string('type')->nullable();
+            $table->boolean('is_capital')->default(false);
+            $table->timestamps();
         });
     }
 
@@ -23,4 +26,4 @@ class CreateUexCitiesTable extends Migration
     {
         Schema::dropIfExists('uex_cities');
     }
-}
+};

@@ -1,19 +1,25 @@
 <?php namespace Dataverse\Core\Updates;
 
 use Schema;
+use October\Rain\Database\Schema\Blueprint;
 use October\Rain\Database\Updates\Migration;
 
-class CreateUexPricesTable extends Migration
+return new class extends Migration
 {
     public function up()
     {
-        Schema::create('uex_prices', function ($t) {
-            $t->increments('id');
-            $t->unsignedInteger('commodity_id')->index();
-            $t->unsignedInteger('terminal_id')->nullable();
-            $t->decimal('price_buy', 10, 2)->nullable();
-            $t->decimal('price_sell', 10, 2)->nullable();
-            $t->timestamp('fetched_at')->useCurrent();
+        Schema::create('uex_prices', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_unicode_ci';
+
+            $table->increments('id');
+            $table->unsignedInteger('commodity_id')->index();
+            $table->unsignedInteger('terminal_id')->nullable()->index();
+            $table->decimal('price_buy', 10, 2)->nullable();
+            $table->decimal('price_sell', 10, 2)->nullable();
+            $table->timestamp('fetched_at')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -21,4 +27,4 @@ class CreateUexPricesTable extends Migration
     {
         Schema::dropIfExists('uex_prices');
     }
-}
+};

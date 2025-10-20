@@ -1,23 +1,24 @@
 <?php namespace Dataverse\Core\Updates;
 
 use Schema;
+use October\Rain\Database\Schema\Blueprint;
 use October\Rain\Database\Updates\Migration;
 
-class CreateUexCommoditiesTable extends Migration
+return new class extends Migration
 {
     public function up()
     {
-        Schema::create('uex_commodities', function ($t) {
-            $t->increments('id');
-            $t->string('name')->index();
-            $t->string('code')->nullable();
-            $t->string('kind')->nullable();
-            $t->boolean('is_buyable')->default(false);
-            $t->boolean('is_sellable')->default(false);
-            $t->boolean('is_illegal')->default(false);
-            $t->boolean('is_refinable')->default(false);
-            $t->boolean('is_raw')->default(false);
-            $t->timestamps();
+        Schema::create('uex_commodities', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_unicode_ci';
+
+            $table->increments('id');
+            $table->string('name')->index();
+            $table->string('type')->nullable();
+            $table->string('category')->nullable();
+            $table->decimal('mass', 10, 2)->nullable();
+            $table->timestamps();
         });
     }
 
@@ -25,4 +26,4 @@ class CreateUexCommoditiesTable extends Migration
     {
         Schema::dropIfExists('uex_commodities');
     }
-}
+};

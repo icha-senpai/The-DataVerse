@@ -1,18 +1,23 @@
 <?php namespace Dataverse\Core\Updates;
 
 use Schema;
+use October\Rain\Database\Schema\Blueprint;
 use October\Rain\Database\Updates\Migration;
 
-class CreateUexStarSystemsTable extends Migration
+return new class extends Migration
 {
     public function up()
     {
-        Schema::create('uex_star_systems', function ($t) {
-            $t->increments('id');
-            $t->string('name')->index();
-            $t->string('code')->nullable();
-            $t->string('description', 1024)->nullable();
-            $t->timestamps();
+        Schema::create('uex_star_systems', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_unicode_ci';
+
+            $table->increments('id');
+            $table->string('name')->index();
+            $table->string('code')->nullable();
+            $table->string('type')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -20,4 +25,4 @@ class CreateUexStarSystemsTable extends Migration
     {
         Schema::dropIfExists('uex_star_systems');
     }
-}
+};
