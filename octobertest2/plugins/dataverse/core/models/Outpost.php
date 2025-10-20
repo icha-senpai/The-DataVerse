@@ -1,20 +1,18 @@
 <?php namespace Dataverse\Core\Models;
 
 use Model;
+use October\Rain\Database\Traits\Validation;
 
 class Outpost extends Model
 {
+    use Validation;
+
     protected $table = 'uex_outposts';
     protected $guarded = ['*'];
-    protected $fillable = [
-        'id', 'id_star_system', 'id_planet', 'name', 'type',
-        'is_mining', 'is_refinery', 'has_trade_terminal'
-    ];
-
+    protected $fillable = ['id_planet', 'name', 'type'];
     public $timestamps = true;
 
     public $belongsTo = [
-        'system' => [StarSystem::class, 'key' => 'id_star_system'],
         'planet' => [Planet::class, 'key' => 'id_planet']
     ];
 

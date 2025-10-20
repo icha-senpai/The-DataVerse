@@ -1,12 +1,15 @@
 <?php namespace Dataverse\Core\Models;
 
 use Model;
+use October\Rain\Database\Traits\Validation;
 
 class Poi extends Model
 {
+    use Validation;
+
     protected $table = 'uex_poi';
     protected $guarded = ['*'];
-    protected $fillable = ['id', 'id_planet', 'name', 'type', 'description'];
+    protected $fillable = ['id_planet', 'name', 'type'];
     public $timestamps = true;
 
     public $belongsTo = [

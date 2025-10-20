@@ -1,18 +1,20 @@
 <?php namespace Dataverse\Core\Models;
 
 use Model;
+use October\Rain\Database\Traits\Validation;
 
 class Commodity extends Model
 {
+    use Validation;
+
     protected $table = 'uex_commodities';
     protected $guarded = ['*'];
-    protected $fillable = [
-        'id', 'name', 'code', 'kind',
-        'is_buyable', 'is_sellable', 'is_illegal',
-        'is_refinable', 'is_raw'
-    ];
-
+    protected $fillable = ['name', 'type', 'category', 'mass'];
     public $timestamps = true;
+
+    protected $casts = [
+        'mass' => 'float'
+    ];
 
     public $hasMany = [
         'prices' => [Price::class, 'key' => 'commodity_id']

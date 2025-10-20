@@ -1,20 +1,22 @@
 <?php namespace Dataverse\Core\Models;
 
 use Model;
+use October\Rain\Database\Traits\Validation;
 
 class City extends Model
 {
+    use Validation;
+
     protected $table = 'uex_cities';
     protected $guarded = ['*'];
-    protected $fillable = [
-        'id', 'id_star_system', 'id_planet', 'name', 'code',
-        'is_landable', 'has_trade_terminal'
-    ];
-
+    protected $fillable = ['id_planet', 'name', 'type', 'has_spaceport'];
     public $timestamps = true;
 
+    protected $casts = [
+        'has_spaceport' => 'boolean'
+    ];
+
     public $belongsTo = [
-        'system' => [StarSystem::class, 'key' => 'id_star_system'],
         'planet' => [Planet::class, 'key' => 'id_planet']
     ];
 
