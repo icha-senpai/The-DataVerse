@@ -2,19 +2,20 @@
 
 use Backend;
 use System\Classes\PluginBase;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Core plugin for The DataVerse.
  *
- * This lightweight helper ensures Tailor properly registers
- * all blueprint navigation (like your Wiki section) on boot.
+ * Houses core system utilities, UEX import commands,
+ * and Tailor blueprint registration fixes.
  */
 class Plugin extends PluginBase
 {
     /**
-     * Provides plugin metadata.
+     * Plugin metadata displayed in the backend.
      */
-    public function pluginDetails()
+    public function pluginDetails(): array
     {
         return [
             'name'        => 'Core',
@@ -26,82 +27,96 @@ class Plugin extends PluginBase
 
     /**
      * Called when the plugin is first registered.
+     * Used to register console commands and services.
      */
-    public function register()
+    public function register(): void
     {
-    // Register the artisan command
-    $this->registerConsoleCommand(
-        'dataverse.rebuildnav',
-        'Dataverse\Core\Console\RebuildNav'
-    );
+        // Register all custom console commands
+        $this->registerConsoleCommand(
+            'uex.importall',
+            \Dataverse\Core\Console\ImportUexAll::class
+        );
+
+        $this->registerConsoleCommand(
+            'dataverse.rebuildnav',
+            \Dataverse\Core\Console\RebuildNav::class
+        );
+        $this->registerConsoleCommand(
+            'plugin.bump',
+            \Dataverse\Core\Console\BumpVersion::class
+        );
     }
 
     /**
      * Called right before the request route.
-     * This ensures Tailor navigation (Wiki, etc.) always registers properly.
+     * Ensures Tailor blueprints (e.g., Wiki) always appear in navigation.
      */
-    public function boot()
+    public function boot(): void
     {
-        // Make sure Tailor is available before calling
         if (class_exists('\Tailor\Classes\BlueprintIndexer')) {
-            \Tailor\Classes\BlueprintIndexer::instance()->indexNavigation();
+            try {
+                \Tailor\Classes\BlueprintIndexer::instance()->indexNavigation();
+                Log::info('[Dataverse\Core] Tailor navigation re-indexed successfully.');
+            } catch (\Throwable $e) {
+                Log::error('[Dataverse\Core] Tailor index failed: '.$e->getMessage());
+            }
+        } else {
+            Log::warning('[Dataverse\Core] Tailor not installed — skipping blueprint re-index.');
         }
     }
 
     /**
-     * Frontend components (not used right now).
+     * Frontend components (none yet).
      */
-    public function registerComponents()
+    public function registerComponents(): array
     {
         return [];
     }
 
     /**
-     * Backend permissions (not used right now).
+     * Backend permissions (optional for future use).
      */
-    public function registerPermissions()
+    public function registerPermissions(): array
     {
         return [];
     }
 
     /**
-     * Backend navigation (not needed — Tailor handles its own menus).
+     * Backend navigation — preloads Wiki navigation to match Tailor structure.
      */
-    public function registerNavigation()
+    public function registerNavigation(): array
     {
         return [
             'wiki' => [
                 'label'       => 'Wiki',
                 'icon'        => 'icon-book',
                 'order'       => 150,
-                // optional: lock it down later with your own perms
                 'permissions' => [],
-
                 'sideMenu'    => [
-                    'wiki-entries' => [
-                        'label'       => 'Entries',
-                        'icon'        => 'icon-file-text',
-                        'url'         => Backend::url('tailor/entries/wiki_entry'),
+                    'entries' => [
+                        'label' => 'Entries',
+                        'icon'  => 'icon-file-text',
+                        'url'   => Backend::url('tailor/entries/wiki_entry'),
                     ],
-                    'wiki-categories' => [
-                        'label'       => 'Categories',
-                        'icon'        => 'icon-folder',
-                        'url'         => Backend::url('tailor/entries/wiki_category'),
+                    'categories' => [
+                        'label' => 'Categories',
+                        'icon'  => 'icon-folder',
+                        'url'   => Backend::url('tailor/entries/wiki_category'),
                     ],
-                    'wiki-tags' => [
-                        'label'       => 'Tags',
-                        'icon'        => 'icon-tags',
-                        'url'         => Backend::url('tailor/entries/wiki_tag'),
+                    'tags' => [
+                        'label' => 'Tags',
+                        'icon'  => 'icon-tags',
+                        'url'   => Backend::url('tailor/entries/wiki_tag'),
                     ],
-                    'wiki-sources' => [
-                        'label'       => 'Sources',
-                        'icon'        => 'icon-link',
-                        'url'         => Backend::url('tailor/entries/wiki_source'),
+                    'sources' => [
+                        'label' => 'Sources',
+                        'icon'  => 'icon-link',
+                        'url'   => Backend::url('tailor/entries/wiki_source'),
                     ],
-                    'wiki-revisions' => [
-                        'label'       => 'Revisions',
-                        'icon'        => 'icon-history',
-                        'url'         => Backend::url('tailor/entries/wiki_revision'),
+                    'revisions' => [
+                        'label' => 'Revisions',
+                        'icon'  => 'icon-history',
+                        'url'   => Backend::url('tailor/entries/wiki_revision'),
                     ],
                 ],
             ],

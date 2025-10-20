@@ -1,1 +1,12 @@
-v1.0.1: First version of Core
+1.0.1: First version of Core
+1.0.2:
+    - Rebuild all UEX tables
+    - create_uex_star_systems_table.php
+    - create_uex_planets_table.php
+    - create_uex_cities_table.php
+    - create_uex_outposts_table.php
+    - create_uex_space_stations_table.php
+    - create_uex_poi_table.php
+    - create_uex_terminals_table.php
+    - create_uex_commodities_table.php
+    - create_uex_prices_table.php
