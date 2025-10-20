@@ -3,40 +3,44 @@
 use Exception;
 use Illuminate\Support\Facades\Log;
 
-/**
- * Handles API requests to UEX 2.0 and provides simple rate-limited fetching.
- */
 class UexApiClient
 {
-    /** Base URL for all requests */
+    /** Base URL for the API */
     protected string $base = 'https://api.uexcorp.uk/2.0';
 
-    /** Delay between API requests (seconds) */
+    /** Delay between requests (seconds) */
     protected int $delay = 7;
 
-    /** Timeout for stream context (seconds) */
+    /** Timeout for HTTP requests */
     protected int $timeout = 15;
 
     /**
-     * Fetch a single endpoint and return decoded JSON as array.
+     * Fetch a single endpoint and return decoded JSON array.
      */
     public function fetch(string $endpoint): array
     {
         $url = "{$this->base}/{$endpoint}";
-        Log::info("[UEX] Fetching {$url}");
+        $token = env('UEX_API_TOKEN');
+
+        // Add authentication header if token exists
+        $headers = [
+            'Accept: application/json',
+            'User-Agent: Dataverse-Core/1.0 (+https://ichaa.net)',
+        ];
+
+        if (!empty($token)) {
+            $headers[] = "Authorization: Bearer {$token}";
+        }
+
+        $context = stream_context_create([
+            'http' => [
+                'timeout' => $this->timeout,
+                'ignore_errors' => true,
+                'header' => $headers
+            ]
+        ]);
 
         try {
-            $context = stream_context_create([
-                'http' => [
-                    'timeout' => $this->timeout,
-                    'ignore_errors' => true,
-                    'header' => [
-                        'User-Agent: Dataverse-Core/1.0 (+https://ichaa.net)',
-                        'Accept: application/json'
-                    ]
-                ]
-            ]);
-
             $json = @file_get_contents($url, false, $context);
 
             if ($json === false) {
@@ -46,27 +50,45 @@ class UexApiClient
 
             $data = json_decode($json, true);
 
-            if (json_last_error() !== JSON_ERROR_NONE) {
-                Log::warning("[UEX] JSON decode error from {$url}: " . json_last_error_msg());
+            // Handle wrapped responses like { status, data }
+            if (is_array($data)) {
+                if (isset($data['status']) && strtolower($data['status']) === 'ok') {
+                    if (isset($data['data']) && is_array($data['data'])) {
+                        sleep($this->delay);
+                        return $data['data'];
+                    }
+                    // Empty OK response
+                    Log::warning("[UEX] OK response but no data at {$url}");
+                    return [];
+                }
+
+                // Error message from API
+                if (isset($data['status']) && strtolower($data['status']) !== 'ok') {
+                    $msg = $data['message'] ?? 'unknown error';
+                    Log::warning("[UEX] API error at {$url}: {$msg}");
+                    return [];
+                }
+
+                // Maybe response is direct array (no wrapper)
+                if (array_is_list($data) && count($data) > 0) {
+                    sleep($this->delay);
+                    return $data;
+                }
+
+                Log::warning("[UEX] Unexpected response structure at {$url}: " . substr($json, 0, 200));
                 return [];
             }
 
-            if (!is_array($data)) {
-                Log::warning("[UEX] Invalid response format from {$url}");
-                return [];
-            }
-
-            sleep($this->delay); // obey rate limit
-            return $data;
+            Log::warning("[UEX] Invalid JSON from {$url}");
+            return [];
         } catch (Exception $e) {
-            Log::error("[UEX] Exception while fetching {$url}: {$e->getMessage()}");
+            Log::error("[UEX] Exception fetching {$endpoint}: " . $e->getMessage());
             return [];
         }
     }
 
     /**
-     * Handle paginated endpoints.
-     * Combines results across pages until an empty set is returned.
+     * Handle paginated endpoints (fetch all pages)
      */
     public function fetchPaginated(string $endpoint): array
     {
@@ -75,7 +97,6 @@ class UexApiClient
 
         while (true) {
             $batch = $this->fetch("{$endpoint}?page={$page}");
-
             if (empty($batch)) {
                 Log::info("[UEX] No more data after page {$page} for {$endpoint}");
                 break;

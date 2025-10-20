@@ -45,7 +45,20 @@ class Plugin extends PluginBase
             'plugin.bump',
             \Dataverse\Core\Console\BumpVersion::class
         );
-    }
+        $this->registerConsoleCommand(
+            'plugin.bump-smart',
+             \Dataverse\Core\Console\BumpVersionSmart::class
+        );
+    
+        $this->registerConsoleCommand(
+            'uex.schema-scan',
+            \Dataverse\Core\Console\UexSchemaScan::class
+        );
+    
+        $this->registerConsoleCommand(
+            'uex.schema-diff',
+            \Dataverse\Core\Console\UexSchemaDiff::class
+        );}
 
     /**
      * Called right before the request route.

@@ -12,6 +12,8 @@ class Outpost extends Model
     protected $fillable = ['id_planet', 'name', 'type'];
     public $timestamps = true;
 
+    public $rules = []; // <-- Add this line
+
     public $belongsTo = [
         'planet' => [Planet::class, 'key' => 'id_planet']
     ];

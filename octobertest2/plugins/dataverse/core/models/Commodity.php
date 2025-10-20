@@ -16,6 +16,8 @@ class Commodity extends Model
         'mass' => 'float'
     ];
 
+    public $rules = []; // <-- Add this line
+
     public $hasMany = [
         'prices' => [Price::class, 'key' => 'commodity_id']
     ];

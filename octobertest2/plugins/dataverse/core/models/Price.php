@@ -23,7 +23,7 @@ class Price extends Model
         'price_sell' => 'float',
         'fetched_at' => 'datetime'
     ];
-
+    public $rules = []; // <-- Add this line
     public $belongsTo = [
         'commodity' => [Commodity::class, 'key' => 'commodity_id'],
         'terminal'  => [Terminal::class, 'key' => 'terminal_id']

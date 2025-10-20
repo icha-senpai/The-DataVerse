@@ -15,7 +15,7 @@ class City extends Model
     protected $casts = [
         'has_spaceport' => 'boolean'
     ];
-
+    public $rules = []; // <-- Add this line
     public $belongsTo = [
         'planet' => [Planet::class, 'key' => 'id_planet']
     ];

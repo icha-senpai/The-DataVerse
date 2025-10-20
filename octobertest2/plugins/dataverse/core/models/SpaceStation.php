@@ -11,7 +11,7 @@ class SpaceStation extends Model
     protected $guarded = ['*'];
     protected $fillable = ['id_star_system', 'name', 'type'];
     public $timestamps = true;
-
+    public $rules = []; // <-- Add this line
     public $belongsTo = [
         'star_system' => [StarSystem::class, 'key' => 'id_star_system']
     ];

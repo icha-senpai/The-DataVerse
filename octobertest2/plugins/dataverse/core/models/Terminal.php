@@ -22,7 +22,7 @@ class Terminal extends Model
     protected $casts = [
         'is_trade' => 'boolean'
     ];
-
+    public $rules = []; // <-- Add this line
     public $belongsTo = [
         'city'          => [City::class, 'key' => 'id_city'],
         'outpost'       => [Outpost::class, 'key' => 'id_outpost'],
