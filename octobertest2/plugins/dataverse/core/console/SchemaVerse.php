@@ -9,16 +9,7 @@ use Symfony\Component\Console\Input\InputOption;
 /**
  * 🌌 SchemaVerse — Universal UEX Data Mapper
  *
- * This artisan command scans and maps the schema of any UEX API endpoint.
- * It automatically unwraps nested "data" layers, extracts every field recursively,
- * and can generate matching migrations and models under your plugin namespace.
- *
- * Options:
- *  --endpoint="vehicles,commodities_status"   Manually specify endpoints
- *  --generate                                Auto-generate migrations/models
- *  --dry-run                                 Scan only, do not write files
- *  --save-json                               Save raw API responses under /storage/logs
- *  --sleep=N                                 Wait N seconds between requests (default 6)
+ * Now with auto-pagination: will fetch all pages from an endpoint if metadata or next links exist.
  */
 class SchemaVerse extends Command
 {
@@ -43,7 +34,7 @@ class SchemaVerse extends Command
         $saveJson = (bool) $this->option('save-json');
         $inputEPs = $this->option('endpoint');
 
-        // Handle custom endpoint input
+        // Manual endpoint input
         if ($inputEPs) {
             $endpoints = [];
             foreach (explode(',', $inputEPs) as $ep) {
@@ -52,7 +43,10 @@ class SchemaVerse extends Command
             }
         } else {
             $endpoints = [
+                'commodities_prices_all'     => 'All refined commodities prices',
+                'commodities_raw_prices_all' => 'All raw material prices',
                 'commodities_status'         => 'Commodity status data',
+                'vehicles'                   => 'Vehicle data',
             ];
         }
 
@@ -64,7 +58,9 @@ class SchemaVerse extends Command
 
         foreach ($endpoints as $endpoint => $desc) {
             $this->line("\n🛰️  Scanning: {$desc}");
-            $raw = $this->api->fetch($endpoint);
+
+            // Auto-pagination fetch
+            $raw = $this->fetchAllPages($endpoint, $sleep);
             $records = $this->unwrap($raw);
 
             if ($saveJson) {
@@ -108,6 +104,45 @@ class SchemaVerse extends Command
     }
 
     /**
+     * Automatically detects and fetches paginated results across all pages.
+     */
+    protected function fetchAllPages(string $endpoint, int $delay): array
+    {
+        $page = 1;
+        $results = [];
+
+        while (true) {
+            $this->line("   🔁 Fetching page {$page}...");
+            $data = $this->api->fetch("{$endpoint}?page={$page}");
+            $chunk = $this->unwrap($data);
+
+            if (empty($chunk)) break;
+
+            // Merge arrays only if same structure
+            if (is_array($chunk) && array_is_list($chunk)) {
+                $results = array_merge($results, $chunk);
+            } else {
+                $results[] = $chunk;
+                break; // stop if single-object response
+            }
+
+            // detect pagination meta or next link
+            $hasNext = false;
+            if (isset($data['meta']['total_pages']) && isset($data['meta']['current_page'])) {
+                $hasNext = $data['meta']['current_page'] < $data['meta']['total_pages'];
+            } elseif (isset($data['links']['next']) && !empty($data['links']['next'])) {
+                $hasNext = true;
+            }
+
+            if (!$hasNext) break;
+            $page++;
+            sleep($delay);
+        }
+
+        return $results;
+    }
+
+    /**
      * Recursively unwrap nested "data" keys until an array of records is reached.
      */
     protected function unwrap($payload)
@@ -119,7 +154,6 @@ class SchemaVerse extends Command
             if ($depth > 10) break; // safety stop
         }
 
-        // Unwrap single-key wrappers (e.g., {"items": [ ... ]})
         if (is_array($payload) && count($payload) === 1 && is_array(reset($payload))) {
             $payload = reset($payload);
         }
@@ -143,7 +177,7 @@ class SchemaVerse extends Command
             }
         }
 
-        // Normalize and clean numeric keys
+        // Normalize numeric paths
         $keys = array_map(fn($k) => preg_replace('/\.\d+(\.|$)/', '.', $k), $keys);
         $keys = array_unique(array_map(fn($k) => trim($k, '.'), $keys));
 
