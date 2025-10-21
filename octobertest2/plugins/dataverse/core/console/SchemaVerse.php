@@ -7,19 +7,23 @@ use Dataverse\Core\Classes\UexApiClient;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
- * Scans the UEX commodity-related API endpoints and generates migrations/models
- * for all returned data structures.
+ * 🌌 SchemaVerse — Universal UEX Data Mapper
  *
- * Does NOT loop over individual commodities or terminals — this version
- * only handles top-level UEX endpoints like:
- *  - commodities_prices_all
- *  - commodities_raw_prices_all
- *  - commodities_status
+ * This artisan command scans and maps the schema of any UEX API endpoint.
+ * It automatically unwraps nested "data" layers, extracts every field recursively,
+ * and can generate matching migrations and models under your plugin namespace.
+ *
+ * Options:
+ *  --endpoint="vehicles,commodities_status"   Manually specify endpoints
+ *  --generate                                Auto-generate migrations/models
+ *  --dry-run                                 Scan only, do not write files
+ *  --save-json                               Save raw API responses under /storage/logs
+ *  --sleep=N                                 Wait N seconds between requests (default 6)
  */
-class UexSchemaCommodities extends Command
+class SchemaVerse extends Command
 {
-    protected $name = 'uex:schema-commodities';
-    protected $description = 'Scans UEX commodity endpoints, extracts schema fields, and optionally generates migrations/models.';
+    protected $name = 'dataverse:schemaverse';
+    protected $description = '🌌 Maps and explores any UEX API endpoint schema (Dataverse SchemaVerse)';
 
     protected UexApiClient $api;
     protected string $logFile;
@@ -27,47 +31,69 @@ class UexSchemaCommodities extends Command
     public function handle()
     {
         $this->api = new UexApiClient();
-        $this->logFile = storage_path('logs/uex_schema_commodities.json');
+        $this->logFile = storage_path('logs/schemaverse_summary.json');
 
         $this->info("\n=============================================");
-        $this->info("🔍 UEX Commodity Schema Scanner (Core Mode)");
+        $this->info("🌌  SchemaVerse — UEX Data Dimension Mapper");
         $this->info("=============================================\n");
 
         $sleep    = (int) $this->option('sleep');
         $generate = (bool) $this->option('generate');
+        $dryRun   = (bool) $this->option('dry-run');
+        $saveJson = (bool) $this->option('save-json');
+        $inputEPs = $this->option('endpoint');
+
+        // Handle custom endpoint input
+        if ($inputEPs) {
+            $endpoints = [];
+            foreach (explode(',', $inputEPs) as $ep) {
+                $ep = trim($ep);
+                $endpoints[$ep] = "Manual endpoint: {$ep}";
+            }
+        } else {
+            $endpoints = [
+                'commodities_status'         => 'Commodity status data',
+            ];
+        }
 
         $this->line("→ Delay between requests: {$sleep}s");
+        $this->line("→ Dry run: " . ($dryRun ? 'YES' : 'no'));
         if ($generate) $this->warn("→ Auto-generation of migrations/models is ENABLED.\n");
 
         $summary = [];
 
-        $endpoints = [
-            'commodities_prices_all'     => 'All refined commodities prices',
-            'commodities_raw_prices_all' => 'All raw material prices',
-            'commodities_status'         => 'Status legend (buy/sell levels)',
-        ];
-
         foreach ($endpoints as $endpoint => $desc) {
-            $this->line("\n➡️ {$desc}");
-            $data    = $this->api->fetch($endpoint);
-            $records = $data['data'] ?? $data ?? [];
+            $this->line("\n🛰️  Scanning: {$desc}");
+            $raw = $this->api->fetch($endpoint);
+            $records = $this->unwrap($raw);
+
+            if ($saveJson) {
+                $path = storage_path("logs/schemaverse_raw_{$endpoint}.json");
+                file_put_contents($path, json_encode($raw, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+                $this->info("  💾 Raw JSON saved: {$path}");
+            }
 
             if (empty($records)) {
-                $this->warn("  No data returned from {$endpoint}");
+                $this->warn("  ⚠️  No usable data returned from {$endpoint}");
                 continue;
             }
 
-            $first = (is_array($records) && isset($records[0])) ? $records[0] : $records;
-            $keys  = $this->extractKeysRecursive($first);
+            $sample = is_array($records) && isset($records[0]) ? $records[0] : $records;
+            $keys = $this->extractKeysRecursive($sample);
 
             $summary[$endpoint] = [
                 'count'  => is_countable($records) ? count($records) : 1,
                 'fields' => $keys,
             ];
 
-            $this->info("  Found " . count($keys) . " fields:");
+            $this->info("  ✅ Found " . count($keys) . " unique fields:");
             foreach ($keys as $key) {
-                $this->line("    - {$key}");
+                $this->line("     • {$key}");
+            }
+
+            if ($dryRun) {
+                $this->warn("  ⚠️ Dry-run active: skipping migration/model generation");
+                continue;
             }
 
             if ($generate) {
@@ -77,11 +103,33 @@ class UexSchemaCommodities extends Command
             sleep($sleep);
         }
 
-        file_put_contents($this->logFile, json_encode($summary, JSON_PRETTY_PRINT));
-        $this->info("\n✅ Scan complete. Results saved to: {$this->logFile}\n");
+        file_put_contents($this->logFile, json_encode($summary, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+        $this->info("\n🌠 Scan complete. Results saved to: {$this->logFile}\n");
     }
 
-    /** Recursively extracts dotted keys from nested arrays/objects */
+    /**
+     * Recursively unwrap nested "data" keys until an array of records is reached.
+     */
+    protected function unwrap($payload)
+    {
+        $depth = 0;
+        while (is_array($payload) && array_key_exists('data', $payload)) {
+            $payload = $payload['data'];
+            $depth++;
+            if ($depth > 10) break; // safety stop
+        }
+
+        // Unwrap single-key wrappers (e.g., {"items": [ ... ]})
+        if (is_array($payload) && count($payload) === 1 && is_array(reset($payload))) {
+            $payload = reset($payload);
+        }
+
+        return $payload;
+    }
+
+    /**
+     * Recursively extract flattened dotted keys from arrays/objects.
+     */
     protected function extractKeysRecursive($data, string $prefix = ''): array
     {
         $keys = [];
@@ -90,14 +138,21 @@ class UexSchemaCommodities extends Command
         foreach ($data as $k => $v) {
             $full = $prefix ? "{$prefix}.{$k}" : (string)$k;
             $keys[] = $full;
-            if (is_array($v)) {
+            if (is_array($v) && !empty($v)) {
                 $keys = array_merge($keys, $this->extractKeysRecursive($v, $full));
             }
         }
-        return array_values(array_unique($keys));
+
+        // Normalize and clean numeric keys
+        $keys = array_map(fn($k) => preg_replace('/\.\d+(\.|$)/', '.', $k), $keys);
+        $keys = array_unique(array_map(fn($k) => trim($k, '.'), $keys));
+
+        return array_values($keys);
     }
 
-    /** Generates a migration + model for the endpoint using defensive key handling */
+    /**
+     * Generate migration + model files for the given endpoint.
+     */
     protected function generateMigrationAndModel(string $endpoint, array $keys): void
     {
         $table     = 'uex_' . Str::snake(str_replace(['/', '?', '=', '&'], '_', $endpoint));
@@ -111,24 +166,9 @@ class UexSchemaCommodities extends Command
         $migrationFile = "{$updatesDir}/create_{$table}_table.php";
         $modelFile     = "{$modelsDir}/{$modelName}.php";
 
-        // Flatten keys defensively
-        $flatKeys = [];
-        $flatten = function ($input) use (&$flatten, &$flatKeys) {
-            if (is_array($input)) {
-                foreach ($input as $k => $v) {
-                    if (is_string($k) && $k !== '') $flatKeys[] = $k;
-                    $flatten($v);
-                }
-            } elseif (is_string($input) && $input !== '') {
-                $flatKeys[] = $input;
-            }
-        };
-        $flatten($keys);
-        $flatKeys = array_values(array_unique(array_map('strval', array_filter($flatKeys))));
-
-        // Infer column types
         $columns = [];
-        foreach ($flatKeys as $col) {
+        foreach ($keys as $col) {
+            $col = str_replace('.', '_', $col);
             if (preg_match('/_id$/', $col)) {
                 $columns[] = "            \$t->unsignedInteger('{$col}')->nullable();";
             } elseif (preg_match('/date|time|timestamp/i', $col)) {
@@ -144,7 +184,6 @@ class UexSchemaCommodities extends Command
             }
         }
 
-        // Write migration
         $migration = <<<PHP
 <?php namespace Dataverse\Core\Updates;
 
@@ -172,8 +211,7 @@ PHP;
         file_put_contents($migrationFile, $migration);
         $this->info("  ✨ Migration generated: {$migrationFile}");
 
-        // Write model
-        $fillable = implode("', '", $flatKeys);
+        $fillable = implode("', '", array_map(fn($k) => str_replace('.', '_', $k), $keys));
         $model = <<<PHP
 <?php namespace Dataverse\Core\Models;
 
@@ -194,7 +232,6 @@ PHP;
         $this->info("  🧩 Model generated: {$modelFile}");
     }
 
-    /** pretty-print helper for migration columns */
     protected function indentLines(array $lines): string
     {
         return implode("\n", $lines);
@@ -205,6 +242,9 @@ PHP;
         return [
             ['sleep', null, InputOption::VALUE_OPTIONAL, 'Seconds to wait between requests', 6],
             ['generate', null, InputOption::VALUE_NONE, 'Generate migrations and models for discovered schemas'],
+            ['dry-run', null, InputOption::VALUE_NONE, 'Extract schema only, do not generate anything'],
+            ['save-json', null, InputOption::VALUE_NONE, 'Save raw API JSON responses for inspection'],
+            ['endpoint', null, InputOption::VALUE_OPTIONAL, 'Comma-separated list of API endpoints to scan'],
         ];
     }
 }

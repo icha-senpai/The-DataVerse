@@ -61,8 +61,8 @@ class Plugin extends PluginBase
         );
     
         $this->registerConsoleCommand(
-            'uex.schema-commodities',
-            \Dataverse\Core\Console\UexSchemaCommodities::class
+            'dataverse:schemaverse',
+            \Dataverse\Core\Console\SchemaVerse::class
         );
     }
 
