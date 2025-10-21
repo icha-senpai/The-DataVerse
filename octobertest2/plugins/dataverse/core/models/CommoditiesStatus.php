@@ -9,6 +9,6 @@ class CommoditiesStatus extends Model
 
     protected $table = 'uex_commodities_status';
     protected $guarded = ['*'];
-    protected $fillable = ['buy', 'code', 'name', 'name_short', 'name_abbr', 'percentage', 'percentage_start', 'percentage_end', 'colors'];
+    protected $fillable = [];
     public $rules = [];
 }
