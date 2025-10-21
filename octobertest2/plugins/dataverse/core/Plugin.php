@@ -58,7 +58,13 @@ class Plugin extends PluginBase
         $this->registerConsoleCommand(
             'uex.schema-diff',
             \Dataverse\Core\Console\UexSchemaDiff::class
-        );}
+        );
+    
+        $this->registerConsoleCommand(
+            'uex.schema-commodities',
+            \Dataverse\Core\Console\UexSchemaCommodities::class
+        );
+    }
 
     /**
      * Called right before the request route.

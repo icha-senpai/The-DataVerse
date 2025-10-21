@@ -1,168 +1,259 @@
 <?php namespace Dataverse\Core\Console;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Dataverse\Core\Classes\UexApiClient;
 use Dataverse\Core\Models\{
-    Commodity, Price, StarSystem, Planet, City,
-    Outpost, SpaceStation, Poi, Terminal, Vehicle
+    Commodity, Price,
+    StarSystem, Planet, City,
+    Outpost, SpaceStation, Poi, Terminal
 };
 
+/**
+ * Smart importer for all UEX 2.0 API data (systems, locations, commodities, prices, and status).
+ * - Uses Bearer auth from .env
+ * - Respects rate limits
+ * - Only updates data that actually changed (timestamp/hash-based)
+ */
 class ImportUexAll extends Command
 {
     protected $name = 'uex:import-all';
-    protected $description = 'Imports all UEX 2.0 API data (commodities, locations, vehicles, etc.) into the database.';
+    protected $description = 'Smart import of all UEX 2.0 API data, only updating changed rows.';
 
     protected UexApiClient $api;
 
     public function handle()
     {
+        $this->info("\n----------------------------------------");
+        $this->info("🚀 Starting smart UEX import (delta mode)");
+        $this->info("----------------------------------------");
+
         $this->api = new UexApiClient();
 
-        $this->banner("Starting full UEX import");
+        try {
+            $this->importVehicles();
+            $this->importStarSystems();
+            $this->importPlanets();
+            $this->importCities();
+            $this->importOutposts();
+            $this->importSpaceStations();
+            $this->importPois();
+            $this->importTerminals();
+            $this->importCommodities();
+            $this->importPrices();
+        } catch (\Throwable $e) {
+            $this->error("❌ Import failed: " . $e->getMessage());
+            Log::error('[UEX ImportAll] ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
+            return 1;
+        }
 
-        $this->importStarSystems();
-        $this->importPlanets();
-        $this->importCities();
-        $this->importOutposts();
-        $this->importSpaceStations();
-        $this->importPoi();
-        $this->importTerminals();
-        $this->importCommodities();
-        $this->importVehicles();
-        $this->importPrices();
-
-        $this->banner("✅ All UEX data imported successfully!");
+        $this->info("\n✅ Smart import completed successfully!");
+        return 0;
     }
 
-    /* -----------------------------------------------------------
-       Import Methods
-    ----------------------------------------------------------- */
+    /* -----------------------------------------------------
+     * SMART UPDATE HELPERS
+     * ----------------------------------------------------- */
 
+    protected function shouldUpdate($model, array $data): bool
+    {
+        // 1. Compare modification dates if provided
+        if (isset($data['date_modified']) && $model->date_modified ?? null) {
+            return strtotime($data['date_modified']) > strtotime($model->date_modified);
+        }
+
+        // 2. Compare hashes if timestamps aren’t provided
+        $newHash = hash('sha256', json_encode($data));
+        if (!isset($model->last_hash) || $model->last_hash !== $newHash) {
+            $model->last_hash = $newHash;
+            return true;
+        }
+
+        return false;
+    }
+
+    protected function syncModel($class, $data)
+    {
+        $inserted = $updated = $skipped = 0;
+
+        foreach ($data as $item) {
+            $id = $item['id'] ?? null;
+            if (!$id) continue;
+
+            $model = $class::find($id);
+
+            if (!$model) {
+                $item['last_hash'] = hash('sha256', json_encode($item));
+                $class::create($item);
+                $inserted++;
+            } else {
+                if ($this->shouldUpdate($model, $item)) {
+                    $model->fill($item)->save();
+                    $updated++;
+                } else {
+                    $skipped++;
+                }
+            }
+        }
+
+        return [$inserted, $updated, $skipped];
+    }
+
+    /* -----------------------------------------------------
+     * INDIVIDUAL IMPORT SECTIONS
+     * ----------------------------------------------------- */
+    protected function importVehicles()
+    {
+        $this->info('Fetching vehicles...');
+        $data = $this->unwrap($this->api->fetch('vehicles'));
+        [$inserted, $updated, $skipped] = $this->syncModel(\Dataverse\Core\Models\Vehicle::class, $data);
+        $this->line(" → +{$inserted} new, ✎{$updated} updated, ⏸{$skipped} skipped");
+    }
     protected function importStarSystems()
     {
-        $this->importGeneric('star_systems', StarSystem::class);
+        $this->info('Fetching star_systems...');
+        $data = $this->unwrap($this->api->fetch('star_systems'));
+        [$inserted, $updated, $skipped] = $this->syncModel(StarSystem::class, $data);
+        $this->line(" → +{$inserted} new, ✎{$updated} updated, ⏸{$skipped} skipped");
     }
 
     protected function importPlanets()
     {
-        $this->importGeneric('planets', Planet::class);
+        $this->info('Fetching planets...');
+        $data = $this->unwrap($this->api->fetch('planets'));
+        [$inserted, $updated, $skipped] = $this->syncModel(Planet::class, $data);
+        $this->line(" → +{$inserted} new, ✎{$updated} updated, ⏸{$skipped} skipped");
     }
 
     protected function importCities()
     {
-        $this->importGeneric('cities', City::class);
+        $this->info('Fetching cities...');
+        $data = $this->unwrap($this->api->fetch('cities'));
+        [$inserted, $updated, $skipped] = $this->syncModel(City::class, $data);
+        $this->line(" → +{$inserted} new, ✎{$updated} updated, ⏸{$skipped} skipped");
     }
 
     protected function importOutposts()
     {
-        $this->importGeneric('outposts', Outpost::class);
+        $this->info('Fetching outposts...');
+        $data = $this->unwrap($this->api->fetch('outposts'));
+        [$inserted, $updated, $skipped] = $this->syncModel(Outpost::class, $data);
+        $this->line(" → +{$inserted} new, ✎{$updated} updated, ⏸{$skipped} skipped");
     }
 
     protected function importSpaceStations()
     {
-        $this->importGeneric('space_stations', SpaceStation::class);
+        $this->info('Fetching space_stations...');
+        $data = $this->unwrap($this->api->fetch('space_stations'));
+        [$inserted, $updated, $skipped] = $this->syncModel(SpaceStation::class, $data);
+        $this->line(" → +{$inserted} new, ✎{$updated} updated, ⏸{$skipped} skipped");
     }
 
-    protected function importPoi()
+    protected function importPois()
     {
-        $this->importGeneric('poi', Poi::class);
+        $this->info('Fetching points of interest...');
+        $data = $this->unwrap($this->api->fetch('poi'));
+        [$inserted, $updated, $skipped] = $this->syncModel(Poi::class, $data);
+        $this->line(" → +{$inserted} new, ✎{$updated} updated, ⏸{$skipped} skipped");
     }
 
     protected function importTerminals()
     {
-        $this->importGeneric('terminals', Terminal::class);
+        $this->info('Fetching terminals...');
+        $data = $this->unwrap($this->api->fetch('terminals'));
+        [$inserted, $updated, $skipped] = $this->syncModel(Terminal::class, $data);
+        $this->line(" → +{$inserted} new, ✎{$updated} updated, ⏸{$skipped} skipped");
     }
 
     protected function importCommodities()
     {
-        $this->importGeneric('commodities', Commodity::class);
-    }
-
-    protected function importVehicles()
-    {
-        $this->importGeneric('vehicles', Vehicle::class);
+        $this->info('Fetching commodities...');
+        $data = $this->unwrap($this->api->fetch('commodities'));
+        [$inserted, $updated, $skipped] = $this->syncModel(Commodity::class, $data);
+        $this->line(" → +{$inserted} new, ✎{$updated} updated, ⏸{$skipped} skipped");
     }
 
     protected function importPrices()
     {
-        $this->section("Fetching commodity prices (rate-limited)");
+        $this->info('Fetching commodity prices (bulk)...');
+        $data = $this->unwrap($this->api->fetch('commodities_prices_all'));
+        $inserted = $updated = $skipped = 0;
 
-        $commodities = Commodity::all();
-        foreach ($commodities as $commodity) {
-            $encoded = urlencode($commodity->name);
-            $endpoint = "commodities_prices?commodity_name={$encoded}";
-            $data = $this->api->fetch($endpoint);
+        foreach ($data as $p) {
+            $record = Price::where([
+                'commodity_id' => $p['id_commodity'] ?? null,
+                'terminal_id'  => $p['id_terminal'] ?? null
+            ])->first();
 
-            $records = $data['data'] ?? $data ?? [];
-            foreach ($records as $row) {
-                Price::updateOrCreate(
-                    [
-                        'commodity_id' => $commodity->id,
-                        'terminal_id'  => $row['id_terminal'] ?? null,
-                    ],
-                    [
-                        'price_buy'  => $row['price_buy'] ?? null,
-                        'price_sell' => $row['price_sell'] ?? null,
+            if (!$record) {
+                Price::create([
+                    'commodity_id' => $p['id_commodity'] ?? null,
+                    'terminal_id'  => $p['id_terminal'] ?? null,
+                    'price_buy'    => $p['price_buy'] ?? null,
+                    'price_sell'   => $p['price_sell'] ?? null,
+                    'location'     => $p['terminal_name'] ?? null,
+                    'fetched_at'   => Carbon::now(),
+                    'last_hash'    => hash('sha256', json_encode($p))
+                ]);
+                $inserted++;
+            } else {
+                $newHash = hash('sha256', json_encode($p));
+                if ($record->last_hash !== $newHash) {
+                    $record->fill([
+                        'price_buy'  => $p['price_buy'] ?? null,
+                        'price_sell' => $p['price_sell'] ?? null,
+                        'location'   => $p['terminal_name'] ?? null,
                         'fetched_at' => Carbon::now(),
-                    ]
-                );
+                        'last_hash'  => $newHash
+                    ])->save();
+                    $updated++;
+                } else {
+                    $skipped++;
+                }
             }
-
-            $this->line("   ↳ Imported prices for {$commodity->name}");
-            sleep(1);
         }
+
+        $this->line(" → +{$inserted} new, ✎{$updated} updated, ⏸{$skipped} skipped");
     }
 
-    /* -----------------------------------------------------------
-       Helper Methods
-    ----------------------------------------------------------- */
-
-    /**
-     * Imports generic endpoint → model mapping with safe unwrap + logging.
-     */
-    protected function importGeneric(string $endpoint, string $modelClass)
+    protected function importCommodityStatus()
     {
-        $this->section("Fetching {$endpoint} ...");
+        $this->info('Fetching commodity status legend...');
+        $data = $this->unwrap($this->api->fetch('commodities_status'));
 
-        $response = $this->api->fetch($endpoint);
-        $records = $response['data'] ?? $response ?? [];
-
-        if (empty($records)) {
-            $this->warn(" → No data returned for {$endpoint}");
-            Log::warning("[UEX Import] No data for {$endpoint}");
+        if (!$data || !isset($data['buy']) || !isset($data['sell'])) {
+            $this->warn('  ⚠️ No valid status data received.');
             return;
         }
 
-        $count = 0;
-        foreach ($records as $row) {
-            if (!isset($row['id'])) continue;
+        DB::table('uex_commodities_status_buy')->truncate();
+        DB::table('uex_commodities_status_sell')->truncate();
 
-            try {
-                $modelClass::updateOrCreate(['id' => $row['id']], $row);
-                $count++;
-            } catch (\Exception $e) {
-                Log::error("[UEX Import] Failed {$endpoint} ID {$row['id']}: {$e->getMessage()}");
+        DB::table('uex_commodities_status_buy')->insert($data['buy']);
+        DB::table('uex_commodities_status_sell')->insert($data['sell']);
+
+        $this->line(
+            ' → Imported ' .
+            count($data['buy']) . ' buy statuses and ' .
+            count($data['sell']) . ' sell statuses.'
+        );
+    }
+
+    /* -----------------------------------------------------
+     * HELPER
+     * ----------------------------------------------------- */
+    protected function unwrap($response)
+    {
+        if (is_array($response)) {
+            if (isset($response['data']) && is_array($response['data'])) {
+                return $response['data'];
+            }
+            if (isset($response[0])) {
+                return $response;
             }
         }
-
-        $this->info(" → Imported {$count} records for {$endpoint}");
-        Log::info("[UEX Import] Imported {$count} records for {$endpoint}");
-    }
-
-    /**
-     * Pretty console banners
-     */
-    protected function banner(string $text)
-    {
-        $this->line("\n----------------------------------------");
-        $this->info($text);
-        $this->line("----------------------------------------");
-    }
-
-    protected function section(string $text)
-    {
-        $this->line("\n" . $text);
+        return [];
     }
 }

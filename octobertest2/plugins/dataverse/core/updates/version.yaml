@@ -20,3 +20,24 @@
 1.0.6:
     - 'Auto-bumped from 1.0.5 to 1.0.6'
     - create_uex_vehicles_table.php
+1.0.7:
+    - 'Auto-bumped from 1.0.6 to 1.0.7'
+    - create_uex_commodities_prices_all_table.php
+    - create_uex_commodities_raw_prices_all_table.php
+    - create_uex_commodities_status_table.php
+1.0.8:
+    - 'Auto-bumped from 1.0.7 to 1.0.8'
+1.0.9:
+    - 'Auto-bumped from 1.0.8 to 1.0.9'
+1.0.10:
+    - 'Auto-bumped from 1.0.9 to 1.0.10'
+1.0.11:
+    - 'Auto-bumped from 1.0.10 to 1.0.11'
+1.0.12:
+    - 'Auto-bumped from 1.0.11 to 1.0.12'
+    - add_last_hash_columns.php
+1.0.13:
+    - 'Auto-bumped from 1.0.12 to 1.0.13'
+1.0.14:
+    - 'Auto-bumped from 1.0.13 to 1.0.14'
+    - add_last_hash_to_vehicles.php
