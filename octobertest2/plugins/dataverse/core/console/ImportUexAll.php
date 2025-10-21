@@ -12,10 +12,10 @@ use Dataverse\Core\Models\{
 };
 
 /**
- * Smart importer for all UEX 2.0 API data (systems, locations, commodities, prices, and status).
+ * Smart importer for all UEX 2.0 API data (systems, locations, commodities, vehicles, prices, and status).
  * - Uses Bearer auth from .env
  * - Respects rate limits
- * - Only updates data that actually changed (timestamp/hash-based)
+ * - Only updates changed data (via timestamp/hash)
  */
 class ImportUexAll extends Command
 {
@@ -43,6 +43,7 @@ class ImportUexAll extends Command
             $this->importTerminals();
             $this->importCommodities();
             $this->importPrices();
+            $this->importCommodityStatus();
         } catch (\Throwable $e) {
             $this->error("❌ Import failed: " . $e->getMessage());
             Log::error('[UEX ImportAll] ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
@@ -59,12 +60,12 @@ class ImportUexAll extends Command
 
     protected function shouldUpdate($model, array $data): bool
     {
-        // 1. Compare modification dates if provided
+        // 1. Compare modification timestamps if available
         if (isset($data['date_modified']) && $model->date_modified ?? null) {
             return strtotime($data['date_modified']) > strtotime($model->date_modified);
         }
 
-        // 2. Compare hashes if timestamps aren’t provided
+        // 2. Compare hash if no timestamp field
         $newHash = hash('sha256', json_encode($data));
         if (!isset($model->last_hash) || $model->last_hash !== $newHash) {
             $model->last_hash = $newHash;
@@ -104,6 +105,7 @@ class ImportUexAll extends Command
     /* -----------------------------------------------------
      * INDIVIDUAL IMPORT SECTIONS
      * ----------------------------------------------------- */
+
     protected function importVehicles()
     {
         $this->info('Fetching vehicles...');
@@ -111,6 +113,7 @@ class ImportUexAll extends Command
         [$inserted, $updated, $skipped] = $this->syncModel(\Dataverse\Core\Models\Vehicle::class, $data);
         $this->line(" → +{$inserted} new, ✎{$updated} updated, ⏸{$skipped} skipped");
     }
+
     protected function importStarSystems()
     {
         $this->info('Fetching star_systems...');
@@ -221,29 +224,83 @@ class ImportUexAll extends Command
     protected function importCommodityStatus()
     {
         $this->info('Fetching commodity status legend...');
-        $data = $this->unwrap($this->api->fetch('commodities_status'));
 
-        if (!$data || !isset($data['buy']) || !isset($data['sell'])) {
+        $response = $this->api->fetch('commodities_status');
+        $data = $response['data'] ?? $response ?? [];
+
+        if (!isset($data['buy']) || !isset($data['sell'])) {
             $this->warn('  ⚠️ No valid status data received.');
+            Log::warning('[UEX ImportAll] Unexpected commodities_status payload', ['payload' => $response]);
             return;
         }
 
-        DB::table('uex_commodities_status_buy')->truncate();
-        DB::table('uex_commodities_status_sell')->truncate();
+        $this->line('  🧮 Syncing BUY table...');
+        [$insertedBuy, $updatedBuy, $skippedBuy] = $this->syncStatusTable('uex_commodities_status_buy', $data['buy']);
 
-        DB::table('uex_commodities_status_buy')->insert($data['buy']);
-        DB::table('uex_commodities_status_sell')->insert($data['sell']);
+        $this->line('  🧮 Syncing SELL table...');
+        [$insertedSell, $updatedSell, $skippedSell] = $this->syncStatusTable('uex_commodities_status_sell', $data['sell']);
 
         $this->line(
-            ' → Imported ' .
-            count($data['buy']) . ' buy statuses and ' .
-            count($data['sell']) . ' sell statuses.'
+            " → BUY: +{$insertedBuy}, ✎{$updatedBuy}, ⏸{$skippedBuy} | " .
+            "SELL: +{$insertedSell}, ✎{$updatedSell}, ⏸{$skippedSell}"
         );
+    }
+
+    protected function syncStatusTable(string $table, array $rows): array
+    {
+        $inserted = $updated = $skipped = 0;
+
+        foreach ($rows as $r) {
+            $code = $r['code'] ?? null;
+            if ($code === null) continue;
+
+            $existing = DB::table($table)->where('code', $code)->first();
+            $newHash  = hash('sha256', json_encode($r));
+
+            if (!$existing) {
+                DB::table($table)->insert([
+                    'code'             => $r['code'] ?? null,
+                    'name'             => $r['name'] ?? null,
+                    'name_short'       => $r['name_short'] ?? null,
+                    'name_abbr'        => $r['name_abbr'] ?? null,
+                    'percentage'       => $r['percentage'] ?? null,
+                    'percentage_start' => $r['percentage_start'] ?? null,
+                    'percentage_end'   => $r['percentage_end'] ?? null,
+                    'colors'           => $r['colors'] ?? null,
+                    'created_at'       => now(),
+                    'updated_at'       => now(),
+                    'last_hash'        => $newHash,
+                ]);
+                $inserted++;
+            } else {
+                if (!isset($existing->last_hash) || $existing->last_hash !== $newHash) {
+                    DB::table($table)
+                        ->where('code', $code)
+                        ->update([
+                            'name'             => $r['name'] ?? null,
+                            'name_short'       => $r['name_short'] ?? null,
+                            'name_abbr'        => $r['name_abbr'] ?? null,
+                            'percentage'       => $r['percentage'] ?? null,
+                            'percentage_start' => $r['percentage_start'] ?? null,
+                            'percentage_end'   => $r['percentage_end'] ?? null,
+                            'colors'           => $r['colors'] ?? null,
+                            'updated_at'       => now(),
+                            'last_hash'        => $newHash,
+                        ]);
+                    $updated++;
+                } else {
+                    $skipped++;
+                }
+            }
+        }
+
+        return [$inserted, $updated, $skipped];
     }
 
     /* -----------------------------------------------------
      * HELPER
      * ----------------------------------------------------- */
+
     protected function unwrap($response)
     {
         if (is_array($response)) {

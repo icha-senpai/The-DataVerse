@@ -2,6 +2,7 @@
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Dataverse\Core\Classes\UexApiClient;
 use Symfony\Component\Console\Input\InputOption;
@@ -14,7 +15,7 @@ use Symfony\Component\Console\Input\InputOption;
 class SchemaVerse extends Command
 {
     protected $name = 'dataverse:schemaverse';
-    protected $description = '🌌 Maps and explores any UEX API endpoint schema (Dataverse SchemaVerse)';
+    protected $description = '🌌 Maps UEX API schemas, auto-generates/merges migrations & models safely.';
 
     protected UexApiClient $api;
     protected string $logFile;
@@ -25,13 +26,14 @@ class SchemaVerse extends Command
         $this->logFile = storage_path('logs/schemaverse_summary.json');
 
         $this->info("\n=============================================");
-        $this->info("🌌  SchemaVerse — UEX Data Dimension Mapper");
+        $this->info("🌌  SchemaVerse — UEX Data Dimension Mapper (Merge-Aware)");
         $this->info("=============================================\n");
 
         $sleep    = (int) $this->option('sleep');
         $generate = (bool) $this->option('generate');
         $dryRun   = (bool) $this->option('dry-run');
         $saveJson = (bool) $this->option('save-json');
+        $merge    = (bool) $this->option('merge');
         $inputEPs = $this->option('endpoint');
 
         // Manual endpoint input
@@ -43,16 +45,15 @@ class SchemaVerse extends Command
             }
         } else {
             $endpoints = [
-                'commodities_prices_all'     => 'All refined commodities prices',
-                'commodities_raw_prices_all' => 'All raw material prices',
-                'commodities_status'         => 'Commodity status data',
-                'vehicles'                   => 'Vehicle data',
+                'commodities_status' => 'Commodity status data',
             ];
         }
 
         $this->line("→ Delay between requests: {$sleep}s");
         $this->line("→ Dry run: " . ($dryRun ? 'YES' : 'no'));
-        if ($generate) $this->warn("→ Auto-generation of migrations/models is ENABLED.\n");
+        $this->line("→ Merge mode: " . ($merge ? 'YES' : 'no'));
+        if ($generate && !$dryRun)
+            $this->warn("→ Generation ENABLED (with merge=" . ($merge ? 'YES' : 'no') . ")\n");
 
         $summary = [];
 
@@ -61,7 +62,7 @@ class SchemaVerse extends Command
 
             // Auto-pagination fetch
             $raw = $this->fetchAllPages($endpoint, $sleep);
-            $records = $this->unwrap($raw);
+            $records = $this->unwrapDeep($raw);
 
             if ($saveJson) {
                 $path = storage_path("logs/schemaverse_raw_{$endpoint}.json");
@@ -75,25 +76,31 @@ class SchemaVerse extends Command
             }
 
             $sample = is_array($records) && isset($records[0]) ? $records[0] : $records;
-            $keys = $this->extractKeysRecursive($sample);
+            $schema = $this->extractSchemaRecursive($sample);
 
             $summary[$endpoint] = [
                 'count'  => is_countable($records) ? count($records) : 1,
-                'fields' => $keys,
+                'schema' => $schema,
             ];
 
-            $this->info("  ✅ Found " . count($keys) . " unique fields:");
-            foreach ($keys as $key) {
-                $this->line("     • {$key}");
-            }
+            $schemaPath = storage_path("logs/schema_struct_{$endpoint}.json");
+            file_put_contents($schemaPath, json_encode($schema, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+            $this->info("  💾 Structured schema saved: {$schemaPath}");
 
             if ($dryRun) {
-                $this->warn("  ⚠️ Dry-run active: skipping migration/model generation");
+                $this->warn("  ⚠️ Dry-run active: skipping generation/merge");
                 continue;
             }
 
-            if ($generate) {
-                $this->generateMigrationAndModel($endpoint, $keys);
+            // Flatten nested schema for database columns
+            $flatKeys = $this->flattenForMigration($schema);
+
+            if ($generate && !$merge) {
+                $this->generateMigrationAndModel($endpoint, $flatKeys);
+            }
+
+            if ($generate && $merge) {
+                $this->mergeMigrationAndModel($endpoint, $flatKeys);
             }
 
             sleep($sleep);
@@ -110,23 +117,20 @@ class SchemaVerse extends Command
     {
         $page = 1;
         $results = [];
-
         while (true) {
             $this->line("   🔁 Fetching page {$page}...");
             $data = $this->api->fetch("{$endpoint}?page={$page}");
-            $chunk = $this->unwrap($data);
+            $chunk = $this->unwrapDeep($data);
 
             if (empty($chunk)) break;
 
-            // Merge arrays only if same structure
             if (is_array($chunk) && array_is_list($chunk)) {
                 $results = array_merge($results, $chunk);
             } else {
                 $results[] = $chunk;
-                break; // stop if single-object response
+                break;
             }
 
-            // detect pagination meta or next link
             $hasNext = false;
             if (isset($data['meta']['total_pages']) && isset($data['meta']['current_page'])) {
                 $hasNext = $data['meta']['current_page'] < $data['meta']['total_pages'];
@@ -138,55 +142,126 @@ class SchemaVerse extends Command
             $page++;
             sleep($delay);
         }
-
         return $results;
     }
 
     /**
      * Recursively unwrap nested "data" keys until an array of records is reached.
      */
-    protected function unwrap($payload)
+    protected function unwrapDeep($payload)
     {
+        $seen = [];
         $depth = 0;
-        while (is_array($payload) && array_key_exists('data', $payload)) {
-            $payload = $payload['data'];
+        while (is_array($payload)) {
+            $keys = array_keys($payload);
+            $hash = md5(json_encode($keys));
+            if (in_array($hash, $seen) || $depth > 15) break;
+            $seen[] = $hash;
             $depth++;
-            if ($depth > 10) break; // safety stop
+
+            if (count($keys) === 1 && isset($payload['data']) && is_array($payload['data'])) {
+                $payload = $payload['data'];
+                continue;
+            }
+            if (count($keys) === 1 && isset($payload['Data']) && is_array($payload['Data'])) {
+                $payload = $payload['Data'];
+                continue;
+            }
+            if (count($keys) === 1 && isset($payload['payload']) && is_array($payload['payload'])) {
+                $payload = $payload['payload'];
+                continue;
+            }
+            if (count($keys) === 1 && is_array(reset($payload)) && array_is_list(reset($payload))) {
+                $payload = reset($payload);
+                continue;
+            }
+
+            break;
         }
 
-        if (is_array($payload) && count($payload) === 1 && is_array(reset($payload))) {
-            $payload = reset($payload);
+        if (is_array($payload) && !array_is_list($payload)) {
+            $payload = [$payload];
         }
 
         return $payload;
     }
 
-    /**
-     * Recursively extract flattened dotted keys from arrays/objects.
-     */
-    protected function extractKeysRecursive($data, string $prefix = ''): array
-    {
-        $keys = [];
-        if (!is_array($data)) return $keys;
+    /* =========================
+       STRUCTURED SCHEMA
+       ========================= */
 
-        foreach ($data as $k => $v) {
-            $full = $prefix ? "{$prefix}.{$k}" : (string)$k;
-            $keys[] = $full;
-            if (is_array($v) && !empty($v)) {
-                $keys = array_merge($keys, $this->extractKeysRecursive($v, $full));
+    protected function extractSchemaRecursive($data)
+    {
+        if (!is_array($data)) {
+            return gettype($data);
+        }
+
+        $schema = [];
+        foreach ($data as $key => $value) {
+            if (is_array($value)) {
+                if (array_keys($value) === range(0, count($value) - 1)) {
+                    $first = $value[0] ?? null;
+                    $schema[$key] = [
+                        'type' => 'array',
+                        'items' => $this->extractSchemaRecursive($first)
+                    ];
+                } else {
+                    $schema[$key] = [
+                        'type' => 'object',
+                        'properties' => $this->extractSchemaRecursive($value)
+                    ];
+                }
+            } else {
+                $schema[$key] = gettype($value);
             }
         }
 
-        // Normalize numeric paths
-        $keys = array_map(fn($k) => preg_replace('/\.\d+(\.|$)/', '.', $k), $keys);
-        $keys = array_unique(array_map(fn($k) => trim($k, '.'), $keys));
-
-        return array_values($keys);
+        return $schema;
     }
 
-    /**
-     * Generate migration + model files for the given endpoint.
-     */
+    protected function flattenForMigration($schema, string $prefix = ''): array
+    {
+        $fields = [];
+        if (is_array($schema)) {
+            foreach ($schema as $k => $v) {
+                $name = $prefix ? "{$prefix}_{$k}" : $k;
+                if (is_array($v) && isset($v['type'])) {
+                    if ($v['type'] === 'object' && isset($v['properties'])) {
+                        $fields = array_merge($fields, $this->flattenForMigration($v['properties'], $name));
+                    } elseif ($v['type'] === 'array' && isset($v['items'])) {
+                        $fields = array_merge($fields, $this->flattenForMigration($v['items'], "{$name}_item"));
+                    } else {
+                        $fields[] = $name;
+                    }
+                } else {
+                    $fields[] = $name;
+                }
+            }
+        }
+        return array_unique($fields);
+    }
+
+    /* =========================
+       TYPE INFERENCE + MIGRATION + MERGE
+       ========================= */
+
+    protected function inferColumnLine(string $col): string
+    {
+        if (preg_match('/_id$/', $col)) {
+            return "            \$t->unsignedInteger('{$col}')->nullable();";
+        } elseif (preg_match('/date|time|timestamp/i', $col)) {
+            return "            \$t->timestamp('{$col}')->nullable();";
+        } elseif (preg_match('/price|amount|value|percent|ratio|quantity|avg|min|max|scu|mass|width|height|length|fuel/i', $col)) {
+            return "            \$t->decimal('{$col}', 12, 4)->nullable();";
+        } elseif (preg_match('/^is_|^has_|flag|bool/i', $col)) {
+            return "            \$t->boolean('{$col}')->nullable();";
+        } elseif (preg_match('/^url_|^uri_|_url$|_uri$/i', $col)) {
+            return "            \$t->text('{$col}')->nullable();";
+        } else {
+            return "            \$t->string('{$col}', 255)->nullable();";
+        }
+    }
+
     protected function generateMigrationAndModel(string $endpoint, array $keys): void
     {
         $table     = 'uex_' . Str::snake(str_replace(['/', '?', '=', '&'], '_', $endpoint));
@@ -200,23 +275,7 @@ class SchemaVerse extends Command
         $migrationFile = "{$updatesDir}/create_{$table}_table.php";
         $modelFile     = "{$modelsDir}/{$modelName}.php";
 
-        $columns = [];
-        foreach ($keys as $col) {
-            $col = str_replace('.', '_', $col);
-            if (preg_match('/_id$/', $col)) {
-                $columns[] = "            \$t->unsignedInteger('{$col}')->nullable();";
-            } elseif (preg_match('/date|time|timestamp/i', $col)) {
-                $columns[] = "            \$t->timestamp('{$col}')->nullable();";
-            } elseif (preg_match('/price|amount|value|percent|ratio|quantity|avg|min|max/i', $col)) {
-                $columns[] = "            \$t->decimal('{$col}', 12, 4)->nullable();";
-            } elseif (preg_match('/^is_|^has_|flag|bool/i', $col)) {
-                $columns[] = "            \$t->boolean('{$col}')->nullable();";
-            } elseif (preg_match('/^url_|^uri_|_url$|_uri$/i', $col)) {
-                $columns[] = "            \$t->text('{$col}')->nullable();";
-            } else {
-                $columns[] = "            \$t->string('{$col}', 255)->nullable();";
-            }
-        }
+        $columns = array_map(fn($k) => $this->inferColumnLine($k), $keys);
 
         $migration = <<<PHP
 <?php namespace Dataverse\Core\Updates;
@@ -245,7 +304,7 @@ PHP;
         file_put_contents($migrationFile, $migration);
         $this->info("  ✨ Migration generated: {$migrationFile}");
 
-        $fillable = implode("', '", array_map(fn($k) => str_replace('.', '_', $k), $keys));
+        $fillable = implode("', '", $keys);
         $model = <<<PHP
 <?php namespace Dataverse\Core\Models;
 
@@ -266,6 +325,117 @@ PHP;
         $this->info("  🧩 Model generated: {$modelFile}");
     }
 
+    protected function mergeMigrationAndModel(string $endpoint, array $keys): void
+    {
+        $table     = 'uex_' . Str::snake(str_replace(['/', '?', '=', '&'], '_', $endpoint));
+        $modelName = Str::studly(Str::camel(str_replace('uex_', '', $table)));
+        $modelsDir = base_path('plugins/dataverse/core/models');
+        $updatesDir = base_path('plugins/dataverse/core/updates');
+
+        if (!is_dir($modelsDir)) mkdir($modelsDir, 0775, true);
+        if (!is_dir($updatesDir)) mkdir($updatesDir, 0775, true);
+
+        $modelFile = "{$modelsDir}/{$modelName}.php";
+
+        if (!file_exists($modelFile)) {
+            $this->warn("  ℹ️ Model {$modelName} not found — generating fresh.");
+            $this->generateMigrationAndModel($endpoint, $keys);
+            return;
+        }
+
+        $existing = file_get_contents($modelFile) ?: '';
+        $existingFillable = $this->extractFillable($existing);
+
+        $newFields = $keys;
+        $missingFields = array_values(array_diff($newFields, $existingFillable));
+
+        if (!empty($missingFields)) {
+            $this->line("  ➕ Appending " . count($missingFields) . " new fillables to {$modelName}...");
+            $updatedContent = $this->injectFillable($existing, array_merge($existingFillable, $missingFields));
+            file_put_contents($modelFile, $updatedContent);
+            $this->info("  🧬 Model updated: {$modelFile}");
+        } else {
+            $this->line("  ✅ Model fillables already cover API fields.");
+        }
+
+        if (!Schema::hasTable($table)) {
+            $this->warn("  ⚠️ Table {$table} does not exist — generating fresh migration.");
+            $this->generateMigrationAndModel($endpoint, $keys);
+            return;
+        }
+
+        $missingCols = [];
+        foreach ($newFields as $col) {
+            if (!Schema::hasColumn($table, $col)) {
+                $missingCols[] = $col;
+            }
+        }
+
+        if (empty($missingCols)) {
+            $this->line("  ✅ No new DB columns needed for {$table}.");
+            return;
+        }
+
+        $timestamp = date('Y_m_d_His');
+        $patchFile = "{$updatesDir}/add_columns_{$table}_{$timestamp}.php";
+
+        $columnLines = array_map(fn($c) => $this->inferColumnLine($c), $missingCols);
+        $dropLines   = array_map(fn($c) => "            \$t->dropColumn('{$c}');", $missingCols);
+
+        $patch = <<<PHP
+<?php namespace Dataverse\Core\Updates;
+
+use Schema;
+use October\Rain\Database\Schema\Blueprint;
+use October\Rain\Database\Updates\Migration;
+
+return new class extends Migration
+{
+    public function up()
+    {
+        if (Schema::hasTable('{$table}')) {
+            Schema::table('{$table}', function (Blueprint \$t) {
+{$this->indentLines($columnLines)}
+            });
+        }
+    }
+
+    public function down()
+    {
+        if (Schema::hasTable('{$table}')) {
+            Schema::table('{$table}', function (Blueprint \$t) {
+{$this->indentLines($dropLines)}
+            });
+        }
+    }
+};
+PHP;
+
+        file_put_contents($patchFile, $patch);
+        $this->info("  🧱 Add-columns migration generated: {$patchFile}");
+        $this->warn("  👉 Run: php artisan plugin:bump-smart Dataverse.Core");
+    }
+
+    protected function extractFillable(string $content): array
+    {
+        $re = '/protected\s+\$fillable\s*=\s*\[(.*?)\];/s';
+        if (!preg_match($re, $content, $m)) return [];
+        $inside = $m[1];
+        preg_match_all("/['\"]([^'\"]+)['\"]/", $inside, $mm);
+        return array_values(array_unique($mm[1] ?? []));
+    }
+
+    protected function injectFillable(string $content, array $allFields): string
+    {
+        sort($allFields);
+        $formatted = "'" . implode("', '", $allFields) . "'";
+        $re = '/protected\s+\$fillable\s*=\s*\[(.*?)\];/s';
+        if (preg_match($re, $content)) {
+            return preg_replace($re, "protected \$fillable = [{$formatted}];", $content);
+        }
+        return preg_replace('/class\s+[^\{]+\{/', "\$0\n    protected \$fillable = [{$formatted}];\n", $content, 1);
+    }
+
     protected function indentLines(array $lines): string
     {
         return implode("\n", $lines);
@@ -275,8 +445,9 @@ PHP;
     {
         return [
             ['sleep', null, InputOption::VALUE_OPTIONAL, 'Seconds to wait between requests', 6],
-            ['generate', null, InputOption::VALUE_NONE, 'Generate migrations and models for discovered schemas'],
-            ['dry-run', null, InputOption::VALUE_NONE, 'Extract schema only, do not generate anything'],
+            ['generate', null, InputOption::VALUE_NONE, 'Generate migrations and models'],
+            ['merge', null, InputOption::VALUE_NONE, 'Merge into existing model/table (append-only)'],
+            ['dry-run', null, InputOption::VALUE_NONE, 'Extract schema only, do not write files'],
             ['save-json', null, InputOption::VALUE_NONE, 'Save raw API JSON responses for inspection'],
             ['endpoint', null, InputOption::VALUE_OPTIONAL, 'Comma-separated list of API endpoints to scan'],
         ];

@@ -18,6 +18,7 @@ return new class extends Migration
             $t->integer('percentage_start')->nullable();
             $t->integer('percentage_end')->nullable();
             $t->string('colors')->nullable();
+            $t->string('last_hash', 64)->nullable();
             $t->timestamps();
         });
 
@@ -31,6 +32,7 @@ return new class extends Migration
             $t->integer('percentage_start')->nullable();
             $t->integer('percentage_end')->nullable();
             $t->string('colors')->nullable();
+            $t->string('last_hash', 64)->nullable();
             $t->timestamps();
         });
     }

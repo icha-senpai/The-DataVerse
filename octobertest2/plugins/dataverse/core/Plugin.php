@@ -64,6 +64,11 @@ class Plugin extends PluginBase
             'dataverse:schemaverse',
             \Dataverse\Core\Console\SchemaVerse::class
         );
+    
+        $this->registerConsoleCommand(
+            'uex.debug',
+            \Dataverse\Core\Console\DebugUex::class
+        );
     }
 
     /**
