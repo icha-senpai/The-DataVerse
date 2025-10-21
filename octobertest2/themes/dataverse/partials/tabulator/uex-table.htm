@@ -1,0 +1,44 @@
+<link href="{{ 'assets/vendor/tabulator/tabulator.css'|theme }}" rel="stylesheet">
+<script src="{{ 'assets/vendor/tabulator/tabulator.js'|theme }}"></script>
+<script src="{{ 'assets/vendor/formulajs/formula.js'|theme }}"></script>
+
+<div id="uexTable"></div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const table = new Tabulator("#uexTable", {
+    ajaxURL: "/uexCommodities/onGetData",
+    height: "650px",
+    layout: "fitColumns",
+    reactiveData: true,
+    columns: [
+      {title:"Commodity", field:"name", headerFilter:"input"},
+      {title:"Buy", field:"buy_price", editor:"input", hozAlign:"right"},
+      {title:"Sell", field:"sell_price", editor:"input", hozAlign:"right"},
+      {
+        title:"Margin %",
+        field:"margin",
+        mutator:(v,d)=>formula.eval("IF(buy_price>0,(sell_price-buy_price)/buy_price*100,0)",d),
+        formatter:cell=>cell.getValue().toFixed(2)+"%"
+      },
+      {title:"Buy Status", field:"buy_status", hozAlign:"center", formatter:cell=>cell.getValue()+"%"},
+      {title:"Sell Status", field:"sell_status", hozAlign:"center", formatter:cell=>cell.getValue()+"%"},
+      {
+        title:"Est. Profit (SCU=100)",
+        field:"profit",
+        mutator:(v,d)=>formula.eval("(sell_price-buy_price)*100",d),
+        formatter:"money",
+        bottomCalc:"sum"
+      }
+    ],
+  });
+
+  table.on("cellEdited", cell => {
+    fetch("/uexCommodities/onUpdateCommodity", {
+      method:"POST",
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(cell.getRow().getData())
+    });
+  });
+});
+</script>
