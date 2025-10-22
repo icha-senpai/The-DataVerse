@@ -4,6 +4,7 @@ return array (
   'option_group.alerts' => 'User alerts and notifications',
   'option_group.appearance' => 'Appearance',
   'option_group.attachments' => 'Attachments',
+  'option_group.audapi' => '[Audentio] API',
   'option_group.basicBoard' => 'Basic options',
   'option_group.boardActive' => 'Board active',
   'option_group.censoringOptions' => 'Censoring',

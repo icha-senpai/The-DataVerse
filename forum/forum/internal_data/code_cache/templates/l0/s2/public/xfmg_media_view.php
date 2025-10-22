@@ -108,13 +108,13 @@ return array(
 						<div class="contentRow-lesser p-description">
 							<ul class="listInline listInline--bullet">
 								<li>' . $__templater->fontAwesome('fa-user', array(
-		'title' => $__templater->filter('xfmg_media_owner', array(array('for_attr', array()),), false),
+		'title' => $__templater->filter('Media owner', array(array('for_attr', array()),), false),
 	)) . ' ' . $__templater->func('username_link', array($__vars['mediaItem']['User'], false, array(
 		'defaultname' => $__vars['mediaItem']['username'],
 		'class' => 'u-concealed',
 	))) . '</li>
 								<li>' . $__templater->fontAwesome('fa-clock', array(
-		'title' => $__templater->filter('xfmg_date_added', array(array('for_attr', array()),), false),
+		'title' => $__templater->filter('Date added', array(array('for_attr', array()),), false),
 	)) . ' ' . $__templater->func('date_dynamic', array($__vars['mediaItem']['media_date'], array(
 	))) . '</li>
 								';
@@ -147,7 +147,7 @@ return array(
 	if ($__vars['mirrorContainer']) {
 		$__finalCompiled .= '
 				<div class="xfmgInfoBlock-originallyFrom">
-					' . 'xfmg_originally_posted_in_x' . '
+					' . 'Originally posted in: <a href="' . $__templater->escape($__vars['mirrorContainer']['link']) . '">' . $__templater->escape($__vars['mirrorContainer']['title']) . '</a>' . '
 				</div>
 			';
 	}
@@ -355,12 +355,12 @@ return array(
 						', array(
 			'id' => 'js-noterToggle',
 			'class' => 'button--icon',
-			'data-active-label' => 'xfmg_stop_adding_note_tag',
+			'data-active-label' => 'Stop adding note/tag',
 			'data-active-icon' => 'ban',
-			'data-active-message' => 'xfmg_note_tag_mode_activated',
+			'data-active-message' => 'Note/tag mode activated',
 			'data-inactive-label' => 'Add note/tag',
 			'data-inactive-icon' => '',
-			'data-inactive-message' => 'xfmg_note_tag_mode_deactivated',
+			'data-inactive-message' => 'Note/tag mode deactivated',
 		), '', array(
 		)) . '
 					';
@@ -439,7 +439,7 @@ return array(
 	if ($__templater->method($__vars['mediaItem'], 'canSetAsAvatar', array())) {
 		$__compilerTemp7 .= '
 														<a href="' . $__templater->func('link', array('media/set-as-avatar', $__vars['mediaItem'], ), true) . '" data-xf-click="overlay" class="menu-linkRow">
-															' . 'xfmg_set_as_avatar' . '
+															' . 'Set as avatar' . '
 														</a>
 														';
 		if ($__vars['avatarUpdated']) {
@@ -454,28 +454,28 @@ return array(
 													';
 	if ($__templater->method($__vars['mediaItem'], 'canEdit', array())) {
 		$__compilerTemp7 .= '
-														<a href="' . $__templater->func('link', array('media/edit', $__vars['mediaItem'], ), true) . '" data-xf-click="overlay" class="menu-linkRow">' . 'xfmg_edit_media_item' . '</a>
+														<a href="' . $__templater->func('link', array('media/edit', $__vars['mediaItem'], ), true) . '" data-xf-click="overlay" class="menu-linkRow">' . 'Edit media item' . '</a>
 													';
 	}
 	$__compilerTemp7 .= '
 													';
 	if ($__templater->method($__vars['mediaItem'], 'canEditImage', array())) {
 		$__compilerTemp7 .= '
-														<a href="' . $__templater->func('link', array('media/edit-image', $__vars['mediaItem'], ), true) . '" class="menu-linkRow">' . 'xfmg_edit_image' . '</a>
+														<a href="' . $__templater->func('link', array('media/edit-image', $__vars['mediaItem'], ), true) . '" class="menu-linkRow">' . 'Edit image' . '</a>
 													';
 	}
 	$__compilerTemp7 .= '
 													';
 	if ($__templater->method($__vars['mediaItem'], 'canChangeThumbnail', array())) {
 		$__compilerTemp7 .= '
-														<a href="' . $__templater->func('link', array('media/change-thumbnail', $__vars['mediaItem'], ), true) . '" data-xf-click="overlay" class="menu-linkRow">' . 'xfmg_change_thumbnail' . '</a>
+														<a href="' . $__templater->func('link', array('media/change-thumbnail', $__vars['mediaItem'], ), true) . '" data-xf-click="overlay" class="menu-linkRow">' . 'Change thumbnail' . '</a>
 													';
 	}
 	$__compilerTemp7 .= '
 													';
 	if ($__templater->method($__vars['mediaItem'], 'canMove', array())) {
 		$__compilerTemp7 .= '
-														<a href="' . $__templater->func('link', array('media/move', $__vars['mediaItem'], ), true) . '" data-xf-click="overlay" class="menu-linkRow">' . 'xfmg_move_media_item' . '</a>
+														<a href="' . $__templater->func('link', array('media/move', $__vars['mediaItem'], ), true) . '" data-xf-click="overlay" class="menu-linkRow">' . 'Move media item' . '</a>
 													';
 	}
 	$__compilerTemp7 .= '
@@ -490,7 +490,7 @@ return array(
 															';
 		} else {
 			$__compilerTemp7 .= '
-																' . 'xfmg_feature_media_item' . '
+																' . 'Feature media item' . '
 															';
 		}
 		$__compilerTemp7 .= '
@@ -501,7 +501,7 @@ return array(
 													';
 	if ($__templater->method($__vars['mediaItem'], 'canDelete', array('soft', ))) {
 		$__compilerTemp7 .= '
-														<a href="' . $__templater->func('link', array('media/delete', $__vars['mediaItem'], ), true) . '" data-xf-click="overlay" class="menu-linkRow">' . 'xfmg_delete_media_item' . '</a>
+														<a href="' . $__templater->func('link', array('media/delete', $__vars['mediaItem'], ), true) . '" data-xf-click="overlay" class="menu-linkRow">' . 'Delete media item' . '</a>
 													';
 	}
 	$__compilerTemp7 .= '

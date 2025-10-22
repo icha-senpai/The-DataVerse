@@ -14,3 +14,5 @@ $config['enableUpgradeCheck'] = false;
 $config['development']['enabled'] = true;
 $config['enableAddOnArchiveInstaller'] = true;
 $config['development']['export_path'] = 'dev_output';
+$config['development']['fullJobLogging'] = true;
+$config['debug'] = true;

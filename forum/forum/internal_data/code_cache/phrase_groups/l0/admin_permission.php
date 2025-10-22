@@ -5,6 +5,7 @@ return array (
   'admin_permission.advertising' => 'Manage advertising',
   'admin_permission.articleManagementSystem' => 'Manage Article Management System',
   'admin_permission.attachment' => 'Manage attached files',
+  'admin_permission.audapi_authentication' => '[Audentio] API: Manage authentication',
   'admin_permission.ban' => 'Manage bans',
   'admin_permission.bbCodeSmilie' => 'Manage BB codes and smilies',
   'admin_permission.checksAndTests' => 'Perform checks and tests',

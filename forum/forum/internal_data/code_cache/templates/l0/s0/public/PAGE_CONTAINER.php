@@ -1,5 +1,5 @@
 <?php
-// FROM HASH: 4f141fca0368bd784d6f151ca986f24c
+// FROM HASH: e1ba3afc1b93076d0e458b7a14ef3eb1
 return array(
 'macros' => array('nav_entry' => array(
 'arguments' => function($__templater, array $__vars) { return array(
@@ -1399,16 +1399,31 @@ return array(
 			';
 	$__compilerTemp14 = '';
 	$__compilerTemp14 .= '
+						' . $__templater->func('copyright') . '
+						' . '' . '
+					';
+	if (strlen(trim($__compilerTemp14)) > 0) {
+		$__finalCompiled .= '
+				<div class="p-footer-copyright">
+					' . $__compilerTemp14 . '
+				</div>
+			';
+	}
+	$__finalCompiled .= '
+
+			';
+	$__compilerTemp15 = '';
+	$__compilerTemp15 .= '
 						' . $__templater->callMacro(null, 'debug_macros::debug', array(
 		'controller' => $__vars['controller'],
 		'action' => $__vars['actionMethod'],
 		'template' => $__vars['template'],
 	), $__vars) . '
 					';
-	if (strlen(trim($__compilerTemp14)) > 0) {
+	if (strlen(trim($__compilerTemp15)) > 0) {
 		$__finalCompiled .= '
 				<div class="p-footer-debug">
-					' . $__compilerTemp14 . '
+					' . $__compilerTemp15 . '
 				</div>
 			';
 	}

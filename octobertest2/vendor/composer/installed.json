@@ -5717,6 +5717,61 @@
             "install-path": "../phpunit/phpunit"
         },
         {
+            "name": "pragmarx/google2fa",
+            "version": "v8.0.3",
+            "version_normalized": "8.0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/antonioribeiro/google2fa.git",
+                "reference": "6f8d87ebd5afbf7790bde1ffc7579c7c705e0fad"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/antonioribeiro/google2fa/zipball/6f8d87ebd5afbf7790bde1ffc7579c7c705e0fad",
+                "reference": "6f8d87ebd5afbf7790bde1ffc7579c7c705e0fad",
+                "shasum": ""
+            },
+            "require": {
+                "paragonie/constant_time_encoding": "^1.0|^2.0|^3.0",
+                "php": "^7.1|^8.0"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^1.9",
+                "phpunit/phpunit": "^7.5.15|^8.5|^9.0"
+            },
+            "time": "2024-09-05T11:56:40+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "PragmaRX\\Google2FA\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Antonio Carlos Ribeiro",
+                    "email": "acr@antoniocarlosribeiro.com",
+                    "role": "Creator & Designer"
+                }
+            ],
+            "description": "A One Time Password Authentication package, compatible with Google Authenticator.",
+            "keywords": [
+                "2fa",
+                "Authentication",
+                "Two Factor Authentication",
+                "google2fa"
+            ],
+            "support": {
+                "issues": "https://github.com/antonioribeiro/google2fa/issues",
+                "source": "https://github.com/antonioribeiro/google2fa/tree/v8.0.3"
+            },
+            "install-path": "../pragmarx/google2fa"
+        },
+        {
             "name": "psr/cache",
             "version": "3.0.0",
             "version_normalized": "3.0.0.0",
@@ -6286,6 +6341,336 @@
                 "source": "https://github.com/bobthecow/psysh/tree/v0.12.13"
             },
             "install-path": "../psy/psysh"
+        },
+        {
+            "name": "rainlab/blog-plugin",
+            "version": "v1.7.1",
+            "version_normalized": "1.7.1.0",
+            "dist": {
+                "type": "zip",
+                "url": "https://gateway.octobercms.com/composer/dist/rainlab/blog-plugin/rainlab-blog-plugin-e635f52d2b389bf6b9bcc2e5711bf399614f5a09-zip-84e71d.zip",
+                "reference": "e635f52d2b389bf6b9bcc2e5711bf399614f5a09",
+                "shasum": "5f93f78fede3a88f8491c69f9216b303bea5f58d"
+            },
+            "require": {
+                "composer/installers": "~1.0",
+                "php": ">=7.0"
+            },
+            "time": "2024-09-19T05:39:28+00:00",
+            "type": "october-plugin",
+            "installation-source": "dist",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexey Bobkov",
+                    "email": "aleksey.bobkov@gmail.com",
+                    "role": "Co-founder"
+                },
+                {
+                    "name": "Samuel Georges",
+                    "email": "daftspunky@gmail.com",
+                    "role": "Co-founder"
+                }
+            ],
+            "description": "Blog plugin for October CMS",
+            "homepage": "https://octobercms.com/plugin/rainlab-blog",
+            "keywords": [
+                "blog",
+                "october",
+                "octobercms"
+            ],
+            "support": {
+                "source": "https://github.com/rainlab/blog-plugin/tree/v1.7.1",
+                "issues": "https://github.com/rainlab/blog-plugin/issues"
+            },
+            "install-path": "../../plugins/rainlab/blog"
+        },
+        {
+            "name": "rainlab/builder-plugin",
+            "version": "v3.0.1",
+            "version_normalized": "3.0.1.0",
+            "dist": {
+                "type": "zip",
+                "url": "https://gateway.octobercms.com/composer/dist/rainlab/builder-plugin/rainlab-builder-plugin-a7ab83a6c520edc7ed6ef9b9dbf6268d19855113-zip-e402b3.zip",
+                "reference": "a7ab83a6c520edc7ed6ef9b9dbf6268d19855113",
+                "shasum": "88439d148e36947ca80aedec114c3f7a679c93da"
+            },
+            "require": {
+                "composer/installers": "~1.0",
+                "october/rain": ">=3.0",
+                "php": "^8.0.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "time": "2025-07-26T04:47:47+00:00",
+            "type": "october-plugin",
+            "installation-source": "dist",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexey Bobkov",
+                    "email": "aleksey.bobkov@gmail.com",
+                    "role": "Co-founder"
+                },
+                {
+                    "name": "Samuel Georges",
+                    "email": "daftspunky@gmail.com",
+                    "role": "Co-founder"
+                }
+            ],
+            "description": "Builder plugin for October CMS",
+            "homepage": "https://octobercms.com/plugin/rainlab-builder",
+            "keywords": [
+                "builder",
+                "october",
+                "octobercms"
+            ],
+            "support": {
+                "source": "https://github.com/rainlab/builder-plugin/tree/v3.0.1",
+                "issues": "https://github.com/rainlab/builder-plugin/issues"
+            },
+            "install-path": "../../plugins/rainlab/builder"
+        },
+        {
+            "name": "rainlab/location-plugin",
+            "version": "v2.0.1",
+            "version_normalized": "2.0.1.0",
+            "dist": {
+                "type": "zip",
+                "url": "https://gateway.octobercms.com/composer/dist/rainlab/location-plugin/rainlab-location-plugin-907f7eaeaaffddf0ee634da05d8cb2eda7a72244-zip-00fc6c.zip",
+                "reference": "907f7eaeaaffddf0ee634da05d8cb2eda7a72244",
+                "shasum": "8e2704522975552dbdb193b886b23694dbff5f38"
+            },
+            "require": {
+                "composer/installers": "~1.0",
+                "php": "^8.0.2"
+            },
+            "time": "2025-06-28T07:30:24+00:00",
+            "type": "october-plugin",
+            "installation-source": "dist",
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Alexey Bobkov",
+                    "email": "aleksey.bobkov@gmail.com",
+                    "role": "Co-founder"
+                },
+                {
+                    "name": "Samuel Georges",
+                    "email": "daftspunky@gmail.com",
+                    "role": "Co-founder"
+                }
+            ],
+            "description": "Location plugin for October CMS",
+            "homepage": "https://octobercms.com/plugin/rainlab-location",
+            "keywords": [
+                "location",
+                "october",
+                "octobercms"
+            ],
+            "install-path": "../../plugins/rainlab/location"
+        },
+        {
+            "name": "rainlab/pages-plugin",
+            "version": "v2.2.0",
+            "version_normalized": "2.2.0.0",
+            "dist": {
+                "type": "zip",
+                "url": "https://gateway.octobercms.com/composer/dist/rainlab/pages-plugin/rainlab-pages-plugin-4341db2cf36cc93ac4855e71226cc0215bb5c688-zip-2d1bff.zip",
+                "reference": "4341db2cf36cc93ac4855e71226cc0215bb5c688",
+                "shasum": "4a6c8471e5abc3566d53c084928a962074fb7f66"
+            },
+            "require": {
+                "composer/installers": "~1.0",
+                "october/rain": ">=3.4",
+                "php": "^8.0.2"
+            },
+            "time": "2025-05-14T22:22:41+00:00",
+            "type": "october-plugin",
+            "installation-source": "dist",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexey Bobkov",
+                    "email": "aleksey.bobkov@gmail.com",
+                    "role": "Co-founder"
+                },
+                {
+                    "name": "Samuel Georges",
+                    "email": "daftspunky@gmail.com",
+                    "role": "Co-founder"
+                }
+            ],
+            "description": "Pages plugin for October CMS",
+            "homepage": "https://octobercms.com/plugin/rainlab-pages",
+            "keywords": [
+                "october",
+                "octobercms",
+                "pages"
+            ],
+            "support": {
+                "source": "https://github.com/rainlab/pages-plugin/tree/v2.2.0",
+                "issues": "https://github.com/rainlab/pages-plugin/issues"
+            },
+            "install-path": "../../plugins/rainlab/pages"
+        },
+        {
+            "name": "rainlab/translate-plugin",
+            "version": "v2.2.11",
+            "version_normalized": "2.2.11.0",
+            "dist": {
+                "type": "zip",
+                "url": "https://gateway.octobercms.com/composer/dist/rainlab/translate-plugin/rainlab-translate-plugin-6e490feb3540d68696b3bf14b5fcb8cf04dbc08a-zip-d01399.zip",
+                "reference": "6e490feb3540d68696b3bf14b5fcb8cf04dbc08a",
+                "shasum": "37bc40b6547c895ec5ce20d9036f05c87acaac8f"
+            },
+            "require": {
+                "composer/installers": "~1.0",
+                "october/rain": ">=3.1",
+                "php": ">=8.0.2"
+            },
+            "time": "2025-02-16T00:36:32+00:00",
+            "type": "october-plugin",
+            "installation-source": "dist",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexey Bobkov",
+                    "email": "aleksey.bobkov@gmail.com",
+                    "role": "Co-founder"
+                },
+                {
+                    "name": "Samuel Georges",
+                    "email": "daftspunky@gmail.com",
+                    "role": "Co-founder"
+                }
+            ],
+            "description": "Translate plugin for October CMS",
+            "homepage": "https://octobercms.com/plugin/rainlab-translate",
+            "keywords": [
+                "october",
+                "octobercms",
+                "translate"
+            ],
+            "support": {
+                "source": "https://github.com/rainlab/translate-plugin/tree/v2.2.11",
+                "issues": "https://github.com/rainlab/translate-plugin/issues"
+            },
+            "install-path": "../../plugins/rainlab/translate"
+        },
+        {
+            "name": "rainlab/user-plugin",
+            "version": "v3.2.2",
+            "version_normalized": "3.2.2.0",
+            "dist": {
+                "type": "zip",
+                "url": "https://gateway.octobercms.com/composer/dist/rainlab/user-plugin/rainlab-user-plugin-ce8ef1c1abac27e20da0f6a278da6dc1385a3018-zip-4b5092.zip",
+                "reference": "ce8ef1c1abac27e20da0f6a278da6dc1385a3018",
+                "shasum": "bd6f68585b6957bcaa3344135954982f261816b4"
+            },
+            "require": {
+                "bacon/bacon-qr-code": "^2.0",
+                "composer/installers": "~1.0",
+                "firebase/php-jwt": "^6.4",
+                "mobiledetect/mobiledetectlib": "^4.8",
+                "october/rain": ">=3.0",
+                "php": "^8.0.2",
+                "pragmarx/google2fa": "^8.0"
+            },
+            "time": "2025-06-24T11:24:43+00:00",
+            "type": "october-plugin",
+            "installation-source": "dist",
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Alexey Bobkov",
+                    "email": "aleksey.bobkov@gmail.com",
+                    "role": "Co-founder"
+                },
+                {
+                    "name": "Samuel Georges",
+                    "email": "daftspunky@gmail.com",
+                    "role": "Co-founder"
+                }
+            ],
+            "description": "User plugin for October CMS",
+            "homepage": "https://octobercms.com/plugin/rainlab-user",
+            "keywords": [
+                "october",
+                "octobercms",
+                "user"
+            ],
+            "support": {
+                "source": "https://github.com/rainlab/user-plugin/tree/v3.2.2",
+                "issues": "https://github.com/rainlab/user-plugin/issues"
+            },
+            "install-path": "../../plugins/rainlab/user"
+        },
+        {
+            "name": "rainlab/userplus-plugin",
+            "version": "v2.0.2",
+            "version_normalized": "2.0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rainlab/userplus-plugin.git",
+                "reference": "ad750ee970a5030f1a1c4fb5883997ef1586c11d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rainlab/userplus-plugin/zipball/ad750ee970a5030f1a1c4fb5883997ef1586c11d",
+                "reference": "ad750ee970a5030f1a1c4fb5883997ef1586c11d",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "~1.0",
+                "php": "^8.0.2"
+            },
+            "time": "2024-08-12T23:49:55+00:00",
+            "type": "october-plugin",
+            "installation-source": "dist",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Alexey Bobkov",
+                    "email": "aleksey.bobkov@gmail.com",
+                    "role": "Co-founder"
+                },
+                {
+                    "name": "Samuel Georges",
+                    "email": "daftspunky@gmail.com",
+                    "role": "Co-founder"
+                }
+            ],
+            "description": "User plus plugin for October CMS",
+            "homepage": "https://octobercms.com/plugin/rainlab-userplus",
+            "keywords": [
+                "blog",
+                "october",
+                "octobercms",
+                "user",
+                "userplus"
+            ],
+            "support": {
+                "issues": "https://github.com/rainlab/userplus-plugin/issues",
+                "source": "https://github.com/rainlab/userplus-plugin/tree/v2.0.2"
+            },
+            "install-path": "../../plugins/rainlab/userplus"
         },
         {
             "name": "ralouphie/getallheaders",

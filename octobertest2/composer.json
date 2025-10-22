@@ -30,7 +30,14 @@
         "bacon/bacon-qr-code": "2.0.8",
         "composer/installers": "1.12.0",
         "dasprid/enum": "1.0.7",
-        "mobiledetect/mobiledetectlib": "4.8.09"
+        "mobiledetect/mobiledetectlib": "4.8.09",
+        "rainlab/user-plugin": "^3.2",
+        "rainlab/blog-plugin": "^1.7",
+        "rainlab/builder-plugin": "^3.0",
+        "rainlab/pages-plugin": "^2.2",
+        "rainlab/userplus-plugin": "^2.0",
+        "rainlab/location-plugin": "^2.0",
+        "rainlab/translate-plugin": "^2.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.5|^9.0",

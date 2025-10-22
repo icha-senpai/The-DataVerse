@@ -6,129 +6,110 @@ use XF\Util\File;
 
 class ComposerAutoload
 {
-	/**
-	 * @var App
-	 */
-	protected $app;
+    /**
+     * @var App
+     */
+    protected $app;
 
-	protected $pathPrefix;
+    protected $pathPrefix;
 
-	protected $checkPaths = true;
+    protected $checkPaths = true;
 
-	public function __construct(App $app, $pathPrefix)
-	{
-		$this->app = $app;
-		$this->pathPrefix = rtrim($pathPrefix, '\/') . \XF::$DS;
-	}
+    public function __construct(App $app, $pathPrefix)
+    {
+        $this->app = $app;
+        $this->pathPrefix = rtrim($pathPrefix, '\/') . \XF::$DS;
+    }
 
-	public function checkPaths(bool $check)
-	{
-		$this->checkPaths = $check;
-	}
+    public function checkPaths(bool $check)
+    {
+        $this->checkPaths = $check;
+    }
 
-	public function autoloadAll($prepend = false)
-	{
-		$this->autoloadNamespaces($prepend);
-		$this->autoloadPsr4($prepend);
-		$this->autoloadClassmap();
-		$this->autoloadFiles();
-	}
+    public function autoloadAll($prepend = false)
+    {
+        $this->autoloadNamespaces($prepend);
+        $this->autoloadPsr4($prepend);
+        $this->autoloadClassmap();
+        $this->autoloadFiles();
+    }
 
-	public function autoloadNamespaces($prepend = false)
-	{
-		$namespaces = $this->pathPrefix . 'autoload_namespaces.php';
+    public function autoloadNamespaces($prepend = false)
+    {
+        $namespaces = $this->pathPrefix . 'autoload_namespaces.php';
 
-		if ($this->checkPaths && !file_exists($namespaces))
-		{
-			throw new \InvalidArgumentException(
-				'Missing autoload_namespaces.php at ' . $this->getPathForError($namespaces)
-			);
-		}
-		else
-		{
-			$map = require $namespaces;
+        if (!file_exists($namespaces)) {
+            \XF::logError("[ComposerAutoload] Skipped missing namespaces file: {$namespaces}");
+            return;
+        }
 
-			foreach ($map AS $namespace => $path)
-			{
-				\XF::$autoLoader->add($namespace, $path, $prepend);
-			}
-		}
-	}
+        $map = require $namespaces;
+        if (is_array($map)) {
+            foreach ($map as $namespace => $path) {
+                \XF::$autoLoader->add($namespace, $path, $prepend);
+            }
+        }
+    }
 
-	public function autoloadPsr4($prepend = false)
-	{
-		$psr4 = $this->pathPrefix . 'autoload_psr4.php';
+    public function autoloadPsr4($prepend = false)
+    {
+        $psr4 = $this->pathPrefix . 'autoload_psr4.php';
 
-		if ($this->checkPaths && !file_exists($psr4))
-		{
-			throw new \InvalidArgumentException(
-				'Missing autoload_psr4.php at ' . $this->getPathForError($psr4)
-			);
-		}
-		else
-		{
-			$map = require $psr4;
+        if (!file_exists($psr4)) {
+            \XF::logError("[ComposerAutoload] Skipped missing PSR4 file: {$psr4}");
+            return;
+        }
 
-			foreach ($map AS $namespace => $path)
-			{
-				\XF::$autoLoader->addPsr4($namespace, $path, $prepend);
-			}
-		}
-	}
+        $map = require $psr4;
+        if (is_array($map)) {
+            foreach ($map as $namespace => $path) {
+                \XF::$autoLoader->addPsr4($namespace, $path, $prepend);
+            }
+        }
+    }
 
-	public function autoloadClassmap()
-	{
-		$classmap = $this->pathPrefix . 'autoload_classmap.php';
+    public function autoloadClassmap()
+    {
+        $classmap = $this->pathPrefix . 'autoload_classmap.php';
 
-		if ($this->checkPaths && !file_exists($classmap))
-		{
-			throw new \InvalidArgumentException(
-				'Missing autoload_classmap.php at ' . $this->getPathForError($classmap)
-			);
-		}
-		else
-		{
-			$map = require $classmap;
+        if (!file_exists($classmap)) {
+            \XF::logError("[ComposerAutoload] Skipped missing classmap file: {$classmap}");
+            return;
+        }
 
-			if ($map)
-			{
-				\XF::$autoLoader->addClassMap($map);
-			}
-		}
-	}
+        $map = require $classmap;
+        if (is_array($map) && $map) {
+            \XF::$autoLoader->addClassMap($map);
+        }
+    }
 
-	public function autoloadFiles()
-	{
-		$files = $this->pathPrefix . 'autoload_files.php';
+    public function autoloadFiles()
+    {
+        $files = $this->pathPrefix . 'autoload_files.php';
 
-		if ($this->checkPaths)
-		{
-			$exists = file_exists($files);
-		}
-		else
-		{
-			$exists = true;
-		}
+        if (!file_exists($files)) {
+            \XF::logError("[ComposerAutoload] Skipped missing files autoloader: {$files}");
+            return;
+        }
 
-		// note that autoload_files.php is only generated if there is actually a 'files' directive somewhere in the dependency chain
-		if ($exists)
-		{
-			$includeFiles = require $files;
+        $includeFiles = require $files;
 
-			foreach ($includeFiles AS $fileIdentifier => $file)
-			{
-				if (empty($GLOBALS['__composer_autoload_files'][$fileIdentifier]))
-				{
-					require $file;
+        if (is_array($includeFiles)) {
+            foreach ($includeFiles as $fileIdentifier => $file) {
+                if (empty($GLOBALS['__composer_autoload_files'][$fileIdentifier])) {
+                    if (file_exists($file)) {
+                        require $file;
+                        $GLOBALS['__composer_autoload_files'][$fileIdentifier] = true;
+                    } else {
+                        \XF::logError("[ComposerAutoload] Missing autoload include file: {$file}");
+                    }
+                }
+            }
+        }
+    }
 
-					$GLOBALS['__composer_autoload_files'][$fileIdentifier] = true;
-				}
-			}
-		}
-	}
-
-	protected function getPathForError($path)
-	{
-		return File::stripRootPathPrefix($path);
-	}
+    protected function getPathForError($path)
+    {
+        return File::stripRootPathPrefix($path);
+    }
 }

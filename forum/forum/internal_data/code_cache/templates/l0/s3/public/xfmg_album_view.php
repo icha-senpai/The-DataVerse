@@ -11,13 +11,13 @@ return array(
 	$__finalCompiled .= '
 	<div class="block">
 		<div class="block-container">
-			<h3 class="block-minorHeader">' . 'xfmg_album_information' . '</h3>
+			<h3 class="block-minorHeader">' . 'Album information' . '</h3>
 			<div class="block-body block-row">
 				';
 	if ($__vars['album']['Category']) {
 		$__finalCompiled .= '
 					<dl class="pairs pairs--justified">
-						<dt>' . 'xfmg_category' . '</dt>
+						<dt>' . 'Category' . '</dt>
 						<dd><a href="' . $__templater->func('link', array('media/categories', $__vars['album']['Category'], ), true) . '">' . $__templater->escape($__vars['album']['Category']['title']) . '</a></dd>
 					</dl>
 				';
@@ -25,30 +25,30 @@ return array(
 	$__finalCompiled .= '
 
 				<dl class="pairs pairs--justified">
-					<dt>' . 'xfmg_album_owner' . '</dt>
+					<dt>' . 'Album owner' . '</dt>
 					<dd>' . $__templater->func('username_link', array($__vars['album']['User'], false, array(
 		'defaultname' => $__vars['album']['username'],
 	))) . '</dd>
 				</dl>
 
 				<dl class="pairs pairs--justified">
-					<dt>' . 'xfmg_date_created' . '</dt>
+					<dt>' . 'Date created' . '</dt>
 					<dd>' . $__templater->func('date_dynamic', array($__vars['album']['create_date'], array(
 	))) . '</dd>
 				</dl>
 
 				<dl class="pairs pairs--justified">
-					<dt>' . 'xfmg_item_count' . '</dt>
+					<dt>' . 'Item count' . '</dt>
 					<dd>' . $__templater->filter($__vars['album']['media_count'], array(array('number', array()),), true) . '</dd>
 				</dl>
 
 				<dl class="pairs pairs--justified">
-					<dt>' . 'xfmg_view_count' . '</dt>
+					<dt>' . 'View count' . '</dt>
 					<dd>' . $__templater->filter($__vars['album']['view_count'], array(array('number', array()),), true) . '</dd>
 				</dl>
 
 				<dl class="pairs pairs--justified">
-					<dt>' . 'xfmg_comment_count' . '</dt>
+					<dt>' . 'Comment count' . '</dt>
 					<dd>' . $__templater->filter($__vars['album']['comment_count'], array(array('number', array()),), true) . '</dd>
 				</dl>
 
@@ -84,7 +84,7 @@ return array(
 		$__finalCompiled .= '
 		<div class="block">
 		<div class="block-container">
-			<h3 class="block-minorHeader">' . 'xfmg_album_privacy' . '</h3>
+			<h3 class="block-minorHeader">' . 'Album privacy' . '</h3>
 			<div class="block-body">
 				<div class="block-row">
 					<div class="contentRow">
@@ -98,7 +98,7 @@ return array(
 
 							<div class="contentRow-muted">
 								<dl class="pairs pairs--justified fauxBlockLink">
-									<dt>' . 'xfmg_media_items' . '</dt>
+									<dt>' . 'Media items' . '</dt>
 									<dd>
 										<a href="' . $__templater->func('link', array('media/users', $__vars['album']['User'], ), true) . '" class="fauxBlockLink-blockLink u-concealed">
 											' . $__templater->filter($__vars['album']['User']['xfmg_media_count'], array(array('number', array()),), true) . '
@@ -106,7 +106,7 @@ return array(
 									</dd>
 								</dl>
 								<dl class="pairs pairs--justified fauxBlockLink">
-									<dt>' . 'xfmg_albums' . '</dt>
+									<dt>' . 'Albums' . '</dt>
 									<dd>
 										<a href="' . $__templater->func('link', array('media/albums/users', $__vars['album']['User'], ), true) . '" class="fauxBlockLink-blockLink u-concealed">
 											' . $__templater->filter($__vars['album']['User']['xfmg_album_count'], array(array('number', array()),), true) . '
@@ -119,7 +119,7 @@ return array(
 				</div>
 				<div class="block-row">
 					<dl class="pairs pairs--justified">
-						<dt>' . 'xfmg_can_view_media_items' . '</dt>
+						<dt>' . 'Can view media items' . '</dt>
 						<dd>' . $__templater->escape($__templater->method($__vars['album'], 'getPrivacyPhrase', array($__vars['album']['view_privacy'], ))) . '</dd>
 					</dl>
 					';
@@ -143,7 +143,7 @@ return array(
 				</div>
 				<div class="block-row">
 					<dl class="pairs pairs--justified">
-						<dt>' . 'xfmg_can_add_media_items' . '</dt>
+						<dt>' . 'Can add media items' . '</dt>
 						<dd>' . $__templater->escape($__templater->method($__vars['album'], 'getPrivacyPhrase', array($__vars['album']['add_privacy'], ))) . '</dd>
 					</dl>
 					';
@@ -171,7 +171,7 @@ return array(
 			$__finalCompiled .= '
 				<div class="block-footer">
 					<span class="block-footer-controls">
-						' . $__templater->button('xfmg_change_privacy', array(
+						' . $__templater->button('Change privacy', array(
 				'href' => $__templater->func('link', array('media/albums/change-privacy', $__vars['album'], ), false),
 				'class' => 'button--small button--link',
 				'overlay' => 'true',
@@ -211,7 +211,7 @@ return array(
 							';
 	if (strlen(trim($__compilerTemp2)) > 0) {
 		$__compilerTemp1 .= '
-						<h3 class="block-minorHeader">' . 'xfmg_share_this_album' . '</h3>
+						<h3 class="block-minorHeader">' . 'Share this album' . '</h3>
 						<div class="block-body block-row block-row--separated">
 							' . $__compilerTemp2 . '
 						</div>
@@ -225,7 +225,7 @@ return array(
 	if ($__vars['album']['thumbnail_date']) {
 		$__compilerTemp3 .= '
 									' . $__templater->callMacro(null, 'share_page_macros::share_clipboard_input', array(
-			'label' => 'xfmg_copy_url_bb_code_with_thumbnail',
+			'label' => 'Copy URL BB code with thumbnail',
 			'text' => '[URL="' . $__templater->func('link', array('canonical:media/albums', $__vars['album'], ), false) . '"][IMG]' . $__templater->method($__vars['album'], 'getThumbnailUrl', array(true, )) . '[/IMG][/URL]',
 		), $__vars) . '
 								';
@@ -233,7 +233,7 @@ return array(
 	$__compilerTemp3 .= '
 
 								' . $__templater->callMacro(null, 'share_page_macros::share_clipboard_input', array(
-		'label' => 'xfmg_copy_gallery_bb_code',
+		'label' => 'Copy GALLERY BB code',
 		'text' => '[GALLERY=album, ' . $__vars['album']['album_id'] . '][/GALLERY]',
 	), $__vars) . '
 							';
@@ -474,7 +474,7 @@ return array(
 		$__compilerTemp5 .= '
 									' . $__templater->button('
 
-										' . 'xfmg_mark_viewed' . '
+										' . 'Mark viewed' . '
 									', array(
 			'href' => $__templater->func('link', array('media/albums/mark-viewed', $__vars['album'], array('date' => $__vars['xf']['time'], ), ), false),
 			'class' => 'button--link',
@@ -526,21 +526,21 @@ return array(
 													';
 	if ($__templater->method($__vars['album'], 'canEdit', array())) {
 		$__compilerTemp7 .= '
-														<a href="' . $__templater->func('link', array('media/albums/edit', $__vars['album'], ), true) . '" data-xf-click="overlay" class="menu-linkRow">' . 'xfmg_edit_album' . '</a>
+														<a href="' . $__templater->func('link', array('media/albums/edit', $__vars['album'], ), true) . '" data-xf-click="overlay" class="menu-linkRow">' . 'Edit album' . '</a>
 													';
 	}
 	$__compilerTemp7 .= '
 													';
 	if ($__templater->method($__vars['album'], 'canMove', array())) {
 		$__compilerTemp7 .= '
-														<a href="' . $__templater->func('link', array('media/albums/move', $__vars['album'], ), true) . '" data-xf-click="overlay" class="menu-linkRow">' . 'xfmg_move_album' . '</a>
+														<a href="' . $__templater->func('link', array('media/albums/move', $__vars['album'], ), true) . '" data-xf-click="overlay" class="menu-linkRow">' . 'Move album' . '</a>
 													';
 	}
 	$__compilerTemp7 .= '
 													';
 	if ($__templater->method($__vars['album'], 'canDelete', array('soft', ))) {
 		$__compilerTemp7 .= '
-														<a href="' . $__templater->func('link', array('media/albums/delete', $__vars['album'], ), true) . '" data-xf-click="overlay" class="menu-linkRow">' . 'xfmg_delete_album' . '</a>
+														<a href="' . $__templater->func('link', array('media/albums/delete', $__vars['album'], ), true) . '" data-xf-click="overlay" class="menu-linkRow">' . 'Delete album' . '</a>
 													';
 	}
 	$__compilerTemp7 .= '
@@ -647,11 +647,11 @@ return array(
 			';
 	} else if ($__vars['filters']) {
 		$__finalCompiled .= '
-				<div class="block-row">' . 'xfmg_no_media_has_been_added_to_this_album_which_matches_your_filters' . '</div>
+				<div class="block-row">' . 'No media has been added to this album which matches your filters.' . '</div>
 			';
 	} else {
 		$__finalCompiled .= '
-				<div class="block-row">' . 'xfmg_no_media_has_been_added_to_this_album_yet' . '</div>
+				<div class="block-row">' . 'No media has been added to this album yet.' . '</div>
 			';
 	}
 	$__finalCompiled .= '
@@ -692,16 +692,16 @@ return array(
 						<div class="contentRow-lesser p-description">
 							<ul class="listInline listInline--bullet">
 								<li>' . $__templater->fontAwesome('fa-th', array(
-		'title' => $__templater->filter('xfmg_items', array(array('for_attr', array()),), false),
+		'title' => $__templater->filter('Items', array(array('for_attr', array()),), false),
 	)) . ' ' . $__templater->filter($__vars['album']['media_count'], array(array('number_short', array()),), true) . '</li>
 								<li>' . $__templater->fontAwesome('fa-user', array(
-		'title' => $__templater->filter('xfmg_album_owner', array(array('for_attr', array()),), false),
+		'title' => $__templater->filter('Album owner', array(array('for_attr', array()),), false),
 	)) . ' ' . $__templater->func('username_link', array($__vars['album']['User'], false, array(
 		'defaultname' => $__vars['album']['username'],
 		'class' => 'u-concealed',
 	))) . '</li>
 								<li>' . $__templater->fontAwesome('fa-clock', array(
-		'title' => $__templater->filter('xfmg_date_created', array(array('for_attr', array()),), false),
+		'title' => $__templater->filter('Date created', array(array('for_attr', array()),), false),
 	)) . ' ' . $__templater->func('date_dynamic', array($__vars['album']['create_date'], array(
 	))) . '</li>
 							</ul>

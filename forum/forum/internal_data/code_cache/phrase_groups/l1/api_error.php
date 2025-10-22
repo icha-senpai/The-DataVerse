@@ -7,6 +7,7 @@ return array (
   'api_error.attachment_key_type_wrong' => 'The provided attachment key does not have the expected content type.',
   'api_error.attachment_key_unknown' => 'The provided attachment key could not be found.',
   'api_error.attachment_key_user_wrong' => 'The provided attachment key does not have the expected user.',
+  'api_error.audapi_session_id_invalid' => 'Session ID is invalid.',
   'api_error.endpoint_not_found' => 'Requested endpoint cannot be found.',
   'api_error.missing_scope' => 'This request requires access to the following scope: {scope}',
   'api_error.no_api_key_in_request' => 'No API key was included in the request.',

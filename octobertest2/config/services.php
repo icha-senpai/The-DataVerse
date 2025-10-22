@@ -31,4 +31,11 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+
+    'xenforo' => [
+        'client_id' => env('XENFORO_CLIENT_ID'),
+        'client_secret' => env('XENFORO_CLIENT_SECRET'),
+        'redirect' => env('XENFORO_REDIRECT_URI'),
+        'base_url' => env('XENFORO_BASE_URL'),
+    ],
 ];
