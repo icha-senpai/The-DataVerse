@@ -1,0 +1,24 @@
+{
+    "legacy_addon_id": "",
+    "title": "[TH] Connected Account Providers",
+    "description": "Get your users onboarded faster with more connected account providers.",
+    "version_id": 1030070,
+    "version_string": "1.3.0",
+    "dev": "ThemeHouse",
+    "dev_url": "https://www.themehouse.com",
+    "faq_url": "",
+    "support_url": "https://www.themehouse.com/help",
+    "extra_urls": [],
+    "require": {
+        "XF": [
+            2030010,
+            "XenForo 2.3.0+"
+        ],
+        "php": [
+            "7.4.0",
+            "PHP 7.4.0+"
+        ]
+    },
+    "icon": "icon.png",
+    "composer_autoload": "vendor/composer"
+}

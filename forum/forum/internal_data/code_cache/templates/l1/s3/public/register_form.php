@@ -80,53 +80,56 @@ Before your content can be posted, please take a few moments to register a free 
 	$__finalCompiled .= '
 
 ';
-	$__compilerTemp2 = '';
-	if (($__templater->func('rand', array(0, 2, ), false) == 1)) {
-		$__compilerTemp2 .= '
+	if (!$__vars['xf']['options']['thconnectedaccountproviders_forceOauthRegistration']) {
+		$__finalCompiled .= '
+';
+		$__compilerTemp2 = '';
+		if (($__templater->func('rand', array(0, 2, ), false) == 1)) {
+			$__compilerTemp2 .= '
 				' . $__templater->formTextBoxRow(array(
-			'name' => $__templater->method($__vars['regForm'], 'getFieldName', array('email_hp', )),
-			'value' => '',
-			'type' => 'email',
-			'autocomplete' => 'off',
-			'maxlength' => $__templater->func('max_length', array($__vars['xf']['visitor'], 'email', ), false),
-		), array(
-			'rowclass' => 'formRow--limited',
-			'label' => 'Email',
-			'explain' => 'Please leave this field blank.',
-		)) . '
+				'name' => $__templater->method($__vars['regForm'], 'getFieldName', array('email_hp', )),
+				'value' => '',
+				'type' => 'email',
+				'autocomplete' => 'off',
+				'maxlength' => $__templater->func('max_length', array($__vars['xf']['visitor'], 'email', ), false),
+			), array(
+				'rowclass' => 'formRow--limited',
+				'label' => 'Email',
+				'explain' => 'Please leave this field blank.',
+			)) . '
 			';
-	}
-	$__compilerTemp3 = '';
-	if (($__templater->func('rand', array(0, 2, ), false) == 1)) {
-		$__compilerTemp3 .= '
+		}
+		$__compilerTemp3 = '';
+		if (($__templater->func('rand', array(0, 2, ), false) == 1)) {
+			$__compilerTemp3 .= '
 				' . $__templater->formTextBoxRow(array(
-			'name' => 'email',
-			'value' => '',
-			'type' => 'email',
-			'autocomplete' => 'off',
-			'maxlength' => $__templater->func('max_length', array($__vars['xf']['visitor'], 'email', ), false),
-		), array(
-			'rowclass' => 'formRow--limited',
-			'label' => 'Email',
-			'explain' => 'Please leave this field blank.',
-		)) . '
+				'name' => 'email',
+				'value' => '',
+				'type' => 'email',
+				'autocomplete' => 'off',
+				'maxlength' => $__templater->func('max_length', array($__vars['xf']['visitor'], 'email', ), false),
+			), array(
+				'rowclass' => 'formRow--limited',
+				'label' => 'Email',
+				'explain' => 'Please leave this field blank.',
+			)) . '
 			';
-	}
-	$__compilerTemp4 = '';
-	if (($__templater->func('rand', array(0, 2, ), false) == 1)) {
-		$__compilerTemp4 .= '
+		}
+		$__compilerTemp4 = '';
+		if (($__templater->func('rand', array(0, 2, ), false) == 1)) {
+			$__compilerTemp4 .= '
 				' . $__templater->formTextBoxRow(array(
-			'name' => 'password',
-			'type' => 'password',
-			'autocomplete' => 'off',
-		), array(
-			'rowclass' => 'formRow--limited',
-			'label' => 'Password',
-			'explain' => 'Please leave this field blank.',
-		)) . '
+				'name' => 'password',
+				'type' => 'password',
+				'autocomplete' => 'off',
+			), array(
+				'rowclass' => 'formRow--limited',
+				'label' => 'Password',
+				'explain' => 'Please leave this field blank.',
+			)) . '
 			';
-	}
-	$__finalCompiled .= $__templater->form('
+		}
+		$__finalCompiled .= $__templater->form('
 
 	<div class="block-container">
 		<div class="block-body">
@@ -134,28 +137,28 @@ Before your content can be posted, please take a few moments to register a free 
 			' . '
 
 			' . $__templater->callMacro(null, 'register_macros::username_row', array(
-		'fieldName' => $__templater->method($__vars['regForm'], 'getFieldName', array('username', )),
-		'value' => $__vars['fields']['username'],
-	), $__vars) . '
+			'fieldName' => $__templater->method($__vars['regForm'], 'getFieldName', array('username', )),
+			'value' => $__vars['fields']['username'],
+		), $__vars) . '
 			
 			' . $__templater->formTextBoxRow(array(
-		'name' => 'username',
-		'value' => '',
-		'autocomplete' => 'off',
-		'maxlength' => $__templater->func('max_length', array($__vars['xf']['visitor'], 'username', ), false),
-	), array(
-		'rowclass' => 'formRow--limited',
-		'label' => 'Username',
-		'explain' => 'Please leave this field blank.',
-	)) . '
+			'name' => 'username',
+			'value' => '',
+			'autocomplete' => 'off',
+			'maxlength' => $__templater->func('max_length', array($__vars['xf']['visitor'], 'username', ), false),
+		), array(
+			'rowclass' => 'formRow--limited',
+			'label' => 'Username',
+			'explain' => 'Please leave this field blank.',
+		)) . '
 
 			' . '
 			' . $__compilerTemp2 . '
 
 			' . $__templater->callMacro(null, 'register_macros::email_row', array(
-		'fieldName' => $__templater->method($__vars['regForm'], 'getFieldName', array('email', )),
-		'value' => $__vars['fields']['email'],
-	), $__vars) . '
+			'fieldName' => $__templater->method($__vars['regForm'], 'getFieldName', array('email', )),
+			'value' => $__vars['fields']['email'],
+		), $__vars) . '
 
 			' . '
 			' . $__compilerTemp3 . '
@@ -164,32 +167,32 @@ Before your content can be posted, please take a few moments to register a free 
 			' . $__compilerTemp4 . '
 
 			' . $__templater->formPasswordBoxRow(array(
-		'name' => $__templater->method($__vars['regForm'], 'getFieldName', array('password', )),
-		'autocomplete' => 'new-password',
-		'required' => 'required',
-		'checkstrength' => 'true',
-	), array(
-		'label' => 'Password',
-		'hint' => 'Required',
-	)) . '
+			'name' => $__templater->method($__vars['regForm'], 'getFieldName', array('password', )),
+			'autocomplete' => 'new-password',
+			'required' => 'required',
+			'checkstrength' => 'true',
+		), array(
+			'label' => 'Password',
+			'hint' => 'Required',
+		)) . '
 
 			' . $__templater->callMacro(null, 'register_macros::dob_row', array(), $__vars) . '
 
 			' . $__templater->callMacro(null, 'register_macros::location_row', array(
-		'value' => $__vars['fields']['location'],
-	), $__vars) . '
+			'value' => $__vars['fields']['location'],
+		), $__vars) . '
 
 			' . $__templater->callMacro(null, 'register_macros::custom_fields', array(), $__vars) . '
 
 			' . $__templater->formRowIfContent($__templater->func('captcha_options', array(array(
-		'label' => 'Verification',
-		'hint' => 'Required',
-		'context' => 'xf_register',
-	))), array(
-		'label' => 'Verification',
-		'hint' => 'Required',
-		'context' => 'xf_register',
-	)) . '
+			'label' => 'Verification',
+			'hint' => 'Required',
+			'context' => 'xf_register',
+		))), array(
+			'label' => 'Verification',
+			'hint' => 'Required',
+			'context' => 'xf_register',
+		)) . '
 
 			' . $__templater->callMacro(null, 'register_macros::email_choice_row', array(), $__vars) . '
 
@@ -199,17 +202,19 @@ Before your content can be posted, please take a few moments to register a free 
 	</div>
 
 	' . $__templater->formHiddenVal('reg_key', $__templater->method($__vars['regForm'], 'getUniqueKey', array()), array(
-	)) . '
+		)) . '
 	' . $__templater->formHiddenVal($__templater->method($__vars['regForm'], 'getFieldName', array('timezone', )), '', array(
-		'data-xf-init' => 'auto-timezone',
-	)) . '
+			'data-xf-init' => 'auto-timezone',
+		)) . '
 ', array(
-		'action' => $__templater->func('link', array('register/register', ), false),
-		'ajax' => 'true',
-		'class' => 'block',
-		'data-xf-init' => 'reg-form',
-		'data-timer' => $__vars['xf']['options']['registrationTimer'],
-	));
+			'action' => $__templater->func('link', array('register/register', ), false),
+			'ajax' => 'true',
+			'class' => 'block',
+			'data-xf-init' => 'reg-form',
+			'data-timer' => $__vars['xf']['options']['registrationTimer'],
+		)) . '
+';
+	}
 	return $__finalCompiled;
 }
 );

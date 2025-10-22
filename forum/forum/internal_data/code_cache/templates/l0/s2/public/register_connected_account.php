@@ -23,31 +23,8 @@ return array(
 
 ';
 	$__compilerTemp1 = '';
-	if ($__vars['providerData']['email']) {
+	if ($__vars['xf']['options']['thconnectedaccountproviders_enableConAccSect']) {
 		$__compilerTemp1 .= '
-						' . $__templater->formRow($__templater->filter($__vars['providerData']['email'], array(array('email_display', array()),), true), array(
-			'label' => 'Email',
-		)) . '
-					';
-	} else {
-		$__compilerTemp1 .= '
-						' . $__templater->callMacro(null, 'register_macros::email_row', array(), $__vars) . '
-					';
-	}
-	$__compilerTemp2 = '';
-	if (!$__vars['providerData']['dob']) {
-		$__compilerTemp2 .= '
-						' . $__templater->callMacro(null, 'register_macros::dob_row', array(), $__vars) . '
-					';
-	}
-	$__compilerTemp3 = '';
-	if (!$__vars['providerData']['location']) {
-		$__compilerTemp3 .= '
-						' . $__templater->callMacro(null, 'register_macros::location_row', array(), $__vars) . '
-					';
-	}
-	$__finalCompiled .= $__templater->form('
-	<div class="block-container">
 		<h2 class="block-tabHeader tabs" data-xf-init="tabs" role="tablist">
 			<a class="tabs-tab is-active" role="tab" tabindex="0" aria-controls="' . $__templater->func('unique_id', array('regCreate', ), true) . '">
 				' . 'Create new account' . '
@@ -56,6 +33,35 @@ return array(
 				' . 'Associate existing account' . '
 			</a>
 		</h2>
+';
+	}
+	$__compilerTemp2 = '';
+	if ($__vars['providerData']['email']) {
+		$__compilerTemp2 .= '
+						' . $__templater->formRow($__templater->filter($__vars['providerData']['email'], array(array('email_display', array()),), true), array(
+			'label' => 'Email',
+		)) . '
+					';
+	} else {
+		$__compilerTemp2 .= '
+						' . $__templater->callMacro(null, 'register_macros::email_row', array(), $__vars) . '
+					';
+	}
+	$__compilerTemp3 = '';
+	if (!$__vars['providerData']['dob']) {
+		$__compilerTemp3 .= '
+						' . $__templater->callMacro(null, 'register_macros::dob_row', array(), $__vars) . '
+					';
+	}
+	$__compilerTemp4 = '';
+	if (!$__vars['providerData']['location']) {
+		$__compilerTemp4 .= '
+						' . $__templater->callMacro(null, 'register_macros::location_row', array(), $__vars) . '
+					';
+	}
+	$__finalCompiled .= $__templater->form('
+	<div class="block-container">
+		' . $__compilerTemp1 . '
 
 		<ul class="tabPanes">
 			<li class="is-active"
@@ -65,13 +71,15 @@ return array(
 				id="' . $__templater->func('unique_id', array('regCreate', ), true) . '">
 
 				<div class="block-body">
-					' . $__templater->callMacro(null, 'register_macros::username_row', array(), $__vars) . '
-
-					' . $__compilerTemp1 . '
+					' . $__templater->callMacro(null, 'register_macros::username_row', array(
+		'value' => $__vars['providerData']['username'],
+	), $__vars) . '
 
 					' . $__compilerTemp2 . '
 
 					' . $__compilerTemp3 . '
+
+					' . $__compilerTemp4 . '
 
 					' . $__templater->callMacro(null, 'register_macros::custom_fields', array(), $__vars) . '
 

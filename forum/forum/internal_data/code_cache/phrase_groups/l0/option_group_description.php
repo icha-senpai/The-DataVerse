@@ -30,6 +30,7 @@ You may set a user into \'discouraged\' mode by editing their user profile, or d
   'option_group_description.stats' => '',
   'option_group_description.tagging' => 'Options that control how tags can be applied to content.',
   'option_group_description.th_uix' => 'Options in this group allow you to customize your UI.X experience.',
+  'option_group_description.thconnectedaccountproviders' => 'Options for the [TH] Connected Account Providers add-on.',
   'option_group_description.users' => '',
   'option_group_description.usersAndRegistration' => '',
   'option_group_description.xaAms' => 'Options that control the article management system add-on.',

@@ -7,6 +7,19 @@ return array(
 	$__templater->pageParams['pageTitle'] = $__templater->preEscaped('Connected account providers');
 	$__finalCompiled .= '
 
+';
+	$__templater->pageParams['pageAction'] = $__templater->preEscaped('
+	' . $__templater->button('
+		' . 'Sort' . '
+	', array(
+		'href' => $__templater->func('link', array('connected-accounts/th-cap-sort', ), false),
+		'icon' => 'sort',
+		'data-xf-click' => 'overlay',
+	), '', array(
+	)) . '
+');
+	$__finalCompiled .= '
+
 <div class="block">
 	<div class="block-outer">
 		' . $__templater->callMacro(null, 'filter_macros::quick_filter', array(
@@ -25,30 +38,42 @@ return array(
 			foreach ($__vars['activeProviders'] AS $__vars['provider']) {
 				$__compilerTemp1 .= '
 						';
-				$__compilerTemp2 = array();
+				$__compilerTemp2 = '';
+				if ($__templater->method($__vars['provider'], 'isThCapProvider', array())) {
+					$__compilerTemp2 .= '
+								<span class="label label--primary">' . '[ThemeHouse]' . '</span>
+							';
+				}
+				$__vars['providerTitle'] = $__templater->preEscaped('
+							' . $__compilerTemp2 . '
+							' . $__templater->escape($__vars['provider']['title']) . '
+						');
+				$__compilerTemp1 .= '
+						';
+				$__compilerTemp3 = array();
 				if ($__templater->method($__vars['provider'], 'canBeTested', array())) {
-					$__compilerTemp2[] = array(
+					$__compilerTemp3[] = array(
 						'href' => $__templater->func('link', array('connected-accounts/test', $__vars['provider'], ), false),
 						'overlay' => 'true',
 						'_type' => 'action',
 						'html' => 'Test provider',
 					);
 				} else {
-					$__compilerTemp2[] = array(
+					$__compilerTemp3[] = array(
 						'_type' => 'cell',
 						'html' => '',
 					);
 				}
-				$__compilerTemp2[] = array(
+				$__compilerTemp3[] = array(
 					'href' => $__templater->func('link', array('connected-accounts/deactivate', $__vars['provider'], ), false),
 					'tooltip' => 'Deactivate',
 					'_type' => 'delete',
 					'html' => '',
 				);
 				$__compilerTemp1 .= $__templater->dataRow(array(
-					'label' => $__templater->escape($__vars['provider']['title']),
+					'label' => $__templater->filter($__vars['providerTitle'], array(array('raw', array()),), true),
 					'href' => $__templater->func('link', array('connected-accounts/edit', $__vars['provider'], ), false),
-				), $__compilerTemp2) . '
+				), $__compilerTemp3) . '
 					';
 			}
 		}
@@ -78,12 +103,24 @@ return array(
 		$__finalCompiled .= '
 			<div class="block-body">
 				';
-		$__compilerTemp3 = '';
+		$__compilerTemp4 = '';
 		if ($__templater->isTraversable($__vars['inactiveProviders'])) {
 			foreach ($__vars['inactiveProviders'] AS $__vars['provider']) {
-				$__compilerTemp3 .= '
+				$__compilerTemp4 .= '
+						';
+				$__compilerTemp5 = '';
+				if ($__templater->method($__vars['provider'], 'isThCapProvider', array())) {
+					$__compilerTemp5 .= '
+								<span class="label label--primary">' . '[ThemeHouse]' . '</span>
+							';
+				}
+				$__vars['providerTitle'] = $__templater->preEscaped('
+							' . $__compilerTemp5 . '
+							' . $__templater->escape($__vars['provider']['title']) . '
+						');
+				$__compilerTemp4 .= '
 						' . $__templater->dataRow(array(
-					'label' => $__templater->escape($__vars['provider']['title']),
+					'label' => $__templater->filter($__vars['providerTitle'], array(array('raw', array()),), true),
 					'href' => $__templater->func('link', array('connected-accounts/edit', $__vars['provider'], ), false),
 				), array()) . '
 					';
@@ -97,7 +134,7 @@ return array(
 			'_type' => 'cell',
 			'html' => 'Inactive providers',
 		))) . '
-					' . $__compilerTemp3 . '
+					' . $__compilerTemp4 . '
 				', array(
 		)) . '
 			</div>

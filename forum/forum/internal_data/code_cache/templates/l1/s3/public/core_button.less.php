@@ -686,7 +686,7 @@ a.button // needed for specificity over a:link
 
 .block-outer-opposite .button {
 	.xf-uix_buttonSmall();
-}';
+}' . $__templater->includeTemplate('th_cap_provider_button.less', $__vars);
 	return $__finalCompiled;
 }
 );

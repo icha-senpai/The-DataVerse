@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<routes>
+  <route route_type="api" route_prefix="th-connected-account" sub_name="-" format=":+int&lt;user_id&gt;/" controller="ThemeHouse\ConnectedAccountProviders:ConnectedAccount"/>
+</routes>

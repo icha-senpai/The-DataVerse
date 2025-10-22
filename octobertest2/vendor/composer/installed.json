@@ -2477,17 +2477,17 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v12.34.0",
-            "version_normalized": "12.34.0.0",
+            "version": "v12.35.0",
+            "version_normalized": "12.35.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "f9ec5a5d88bc8c468f17b59f88e05c8ac3c8d687"
+                "reference": "9583ef9e405a71d5b8c04ff6efd05a7ef9a5baef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/f9ec5a5d88bc8c468f17b59f88e05c8ac3c8d687",
-                "reference": "f9ec5a5d88bc8c468f17b59f88e05c8ac3c8d687",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/9583ef9e405a71d5b8c04ff6efd05a7ef9a5baef",
+                "reference": "9583ef9e405a71d5b8c04ff6efd05a7ef9a5baef",
                 "shasum": ""
             },
             "require": {
@@ -2647,7 +2647,7 @@
                 "symfony/postmark-mailer": "Required to enable support for the Postmark mail transport (^7.2).",
                 "symfony/psr-http-message-bridge": "Required to use PSR-7 bridging features (^7.2)."
             },
-            "time": "2025-10-14T13:58:31+00:00",
+            "time": "2025-10-21T15:15:41+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -2822,6 +2822,81 @@
                 "source": "https://github.com/laravel/serializable-closure"
             },
             "install-path": "../laravel/serializable-closure"
+        },
+        {
+            "name": "laravel/socialite",
+            "version": "v5.23.0",
+            "version_normalized": "5.23.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/socialite.git",
+                "reference": "e9e0fc83b9d8d71c8385a5da20e5b95ca6234cf5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/socialite/zipball/e9e0fc83b9d8d71c8385a5da20e5b95ca6234cf5",
+                "reference": "e9e0fc83b9d8d71c8385a5da20e5b95ca6234cf5",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "firebase/php-jwt": "^6.4",
+                "guzzlehttp/guzzle": "^6.0|^7.0",
+                "illuminate/contracts": "^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0",
+                "illuminate/http": "^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0",
+                "illuminate/support": "^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0",
+                "league/oauth1-client": "^1.11",
+                "php": "^7.2|^8.0",
+                "phpseclib/phpseclib": "^3.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.0",
+                "orchestra/testbench": "^4.0|^5.0|^6.0|^7.0|^8.0|^9.0|^10.0",
+                "phpstan/phpstan": "^1.12.23",
+                "phpunit/phpunit": "^8.0|^9.3|^10.4|^11.5"
+            },
+            "time": "2025-07-23T14:16:08+00:00",
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "Socialite": "Laravel\\Socialite\\Facades\\Socialite"
+                    },
+                    "providers": [
+                        "Laravel\\Socialite\\SocialiteServiceProvider"
+                    ]
+                },
+                "branch-alias": {
+                    "dev-master": "5.x-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Socialite\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "Laravel wrapper around OAuth 1 & OAuth 2 libraries.",
+            "homepage": "https://laravel.com",
+            "keywords": [
+                "laravel",
+                "oauth"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel/socialite/issues",
+                "source": "https://github.com/laravel/socialite"
+            },
+            "install-path": "../laravel/socialite"
         },
         {
             "name": "laravel/tinker",
@@ -3183,17 +3258,17 @@
         },
         {
             "name": "league/flysystem",
-            "version": "3.30.0",
-            "version_normalized": "3.30.0.0",
+            "version": "3.30.1",
+            "version_normalized": "3.30.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "2203e3151755d874bb2943649dae1eb8533ac93e"
+                "reference": "c139fd65c1f796b926f4aec0df37f6caa959a8da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/2203e3151755d874bb2943649dae1eb8533ac93e",
-                "reference": "2203e3151755d874bb2943649dae1eb8533ac93e",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/c139fd65c1f796b926f4aec0df37f6caa959a8da",
+                "reference": "c139fd65c1f796b926f4aec0df37f6caa959a8da",
                 "shasum": ""
             },
             "require": {
@@ -3229,7 +3304,7 @@
                 "phpunit/phpunit": "^9.5.11|^10.0",
                 "sabre/dav": "^4.6.0"
             },
-            "time": "2025-06-25T13:29:59+00:00",
+            "time": "2025-10-20T15:35:26+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -3263,7 +3338,7 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/flysystem/issues",
-                "source": "https://github.com/thephpleague/flysystem/tree/3.30.0"
+                "source": "https://github.com/thephpleague/flysystem/tree/3.30.1"
             },
             "install-path": "../league/flysystem"
         },
@@ -3377,6 +3452,85 @@
                 }
             ],
             "install-path": "../league/mime-type-detection"
+        },
+        {
+            "name": "league/oauth1-client",
+            "version": "v1.11.0",
+            "version_normalized": "1.11.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/oauth1-client.git",
+                "reference": "f9c94b088837eb1aae1ad7c4f23eb65cc6993055"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/oauth1-client/zipball/f9c94b088837eb1aae1ad7c4f23eb65cc6993055",
+                "reference": "f9c94b088837eb1aae1ad7c4f23eb65cc6993055",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-openssl": "*",
+                "guzzlehttp/guzzle": "^6.0|^7.0",
+                "guzzlehttp/psr7": "^1.7|^2.0",
+                "php": ">=7.1||>=8.0"
+            },
+            "require-dev": {
+                "ext-simplexml": "*",
+                "friendsofphp/php-cs-fixer": "^2.17",
+                "mockery/mockery": "^1.3.3",
+                "phpstan/phpstan": "^0.12.42",
+                "phpunit/phpunit": "^7.5||9.5"
+            },
+            "suggest": {
+                "ext-simplexml": "For decoding XML-based responses."
+            },
+            "time": "2024-12-10T19:59:05+00:00",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev",
+                    "dev-develop": "2.0-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "League\\OAuth1\\Client\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Corlett",
+                    "email": "bencorlett@me.com",
+                    "homepage": "http://www.webcomm.com.au",
+                    "role": "Developer"
+                }
+            ],
+            "description": "OAuth 1.0 Client Library",
+            "keywords": [
+                "Authentication",
+                "SSO",
+                "authorization",
+                "bitbucket",
+                "identity",
+                "idp",
+                "oauth",
+                "oauth1",
+                "single sign on",
+                "trello",
+                "tumblr",
+                "twitter"
+            ],
+            "support": {
+                "issues": "https://github.com/thephpleague/oauth1-client/issues",
+                "source": "https://github.com/thephpleague/oauth1-client/tree/v1.11.0"
+            },
+            "install-path": "../league/oauth1-client"
         },
         {
             "name": "league/uri",
@@ -4202,17 +4356,17 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v5.6.1",
-            "version_normalized": "5.6.1.0",
+            "version": "v5.6.2",
+            "version_normalized": "5.6.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "f103601b29efebd7ff4a1ca7b3eeea9e3336a2a2"
+                "reference": "3a454ca033b9e06b63282ce19562e892747449bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/f103601b29efebd7ff4a1ca7b3eeea9e3336a2a2",
-                "reference": "f103601b29efebd7ff4a1ca7b3eeea9e3336a2a2",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/3a454ca033b9e06b63282ce19562e892747449bb",
+                "reference": "3a454ca033b9e06b63282ce19562e892747449bb",
                 "shasum": ""
             },
             "require": {
@@ -4225,7 +4379,7 @@
                 "ircmaxell/php-yacc": "^0.0.7",
                 "phpunit/phpunit": "^9.0"
             },
-            "time": "2025-08-13T20:13:15+00:00",
+            "time": "2025-10-21T19:32:17+00:00",
             "bin": [
                 "bin/php-parse"
             ],
@@ -4257,41 +4411,41 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v5.6.1"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v5.6.2"
             },
             "install-path": "../nikic/php-parser"
         },
         {
             "name": "nunomaduro/termwind",
-            "version": "v2.3.1",
-            "version_normalized": "2.3.1.0",
+            "version": "v2.3.2",
+            "version_normalized": "2.3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/termwind.git",
-                "reference": "dfa08f390e509967a15c22493dc0bac5733d9123"
+                "reference": "eb61920a53057a7debd718a5b89c2178032b52c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/termwind/zipball/dfa08f390e509967a15c22493dc0bac5733d9123",
-                "reference": "dfa08f390e509967a15c22493dc0bac5733d9123",
+                "url": "https://api.github.com/repos/nunomaduro/termwind/zipball/eb61920a53057a7debd718a5b89c2178032b52c0",
+                "reference": "eb61920a53057a7debd718a5b89c2178032b52c0",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
                 "php": "^8.2",
-                "symfony/console": "^7.2.6"
+                "symfony/console": "^7.3.4"
             },
             "require-dev": {
-                "illuminate/console": "^11.44.7",
-                "laravel/pint": "^1.22.0",
+                "illuminate/console": "^11.46.1",
+                "laravel/pint": "^1.25.1",
                 "mockery/mockery": "^1.6.12",
-                "pestphp/pest": "^2.36.0 || ^3.8.2",
-                "phpstan/phpstan": "^1.12.25",
+                "pestphp/pest": "^2.36.0 || ^3.8.4",
+                "phpstan/phpstan": "^1.12.32",
                 "phpstan/phpstan-strict-rules": "^1.6.2",
-                "symfony/var-dumper": "^7.2.6",
+                "symfony/var-dumper": "^7.3.4",
                 "thecodingmachine/phpstan-strict-rules": "^1.0.0"
             },
-            "time": "2025-05-08T08:14:37+00:00",
+            "time": "2025-10-18T11:10:27+00:00",
             "type": "library",
             "extra": {
                 "laravel": {
@@ -4333,7 +4487,7 @@
             ],
             "support": {
                 "issues": "https://github.com/nunomaduro/termwind/issues",
-                "source": "https://github.com/nunomaduro/termwind/tree/v2.3.1"
+                "source": "https://github.com/nunomaduro/termwind/tree/v2.3.2"
             },
             "funding": [
                 {
@@ -4350,48 +4504,6 @@
                 }
             ],
             "install-path": "../nunomaduro/termwind"
-        },
-        {
-            "name": "october/all",
-            "version": "v4.0.0",
-            "version_normalized": "4.0.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/octoberrain/all.git",
-                "reference": "111b62ad33028e80847fae09748f218955bfb288"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/octoberrain/all/zipball/111b62ad33028e80847fae09748f218955bfb288",
-                "reference": "111b62ad33028e80847fae09748f218955bfb288",
-                "shasum": ""
-            },
-            "require": {
-                "october/backend": "4.0.*",
-                "october/cms": "4.0.*",
-                "october/dashboard": "4.0.*",
-                "october/editor": "4.0.*",
-                "october/media": "4.0.*",
-                "october/system": "4.0.*",
-                "october/tailor": "4.0.*"
-            },
-            "time": "2025-06-14T05:23:27+00:00",
-            "type": "library",
-            "installation-source": "dist",
-            "notification-url": "https://packagist.org/downloads/",
-            "description": "All common modules for October CMS",
-            "homepage": "https://octobercms.com",
-            "keywords": [
-                "all",
-                "core",
-                "october",
-                "october cms"
-            ],
-            "support": {
-                "issues": "https://github.com/octoberrain/all/issues",
-                "source": "https://github.com/octoberrain/all/tree/v4.0.0"
-            },
-            "install-path": "../october/all"
         },
         {
             "name": "october/backend",
@@ -4789,6 +4901,59 @@
             "install-path": "../paragonie/constant_time_encoding"
         },
         {
+            "name": "paragonie/random_compat",
+            "version": "v9.99.100",
+            "version_normalized": "9.99.100.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paragonie/random_compat.git",
+                "reference": "996434e5492cb4c3edcb9168db6fbb1359ef965a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/996434e5492cb4c3edcb9168db6fbb1359ef965a",
+                "reference": "996434e5492cb4c3edcb9168db6fbb1359ef965a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">= 7"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*|5.*",
+                "vimeo/psalm": "^1"
+            },
+            "suggest": {
+                "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
+            },
+            "time": "2020-10-15T08:29:30+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paragon Initiative Enterprises",
+                    "email": "security@paragonie.com",
+                    "homepage": "https://paragonie.com"
+                }
+            ],
+            "description": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
+            "keywords": [
+                "csprng",
+                "polyfill",
+                "pseudorandom",
+                "random"
+            ],
+            "support": {
+                "email": "info@paragonie.com",
+                "issues": "https://github.com/paragonie/random_compat/issues",
+                "source": "https://github.com/paragonie/random_compat"
+            },
+            "install-path": "../paragonie/random_compat"
+        },
+        {
             "name": "phar-io/manifest",
             "version": "2.0.4",
             "version_normalized": "2.0.4.0",
@@ -4989,6 +5154,119 @@
                 }
             ],
             "install-path": "../phpoption/phpoption"
+        },
+        {
+            "name": "phpseclib/phpseclib",
+            "version": "3.0.47",
+            "version_normalized": "3.0.47.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpseclib/phpseclib.git",
+                "reference": "9d6ca36a6c2dd434765b1071b2644a1c683b385d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/9d6ca36a6c2dd434765b1071b2644a1c683b385d",
+                "reference": "9d6ca36a6c2dd434765b1071b2644a1c683b385d",
+                "shasum": ""
+            },
+            "require": {
+                "paragonie/constant_time_encoding": "^1|^2|^3",
+                "paragonie/random_compat": "^1.4|^2.0|^9.99.99",
+                "php": ">=5.6.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "suggest": {
+                "ext-dom": "Install the DOM extension to load XML formatted public keys.",
+                "ext-gmp": "Install the GMP (GNU Multiple Precision) extension in order to speed up arbitrary precision integer arithmetic operations.",
+                "ext-libsodium": "SSH2/SFTP can make use of some algorithms provided by the libsodium-php extension.",
+                "ext-mcrypt": "Install the Mcrypt extension in order to speed up a few other cryptographic operations.",
+                "ext-openssl": "Install the OpenSSL extension in order to speed up a wide variety of cryptographic operations."
+            },
+            "time": "2025-10-06T01:07:24+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "phpseclib/bootstrap.php"
+                ],
+                "psr-4": {
+                    "phpseclib3\\": "phpseclib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jim Wigginton",
+                    "email": "terrafrost@php.net",
+                    "role": "Lead Developer"
+                },
+                {
+                    "name": "Patrick Monnerat",
+                    "email": "pm@datasphere.ch",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Andreas Fischer",
+                    "email": "bantu@phpbb.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Hans-Jürgen Petrich",
+                    "email": "petrich@tronic-media.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Graham Campbell",
+                    "email": "graham@alt-three.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP Secure Communications Library - Pure-PHP implementations of RSA, AES, SSH2, SFTP, X.509 etc.",
+            "homepage": "http://phpseclib.sourceforge.net",
+            "keywords": [
+                "BigInteger",
+                "aes",
+                "asn.1",
+                "asn1",
+                "blowfish",
+                "crypto",
+                "cryptography",
+                "encryption",
+                "rsa",
+                "security",
+                "sftp",
+                "signature",
+                "signing",
+                "ssh",
+                "twofish",
+                "x.509",
+                "x509"
+            ],
+            "support": {
+                "issues": "https://github.com/phpseclib/phpseclib/issues",
+                "source": "https://github.com/phpseclib/phpseclib/tree/3.0.47"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/terrafrost",
+                    "type": "github"
+                },
+                {
+                    "url": "https://www.patreon.com/phpseclib",
+                    "type": "patreon"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/phpseclib/phpseclib",
+                    "type": "tidelift"
+                }
+            ],
+            "install-path": "../phpseclib/phpseclib"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -5437,61 +5715,6 @@
                 }
             ],
             "install-path": "../phpunit/phpunit"
-        },
-        {
-            "name": "pragmarx/google2fa",
-            "version": "v8.0.3",
-            "version_normalized": "8.0.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/antonioribeiro/google2fa.git",
-                "reference": "6f8d87ebd5afbf7790bde1ffc7579c7c705e0fad"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/antonioribeiro/google2fa/zipball/6f8d87ebd5afbf7790bde1ffc7579c7c705e0fad",
-                "reference": "6f8d87ebd5afbf7790bde1ffc7579c7c705e0fad",
-                "shasum": ""
-            },
-            "require": {
-                "paragonie/constant_time_encoding": "^1.0|^2.0|^3.0",
-                "php": "^7.1|^8.0"
-            },
-            "require-dev": {
-                "phpstan/phpstan": "^1.9",
-                "phpunit/phpunit": "^7.5.15|^8.5|^9.0"
-            },
-            "time": "2024-09-05T11:56:40+00:00",
-            "type": "library",
-            "installation-source": "dist",
-            "autoload": {
-                "psr-4": {
-                    "PragmaRX\\Google2FA\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Antonio Carlos Ribeiro",
-                    "email": "acr@antoniocarlosribeiro.com",
-                    "role": "Creator & Designer"
-                }
-            ],
-            "description": "A One Time Password Authentication package, compatible with Google Authenticator.",
-            "keywords": [
-                "2fa",
-                "Authentication",
-                "Two Factor Authentication",
-                "google2fa"
-            ],
-            "support": {
-                "issues": "https://github.com/antonioribeiro/google2fa/issues",
-                "source": "https://github.com/antonioribeiro/google2fa/tree/v8.0.3"
-            },
-            "install-path": "../pragmarx/google2fa"
         },
         {
             "name": "psr/cache",
@@ -5983,17 +6206,17 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.12.12",
-            "version_normalized": "0.12.12.0",
+            "version": "v0.12.13",
+            "version_normalized": "0.12.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "cd23863404a40ccfaf733e3af4db2b459837f7e7"
+                "reference": "d86c2f750e72017a5cdb1b9f1cef468a5cbacd1e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/cd23863404a40ccfaf733e3af4db2b459837f7e7",
-                "reference": "cd23863404a40ccfaf733e3af4db2b459837f7e7",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/d86c2f750e72017a5cdb1b9f1cef468a5cbacd1e",
+                "reference": "d86c2f750e72017a5cdb1b9f1cef468a5cbacd1e",
                 "shasum": ""
             },
             "require": {
@@ -6008,14 +6231,16 @@
                 "symfony/console": "4.4.37 || 5.3.14 || 5.3.15 || 5.4.3 || 5.4.4 || 6.0.3 || 6.0.4"
             },
             "require-dev": {
-                "bamarni/composer-bin-plugin": "^1.2"
+                "bamarni/composer-bin-plugin": "^1.2",
+                "composer/class-map-generator": "^1.6"
             },
             "suggest": {
+                "composer/class-map-generator": "Improved tab completion performance with better class discovery.",
                 "ext-pcntl": "Enabling the PCNTL extension makes PsySH a lot happier :)",
                 "ext-pdo-sqlite": "The doc command requires SQLite to work.",
                 "ext-posix": "If you have PCNTL, you'll want the POSIX extension as well."
             },
-            "time": "2025-09-20T13:46:31+00:00",
+            "time": "2025-10-20T22:48:29+00:00",
             "bin": [
                 "bin/psysh"
             ],
@@ -6058,339 +6283,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bobthecow/psysh/issues",
-                "source": "https://github.com/bobthecow/psysh/tree/v0.12.12"
+                "source": "https://github.com/bobthecow/psysh/tree/v0.12.13"
             },
             "install-path": "../psy/psysh"
-        },
-        {
-            "name": "rainlab/blog-plugin",
-            "version": "v1.7.1",
-            "version_normalized": "1.7.1.0",
-            "dist": {
-                "type": "zip",
-                "url": "https://gateway.octobercms.com/composer/dist/rainlab/blog-plugin/rainlab-blog-plugin-e635f52d2b389bf6b9bcc2e5711bf399614f5a09-zip-84e71d.zip",
-                "reference": "e635f52d2b389bf6b9bcc2e5711bf399614f5a09",
-                "shasum": "5f93f78fede3a88f8491c69f9216b303bea5f58d"
-            },
-            "require": {
-                "composer/installers": "~1.0",
-                "php": ">=7.0"
-            },
-            "time": "2024-09-19T05:39:28+00:00",
-            "type": "october-plugin",
-            "installation-source": "dist",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alexey Bobkov",
-                    "email": "aleksey.bobkov@gmail.com",
-                    "role": "Co-founder"
-                },
-                {
-                    "name": "Samuel Georges",
-                    "email": "daftspunky@gmail.com",
-                    "role": "Co-founder"
-                }
-            ],
-            "description": "Blog plugin for October CMS",
-            "homepage": "https://octobercms.com/plugin/rainlab-blog",
-            "keywords": [
-                "blog",
-                "october",
-                "octobercms"
-            ],
-            "support": {
-                "source": "https://github.com/rainlab/blog-plugin/tree/v1.7.1",
-                "issues": "https://github.com/rainlab/blog-plugin/issues"
-            },
-            "install-path": "../../plugins/rainlab/blog"
-        },
-        {
-            "name": "rainlab/builder-plugin",
-            "version": "v3.0.1",
-            "version_normalized": "3.0.1.0",
-            "dist": {
-                "type": "zip",
-                "url": "https://gateway.octobercms.com/composer/dist/rainlab/builder-plugin/rainlab-builder-plugin-a7ab83a6c520edc7ed6ef9b9dbf6268d19855113-zip-e402b3.zip",
-                "reference": "a7ab83a6c520edc7ed6ef9b9dbf6268d19855113",
-                "shasum": "88439d148e36947ca80aedec114c3f7a679c93da"
-            },
-            "require": {
-                "composer/installers": "~1.0",
-                "october/rain": ">=3.0",
-                "php": "^8.0.2"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0"
-            },
-            "time": "2025-07-26T04:47:47+00:00",
-            "type": "october-plugin",
-            "installation-source": "dist",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alexey Bobkov",
-                    "email": "aleksey.bobkov@gmail.com",
-                    "role": "Co-founder"
-                },
-                {
-                    "name": "Samuel Georges",
-                    "email": "daftspunky@gmail.com",
-                    "role": "Co-founder"
-                }
-            ],
-            "description": "Builder plugin for October CMS",
-            "homepage": "https://octobercms.com/plugin/rainlab-builder",
-            "keywords": [
-                "builder",
-                "october",
-                "octobercms"
-            ],
-            "support": {
-                "source": "https://github.com/rainlab/builder-plugin/tree/v3.0.1",
-                "issues": "https://github.com/rainlab/builder-plugin/issues"
-            },
-            "install-path": "../../plugins/rainlab/builder"
-        },
-        {
-            "name": "rainlab/location-plugin",
-            "version": "v2.0.1",
-            "version_normalized": "2.0.1.0",
-            "dist": {
-                "type": "zip",
-                "url": "https://gateway.octobercms.com/composer/dist/rainlab/location-plugin/rainlab-location-plugin-907f7eaeaaffddf0ee634da05d8cb2eda7a72244-zip-00fc6c.zip",
-                "reference": "907f7eaeaaffddf0ee634da05d8cb2eda7a72244",
-                "shasum": "8e2704522975552dbdb193b886b23694dbff5f38"
-            },
-            "require": {
-                "composer/installers": "~1.0",
-                "php": "^8.0.2"
-            },
-            "time": "2025-06-28T07:30:24+00:00",
-            "type": "october-plugin",
-            "installation-source": "dist",
-            "license": [
-                "proprietary"
-            ],
-            "authors": [
-                {
-                    "name": "Alexey Bobkov",
-                    "email": "aleksey.bobkov@gmail.com",
-                    "role": "Co-founder"
-                },
-                {
-                    "name": "Samuel Georges",
-                    "email": "daftspunky@gmail.com",
-                    "role": "Co-founder"
-                }
-            ],
-            "description": "Location plugin for October CMS",
-            "homepage": "https://octobercms.com/plugin/rainlab-location",
-            "keywords": [
-                "location",
-                "october",
-                "octobercms"
-            ],
-            "install-path": "../../plugins/rainlab/location"
-        },
-        {
-            "name": "rainlab/pages-plugin",
-            "version": "v2.2.0",
-            "version_normalized": "2.2.0.0",
-            "dist": {
-                "type": "zip",
-                "url": "https://gateway.octobercms.com/composer/dist/rainlab/pages-plugin/rainlab-pages-plugin-4341db2cf36cc93ac4855e71226cc0215bb5c688-zip-2d1bff.zip",
-                "reference": "4341db2cf36cc93ac4855e71226cc0215bb5c688",
-                "shasum": "4a6c8471e5abc3566d53c084928a962074fb7f66"
-            },
-            "require": {
-                "composer/installers": "~1.0",
-                "october/rain": ">=3.4",
-                "php": "^8.0.2"
-            },
-            "time": "2025-05-14T22:22:41+00:00",
-            "type": "october-plugin",
-            "installation-source": "dist",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alexey Bobkov",
-                    "email": "aleksey.bobkov@gmail.com",
-                    "role": "Co-founder"
-                },
-                {
-                    "name": "Samuel Georges",
-                    "email": "daftspunky@gmail.com",
-                    "role": "Co-founder"
-                }
-            ],
-            "description": "Pages plugin for October CMS",
-            "homepage": "https://octobercms.com/plugin/rainlab-pages",
-            "keywords": [
-                "october",
-                "octobercms",
-                "pages"
-            ],
-            "support": {
-                "source": "https://github.com/rainlab/pages-plugin/tree/v2.2.0",
-                "issues": "https://github.com/rainlab/pages-plugin/issues"
-            },
-            "install-path": "../../plugins/rainlab/pages"
-        },
-        {
-            "name": "rainlab/translate-plugin",
-            "version": "v2.2.11",
-            "version_normalized": "2.2.11.0",
-            "dist": {
-                "type": "zip",
-                "url": "https://gateway.octobercms.com/composer/dist/rainlab/translate-plugin/rainlab-translate-plugin-6e490feb3540d68696b3bf14b5fcb8cf04dbc08a-zip-d01399.zip",
-                "reference": "6e490feb3540d68696b3bf14b5fcb8cf04dbc08a",
-                "shasum": "37bc40b6547c895ec5ce20d9036f05c87acaac8f"
-            },
-            "require": {
-                "composer/installers": "~1.0",
-                "october/rain": ">=3.1",
-                "php": ">=8.0.2"
-            },
-            "time": "2025-02-16T00:36:32+00:00",
-            "type": "october-plugin",
-            "installation-source": "dist",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alexey Bobkov",
-                    "email": "aleksey.bobkov@gmail.com",
-                    "role": "Co-founder"
-                },
-                {
-                    "name": "Samuel Georges",
-                    "email": "daftspunky@gmail.com",
-                    "role": "Co-founder"
-                }
-            ],
-            "description": "Translate plugin for October CMS",
-            "homepage": "https://octobercms.com/plugin/rainlab-translate",
-            "keywords": [
-                "october",
-                "octobercms",
-                "translate"
-            ],
-            "support": {
-                "source": "https://github.com/rainlab/translate-plugin/tree/v2.2.11",
-                "issues": "https://github.com/rainlab/translate-plugin/issues"
-            },
-            "install-path": "../../plugins/rainlab/translate"
-        },
-        {
-            "name": "rainlab/user-plugin",
-            "version": "v3.2.2",
-            "version_normalized": "3.2.2.0",
-            "dist": {
-                "type": "zip",
-                "url": "https://gateway.octobercms.com/composer/dist/rainlab/user-plugin/rainlab-user-plugin-ce8ef1c1abac27e20da0f6a278da6dc1385a3018-zip-4b5092.zip",
-                "reference": "ce8ef1c1abac27e20da0f6a278da6dc1385a3018",
-                "shasum": "bd6f68585b6957bcaa3344135954982f261816b4"
-            },
-            "require": {
-                "bacon/bacon-qr-code": "^2.0",
-                "composer/installers": "~1.0",
-                "firebase/php-jwt": "^6.4",
-                "mobiledetect/mobiledetectlib": "^4.8",
-                "october/rain": ">=3.0",
-                "php": "^8.0.2",
-                "pragmarx/google2fa": "^8.0"
-            },
-            "time": "2025-06-24T11:24:43+00:00",
-            "type": "october-plugin",
-            "installation-source": "dist",
-            "license": [
-                "proprietary"
-            ],
-            "authors": [
-                {
-                    "name": "Alexey Bobkov",
-                    "email": "aleksey.bobkov@gmail.com",
-                    "role": "Co-founder"
-                },
-                {
-                    "name": "Samuel Georges",
-                    "email": "daftspunky@gmail.com",
-                    "role": "Co-founder"
-                }
-            ],
-            "description": "User plugin for October CMS",
-            "homepage": "https://octobercms.com/plugin/rainlab-user",
-            "keywords": [
-                "october",
-                "octobercms",
-                "user"
-            ],
-            "support": {
-                "source": "https://github.com/rainlab/user-plugin/tree/v3.2.2",
-                "issues": "https://github.com/rainlab/user-plugin/issues"
-            },
-            "install-path": "../../plugins/rainlab/user"
-        },
-        {
-            "name": "rainlab/userplus-plugin",
-            "version": "v2.0.2",
-            "version_normalized": "2.0.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/rainlab/userplus-plugin.git",
-                "reference": "ad750ee970a5030f1a1c4fb5883997ef1586c11d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/rainlab/userplus-plugin/zipball/ad750ee970a5030f1a1c4fb5883997ef1586c11d",
-                "reference": "ad750ee970a5030f1a1c4fb5883997ef1586c11d",
-                "shasum": ""
-            },
-            "require": {
-                "composer/installers": "~1.0",
-                "php": "^8.0.2"
-            },
-            "time": "2024-08-12T23:49:55+00:00",
-            "type": "october-plugin",
-            "installation-source": "dist",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "proprietary"
-            ],
-            "authors": [
-                {
-                    "name": "Alexey Bobkov",
-                    "email": "aleksey.bobkov@gmail.com",
-                    "role": "Co-founder"
-                },
-                {
-                    "name": "Samuel Georges",
-                    "email": "daftspunky@gmail.com",
-                    "role": "Co-founder"
-                }
-            ],
-            "description": "User plus plugin for October CMS",
-            "homepage": "https://octobercms.com/plugin/rainlab-userplus",
-            "keywords": [
-                "blog",
-                "october",
-                "octobercms",
-                "user",
-                "userplus"
-            ],
-            "support": {
-                "issues": "https://github.com/rainlab/userplus-plugin/issues",
-                "source": "https://github.com/rainlab/userplus-plugin/tree/v2.0.2"
-            },
-            "install-path": "../../plugins/rainlab/userplus"
         },
         {
             "name": "ralouphie/getallheaders",
@@ -11330,31 +11225,31 @@
         },
         {
             "name": "webmozart/assert",
-            "version": "1.11.0",
-            "version_normalized": "1.11.0.0",
+            "version": "1.12.0",
+            "version_normalized": "1.12.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webmozarts/assert.git",
-                "reference": "11cb2199493b2f8a3b53e7f19068fc6aac760991"
+                "reference": "541057574806f942c94662b817a50f63f7345360"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozarts/assert/zipball/11cb2199493b2f8a3b53e7f19068fc6aac760991",
-                "reference": "11cb2199493b2f8a3b53e7f19068fc6aac760991",
+                "url": "https://api.github.com/repos/webmozarts/assert/zipball/541057574806f942c94662b817a50f63f7345360",
+                "reference": "541057574806f942c94662b817a50f63f7345360",
                 "shasum": ""
             },
             "require": {
                 "ext-ctype": "*",
+                "ext-date": "*",
+                "ext-filter": "*",
                 "php": "^7.2 || ^8.0"
             },
-            "conflict": {
-                "phpstan/phpstan": "<0.12.20",
-                "vimeo/psalm": "<4.6.1 || 4.6.2"
+            "suggest": {
+                "ext-intl": "",
+                "ext-simplexml": "",
+                "ext-spl": ""
             },
-            "require-dev": {
-                "phpunit/phpunit": "^8.5.13"
-            },
-            "time": "2022-06-03T18:03:27+00:00",
+            "time": "2025-10-20T12:43:39+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -11385,7 +11280,7 @@
             ],
             "support": {
                 "issues": "https://github.com/webmozarts/assert/issues",
-                "source": "https://github.com/webmozarts/assert/tree/1.11.0"
+                "source": "https://github.com/webmozarts/assert/tree/1.12.0"
             },
             "install-path": "../webmozart/assert"
         },

@@ -4,11 +4,33 @@
     "type": "project",
     "homepage": "https://octobercms.com",
     "license": "proprietary",
+
+    "repositories": [
+    {
+        "type": "composer",
+        "url": "https://gateway.octobercms.com"
+    }
+],
+"minimum-stability": "dev",
+"prefer-stable": true,
+
+
     "require": {
         "php": "^8.2",
         "october/rain": "^4.0",
-        "october/tailor": "^4.0",
-        "laravel/framework": "^12.0"
+        "october/system": "4.0.*",
+        "october/backend": "4.0.*",
+        "october/cms": "4.0.*",
+        "october/media": "4.0.*",
+        "october/editor": "4.0.*",
+        "october/dashboard": "4.0.*",
+        "october/tailor": "4.0.*",
+        "laravel/framework": "^12.0",
+        "laravel/socialite": "^5.23",
+        "bacon/bacon-qr-code": "2.0.8",
+        "composer/installers": "1.12.0",
+        "dasprid/enum": "1.0.7",
+        "mobiledetect/mobiledetectlib": "4.8.09"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.5|^9.0",

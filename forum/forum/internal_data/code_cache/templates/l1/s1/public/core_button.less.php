@@ -578,8 +578,8 @@ a.button // needed for specificity over a:link
 			margin-top: (@xf-pageEdgeSpacer) / 2;
 		}
 	}
-}
-';
+}' . $__templater->includeTemplate('th_cap_provider_button.less', $__vars) . '
+' . $__templater->includeTemplate('th_cap_provider_button.less', $__vars);
 	return $__finalCompiled;
 }
 );

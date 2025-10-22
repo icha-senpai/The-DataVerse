@@ -122,6 +122,7 @@ $wgDiff3 = "";
 # The following permissions were set based on your choice in the installer
 $wgGroupPermissions["*"]["edit"] = false;
 
+
 ## Default skin: you can change the default skin. Use the internal symbolic
 ## names, e.g. 'vector' or 'monobook':
 $wgDefaultSkin = "citizen";
@@ -187,8 +188,21 @@ wfLoadExtension( 'Poem' );
 wfLoadExtension( 'VisualEditor' );
 $wgVisualEditorEnableCategoryDialog = true;
 wfLoadExtension( 'WikiEditor' );
-
-
+wfLoadExtension( 'PluggableAuth' );
+wfLoadExtension( 'WSOAuth' );
 # End of automatically generated settings.
 # Add more configuration options below.
 
+$wgPluggableAuth_Class = 'WSOAuth';
+$wgPluggableAuth_EnableAutoLogin = false;
+
+$wgWSOAuth_ConsumerKey    = 'your_client_id_here';
+$wgWSOAuth_ConsumerSecret = 'your_client_secret_here';
+$wgWSOAuth_AuthUri        = 'http://forum.test/forum/oauth2/authorize';
+$wgWSOAuth_TokenUri       = 'http://forum.test/forum/api/oauth2/token';
+$wgWSOAuth_IdentifyUri    = 'http://forum.test/forum/api/users/me';
+$wgWSOAuth_CookieDomain   = '.test';
+$wgWSOAuth_CookieSecure   = false; // true when you move to HTTPS
+$wgWSOAuth_Scope          = 'user:read';
+$wgWSOAuth_CallbackUrl    = 'http://wiki.test/index.php/Special:PluggableAuthLogin';
+$wgGroupPermissions['*']['createaccount'] = false;

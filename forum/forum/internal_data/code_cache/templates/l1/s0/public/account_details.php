@@ -79,12 +79,18 @@ return array(
 	$__compilerTemp5 = '';
 	if ($__vars['canChangeEmail']) {
 		$__compilerTemp5 .= '
-					' . $__templater->button('Change', array(
-			'href' => $__templater->func('link', array('account/email', ), false),
-			'class' => 'button--link',
-			'overlay' => 'true',
-		), '', array(
-		)) . '
+					';
+		if (!$__vars['xf']['options']['thconnectedaccountproviders_updateEmail']) {
+			$__compilerTemp5 .= '
+				' . $__templater->button('Change', array(
+				'href' => $__templater->func('link', array('account/email', ), false),
+				'class' => 'button--link',
+				'overlay' => 'true',
+			), '', array(
+			)) . '
+				';
+		}
+		$__compilerTemp5 .= '
 				';
 	}
 	$__compilerTemp6 = '';

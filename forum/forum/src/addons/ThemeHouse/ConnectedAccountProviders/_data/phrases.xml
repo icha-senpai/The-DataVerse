@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<phrases>
+  <phrase title="con_acc.th_cap_amazon" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[Amazon]]></phrase>
+  <phrase title="con_acc.th_cap_amazoncognito" version_id="1020270" version_string="1.2.2"><![CDATA[Amazon Cognito]]></phrase>
+  <phrase title="con_acc.th_cap_apple" version_id="1020170" version_string="1.2.1"><![CDATA[Sign in with Apple]]></phrase>
+  <phrase title="con_acc.th_cap_battlenet" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[BattleNet]]></phrase>
+  <phrase title="con_acc.th_cap_deviantart" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[DeviantArt]]></phrase>
+  <phrase title="con_acc.th_cap_discord" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[Discord]]></phrase>
+  <phrase title="con_acc.th_cap_dropbox" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[Dropbox]]></phrase>
+  <phrase title="con_acc.th_cap_epicgames" version_id="1020011" version_string="1.2.0 Alpha 1"><![CDATA[Epic Games]]></phrase>
+  <phrase title="con_acc.th_cap_imgur" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[Imgur]]></phrase>
+  <phrase title="con_acc.th_cap_imis" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[iMIS]]></phrase>
+  <phrase title="con_acc.th_cap_instagram" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[Instagram]]></phrase>
+  <phrase title="con_acc.th_cap_keycloak" version_id="1000070" version_string="1.0.0"><![CDATA[Keycloak]]></phrase>
+  <phrase title="con_acc.th_cap_miniorange" version_id="1020191" version_string="1.2.1 Patch Level 1"><![CDATA[Miniorange SSO]]></phrase>
+  <phrase title="con_acc.th_cap_paypal" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[PayPal]]></phrase>
+  <phrase title="con_acc.th_cap_pinterest" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[Pinterest]]></phrase>
+  <phrase title="con_acc.th_cap_reddit" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[Reddit]]></phrase>
+  <phrase title="con_acc.th_cap_spotify" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[Spotify]]></phrase>
+  <phrase title="con_acc.th_cap_stackexchange" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[StackExchange]]></phrase>
+  <phrase title="con_acc.th_cap_steam" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[Steam]]></phrase>
+  <phrase title="con_acc.th_cap_twitch" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[Twitch]]></phrase>
+  <phrase title="con_acc.th_cap_vimeo" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[Vimeo]]></phrase>
+  <phrase title="con_acc.th_cap_vk" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[VK]]></phrase>
+  <phrase title="con_acc_desc.th_cap_amazon" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[]]></phrase>
+  <phrase title="con_acc_desc.th_cap_amazoncognito" version_id="1020270" version_string="1.2.2"><![CDATA[]]></phrase>
+  <phrase title="con_acc_desc.th_cap_apple" version_id="1020170" version_string="1.2.1"><![CDATA[]]></phrase>
+  <phrase title="con_acc_desc.th_cap_battlenet" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[]]></phrase>
+  <phrase title="con_acc_desc.th_cap_deviantart" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[]]></phrase>
+  <phrase title="con_acc_desc.th_cap_discord" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[]]></phrase>
+  <phrase title="con_acc_desc.th_cap_dropbox" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[]]></phrase>
+  <phrase title="con_acc_desc.th_cap_epicgames" version_id="1020011" version_string="1.2.0 Alpha 1"><![CDATA[]]></phrase>
+  <phrase title="con_acc_desc.th_cap_imgur" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[]]></phrase>
+  <phrase title="con_acc_desc.th_cap_imis" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[]]></phrase>
+  <phrase title="con_acc_desc.th_cap_instagram" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[]]></phrase>
+  <phrase title="con_acc_desc.th_cap_keycloak" version_id="1000070" version_string="1.0.0"><![CDATA[]]></phrase>
+  <phrase title="con_acc_desc.th_cap_miniorange" version_id="1020191" version_string="1.2.1 Patch Level 1"><![CDATA[]]></phrase>
+  <phrase title="con_acc_desc.th_cap_paypal" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[]]></phrase>
+  <phrase title="con_acc_desc.th_cap_pinterest" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[]]></phrase>
+  <phrase title="con_acc_desc.th_cap_reddit" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[]]></phrase>
+  <phrase title="con_acc_desc.th_cap_spotify" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[]]></phrase>
+  <phrase title="con_acc_desc.th_cap_stackexchange" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[]]></phrase>
+  <phrase title="con_acc_desc.th_cap_steam" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[]]></phrase>
+  <phrase title="con_acc_desc.th_cap_twitch" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[]]></phrase>
+  <phrase title="con_acc_desc.th_cap_vimeo" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[]]></phrase>
+  <phrase title="con_acc_desc.th_cap_vk" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[]]></phrase>
+  <phrase title="con_acc_imis_base_url_explain" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[Your iMIS base URL]]></phrase>
+  <phrase title="con_acc_imis_client_id_explain" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[Your iMIS client ID]]></phrase>
+  <phrase title="con_acc_imis_client_secret_explain" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[Your iMIS client secret]]></phrase>
+  <phrase title="con_acc_keycloak_base_url_explain" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[Your Keycloak base URL]]></phrase>
+  <phrase title="con_acc_keycloak_client_id_explain" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[Your Keycloak client ID]]></phrase>
+  <phrase title="con_acc_keycloak_realm_name_explain" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[Your Keycloak realm name]]></phrase>
+  <phrase title="con_acc_keycloak_scopes_explain" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[Your required Keycloak scopes, one entry per line.]]></phrase>
+  <phrase title="option.thconnectedaccountproviders_autoCreateAccounts" version_id="1020293" version_string="1.2.2 Patch Level 3"><![CDATA[Automatically create accounts]]></phrase>
+  <phrase title="option.thconnectedaccountproviders_bypass" version_id="1000070" version_string="1.0.0"><![CDATA[Bypass existing account block]]></phrase>
+  <phrase title="option.thconnectedaccountproviders_enableConAccSect" version_id="1000070" version_string="1.0.0"><![CDATA[Enable connected accounts section]]></phrase>
+  <phrase title="option.thconnectedaccountproviders_forceOauthLogin" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[Force OAuth login]]></phrase>
+  <phrase title="option.thconnectedaccountproviders_forceOauthRegistration" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[Force OAuth registration]]></phrase>
+  <phrase title="option.thconnectedaccountproviders_linkProfileFields" version_id="1020293" version_string="1.2.2 Patch Level 3"><![CDATA[Link profile fields]]></phrase>
+  <phrase title="option.thconnectedaccountproviders_mapToCustom" version_id="1000070" version_string="1.0.0"><![CDATA[Map to custom user fields]]></phrase>
+  <phrase title="option.thconnectedaccountproviders_redirectAfterLogout" version_id="1010051" version_string="1.1.0 Release Candidate 1"><![CDATA[Redirect after logout]]></phrase>
+  <phrase title="option.thconnectedaccountproviders_redirectSingleProvider" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[Redirect on single provider]]></phrase>
+  <phrase title="option.thconnectedaccountproviders_updateEmail" version_id="1000070" version_string="1.0.0"><![CDATA[Update Email from provider]]></phrase>
+  <phrase title="option.thconnectedaccountproviders_updateUsername" version_id="1000070" version_string="1.0.0"><![CDATA[Update Username from provider]]></phrase>
+  <phrase title="option_explain.thconnectedaccountproviders_autoCreateAccounts" version_id="1020293" version_string="1.2.2 Patch Level 3"><![CDATA[If enabled, this will bypass account creation prompt if possible, and automatically create an account from the provided 3rd party details.]]></phrase>
+  <phrase title="option_explain.thconnectedaccountproviders_bypass" version_id="1000070" version_string="1.0.0"><![CDATA[Enabled services will be able to associate existing accounts upon login. <strong>Important:</strong> enable this only for services that you trust to have verified the user before login, otherwise account hijacking may be possible.]]></phrase>
+  <phrase title="option_explain.thconnectedaccountproviders_enableConAccSect" version_id="1000070" version_string="1.0.0"><![CDATA[If disabled, users will not be able to access their accounts "connected accounts" section, where they can associated and disassociate connected accounts.]]></phrase>
+  <phrase title="option_explain.thconnectedaccountproviders_forceOauthLogin" version_id="1010051" version_string="1.1.0 Release Candidate 1"><![CDATA[If enabled, users cannot login through a username/password combination, but only through connected account providers. This will effectively lock out users that do not have a connected account provider set up, so use with caution. This will disable the password change functionality for any non-administrator.]]></phrase>
+  <phrase title="option_explain.thconnectedaccountproviders_forceOauthRegistration" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[If enabled, conventional registration will be disabled, and users can only register via one of the provided OAuth providers.]]></phrase>
+  <phrase title="option_explain.thconnectedaccountproviders_linkProfileFields" version_id="1020293" version_string="1.2.2 Patch Level 3"><![CDATA[]]></phrase>
+  <phrase title="option_explain.thconnectedaccountproviders_mapToCustom" version_id="1000070" version_string="1.0.0"><![CDATA[If enabled, additional data will be synchronized to custom user fields. Rules must be provided in the format <pre style="display:inline">provider_key=custom_user_field_id</pre> or <pre style="display:inline">provider_id;provider_key=custom_user_field_id</pre>. One rule per line.]]></phrase>
+  <phrase title="option_explain.thconnectedaccountproviders_redirectAfterLogout" version_id="1010051" version_string="1.1.0 Release Candidate 1"><![CDATA[If provided, users will be redirected to this page after logout instead. You can use {url} as token, which will be replaced with the page they were currently on while logging out. This option requires force OAuth login and redirect on single provider to be enabled.]]></phrase>
+  <phrase title="option_explain.thconnectedaccountproviders_redirectSingleProvider" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[If enabled, the user will automatically be redirected to the OAuth service upon opening a registration/login form for methods that have "Force OAuth" enabled, <strong>if</strong> there is only a single provider to chose from.]]></phrase>
+  <phrase title="option_explain.thconnectedaccountproviders_updateEmail" version_id="1010051" version_string="1.1.0 Release Candidate 1"><![CDATA[If enabled, email will be updated on login based on the connected account providers provided details. This will disable the email change functionality from the user account area.]]></phrase>
+  <phrase title="option_explain.thconnectedaccountproviders_updateUsername" version_id="1000070" version_string="1.0.0"><![CDATA[If enabled, username will be updated on login based on the connected account providers provided details.]]></phrase>
+  <phrase title="option_group.thconnectedaccountproviders" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[[TH] Connected Account Providers]]></phrase>
+  <phrase title="option_group_description.thconnectedaccountproviders" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[Options for the [TH] Connected Account Providers add-on.]]></phrase>
+  <phrase title="th_cap_account_field" version_id="1020293" version_string="1.2.2 Patch Level 3"><![CDATA[Account field]]></phrase>
+  <phrase title="th_cap_amazon_client_id_explain" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[The client ID that is associated with your <a href="https://developer.amazon.com/loginwithamazon/console/site/lwa/overview.html" target="_blank">Amazon application</a> for this domain.]]></phrase>
+  <phrase title="th_cap_amazon_client_secret_explain" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[The secret for the Amazon application you created for this domain.]]></phrase>
+  <phrase title="th_cap_api_key" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[Api key]]></phrase>
+  <phrase title="th_cap_app_id" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[App ID]]></phrase>
+  <phrase title="th_cap_app_key" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[App key]]></phrase>
+  <phrase title="th_cap_app_secret" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[App secret]]></phrase>
+  <phrase title="th_cap_avatar_url" version_id="1020293" version_string="1.2.2 Patch Level 3"><![CDATA[Avatar URL]]></phrase>
+  <phrase title="th_cap_base_url" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[Base URL]]></phrase>
+  <phrase title="th_cap_battlenet_client_id_explain" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[The client ID that is associated with your <a href="https://develop.battle.net/access/clients" target="_blank">BattleNet application</a> for this domain.]]></phrase>
+  <phrase title="th_cap_battlenet_client_secret_explain" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[The secret for the BattleNet application you created for this domain.]]></phrase>
+  <phrase title="th_cap_client_id" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[Client ID]]></phrase>
+  <phrase title="th_cap_client_secret" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[Client secret]]></phrase>
+  <phrase title="th_cap_conventional_login_has_been_disabled_use_oauth" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[Conventional login has been disabled for this platform. Please use one of the available OAuth providers to log in.]]></phrase>
+  <phrase title="th_cap_conventional_registration_has_been_disabled_use_oauth" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[Conventional registration has been disabled for this platform. Please use one of the available OAuth providers to register.]]></phrase>
+  <phrase title="th_cap_customer_id" version_id="1020270" version_string="1.2.2"><![CDATA[Customer ID]]></phrase>
+  <phrase title="th_cap_deviantart_client_id_explain" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[The client ID that is associated with your <a href="https://www.deviantart.com/developers/apps" target="_blank">DeviantArt application</a> for this domain.]]></phrase>
+  <phrase title="th_cap_deviantart_client_secret_explain" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[The secret for the DeviantArt application you created for this domain.]]></phrase>
+  <phrase title="th_cap_discord_client_id_explain" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[The client ID that is associated with your <a href="https://discordapp.com/developers/applications/" target="_blank">Discord application</a> for this domain.]]></phrase>
+  <phrase title="th_cap_discord_client_secret_explain" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[The secret for the Discord application you created for this domain.]]></phrase>
+  <phrase title="th_cap_dropbox_app_key_explain" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[The app key that is associated with your <a href="https://www.dropbox.com/developers/apps" target="_blank">Dropbox application</a> for this domain.]]></phrase>
+  <phrase title="th_cap_dropbox_app_secret_explain" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[The secret for the Dropbox application you created for this domain.]]></phrase>
+  <phrase title="th_cap_epicgames_client_id_explain" version_id="1020011" version_string="1.2.0 Alpha 1"><![CDATA[The ID that is associated with your <a href="https://dev.epicgames.com/portal" target="_blank">Epic Games</a> application for this domain.]]></phrase>
+  <phrase title="th_cap_epicgames_client_secret_explain" version_id="1020011" version_string="1.2.0 Alpha 1"><![CDATA[The secret for the Epic Games application you created for this domain.]]></phrase>
+  <phrase title="th_cap_imgur_client_id_explain" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[The client ID that is associated with your <a href="https://imgur.com/account/settings/apps" target="_blank">Imgur application</a> for this domain.]]></phrase>
+  <phrase title="th_cap_imgur_client_secret_explain" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[The secret for the Imgur application you created for this domain.]]></phrase>
+  <phrase title="th_cap_import_error_no_valid_import_source_selected" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[No valid import source selected.]]></phrase>
+  <phrase title="th_cap_import_error_no_valid_import_target_selected" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[No valid import target selected.]]></phrase>
+  <phrase title="th_cap_import_error_providers_cannot_be_the_same" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[Providers cannot be the same.]]></phrase>
+  <phrase title="th_cap_import_from_provider" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[Import from provider]]></phrase>
+  <phrase title="th_cap_import_from_provider_explain" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[Select the provider that the user data will be drawn from.]]></phrase>
+  <phrase title="th_cap_import_please_note" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[<strong>Please note:</strong> This is a best guess algorithm. It is not guaranteed that data can be migrated from one provider to another, and it is up to you to verify, that a migration is possible.]]></phrase>
+  <phrase title="th_cap_import_to_provider" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[Import to provider]]></phrase>
+  <phrase title="th_cap_import_to_provider_explain" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[Select the provider that the user data will be copied to.]]></phrase>
+  <phrase title="th_cap_instagram_app_id_explain" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[The app ID that is associated with your <a href="https://developers.facebook.com/apps" target="_blank">Instagram application</a> for this domain.]]></phrase>
+  <phrase title="th_cap_instagram_app_secret_explain" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[The secret for the Instagram application you created for this domain.]]></phrase>
+  <phrase title="th_cap_miniorange_client_id_explain" version_id="1020191" version_string="1.2.1 Patch Level 1"><![CDATA[The client ID that is associated with your <a href="https://www.miniorange.com/products/single-sign-on-sso" target="_blank">Miniorange SSO application</a> for this domain.]]></phrase>
+  <phrase title="th_cap_miniorange_client_secret_explain" version_id="1020191" version_string="1.2.1 Patch Level 1"><![CDATA[The client secret that is associated with your <a href="https://www.miniorange.com/products/single-sign-on-sso" target="_blank">Miniorange SSO application</a> for this domain.]]></phrase>
+  <phrase title="th_cap_miniorange_customer_id_explain" version_id="1020270" version_string="1.2.2"><![CDATA[Your Miniorange customer ID.]]></phrase>
+  <phrase title="th_cap_miniorange_subdomain_explain" version_id="1020291" version_string="1.2.2 Patch Level 1"><![CDATA[The domain registered for your Miniorange SSO application.]]></phrase>
+  <phrase title="th_cap_paypal_client_id_explain" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[The client ID that is associated with your <a href="https://developer.paypal.com/developer/applications/" target="_blank">PayPal application</a> for this domain.]]></phrase>
+  <phrase title="th_cap_paypal_client_secret_explain" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[The secret for the PayPal application you created for this domain.]]></phrase>
+  <phrase title="th_cap_pinterest_app_id_explain" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[The app ID that is associated with your <a href="https://developers.pinterest.com/apps/" target="_blank">Pinterest application</a> for this domain.]]></phrase>
+  <phrase title="th_cap_pinterest_app_secret_explain" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[The secret for the Pinterest application you created for this domain]]></phrase>
+  <phrase title="th_cap_profile_fields" version_id="1020293" version_string="1.2.2 Patch Level 3"><![CDATA[Profile fields]]></phrase>
+  <phrase title="th_cap_provider" version_id="1020293" version_string="1.2.2 Patch Level 3"><![CDATA[Provider]]></phrase>
+  <phrase title="th_cap_provider_key" version_id="1020293" version_string="1.2.2 Patch Level 3"><![CDATA[Provider key]]></phrase>
+  <phrase title="th_cap_provider_label" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[[ThemeHouse]]]></phrase>
+  <phrase title="th_cap_realm_name" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[Realm name]]></phrase>
+  <phrase title="th_cap_receive_admin_email" version_id="1020293" version_string="1.2.2 Patch Level 3"><![CDATA[Receive admin email]]></phrase>
+  <phrase title="th_cap_reddit_client_id_explain" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[The client ID that is associated with your <a href="https://www.reddit.com/prefs/apps" target="_blank">Reddit application</a> for this domain.]]></phrase>
+  <phrase title="th_cap_reddit_client_secret_explain" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[The secret for the Reddit application you created for this domain.]]></phrase>
+  <phrase title="th_cap_scopes" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[Scopes]]></phrase>
+  <phrase title="th_cap_secure_key" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[Secure key]]></phrase>
+  <phrase title="th_cap_show_dob_date" version_id="1020293" version_string="1.2.2 Patch Level 3"><![CDATA[Show date of birth]]></phrase>
+  <phrase title="th_cap_show_dob_year" version_id="1020293" version_string="1.2.2 Patch Level 3"><![CDATA[Show year of birth]]></phrase>
+  <phrase title="th_cap_sign_in_with_apple" version_id="1020170" version_string="1.2.1"><![CDATA[Sign in with Apple]]></phrase>
+  <phrase title="th_cap_sign_in_with_apple_loading_message" version_id="1020170" version_string="1.2.1"><![CDATA[Sign in with Apple is loading.]]></phrase>
+  <phrase title="th_cap_sign_in_with_apple_requires_javascript_to_be_enabled" version_id="1020170" version_string="1.2.1"><![CDATA[Sign in with Apple requires JavaScript to be enabled.]]></phrase>
+  <phrase title="th_cap_sort_providers" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[Sort connected account providers]]></phrase>
+  <phrase title="th_cap_spotify_client_id_explain" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[The client ID that is associated with your <a href="https://developer.spotify.com/dashboard/applications" target="_blank">Spotify application</a> for this domain.]]></phrase>
+  <phrase title="th_cap_spotify_client_secret_explain" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[The secret for the Spotify application you created for this domain.]]></phrase>
+  <phrase title="th_cap_stackexchange_app_key_explain" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[The app key that is associated with your <a href="https://stackapps.com/apps/oauth/" target="_blank">StackExchange application</a> for this domain.]]></phrase>
+  <phrase title="th_cap_stackexchange_client_id_explain" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[The Client ID that is associated with your <a href="https://stackapps.com/apps/oauth/" target="_blank">StackExchange application</a> for this domain.]]></phrase>
+  <phrase title="th_cap_stackexchange_client_secret_explain" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[The secret that is associated with your <a href="https://stackapps.com/apps/oauth/" target="_blank">StackExchange application</a> for this domain.]]></phrase>
+  <phrase title="th_cap_steam_api_key_explain" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[Your <a href="https://steamcommunity.com/dev/apikey" target="_blank">Steam api key</a> for this domain.]]></phrase>
+  <phrase title="th_cap_subdomain" version_id="1020291" version_string="1.2.2 Patch Level 1"><![CDATA[Domain]]></phrase>
+  <phrase title="th_cap_twitch_client_id_explain" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[The client ID that is associated with your <a href="https://dev.twitch.tv/console/apps/" target="_blank">Twitch application</a> for this domain.]]></phrase>
+  <phrase title="th_cap_twitch_client_secret_explain" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[The secret for the Twitch application you created for this domain.]]></phrase>
+  <phrase title="th_cap_unknown_account" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[Unkown account]]></phrase>
+  <phrase title="th_cap_unkown_account" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[Unkown account]]></phrase>
+  <phrase title="th_cap_user_data" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[User data]]></phrase>
+  <phrase title="th_cap_user_fields" version_id="1020293" version_string="1.2.2 Patch Level 3"><![CDATA[User fields]]></phrase>
+  <phrase title="th_cap_user_options" version_id="1020293" version_string="1.2.2 Patch Level 3"><![CDATA[User options]]></phrase>
+  <phrase title="th_cap_vimeo_client_id_explain" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[The client ID that is associated with your <a href="https://developer.vimeo.com/apps" target="_blank">Vimeo application</a> for this domain.]]></phrase>
+  <phrase title="th_cap_vimeo_client_secret_explain" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[The secret for the Vimeo application you created for this domain.]]></phrase>
+  <phrase title="th_cap_vk_client_id_explain" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[The app ID that is associated with your <a href="https://vk.com/apps?act=manage" target="_blank">VK application</a> for this domain.]]></phrase>
+  <phrase title="th_cap_vk_secure_key_explain" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[The secure key for the VK application you created for this domain.]]></phrase>
+  <phrase title="thconnectedaccounts_apple_key_id" version_id="1020170" version_string="1.2.1"><![CDATA[Key ID]]></phrase>
+  <phrase title="thconnectedaccounts_apple_team_id" version_id="1020170" version_string="1.2.1"><![CDATA[Apple team ID]]></phrase>
+</phrases>

@@ -57,93 +57,131 @@ Before your content can be posted, please take a few moments to login to your us
 
 <div class="blocks">
 	';
-	$__compilerTemp2 = '';
-	if ($__vars['captcha']) {
-		$__compilerTemp2 .= '
+	if (!$__vars['xf']['options']['thconnectedaccountproviders_forceOauthLogin']) {
+		$__finalCompiled .= '
+	';
+		$__compilerTemp2 = '';
+		if ($__vars['captcha']) {
+			$__compilerTemp2 .= '
 					' . $__templater->formRowIfContent($__templater->func('captcha_options', array(array(
-			'label' => 'Verification',
-			'force' => 'true',
-			'force-visible' => 'true',
-			'context' => 'xf_login',
-		))), array(
-			'label' => 'Verification',
-			'force' => 'true',
-			'force-visible' => 'true',
-			'context' => 'xf_login',
-		)) . '
+				'label' => 'Verification',
+				'force' => 'true',
+				'force-visible' => 'true',
+				'context' => 'xf_login',
+			))), array(
+				'label' => 'Verification',
+				'force' => 'true',
+				'force-visible' => 'true',
+				'context' => 'xf_login',
+			)) . '
 				';
-	}
-	$__compilerTemp3 = '';
-	if ($__vars['xf']['options']['registrationSetup']['enabled']) {
-		$__compilerTemp3 .= '
+		}
+		$__compilerTemp3 = '';
+		if ($__vars['xf']['options']['registrationSetup']['enabled']) {
+			$__compilerTemp3 .= '
 			<div class="block-outer block-outer--after">
 				<div class="block-outer-middle">
 					' . 'Don\'t have an account?' . ' ' . $__templater->button('Register now', array(
-			'href' => $__templater->func('link', array('register', ), false),
-		), '', array(
-		)) . '
+				'href' => $__templater->func('link', array('register', ), false),
+			), '', array(
+			)) . '
 				</div>
 			</div>
 		';
-	}
-	$__finalCompiled .= $__templater->form('
+		}
+		$__finalCompiled .= $__templater->form('
 		<div class="block-container">
 			<div class="block-body">
 				' . $__templater->formTextBoxRow(array(
-		'name' => 'login',
-		'value' => $__vars['login'],
-		'autofocus' => 'autofocus',
-		'autocomplete' => 'username',
-	), array(
-		'label' => 'Your name or email address',
-	)) . '
+			'name' => 'login',
+			'value' => $__vars['login'],
+			'autofocus' => 'autofocus',
+			'autocomplete' => 'username',
+		), array(
+			'label' => 'Your name or email address',
+		)) . '
 
 				' . $__templater->formPasswordBoxRow(array(
-		'name' => 'password',
-		'autocomplete' => 'current-password',
-	), array(
-		'label' => 'Password',
-		'html' => '
+			'name' => 'password',
+			'autocomplete' => 'current-password',
+		), array(
+			'label' => 'Password',
+			'html' => '
 						<a href="' . $__templater->func('link', array('lost-password', ), true) . '" data-xf-click="overlay">' . 'Forgot your password?' . '</a>
 					',
-	)) . '
+		)) . '
 
 				' . $__compilerTemp2 . '
 
 				' . $__templater->formCheckBoxRow(array(
-	), array(array(
-		'name' => 'remember',
-		'selected' => true,
-		'label' => 'Stay logged in',
-		'_type' => 'option',
-	)), array(
-	)) . '
+		), array(array(
+			'name' => 'remember',
+			'selected' => true,
+			'label' => 'Stay logged in',
+			'_type' => 'option',
+		)), array(
+		)) . '
 
 				' . $__templater->formHiddenVal('_xfRedirect', $__vars['redirect'], array(
-	)) . '
+		)) . '
 			</div>
 			' . $__templater->formSubmitRow(array(
-		'icon' => 'login',
-	), array(
-	)) . '
+			'icon' => 'login',
+		), array(
+		)) . '
 		</div>
 		' . $__compilerTemp3 . '
 	', array(
-		'action' => $__templater->func('link', array('login/login', ), false),
-		'class' => 'block',
-	)) . '
+			'action' => $__templater->func('link', array('login/login', ), false),
+			'class' => 'block',
+		)) . '
+';
+	}
+	$__finalCompiled .= '
 
+	';
+	if (!$__vars['xf']['options']['thconnectedaccountproviders_forceOauthLogin']) {
+		$__finalCompiled .= '
 	<div class="blocks-textJoiner"><span></span><em>' . 'or' . '</em><span></span></div>
+';
+	}
+	$__finalCompiled .= '
 
 	<div class="block">
 		<div class="block-container">
 			<div class="block-body">
 				';
 	$__compilerTemp4 = '';
+	if (!$__vars['xf']['options']['thconnectedaccountproviders_forceOauthLogin']) {
+		$__compilerTemp4 .= '
+	' . $__templater->form('
+
+									' . $__templater->button('
+										' . 'Passkey' . '
+									', array(
+			'class' => 'button--icon button--provider button--provider--passkey js-webauthnStart',
+		), '', array(
+		)) . '
+
+								' . $__templater->formHiddenVal('webauthn_payload', '', array(
+		)) . '
+								' . $__templater->formHiddenVal('webauthn_challenge', ($__vars['passkey'] ? $__templater->method($__vars['passkey'], 'getChallenge', array()) : ''), array(
+		)) . '
+							', array(
+			'action' => $__templater->func('link', array('login/login', ), false),
+			'data-xf-init' => 'webauthn',
+			'data-type' => 'get',
+			'data-autotrigger' => 'false',
+			'data-autosubmit' => 'true',
+			'data-verifying' => 'Verifying' . $__vars['xf']['language']['ellipsis'],
+		)) . '
+';
+	}
+	$__compilerTemp5 = '';
 	if ($__templater->isTraversable($__vars['providers'])) {
 		foreach ($__vars['providers'] AS $__vars['provider']) {
 			if (!$__templater->test($__vars['providers'], 'empty', array())) {
-				$__compilerTemp4 .= '
+				$__compilerTemp5 .= '
 							<li>
 								' . $__templater->callMacro(null, 'connected_account_macros::button', array(
 					'provider' => $__vars['provider'],
@@ -157,30 +195,10 @@ Before your content can be posted, please take a few moments to login to your us
 
 					<ul class="listHeap">
 						<li>
-							' . $__templater->form('
-
-									' . $__templater->button('
-										' . 'Passkey' . '
-									', array(
-		'class' => 'button--icon button--provider button--provider--passkey js-webauthnStart',
-	), '', array(
-	)) . '
-
-								' . $__templater->formHiddenVal('webauthn_payload', '', array(
-	)) . '
-								' . $__templater->formHiddenVal('webauthn_challenge', ($__vars['passkey'] ? $__templater->method($__vars['passkey'], 'getChallenge', array()) : ''), array(
-	)) . '
-							', array(
-		'action' => $__templater->func('link', array('login/login', ), false),
-		'data-xf-init' => 'webauthn',
-		'data-type' => 'get',
-		'data-autotrigger' => 'false',
-		'data-autosubmit' => 'true',
-		'data-verifying' => 'Verifying' . $__vars['xf']['language']['ellipsis'],
-	)) . '
+							' . $__compilerTemp4 . '
 						</li>
 
-						' . $__compilerTemp4 . '
+						' . $__compilerTemp5 . '
 					</ul>
 				', array(
 		'rowtype' => 'button',

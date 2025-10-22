@@ -28,6 +28,7 @@ return array (
   'option_group.stats' => 'Statistics and metrics',
   'option_group.tagging' => 'Content tagging',
   'option_group.th_uix' => '[UI.X] Options',
+  'option_group.thconnectedaccountproviders' => '[TH] Connected Account Providers',
   'option_group.users' => 'User options',
   'option_group.usersAndRegistration' => 'User registration',
   'option_group.xaAms' => 'Article Management System',

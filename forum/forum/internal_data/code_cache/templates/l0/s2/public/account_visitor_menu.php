@@ -155,26 +155,32 @@ return array(
 		';
 	}
 	$__compilerTemp4 = '';
-	if ($__templater->method($__vars['xf']['visitor'], 'canEditSignature', array())) {
+	if ((!$__vars['xf']['options']['thconnectedaccountproviders_forceOauthLogin']) OR $__vars['xf']['visitor']['is_admin']) {
 		$__compilerTemp4 .= '
-			<li><a href="' . $__templater->func('link', array('account/signature', ), true) . '" class="menu-linkRow">' . 'Signature' . '</a></li>
+		<li><a href="' . $__templater->func('link', array('account/security', ), true) . '" class="menu-linkRow">' . 'Password and security' . '</a></li>
 		';
 	}
 	$__compilerTemp5 = '';
-	if ($__vars['xf']['app']['userUpgradeCount']) {
+	if ($__templater->method($__vars['xf']['visitor'], 'canEditSignature', array())) {
 		$__compilerTemp5 .= '
-			<li><a href="' . $__templater->func('link', array('account/upgrades', ), true) . '" class="menu-linkRow">' . 'Account upgrades' . '</a></li>
+			<li><a href="' . $__templater->func('link', array('account/signature', ), true) . '" class="menu-linkRow">' . 'Signature' . '</a></li>
 		';
 	}
 	$__compilerTemp6 = '';
-	if ($__vars['xf']['app']['connectedAccountCount']) {
+	if ($__vars['xf']['app']['userUpgradeCount']) {
 		$__compilerTemp6 .= '
-			<li><a href="' . $__templater->func('link', array('account/connected-accounts', ), true) . '" class="menu-linkRow">' . 'Connected accounts' . '</a></li>
+			<li><a href="' . $__templater->func('link', array('account/upgrades', ), true) . '" class="menu-linkRow">' . 'Account upgrades' . '</a></li>
 		';
 	}
 	$__compilerTemp7 = '';
-	if ($__templater->method($__vars['xf']['visitor'], 'canPostOnProfile', array())) {
+	if ($__vars['xf']['app']['connectedAccountCount'] AND $__vars['xf']['options']['thconnectedaccountproviders_enableConAccSect']) {
 		$__compilerTemp7 .= '
+			<li><a href="' . $__templater->func('link', array('account/connected-accounts', ), true) . '" class="menu-linkRow">' . 'Connected accounts' . '</a></li>
+		';
+	}
+	$__compilerTemp8 = '';
+	if ($__templater->method($__vars['xf']['visitor'], 'canPostOnProfile', array())) {
+		$__compilerTemp8 .= '
 		' . $__templater->form('
 
 			<span class="u-srOnly" id="ctrl_message">' . 'Update your status' . $__vars['xf']['language']['label_separator'] . '</span>
@@ -230,12 +236,12 @@ return array(
 	<ul class="listPlain listColumns listColumns--narrow listColumns--together">
 		' . '
 		<li><a href="' . $__templater->func('link', array('account/account-details', ), true) . '" class="menu-linkRow">' . 'Account details' . '</a></li>
-		<li><a href="' . $__templater->func('link', array('account/security', ), true) . '" class="menu-linkRow">' . 'Password and security' . '</a></li>
+		' . $__compilerTemp4 . '
 		<li><a href="' . $__templater->func('link', array('account/privacy', ), true) . '" class="menu-linkRow">' . 'Privacy' . '</a></li>
 		<li><a href="' . $__templater->func('link', array('account/preferences', ), true) . '" class="menu-linkRow">' . 'Preferences' . '</a></li>
-		' . $__compilerTemp4 . '
 		' . $__compilerTemp5 . '
 		' . $__compilerTemp6 . '
+		' . $__compilerTemp7 . '
 		<li><a href="' . $__templater->func('link', array('account/following', ), true) . '" class="menu-linkRow">' . 'Following' . '</a></li>
 		<li><a href="' . $__templater->func('link', array('account/ignored', ), true) . '" class="menu-linkRow">' . 'Ignoring' . '</a></li>
 		' . '
@@ -246,7 +252,7 @@ return array(
 
 	<a href="' . $__templater->func('link', array('logout', null, array('t' => $__templater->func('csrf_token', array(), false), ), ), true) . '" class="menu-linkRow">' . 'Log out' . '</a>
 
-	' . $__compilerTemp7 . '
+	' . $__compilerTemp8 . '
 ');
 	$__finalCompiled .= '
 

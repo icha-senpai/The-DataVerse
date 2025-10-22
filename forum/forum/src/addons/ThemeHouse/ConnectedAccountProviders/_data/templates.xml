@@ -1,0 +1,1237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+  <template type="admin" title="connected_account_provider_test_th_cap_amazon" version_id="1020493" version_string="1.2.4 Patch Level 3"><![CDATA[<xf:if is="!$providerData">
+	<xf:macro id="connected_account_provider_test_macros::explain"
+		arg-providerTitle="{$provider.title}"
+		arg-keyName="{{ phrase('th_cap_client_id') }}"
+		arg-keyValue="{$provider.options.client_id}" />
+<xf:else />
+	<xf:macro id="connected_account_provider_test_macros::success" />
+
+	<xf:macro id="connected_account_provider_test_macros::display_name"
+		arg-name="{$providerData.username}" />
+
+	<xf:macro id="connected_account_provider_test_macros::email"
+		arg-email="{$providerData.email}" />
+</xf:if>]]></template>
+  <template type="admin" title="connected_account_provider_test_th_cap_apple" version_id="1020493" version_string="1.2.4 Patch Level 3"><![CDATA[<xf:if is="!$providerData">
+    <xf:macro id="connected_account_provider_test_macros::explain"
+              arg-providerTitle="{$provider.title}"
+              arg-keyName="{{ phrase('client_id') }}"
+              arg-keyValue="{$provider.options.client_id}" />
+    <xf:else />
+    <xf:macro id="connected_account_provider_test_macros::success" />
+
+    <xf:macro id="connected_account_provider_test_macros::email"
+              arg-email="{$providerData.email}" />
+</xf:if>]]></template>
+  <template type="admin" title="connected_account_provider_test_th_cap_battlenet" version_id="1020493" version_string="1.2.4 Patch Level 3"><![CDATA[<xf:if is="!$providerData">
+	<xf:macro id="connected_account_provider_test_macros::explain"
+		arg-providerTitle="{$provider.title}"
+		arg-keyName="{{ phrase('th_cap_client_id') }}"
+		arg-keyValue="{$provider.options.client_id}" />
+<xf:else />
+	<xf:macro id="connected_account_provider_test_macros::success" />
+
+	<xf:macro id="connected_account_provider_test_macros::display_name"
+		arg-name="{$providerData.username}" />
+</xf:if>]]></template>
+  <template type="admin" title="connected_account_provider_test_th_cap_deviantart" version_id="1020493" version_string="1.2.4 Patch Level 3"><![CDATA[<xf:if is="!$providerData">
+	<xf:macro id="connected_account_provider_test_macros::explain"
+		arg-providerTitle="{$provider.title}"
+		arg-keyName="{{ phrase('th_cap_client_id') }}"
+		arg-keyValue="{$provider.options.client_id}" />
+<xf:else />
+	<xf:macro id="connected_account_provider_test_macros::success" />
+
+	<xf:macro id="connected_account_provider_test_macros::display_name"
+		arg-name="{$providerData.username}" />
+
+	<xf:macro id="connected_account_provider_test_macros::picture"
+		arg-url="{$providerData.avatar_url}" />
+</xf:if>]]></template>
+  <template type="admin" title="connected_account_provider_test_th_cap_discord" version_id="1020493" version_string="1.2.4 Patch Level 3"><![CDATA[<xf:if is="!$providerData">
+	<xf:macro id="connected_account_provider_test_macros::explain"
+		arg-providerTitle="{$provider.title}"
+		arg-keyName="{{ phrase('th_cap_client_id') }}"
+		arg-keyValue="{$provider.options.client_id}" />
+<xf:else />
+	<xf:macro id="connected_account_provider_test_macros::success" />
+
+	<xf:macro id="connected_account_provider_test_macros::display_name"
+		arg-name="{$providerData.username}" />
+
+	<xf:macro id="connected_account_provider_test_macros::picture"
+		arg-url="{$providerData.avatar_url}" />
+</xf:if>]]></template>
+  <template type="admin" title="connected_account_provider_test_th_cap_dropbox" version_id="1020493" version_string="1.2.4 Patch Level 3"><![CDATA[<xf:if is="!$providerData">
+	<xf:macro id="connected_account_provider_test_macros::explain"
+		arg-providerTitle="{$provider.title}"
+		arg-keyName="{{ phrase('th_cap_app_key') }}"
+		arg-keyValue="{$provider.options.app_key}" />
+<xf:else />
+	<xf:macro id="connected_account_provider_test_macros::success" />
+
+	<xf:macro id="connected_account_provider_test_macros::display_name"
+		arg-name="{$providerData.username}" />
+
+	<xf:macro id="connected_account_provider_test_macros::picture"
+		arg-url="{$providerData.avatar_url}" />
+</xf:if>]]></template>
+  <template type="admin" title="connected_account_provider_test_th_cap_epicgames" version_id="1020493" version_string="1.2.4 Patch Level 3"><![CDATA[<xf:if is="!$providerData">
+	<xf:macro id="connected_account_provider_test_macros::explain"
+		arg-providerTitle="{$provider.title}"
+		arg-keyName="{{ phrase('th_cap_client_id') }}"
+		arg-keyValue="{$provider.options.client_id}" />
+<xf:else />
+	<xf:macro id="connected_account_provider_test_macros::success" />
+
+	<xf:macro id="connected_account_provider_test_macros::display_name"
+		arg-name="{$providerData.username}" />
+</xf:if>]]></template>
+  <template type="admin" title="connected_account_provider_test_th_cap_imgur" version_id="1020493" version_string="1.2.4 Patch Level 3"><![CDATA[<xf:if is="!$providerData">
+	<xf:macro id="connected_account_provider_test_macros::explain"
+		arg-providerTitle="{$provider.title}"
+		arg-keyName="{{ phrase('th_cap_client_id') }}"
+		arg-keyValue="{$provider.options.client_id}" />
+<xf:else />
+	<xf:macro id="connected_account_provider_test_macros::success" />
+
+	<xf:macro id="connected_account_provider_test_macros::display_name"
+		arg-name="{$providerData.username}" />
+
+	<xf:macro id="connected_account_provider_test_macros::picture"
+		arg-url="{$providerData.avatar_url}" />
+</xf:if>]]></template>
+  <template type="admin" title="connected_account_provider_test_th_cap_instagram" version_id="1020493" version_string="1.2.4 Patch Level 3"><![CDATA[<xf:if is="!$providerData">
+	<xf:macro id="connected_account_provider_test_macros::explain"
+		arg-providerTitle="{$provider.title}"
+		arg-keyName="{{ phrase('th_cap_app_id') }}"
+		arg-keyValue="{$provider.options.app_id}" />
+<xf:else />
+	<xf:macro id="connected_account_provider_test_macros::success" />
+
+	<xf:macro id="connected_account_provider_test_macros::display_name"
+		arg-name="{$providerData.username}" />
+</xf:if>]]></template>
+  <template type="admin" title="connected_account_provider_test_th_cap_keycloak" version_id="1020493" version_string="1.2.4 Patch Level 3"><![CDATA[<xf:if is="!$providerData">
+	<xf:macro id="connected_account_provider_test_macros::explain"
+		arg-providerTitle="{$provider.title}"
+		arg-keyName="{{ phrase('base_url') }}"
+		arg-keyValue="{$provider.options.base_url}" />
+<xf:else />
+	<xf:macro id="connected_account_provider_test_macros::success" />
+
+	<xf:macro id="connected_account_provider_test_macros::display_name"
+		arg-name="{$providerData.username}" />
+	
+	<xf:macro id="connected_account_provider_test_macros::email"
+		arg-email="{$providerData.email}" />
+</xf:if>]]></template>
+  <template type="admin" title="connected_account_provider_test_th_cap_miniorange" version_id="1020493" version_string="1.2.4 Patch Level 3"><![CDATA[<xf:if is="!$providerData">
+	<xf:macro id="connected_account_provider_test_macros::explain"
+		arg-providerTitle="{$provider.title}"
+		arg-keyName="{{ phrase('client_id') }}"
+		arg-keyValue="{$provider.options.client_id}" />
+<xf:else />
+	<xf:macro id="connected_account_provider_test_macros::success" />
+
+	<xf:macro id="connected_account_provider_test_macros::display_name"
+		arg-name="{$providerData.username}" />
+
+    <xf:macro id="connected_account_provider_test_macros::email"
+              arg-email="{$providerData.email}" />
+	
+	<xf:formrow label="Data">
+		{{ dump($providerData.data) }}
+	</xf:formrow>
+</xf:if>]]></template>
+  <template type="admin" title="connected_account_provider_test_th_cap_paypal" version_id="1020493" version_string="1.2.4 Patch Level 3"><![CDATA[<xf:if is="!$providerData">
+	<xf:macro id="connected_account_provider_test_macros::explain"
+		arg-providerTitle="{$provider.title}"
+		arg-keyName="{{ phrase('th_cap_client_id') }}"
+		arg-keyValue="{$provider.options.client_id}" />
+<xf:else />
+	<xf:macro id="connected_account_provider_test_macros::success" />
+
+	<xf:macro id="connected_account_provider_test_macros::display_name"
+		arg-name="{$providerData.username}" />
+</xf:if>]]></template>
+  <template type="admin" title="connected_account_provider_test_th_cap_pinterest" version_id="1020493" version_string="1.2.4 Patch Level 3"><![CDATA[<xf:if is="!$providerData">
+	<xf:macro id="connected_account_provider_test_macros::explain"
+		arg-providerTitle="{$provider.title}"
+		arg-keyName="{{ phrase('th_cap_app_id') }}"
+		arg-keyValue="{$provider.options.app_id}" />
+<xf:else />
+	<xf:macro id="connected_account_provider_test_macros::success" />
+
+	<xf:macro id="connected_account_provider_test_macros::display_name"
+		arg-name="{$providerData.username}" />
+</xf:if>]]></template>
+  <template type="admin" title="connected_account_provider_test_th_cap_reddit" version_id="1020493" version_string="1.2.4 Patch Level 3"><![CDATA[<xf:if is="!$providerData">
+	<xf:macro id="connected_account_provider_test_macros::explain"
+		arg-providerTitle="{$provider.title}"
+		arg-keyName="{{ phrase('th_cap_app_key') }}"
+		arg-keyValue="{$provider.options.app_key}" />
+<xf:else />
+	<xf:macro id="connected_account_provider_test_macros::success" />
+
+	<xf:macro id="connected_account_provider_test_macros::display_name"
+		arg-name="{$providerData.username}" />
+
+	<xf:macro id="connected_account_provider_test_macros::picture"
+		arg-url="{$providerData.avatar_url}" />
+</xf:if>]]></template>
+  <template type="admin" title="connected_account_provider_test_th_cap_spotify" version_id="1020493" version_string="1.2.4 Patch Level 3"><![CDATA[<xf:if is="!$providerData">
+	<xf:macro id="connected_account_provider_test_macros::explain"
+		arg-providerTitle="{$provider.title}"
+		arg-keyName="{{ phrase('th_cap_client_id') }}"
+		arg-keyValue="{$provider.options.client_id}" />
+<xf:else />
+	<xf:macro id="connected_account_provider_test_macros::success" />
+
+	<xf:macro id="connected_account_provider_test_macros::display_name"
+		arg-name="{$providerData.username}" />
+
+	<xf:macro id="connected_account_provider_test_macros::picture"
+		arg-url="{$providerData.avatar_url}" />
+</xf:if>]]></template>
+  <template type="admin" title="connected_account_provider_test_th_cap_stackexchange" version_id="1020493" version_string="1.2.4 Patch Level 3"><![CDATA[<xf:if is="!$providerData">
+    <xf:macro id="connected_account_provider_test_macros::explain"
+        arg-providerTitle="{$provider.title}"
+        arg-keyName="{{ phrase('client_id') }}"
+        arg-keyValue="{$provider.options.client_id}" />
+<xf:else />
+    <xf:macro id="connected_account_provider_test_macros::success" />
+
+    <xf:macro id="connected_account_provider_test_macros::display_name"
+        arg-name="{$providerData.username}" />
+
+    <xf:macro id="connected_account_provider_test_macros::picture"
+        arg-url="{$providerData.avatar_url}" />
+</xf:if>]]></template>
+  <template type="admin" title="connected_account_provider_test_th_cap_steam" version_id="1020493" version_string="1.2.4 Patch Level 3"><![CDATA[<xf:if is="!$providerData">
+	<xf:macro id="connected_account_provider_test_macros::explain"
+		arg-providerTitle="{$provider.title}"
+		arg-keyName="{{ phrase('th_cap_api_key') }}"
+		arg-keyValue="{$provider.options.api_key}" />
+<xf:else />
+	<xf:macro id="connected_account_provider_test_macros::success" />
+
+	<xf:macro id="connected_account_provider_test_macros::display_name"
+		arg-name="{$providerData.username}" />
+
+	<xf:macro id="connected_account_provider_test_macros::picture"
+		arg-url="{$providerData.avatar_url}" />
+</xf:if>]]></template>
+  <template type="admin" title="connected_account_provider_test_th_cap_stripe" version_id="1020493" version_string="1.2.4 Patch Level 3"><![CDATA[<xf:if is="!$providerData">
+	<xf:macro id="connected_account_provider_test_macros::explain"
+		arg-providerTitle="{$provider.title}"
+		arg-keyName="{{ phrase('th_cap_client_id') }}"
+		arg-keyValue="{$provider.options.client_id}" />
+<xf:else />
+	<xf:macro id="connected_account_provider_test_macros::success" />
+
+	<xf:macro id="connected_account_provider_test_macros::display_name"
+		arg-name="{$providerData.username}" />
+
+	<xf:macro id="connected_account_provider_test_macros::picture"
+		arg-url="{$providerData.avatar_url}" />
+</xf:if>]]></template>
+  <template type="admin" title="connected_account_provider_test_th_cap_twitch" version_id="1020493" version_string="1.2.4 Patch Level 3"><![CDATA[<xf:if is="!$providerData">
+	<xf:macro id="connected_account_provider_test_macros::explain"
+		arg-providerTitle="{$provider.title}"
+		arg-keyName="{{ phrase('th_cap_app_id') }}"
+		arg-keyValue="{$provider.options.app_id}" />
+<xf:else />
+	<xf:macro id="connected_account_provider_test_macros::success" />
+
+	<xf:macro id="connected_account_provider_test_macros::display_name"
+		arg-name="{$providerData.username}" />
+
+	<xf:macro id="connected_account_provider_test_macros::email"
+		arg-email="{$providerData.email}" />
+
+	<xf:macro id="connected_account_provider_test_macros::picture"
+		arg-url="{$providerData.avatar_url}" />
+</xf:if>]]></template>
+  <template type="admin" title="connected_account_provider_test_th_cap_vimeo" version_id="1020493" version_string="1.2.4 Patch Level 3"><![CDATA[<xf:if is="!$providerData">
+	<xf:macro id="connected_account_provider_test_macros::explain"
+		arg-providerTitle="{$provider.title}"
+		arg-keyName="{{ phrase('th_cap_client_id') }}"
+		arg-keyValue="{$provider.options.client_id}" />
+<xf:else />
+	<xf:macro id="connected_account_provider_test_macros::success" />
+
+	<xf:macro id="connected_account_provider_test_macros::display_name"
+		arg-name="{$providerData.username}" />
+
+	<xf:macro id="connected_account_provider_test_macros::picture"
+		arg-url="{$providerData.avatar_url}" />
+</xf:if>]]></template>
+  <template type="admin" title="connected_account_provider_test_th_cap_vk" version_id="1020493" version_string="1.2.4 Patch Level 3"><![CDATA[<xf:if is="!$providerData">
+	<xf:macro id="connected_account_provider_test_macros::explain"
+		arg-providerTitle="{$provider.title}"
+		arg-keyName="{{ phrase('th_cap_app_id') }}"
+		arg-keyValue="{$provider.options.client_id}" />
+<xf:else />
+	<xf:macro id="connected_account_provider_test_macros::success" />
+
+	<xf:macro id="connected_account_provider_test_macros::display_name"
+		arg-name="{$providerData.username}" />
+</xf:if>]]></template>
+  <template type="admin" title="connected_account_provider_th_cap_amazon" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[<xf:textboxrow name="options[client_id]" required="true"
+			   label="{{ phrase('th_cap_client_id') }}"
+			   explain="{{ phrase('th_cap_amazon_client_id_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.client_id}" />
+
+<xf:textboxrow name="options[client_secret]" required="true"
+			   label="{{ phrase('th_cap_client_secret') }}"
+			   explain="{{ phrase('th_cap_amazon_client_secret_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.client_secret}" />]]></template>
+  <template type="admin" title="connected_account_provider_th_cap_amazoncognito" version_id="1020270" version_string="1.2.2"><![CDATA[<xf:textboxrow name="options[base_url]" value="{$options.base_url}"
+	label="{{ phrase('th_cap_base_url') }}" required="true"
+	hint="{{ phrase('required') }}" type="url"
+	explain="{{ phrase('con_acc_amazoncognito_base_url_explain') }}" />
+
+<xf:textboxrow name="options[client_id]" value="{$options.client_id}"
+	label="{{ phrase('client_id') }}"
+	hint="{{ phrase('required') }}" required="true"
+	explain="{{ phrase('con_acc_amazoncognito_client_id_explain') }}" />
+
+<xf:textboxrow name="options[client_secret]" value="{$options.client_secret}"
+	label="{{ phrase('client_secret') }}"
+	hint="{{ phrase('required') }}" required="true"
+	explain="{{ phrase('con_acc_amazoncognito_client_secret_explain') }}" />
+
+<xf:textarearow name="options[scopes]" value="{$options.scopes}"
+	label="{{ phrase('th_cap_scopes') }}"
+	hint="{{ phrase('required') }}" required="true"
+	explain="{{ phrase('con_acc_amazoncognito_scopes_explain') }}" />]]></template>
+  <template type="admin" title="connected_account_provider_th_cap_apple" version_id="1020170" version_string="1.2.1"><![CDATA[<xf:textboxrow name="options[team_id]" value="{$options.team_id}"
+               label="{{ phrase('thconnectedaccounts_apple_team_id') }}"
+               hint="{{ phrase('required') }}" />
+
+<xf:textboxrow name="options[client_id]" value="{$options.client_id}"
+               label="{{ phrase('client_id') }}"
+               hint="{{ phrase('required') }}" />
+
+<xf:textboxrow name="options[private_key_id]" value="{$options.private_key_id}"
+               label="{{ phrase('thconnectedaccounts_apple_key_id') }}"
+               hint="{{ phrase('required') }}" />
+
+<xf:textarearow name="options[private_key]" value="{$options.private_key}"
+                label="{{ phrase('private_key') }}"
+                hint="{{ phrase('required') }}" />]]></template>
+  <template type="admin" title="connected_account_provider_th_cap_battlenet" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[<xf:textboxrow name="options[client_id]" required="true"
+			   label="{{ phrase('th_cap_client_id') }}"
+			   explain="{{ phrase('th_cap_battlenet_client_id_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.client_id}" />
+
+<xf:textboxrow name="options[client_secret]" required="true"
+			   label="{{ phrase('th_cap_client_secret') }}"
+			   explain="{{ phrase('th_cap_battlenet_client_secret_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.client_secret}" />]]></template>
+  <template type="admin" title="connected_account_provider_th_cap_deviantart" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[<xf:textboxrow name="options[client_id]" required="true"
+			   label="{{ phrase('th_cap_client_id') }}"
+			   explain="{{ phrase('th_cap_deviantart_client_id_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.client_id}" />
+
+<xf:textboxrow name="options[client_secret]" required="true"
+			   label="{{ phrase('th_cap_client_secret') }}"
+			   explain="{{ phrase('th_cap_deviantart_client_secret_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.client_secret}" />]]></template>
+  <template type="admin" title="connected_account_provider_th_cap_discord" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[<xf:textboxrow name="options[client_id]" required="true"
+			   label="{{ phrase('th_cap_client_id') }}"
+			   explain="{{ phrase('th_cap_discord_client_id_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.client_id}" />
+
+<xf:textboxrow name="options[client_secret]" required="true"
+			   label="{{ phrase('th_cap_client_secret') }}"
+			   explain="{{ phrase('th_cap_discord_client_secret_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.client_secret}" />]]></template>
+  <template type="admin" title="connected_account_provider_th_cap_dropbox" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[<xf:textboxrow name="options[app_key]" required="true"
+			   value="{$options.app_key}"
+			   label="{{ phrase('th_cap_app_key') }}"
+			   hint="{{ phrase('required') }}"
+			   explain="{{ phrase('th_cap_dropbox_app_key_explain') }}" />
+
+<xf:textboxrow name="options[app_secret]" required="true"
+			   value="{$options.app_secret}"
+			   label="{{ phrase('app_secret') }}"
+			   hint="{{ phrase('required') }}"
+			   explain="{{ phrase('th_cap_dropbox_app_secret_explain') }}" />]]></template>
+  <template type="admin" title="connected_account_provider_th_cap_epicgames" version_id="1020011" version_string="1.2.0 Alpha 1"><![CDATA[<xf:textboxrow name="options[client_id]" required="true"
+			   label="{{ phrase('th_cap_client_id') }}"
+			   explain="{{ phrase('th_cap_epicgames_client_id_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.client_id}" />
+
+<xf:textboxrow name="options[client_secret]" required="true"
+			   label="{{ phrase('th_cap_client_secret') }}"
+			   explain="{{ phrase('th_cap_epicgames_client_secret_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.client_secret}" />]]></template>
+  <template type="admin" title="connected_account_provider_th_cap_imgur" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[<xf:textboxrow name="options[client_id]" required="true"
+			   label="{{ phrase('th_cap_client_id') }}"
+			   explain="{{ phrase('th_cap_imgur_client_id_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.client_id}" />
+
+<xf:textboxrow name="options[client_secret]" required="true"
+			   label="{{ phrase('th_cap_client_secret') }}"
+			   explain="{{ phrase('th_cap_imgur_client_secret_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.client_secret}" />]]></template>
+  <template type="admin" title="connected_account_provider_th_cap_imis" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[<xf:textboxrow name="options[base_url]" value="{$options.base_url}"
+	label="{{ phrase('th_cap_base_url') }}" type="url"
+	hint="{{ phrase('required') }}" required="true"
+	explain="{{ phrase('con_acc_imis_base_url_explain') }}" />
+
+<xf:textboxrow name="options[client_id]" value="{$options.client_id}"
+	label="{{ phrase('client_id') }}"
+	hint="{{ phrase('required') }}" required="true"
+	explain="{{ phrase('con_acc_imis_client_id_explain') }}" />
+
+<xf:textboxrow name="options[client_secret]" value="{$options.client_secret}"
+	label="{{ phrase('client_secret') }}"
+	hint="{{ phrase('required') }}" required="true"
+	explain="{{ phrase('con_acc_imis_client_secret_explain') }}" />]]></template>
+  <template type="admin" title="connected_account_provider_th_cap_instagram" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[<xf:textboxrow name="options[app_id]" required="true"
+			   label="{{ phrase('th_cap_app_id') }}"
+			   explain="{{ phrase('th_cap_instagram_app_id_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.app_id}" />
+
+<xf:textboxrow name="options[app_secret]" required="true"
+			   label="{{ phrase('th_cap_app_secret') }}"
+			   explain="{{ phrase('th_cap_instagram_app_secret_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.app_secret}" />]]></template>
+  <template type="admin" title="connected_account_provider_th_cap_keycloak" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[<xf:textboxrow name="options[base_url]" value="{$options.base_url}"
+	label="{{ phrase('th_cap_base_url') }}" required="true"
+	hint="{{ phrase('required') }}" type="url"
+	explain="{{ phrase('con_acc_keycloak_base_url_explain') }}" />
+
+<xf:textboxrow name="options[realm_name]" value="{$options.realm_name}"
+	label="{{ phrase('th_cap_realm_name') }}"
+	hint="{{ phrase('required') }}" required="true"
+	explain="{{ phrase('con_acc_keycloak_realm_name_explain') }}" />
+
+<xf:textboxrow name="options[client_id]" value="{$options.client_id}"
+	label="{{ phrase('client_id') }}"
+	hint="{{ phrase('required') }}" required="true"
+	explain="{{ phrase('con_acc_keycloak_client_id_explain') }}" />
+
+<xf:textarearow name="options[scopes]" value="{$options.scopes}"
+	label="{{ phrase('th_cap_scopes') }}"
+	hint="{{ phrase('required') }}" required="true"
+	explain="{{ phrase('con_acc_keycloak_scopes_explain') }}" />]]></template>
+  <template type="admin" title="connected_account_provider_th_cap_miniorange" version_id="1020270" version_string="1.2.2"><![CDATA[<xf:textboxrow name="options[customer_id]" required="true"
+			   label="{{ phrase('th_cap_customer_id') }}"
+			   explain="{{ phrase('th_cap_miniorange_customer_id_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.customer_id}" />
+
+<xf:textboxrow name="options[subdomain]" required="true"
+			   label="{{ phrase('th_cap_subdomain') }}"
+			   explain="{{ phrase('th_cap_miniorange_subdomain_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.subdomain}" />
+
+<xf:textboxrow name="options[client_id]" required="true"
+			   label="{{ phrase('th_cap_client_id') }}"
+			   explain="{{ phrase('th_cap_miniorange_client_id_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.client_id}" />
+
+<xf:textboxrow name="options[client_secret]" required="true"
+			   label="{{ phrase('th_cap_client_secret') }}"
+			   explain="{{ phrase('th_cap_miniorange_client_secret_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.client_secret}" />]]></template>
+  <template type="admin" title="connected_account_provider_th_cap_paypal" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[<xf:textboxrow name="options[client_id]" required="true"
+			   label="{{ phrase('th_cap_client_id') }}"
+			   explain="{{ phrase('th_cap_paypal_client_id_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.client_id}" />
+
+<xf:textboxrow name="options[client_secret]" required="true"
+			   label="{{ phrase('th_cap_client_secret') }}"
+			   explain="{{ phrase('th_cap_paypal_client_secret_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.client_secret}" />]]></template>
+  <template type="admin" title="connected_account_provider_th_cap_pinterest" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[<xf:textboxrow name="options[app_id]" required="true"
+			   label="{{ phrase('th_cap_app_id') }}"
+			   explain="{{ phrase('th_cap_pinterest_app_id_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.app_id}" />
+
+<xf:textboxrow name="options[app_secret]" required="true"
+			   label="{{ phrase('th_cap_app_secret') }}"
+			   explain="{{ phrase('th_cap_pinterest_app_secret_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.app_secret}" />]]></template>
+  <template type="admin" title="connected_account_provider_th_cap_reddit" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[<xf:textboxrow name="options[client_id]" required="true"
+			   label="{{ phrase('th_cap_client_id') }}"
+			   explain="{{ phrase('th_cap_reddit_client_id_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.client_id}" />
+
+<xf:textboxrow name="options[client_secret]" required="true"
+			   label="{{ phrase('th_cap_client_secret') }}"
+			   explain="{{ phrase('th_cap_reddit_client_secret_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.client_secret}" />]]></template>
+  <template type="admin" title="connected_account_provider_th_cap_spotify" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[<xf:textboxrow name="options[client_id]" required="true"
+			   label="{{ phrase('th_cap_client_id') }}"
+			   explain="{{ phrase('th_cap_spotify_client_id_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.client_id}" />
+
+<xf:textboxrow name="options[client_secret]" required="true"
+			   label="{{ phrase('th_cap_client_secret') }}"
+			   explain="{{ phrase('th_cap_spotify_client_secret_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.client_secret}" />]]></template>
+  <template type="admin" title="connected_account_provider_th_cap_stackexchange" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[<xf:textboxrow name="options[client_id]" required="true"
+               label="{{ phrase('th_cap_client_id') }}"
+               explain="{{ phrase('th_cap_stackexchange_client_id_explain') }}"
+               hint="{{ phrase('required') }}"
+               value="{$options.client_id}" />
+
+<xf:textboxrow name="options[client_secret]" required="true"
+               value="{$options.client_secret}"
+               label="{{ phrase('client_secret') }}"
+               hint="{{ phrase('required') }}"
+               explain="{{ phrase('th_cap_stackexchange_client_secret_explain') }}" />
+
+<xf:textboxrow name="options[app_key]" required="true"
+               value="{$options.app_key}"
+               label="{{ phrase('th_cap_app_key') }}"
+               hint="{{ phrase('required') }}"
+               explain="{{ phrase('th_cap_stackexchange_app_key_explain') }}" />]]></template>
+  <template type="admin" title="connected_account_provider_th_cap_steam" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[<xf:textboxrow name="options[api_key]" required="true"
+			   label="{{ phrase('th_cap_api_key') }}"
+			   explain="{{ phrase('th_cap_steam_api_key_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.api_key}" />]]></template>
+  <template type="admin" title="connected_account_provider_th_cap_stripe" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[<xf:textboxrow name="options[client_id]" required="true"
+			   label="{{ phrase('th_cap_client_id') }}"
+			   explain="{{ phrase('th_cap_deviantart_client_id_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.client_id}" />
+
+<xf:textboxrow name="options[client_secret]" required="true"
+			   label="{{ phrase('th_cap_client_secret') }}"
+			   explain="{{ phrase('th_cap_deviantart_client_secret_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.client_secret}" />]]></template>
+  <template type="admin" title="connected_account_provider_th_cap_trello" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[<xf:textboxrow name="options[api_key]" required="true"
+			   label="{{ phrase('th_cap_api_key') }}"
+			   explain="{{ phrase('th_cap_trello_api_key_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.api_key}" />
+
+<xf:textboxrow name="options[api_secret]" required="true"
+			   label="{{ phrase('th_cap_api_secret') }}"
+			   explain="{{ phrase('th_cap_trello_api_secret_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.api_secret}" />]]></template>
+  <template type="admin" title="connected_account_provider_th_cap_twitch" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[<xf:textboxrow name="options[client_id]" required="true"
+			   label="{{ phrase('th_cap_client_id') }}"
+			   explain="{{ phrase('th_cap_twitch_client_id_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.client_id}" />
+
+<xf:textboxrow name="options[client_secret]" required="true"
+			   label="{{ phrase('th_cap_client_secret') }}"
+			   explain="{{ phrase('th_cap_twitch_client_secret_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.client_secret}" />]]></template>
+  <template type="admin" title="connected_account_provider_th_cap_vimeo" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[<xf:textboxrow name="options[client_id]" required="true"
+			   label="{{ phrase('th_cap_client_id') }}"
+			   explain="{{ phrase('th_cap_vimeo_client_id_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.client_id}" />
+
+<xf:textboxrow name="options[client_secret]" required="true"
+			   label="{{ phrase('th_cap_client_secret') }}"
+			   explain="{{ phrase('th_cap_vimeo_client_secret_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.client_secret}" />]]></template>
+  <template type="admin" title="connected_account_provider_th_cap_vk" version_id="1010211" version_string="1.1.2 Alpha 1"><![CDATA[<xf:textboxrow name="options[client_id]" required="true"
+			   label="{{ phrase('th_cap_app_id') }}"
+			   explain="{{ phrase('th_cap_vk_client_id_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.client_id}" />
+
+<xf:textboxrow name="options[client_secret]" required="true"
+			   label="{{ phrase('th_cap_secure_key') }}"
+			   explain="{{ phrase('th_cap_vk_secure_key_explain') }}"
+			   hint="{{ phrase('required') }}"
+			   value="{$options.client_secret}" />]]></template>
+  <template type="admin" title="th_cap_connected_account_import_config" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[<xf:inforow>
+	{{ phrase('th_cap_import_please_note') }}
+</xf:inforow>
+
+<xf:selectrow label="{{ phrase('th_cap_import_from_provider') }}"
+			  explain="{{ phrase('th_cap_import_from_provider_explain') }}"
+			  name="config[from_provider]">
+	<xf:foreach loop="$providers" value="$provider">
+		<xf:option value="{$provider.provider_id}">{$provider.title}</xf:option>
+	</xf:foreach>
+</xf:selectrow>
+
+<xf:selectrow label="{{ phrase('th_cap_import_to_provider') }}"
+			  explain="{{ phrase('th_cap_import_to_provider_explain') }}"
+			  name="config[to_provider]">
+	<xf:foreach loop="$providers" value="$provider">
+		<xf:option value="{$provider.provider_id}">{$provider.title}</xf:option>
+	</xf:foreach>
+</xf:selectrow>]]></template>
+  <template type="admin" title="th_cap_connected_account_provider_sort" version_id="1020493" version_string="1.2.4 Patch Level 3"><![CDATA[<xf:title>{{ phrase('th_cap_sort_providers') }}</xf:title>
+
+<xf:macro id="public:nestable_macros::setup" />
+
+<xf:form action="{{ link('connected-accounts/th-cap-sort') }}" class="block" ajax="true">
+	<div class="block-container">
+		<div class="block-body">
+			<div class="nestable-container" data-xf-init="nestable" data-parent-id="">
+				<ol class="nestable-list">
+					<xf:foreach loop="{$providers}" value="$provider" i="$i">
+						<li class="nestable-item" data-id="{$provider.provider_id}">
+							<div class="nestable-handle" aria-label="{{ phrase('drag_handle') }}"><i class="fa fa-bars" aria-hidden="true"></i></div>
+							<div class="nestable-content">{$provider.title}</div>
+						</li>
+					</xf:foreach>
+					<xf:submitrow icon="save" rowtype="simple" />
+				</ol>
+				<xf:hiddenval name="providers" value="" />
+			</div>
+		</div>
+	</div>
+</xf:form>]]></template>
+  <template type="admin" title="th_cap_option_linkProfileFields" version_id="1020493" version_string="1.2.4 Patch Level 3"><![CDATA[<xf:set var="$formatParams" value="{$option.formatParams}" />
+<xf:set var="$rowClass" value="{{ ($option.advanced AND !$forceShowAdvanced) ? 'acp--advanced' : '' }}" />
+<xf:set var="$inputName"><xf:macro id="option_macros::input_name" arg-id="{$option.option_id}" /></xf:set>
+<xf:set var="$listedHtml">
+	<xf:macro id="option_macros::listed_html" arg-id="{$option.option_id}" />
+</xf:set>
+<xf:set var="$hintHtml"><xf:trim>
+	<xf:if is="$option.canEdit()">
+		<xf:macro id="option_macros::option_edit_link" arg-group="{$group}" arg-option="{$option}" />
+	</xf:if>
+	<xf:if is="$includeAddOnHint AND $group AND $option.addon_id AND $option.addon_id != $group.addon_id AND $option.addon_id != 'XF'">
+		<span class="formRow-hint-featured">
+			<a href="{{ link('add-ons/options', $option.AddOn) }}">{$option.AddOn.title}</a>
+		</span>
+	</xf:if>
+	</xf:trim></xf:set>
+<xf:set var="$explainHtml">{$option.explain}</xf:set>
+
+<span class="u-anchorTarget" id="{$option.option_id}"></span>
+
+<xf:macro global="true" name="row" row="" i="">
+	<xf:select name="{$inputName}[profile_fields][]" value="{$row.profile_field}">
+		<xf:option>{{ phrase('(th_cap_account_field)') }}</xf:option>
+		<xf:optgroup label="{{ phrase('th_cap_profile_fields') }}">
+			<xf:option value="signature">{{ phrase('signature') }}</xf:option>
+			<xf:option value="dob">{{ phrase('date_of_birth') }}</xf:option>
+			<xf:option value="website">{{ phrase('website') }}</xf:option>
+			<xf:option value="location">{{ phrase('location') }}</xf:option>
+			<xf:option value="avatar_url">{{ phrase('th_cap_avatar_url') }}</xf:option>
+		</xf:optgroup>
+		<xf:optgroup label="{{ phrase('th_cap_user_options') }}">
+			<xf:option value="receive_admin_email">{{ phrase('th_cap_receive_admin_email') }}</xf:option>
+			<xf:option value="show_dob_year"> {{phrase('th_cap_show_dob_year') }}</xf:option>
+			<xf:option value="show_dob_date"> {{phrase('th_cap_show_dob_date') }}</xf:option>
+		</xf:optgroup>
+		<xf:optgroup label="{{ phrase('th_cap_user_fields') }}">
+			<xf:foreach loop="$userFields" value="$userField">
+				<xf:option value="uf_{$userField.field_id}">{$userField.title}</xf:option>
+			</xf:foreach>
+		</xf:optgroup>
+	</xf:select>
+	<xf:select name="{$inputName}[provider_ids][]" value="{$row.provider_id}">
+		<xf:option>{{ phrase('(th_cap_provider)') }}</xf:option>
+		<xf:foreach loop="$providers" value="$provider">
+			<xf:option value="{$provider.provider_id}" disabled="{{$provider.options is empty}}">{$provider.title}</xf:option>
+		</xf:foreach>
+	</xf:select>
+	<xf:textbox name="{$inputName}[provider_keys][]" value="{$row.provider_key}"
+				placeholder="{{ phrase('th_cap_provider_key...') }}"></xf:textbox>
+</xf:macro>
+
+<xf:formrow value="{$option.option_value}" rowclass="{$rowClass}"
+			label="{$option.title}" hint="{$hintHtml}" explain="{$explainHtml}">
+	<div class="inputGroup">
+		<div class="inputGroup-text inputGroup-label">
+			{{ phrase('th_cap_account_field') }}
+		</div>
+		<div class="inputGroup-text inputGroup-label">
+			{{ phrase('th_cap_provider') }}
+		</div>
+		<div class="inputGroup-text inputGroup-label">
+			{{ phrase('th_cap_provider_key') }}
+		</div>
+	</div>
+	<xf:foreach loop="$option.option_value" i="$i" value="$row">
+		<div class="inputGroup inputGroup--joined" style="margin-bottom: 0.5em;">
+			<xf:macro id="row" row="$row" i="$i" />
+		</div>
+	</xf:foreach>
+	<div class="inputGroup inputGroup--joined" style="margin-bottom: 0.5em;" data-xf-init="field-adder">
+		<xf:set var="$row" value="{{ null }}" />
+		<xf:macro id="row"></xf:macro>
+	</div>
+</xf:formrow>
+{{$listedHtml}}]]></template>
+  <template type="public" title="adhome_dashboard_news_feed_resource_insert" version_id="1020493" version_string="1.2.4 Patch Level 3"><![CDATA[<div class="block">
+	<div class="block-container">
+		<div class="block-body">
+			<div class="block-row adhome_newsFeedTitle">
+				<div class="contentRow-title">
+					{{ phrase('xfrm_x_created_resource_y_in_category_z', {
+					'username': username_link($user, false, {'defaultname': $newsFeed.username}),
+					'title': '<a href="' . link('resources', $content) . '">' . prefix('resource', $content) . $content.title . '</a>',
+					'category': '<a href="' . link('resources/categories', $content.Category) . '">' . $content.Category.title . '</a>'
+					}) }}
+				</div>
+			</div>
+
+			<div class="message message--simple">
+				<div class="message-inner">
+					<div class="message-cell message-cell--user">
+						<header itemscope="" itemtype="https://schema.org/Person" class="message-user">
+							<div class="message-avatar">
+								<div class="message-avatar-wrapper">
+									<xf:avatar user="{$content.User}" size="xs" />
+								</div>
+							</div>
+						</header>
+					</div>
+					<div class="message-cell message-cell--main">
+						<div class="message-main uix_messageContent">
+							<header class="message-attribution message-attribution--split">
+								<div class="message-attribution-main">
+									<a href="{{ link('resources', $content) }}" class="u-concealed"
+									   rel="nofollow">
+										<xf:date time="{$content.resource_date}"/>
+									</a>
+								</div>
+
+								<ul class="message-attribution-opposite message-attribution-opposite--list">
+									<xf:comment>
+										<li>
+											<a href="{{ link('media', $content) }}"
+											   data-xf-init="share-tooltip" data-href="{{ link('post/share', $content) }}"
+											   rel="nofollow">
+												<xf:fa icon="fa-share-alt" class="uix_icon uix_icon--share" />
+											</a>
+										</li>
+									</xf:comment>
+
+									<xf:if contentcheck="true">
+										<li>
+											<xf:contentcheck>
+												<xf:macro id="bookmark_macros::link"
+														  arg-content="{$content}"
+														  arg-class="bookmarkLink--highlightable"
+														  arg-confirmUrl="{{ link('resources/bookmark', $content) }}"
+														  arg-showText="{{ false }}"/>
+
+											</xf:contentcheck>
+										</li>
+									</xf:if>
+								</ul>
+							</header>
+							<div class="message-content">
+								<div class="message-userContent lbContainer">
+									<div class="message-body">
+											{{ snippet($content.Description.message, $xf.options.newsFeedMessageSnippetLength, {'stripQuote': true}) }}
+									</div>
+								</div>
+							</div>
+							<div class="reactionsBar js-reactionsList {{ $content.Description.reactions ? 'is-active' : '' }}">
+								<xf:reactions content="{$content.Description}" link="resources/reactions" />
+							</div>
+							<xf:if contentcheck="true">
+								<div class="message-footer">
+									<div class="actionBar">
+										<xf:contentcheck>
+											<xf:if contentcheck="true">
+												<div class="actionBar-set actionBar-set--external">
+													<xf:contentcheck>
+														<xf:react content="{$content.Description}" link="resources/react" list="< .js-mediaInfoBlock | .js-reactionsList" />
+													</xf:contentcheck>
+												</div>
+											</xf:if>
+
+											<xf:if contentcheck="true">
+												<div class="actionBar-set actionBar-set--internal">
+													<xf:contentcheck>
+														<xf:if is="$content.Description.canReport()">
+															<a href="{{ link('resources/update/report', $content) }}"
+															   class="actionBar-action actionBar-action--report"
+															   data-xf-click="overlay">{{ phrase('report_verb') }}</a>
+														</xf:if>
+
+														<xf:set var="$hasActionBarMenu" value="{{ false }}" />
+														<xf:if is="$content.canEdit()">
+															<a href="{{ link('resources/edit', $content) }}"
+															   class="actionBar-action actionBar-action--edit actionBar-action--menuItem"
+															   data-xf-click="overlay">{{ phrase('edit') }}</a>
+															<xf:set var="$hasActionBarMenu" value="{{ true }}" />
+														</xf:if>
+														<xf:if is="$content.canDelete()">
+															<a href="{{ link('resources/delete', $content) }}"
+															   class="actionBar-action actionBar-action--delete actionBar-action--menuItem"
+															   data-xf-click="overlay">{{ phrase('delete') }}</a>
+															<xf:set var="$hasActionBarMenu" value="{{ true }}" />
+														</xf:if>
+														<xf:if is="$xf.visitor.canViewIps() AND $content.Description.ip_id">
+															<a href="{{ link('resources/update/ip', $content) }}"
+															   class="actionBar-action actionBar-action--ip actionBar-action--menuItem"
+															   data-xf-click="overlay">{{ phrase('ip') }}</a>
+															<xf:set var="$hasActionBarMenu" value="{{ true }}" />
+														</xf:if>
+														<xf:if is="$content.Description.canWarn()">
+															<a href="{{ link('resources/update/warn', $content) }}"
+															   class="actionBar-action actionBar-action--warn actionBar-action--menuItem">{{ phrase('warn') }}</a>
+															<xf:set var="$hasActionBarMenu" value="{{ true }}" />
+															<xf:elseif is="$content.Description.warning_id AND $xf.visitor.canViewWarnings()" />
+															<a href="{{ link('warnings', {'warning_id': $content.Description.warning_id}) }}"
+															   class="actionBar-action actionBar-action--warn actionBar-action--menuItem"
+															   data-xf-click="overlay">{{ phrase('view_warning') }}</a>
+															<xf:set var="$hasActionBarMenu" value="{{ true }}" />
+														</xf:if>
+
+														<xf:if is="$hasActionBarMenu">
+															<a class="actionBar-action actionBar-action--menuTrigger"
+															   data-xf-click="menu"
+															   title="{{ phrase('more_options')|for_attr }}"
+															   role="button"
+															   tabindex="0"
+															   aria-expanded="false"
+															   aria-haspopup="true">&#8226;&#8226;&#8226;</a>
+
+															<div class="menu" data-menu="menu" aria-hidden="true" data-menu-builder="actionBar">
+																<div class="menu-content">
+																	<h4 class="menu-header">{{ phrase('more_options') }}</h4>
+																	<div class="js-menuBuilderTarget"></div>
+																</div>
+															</div>
+														</xf:if>
+													</xf:contentcheck>
+												</div>
+											</xf:if>
+										</xf:contentcheck>
+									</div>
+								</div>
+							</xf:if>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>]]></template>
+  <template type="public" title="connected_account_associated_th_cap_amazon" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[<div>
+	{{ $providerData.username ?: phrase('th_cap_unknown_account') }}
+</div>]]></template>
+  <template type="public" title="connected_account_associated_th_cap_apple" version_id="1020170" version_string="1.2.1"><![CDATA[<div>{{ $providerData.email ?: phrase('account_associated') }}</div>]]></template>
+  <template type="public" title="connected_account_associated_th_cap_battlenet" version_id="1000070" version_string="1.0.0"><![CDATA[<div>
+	{{ $providerData.username ?: phrase('th_cap_unknown_account') }}
+</div>]]></template>
+  <template type="public" title="connected_account_associated_th_cap_deviantart" version_id="1000070" version_string="1.0.0"><![CDATA[<xf:if is="$providerData.avatar_url">
+	<xf:if is="$providerData.profile_link">
+		<a href="{{ $providerData.profile_link }}" target="_blank">
+			<img src="{$providerData.avatar_url}" width="48" alt="" />
+		</a>
+		<xf:else />
+		<img src="{$providerData.avatar_url}" width="48" alt="" />
+	</xf:if>
+</xf:if>
+<div>
+	<xf:if is="$providerData.profile_link">
+		<a href="{{ $providerData.profile_link }}" target="_blank">
+			{{ $providerData.username ?: phrase('view_account') }}
+		</a>
+		<xf:else />
+		{{ $providerData.username ?: phrase('th_cap_unknown_account') }}
+	</xf:if>
+</div>]]></template>
+  <template type="public" title="connected_account_associated_th_cap_discord" version_id="1000070" version_string="1.0.0"><![CDATA[<xf:if is="$providerData.avatar_url">
+	<img src="{$providerData.avatar_url}" width="48" alt="" />
+</xf:if>
+<div>
+	{{ $providerData.username ?: phrase('th_cap_unknown_account') }}
+</div>]]></template>
+  <template type="public" title="connected_account_associated_th_cap_dropbox" version_id="1000070" version_string="1.0.0"><![CDATA[<xf:if is="$providerData.avatar_url">
+	<img src="{$providerData.avatar_url}" width="48" alt="" />
+</xf:if>
+<div>
+	{{ $providerData.username ?: phrase('th_cap_unkown_account') }}
+</div>]]></template>
+  <template type="public" title="connected_account_associated_th_cap_epicgames" version_id="1020011" version_string="1.2.0 Alpha 1"><![CDATA[<div>{{ $providerData.username ?: phrase('unknown_account') }}</div>]]></template>
+  <template type="public" title="connected_account_associated_th_cap_imgur" version_id="1000070" version_string="1.0.0"><![CDATA[<xf:if is="$providerData.avatar_url">
+	<xf:if is="$providerData.profile_link">
+		<a href="{{ $providerData.profile_link }}" target="_blank">
+			<img src="{$providerData.avatar_url}" width="48" alt="" />
+		</a>
+		<xf:else />
+		<img src="{$providerData.avatar_url}" width="48" alt="" />
+	</xf:if>
+</xf:if>
+<div>
+	<xf:if is="$providerData.profile_link">
+		<a href="{{ $providerData.profile_link }}" target="_blank">
+			{{ $providerData.username ?: phrase('view_account') }}
+		</a>
+		<xf:else />
+		{{ $providerData.username ?: phrase('th_cap_unknown_account') }}
+	</xf:if>
+</div>]]></template>
+  <template type="public" title="connected_account_associated_th_cap_instagram" version_id="1000070" version_string="1.0.0"><![CDATA[<div>
+	<xf:if is="$providerData.profile_link">
+		<a href="{{ $providerData.profile_link }}" target="_blank">
+			{{ $providerData.username ?: phrase('view_account') }}
+		</a>
+		<xf:else />
+		{{ $providerData.username ?: phrase('th_cap_unknown_account') }}
+	</xf:if>
+</div>]]></template>
+  <template type="public" title="connected_account_associated_th_cap_keycloak" version_id="1000070" version_string="1.0.0"><![CDATA[<div>{{ $providerData.username ?: phrase('account_associated') }}</div>]]></template>
+  <template type="public" title="connected_account_associated_th_cap_paypal" version_id="1000011" version_string="1.0.0 Alpha 1"><![CDATA[<div>
+	{{ $providerData.username ?: phrase('th_cap_unknown_account') }}
+</div>]]></template>
+  <template type="public" title="connected_account_associated_th_cap_pinterest" version_id="1000070" version_string="1.0.0"><![CDATA[<div>
+	<xf:if is="$providerData.profile_link">
+		<a href="{{ $providerData.profile_link }}" target="_blank">
+			{{ $providerData.username ?: phrase('view_account') }}
+		</a>
+		<xf:else />
+		{{ $providerData.username ?: phrase('th_cap_unknown_account') }}
+	</xf:if>
+</div>]]></template>
+  <template type="public" title="connected_account_associated_th_cap_reddit" version_id="1000070" version_string="1.0.0"><![CDATA[<xf:if is="$providerData.avatar_url">
+	<xf:if is="$providerData.profile_link">
+		<a href="{{ $providerData.profile_link }}" target="_blank">
+			<img src="{$providerData.avatar_url}" width="48" alt="" />
+		</a>
+		<xf:else />
+		<img src="{$providerData.avatar_url}" width="48" alt="" />
+	</xf:if>
+</xf:if>
+<div>
+	<xf:if is="$providerData.profile_link">
+		<a href="{{ $providerData.profile_link }}" target="_blank">
+			{{ $providerData.username ?: phrase('view_account') }}
+		</a>
+		<xf:else />
+		{{ $providerData.username ?: phrase('th_cap_unknown_account') }}
+	</xf:if>
+</div>]]></template>
+  <template type="public" title="connected_account_associated_th_cap_spotify" version_id="1000070" version_string="1.0.0"><![CDATA[<xf:if is="$providerData.avatar_url">
+	<xf:if is="$providerData.profile_link">
+		<a href="{{ $providerData.profile_link }}" target="_blank">
+			<img src="{$providerData.avatar_url}" width="48" alt="" />
+		</a>
+		<xf:else />
+		<img src="{$providerData.avatar_url}" width="48" alt="" />
+	</xf:if>
+</xf:if>
+<div>
+	<xf:if is="$providerData.profile_link">
+		<a href="{{ $providerData.profile_link }}" target="_blank">
+			{{ $providerData.username ?: phrase('view_account') }}
+		</a>
+		<xf:else />
+		{{ $providerData.username ?: phrase('th_cap_unknown_account') }}
+	</xf:if>
+</div>]]></template>
+  <template type="public" title="connected_account_associated_th_cap_steam" version_id="1000070" version_string="1.0.0"><![CDATA[<xf:if is="$providerData.avatar_url">
+	<xf:if is="$providerData.profile_link">
+		<a href="{{ $providerData.profile_link }}" target="_blank">
+			<img src="{$providerData.avatar_url}" width="48" alt="" />
+		</a>
+		<xf:else />
+		<img src="{$providerData.avatar_url}" width="48" alt="" />
+	</xf:if>
+</xf:if>
+<div>
+	<xf:if is="$providerData.profile_link">
+		<a href="{{ $providerData.profile_link }}" target="_blank">
+			{{ $providerData.username ?: phrase('view_account') }}
+		</a>
+		<xf:else />
+		{{ $providerData.username ?: phrase('th_cap_unknown_account') }}
+	</xf:if>
+</div>]]></template>
+  <template type="public" title="connected_account_associated_th_cap_twitch" version_id="1000070" version_string="1.0.0"><![CDATA[<xf:if is="$providerData.avatar_url">
+	<xf:if is="$providerData.profile_link">
+		<a href="{{ $providerData.profile_link }}" target="_blank">
+			<img src="{$providerData.avatar_url}" width="48" alt="" />
+		</a>
+		<xf:else />
+		<img src="{$providerData.avatar_url}" width="48" alt="" />
+	</xf:if>
+</xf:if>
+<div>
+	<xf:if is="$providerData.profile_link">
+		<a href="{{ $providerData.profile_link }}" target="_blank">
+			{{ $providerData.username ?: phrase('view_account') }}
+		</a>
+		<xf:else />
+		{{ $providerData.username ?: phrase('th_cap_unknown_account') }}
+	</xf:if>
+</div>]]></template>
+  <template type="public" title="connected_account_associated_th_cap_vimeo" version_id="1000070" version_string="1.0.0"><![CDATA[<xf:if is="$providerData.avatar_url">
+	<xf:if is="$providerData.profile_link">
+		<a href="{{ $providerData.profile_link }}" target="_blank">
+			<img src="{$providerData.avatar_url}" width="48" alt="" />
+		</a>
+		<xf:else />
+		<img src="{$providerData.avatar_url}" width="48" alt="" />
+	</xf:if>
+</xf:if>
+<div>
+	<xf:if is="$providerData.profile_link">
+		<a href="{{ $providerData.profile_link }}" target="_blank">
+			{{ $providerData.username ?: phrase('view_account') }}
+		</a>
+		<xf:else />
+		{{ $providerData.username ?: phrase('th_cap_unknown_account') }}
+	</xf:if>
+</div>]]></template>
+  <template type="public" title="connected_account_associated_th_cap_vk" version_id="1000070" version_string="1.0.0"><![CDATA[<div>
+	<xf:if is="$providerData.profile_link">
+		<a href="{{ $providerData.profile_link }}" target="_blank">
+			{{ $providerData.username ?: phrase('view_account') }}
+		</a>
+		<xf:else />
+		{{ $providerData.username ?: phrase('th_cap_unknown_account') }}
+	</xf:if>
+</div>]]></template>
+  <template type="public" title="th_cap_provider_button.less" version_id="1020191" version_string="1.2.1 Patch Level 1"><![CDATA[.button,
+a.button {
+	&.button--provider
+	{
+		&--th_cap_epicgames {
+			.button-text::before {
+				background-image: url('styles/themehouse/connected-account-providers/epic-games.png');
+				background-size: contain;
+				background-repeat: no-repeat;
+				content: " ";
+
+				height: 1em;
+				width: 1em;
+    			display: inline-block;
+				text-align: center;
+			}
+
+			.m-buttonColorVariation(#333333, #ffffff);
+		}
+		
+		&--th_cap_miniorange {
+			.button-text::before {
+				background-image: url('styles/themehouse/connected-account-providers/miniorange.png');
+				background-size: contain;
+				background-repeat: no-repeat;
+				content: " ";
+
+				height: 1em;
+				width: 1em;
+    			display: inline-block;
+				text-align: center;
+			}
+
+			.m-buttonColorVariation(#ffffff, #f7934d);
+		}
+
+		&--linkedin {
+			.m-buttonIcon(@fa-var-linkedin-in, .58em);
+		}
+		
+		&--facebook {
+			.m-buttonIcon(@fa-var-facebook-f, .58em);
+		}
+		
+		&--th_cap_deviantart
+		{
+			.m-buttonColorVariation(#4dc47d, #06070d);
+			background: linear-gradient(114deg,#4cddbd,#06f286);
+			background-size: 120% 120%;
+			background-position: -5px -5px;
+			border-color: transparent;
+			.m-buttonIcon(@fa-var-deviantart, .58em);
+		}
+
+		&--th_cap_dropbox {
+			.m-buttonColorVariation(#0061ff, #fff);
+			.m-buttonIcon(@fa-var-dropbox, .88em);
+		}
+
+		&--th_cap_discord {
+			.m-buttonColorVariation(#7289DA, #FFFFFF);
+			.m-buttonIcon(@fa-var-discord, .58em);
+		}
+
+		&--th_cap_amazon {
+			.m-buttonColorVariation(#FF9900, #FFFFFF);
+			.m-buttonIcon(@fa-var-amazon, .58em);
+		}
+
+		&--th_cap_reddit {
+			.m-buttonColorVariation(#FF5700, #FFFFFF);
+			.m-buttonIcon(@fa-var-reddit-alien, .88em);
+		}
+
+		&--th_cap_pinterest {
+			.m-buttonColorVariation(#E60023, #FFFFFF);
+			.m-buttonIcon(@fa-var-pinterest-p, .58em);
+		}
+
+		&--th_cap_instagram {
+			.m-buttonColorVariation(#1400c8, #FFFFFF);
+			background: linear-gradient(-135deg,#1400c8,#b900b4,#f50000);
+			background-size: 120% 120%;
+			background-position: -5px -5px;
+			border-color: transparent;
+			.m-buttonIcon(@fa-var-instagram, .58em);
+		}
+
+		&--th_cap_twitch {
+			.m-buttonColorVariation(#6441A4, #FFFFFF);
+			.m-buttonIcon(@fa-var-twitch, .88em);
+		}
+
+		&--th_cap_vk {
+			.m-buttonColorVariation(#4680C2, #FFFFFF);
+			.m-buttonIcon(@fa-var-vk, .88em);
+		}
+
+		&--th_cap_paypal {
+			.m-buttonColorVariation(#003087, #FFFFFF);
+			background: linear-gradient(-120deg, #003087, #009cde, #012169);
+			background-size: 120% 120%;
+			background-position: -5px -5px;
+			border-color: transparent;
+			.m-buttonIcon(@fa-var-paypal, .58em);
+		}
+
+		&--th_cap_vimeo {
+			.m-buttonColorVariation(#1ab7ea, #FFFFFF);
+			.m-buttonIcon(@fa-var-vimeo-v, .58em);
+		}
+
+		&--th_cap_spotify {
+			.m-buttonColorVariation(#1DB954, #191414);
+			.m-buttonIcon(@fa-var-spotify, .58em);
+		}
+
+		&--th_cap_steam {
+			.m-buttonColorVariation(#171A21, #c7d5e0);
+			.m-buttonIcon(@fa-var-steam-symbol, .58em);
+		}
+
+		&--th_cap_imgur {
+			.m-buttonColorVariation(#85bf25, #000000);
+			.m-buttonIcon(@fa-var-sign-in-alt, .58em);
+
+			> .button-text:before,
+			.button-icon
+			{
+				.m-faBase();
+			}
+		}
+
+		&--th_cap_battlenet {
+			.m-buttonColorVariation(#182336, #01c6ea);
+			.m-buttonIcon(@fa-var-battle-net, .88em);
+		}
+
+		&--th_cap_gitlab {
+			.m-buttonColorVariation(#e65328, #ffffff);
+			.m-buttonIcon(@fa-var-gitlab, .58em);
+		}
+
+		&--th_cap_woocommerce {
+			.m-buttonColorVariation(#444140, #00749C);
+			.m-buttonIcon(@fa-var-wordpress-simple, .58em);
+		}
+
+		&--th_cap_stackexchange {
+			.m-buttonColorVariation(#1e5397, #91d8f4);
+			.m-buttonIcon(@fa-var-stack-exchange, .58em);
+		}
+
+		&--th_cap_xing {
+			.m-buttonColorVariation(#026466, #cfdc00);
+			.m-buttonIcon(@fa-var-xing, .58em);
+		}
+
+		&--th_cap_line {
+			.m-buttonColorVariation(#00c300, #ffffff);
+			.m-buttonIcon(@fa-var-line, .58em);
+		}
+
+		&--th_cap_imis {
+			.m-buttonColorVariation(#01a7e1, #ffffff);
+			.m-buttonIcon(@fa-var-sign-in-alt, .58em);
+
+			> .button-text:before,
+			.button-icon
+			{
+				.m-faBase();
+			}
+		}
+
+		&--th_cap_keycloak {
+			.m-buttonColorVariation(#e0e0e0, #008aaa);
+			.m-buttonIcon(@fa-var-sign-in-alt, .58em);
+
+			> .button-text:before,
+			.button-icon
+			{
+				.m-faBase();
+			}
+		}
+		
+		&--th_cap_apple {
+			.m-buttonColorVariation(#000, #fff);
+			.m-buttonIcon(@fa-var-apple, .58em);
+		}
+	}
+}]]></template>
+  <template type="public" title="thconnectedaccounts_auth_apple" version_id="1020170" version_string="1.2.1"><![CDATA[<xf:js src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js" />
+<xf:js>
+    AppleID.auth.init({
+        clientId: '{$clientId}',
+        scope: '{$scopes}',
+        redirectURI: '{$returnUrl}',
+    });
+    AppleID.auth.signIn();
+</xf:js>
+
+<xf:title>{{ phrase('th_cap_sign_in_with_apple') }}</xf:title>
+
+<noscript>
+    <div class="blocKMessage">
+        {{ phrase('th_cap_sign_in_with_apple_requires_javascript_to_be_enabled') }}
+    </div>
+</noscript>
+
+<div class="blockMessage u-jsOnly">
+    {{ phrase('th_cap_sign_in_with_apple_loading_message') }}
+</div>]]></template>
+</templates>

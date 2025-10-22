@@ -13,32 +13,40 @@ return array(
 				';
 	}
 	$__compilerTemp2 = '';
-	if ($__templater->method($__vars['xf']['visitor'], 'canEditSignature', array())) {
+	if ((!$__vars['xf']['options']['thconnectedaccountproviders_forceOauthLogin']) OR $__vars['xf']['visitor']['is_admin']) {
 		$__compilerTemp2 .= '
+				<a class="blockLink ' . (($__vars['pageSelected'] == 'security') ? 'is-selected' : '') . '" href="' . $__templater->func('link', array('account/security', ), true) . '">
+					' . 'Password and security' . '
+				</a>
+				';
+	}
+	$__compilerTemp3 = '';
+	if ($__templater->method($__vars['xf']['visitor'], 'canEditSignature', array())) {
+		$__compilerTemp3 .= '
 					<a class="blockLink ' . (($__vars['pageSelected'] == 'signature') ? 'is-selected' : '') . '" href="' . $__templater->func('link', array('account/signature', ), true) . '">
 						' . 'Signature' . '
 					</a>
 				';
 	}
-	$__compilerTemp3 = '';
+	$__compilerTemp4 = '';
 	if ($__vars['xf']['app']['userUpgradeCount']) {
-		$__compilerTemp3 .= '
+		$__compilerTemp4 .= '
 					<a class="blockLink ' . (($__vars['pageSelected'] == 'upgrades') ? 'is-selected' : '') . '" href="' . $__templater->func('link', array('account/upgrades', ), true) . '">
 						' . 'Account upgrades' . '
 					</a>
 				';
 	}
-	$__compilerTemp4 = '';
-	if ($__vars['xf']['app']['connectedAccountCount']) {
-		$__compilerTemp4 .= '
+	$__compilerTemp5 = '';
+	if ($__vars['xf']['app']['connectedAccountCount'] AND $__vars['xf']['options']['thconnectedaccountproviders_enableConAccSect']) {
+		$__compilerTemp5 .= '
 					<a class="blockLink ' . (($__vars['pageSelected'] == 'connected_account') ? 'is-selected' : '') . '" href="' . $__templater->func('link', array('account/connected-accounts', ), true) . '">
 						' . 'Connected accounts' . '
 					</a>
 				';
 	}
-	$__compilerTemp5 = '';
+	$__compilerTemp6 = '';
 	if ($__vars['xf']['app']['oAuthClientCount']) {
-		$__compilerTemp5 .= '
+		$__compilerTemp6 .= '
 					<a class="blockLink ' . (($__vars['pageSelected'] == 'applications') ? 'is-selected' : '') . '" href="' . $__templater->func('link', array('account/applications', ), true) . '">
 						' . 'Applications' . '
 					</a>
@@ -67,19 +75,17 @@ return array(
 				<a class="blockLink ' . (($__vars['pageSelected'] == 'account_details') ? 'is-selected' : '') . '" href="' . $__templater->func('link', array('account/account-details', ), true) . '">
 					' . 'Account details' . '
 				</a>
-				<a class="blockLink ' . (($__vars['pageSelected'] == 'security') ? 'is-selected' : '') . '" href="' . $__templater->func('link', array('account/security', ), true) . '">
-					' . 'Password and security' . '
-				</a>
+				' . $__compilerTemp2 . '
 				<a class="blockLink ' . (($__vars['pageSelected'] == 'privacy') ? 'is-selected' : '') . '" href="' . $__templater->func('link', array('account/privacy', ), true) . '">
 					' . 'Privacy' . '
 				</a>
 				<a class="blockLink ' . (($__vars['pageSelected'] == 'preferences') ? 'is-selected' : '') . '" href="' . $__templater->func('link', array('account/preferences', ), true) . '">
 					' . 'Preferences' . '
 				</a>
-				' . $__compilerTemp2 . '
 				' . $__compilerTemp3 . '
 				' . $__compilerTemp4 . '
 				' . $__compilerTemp5 . '
+				' . $__compilerTemp6 . '
 				<a class="blockLink ' . (($__vars['pageSelected'] == 'following') ? 'is-selected' : '') . '" href="' . $__templater->func('link', array('account/following', ), true) . '">
 					' . 'Following' . '
 				</a>
