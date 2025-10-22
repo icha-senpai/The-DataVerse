@@ -15,8 +15,6 @@ return array (
   'admin_navigation.apiScopes' => 'API scopes',
   'admin_navigation.appearance' => 'Appearance',
   'admin_navigation.attachments' => 'Attachments',
-  'admin_navigation.audapi' => '[Audentio] API',
-  'admin_navigation.audapi_authentication' => 'Authentication',
   'admin_navigation.bannedEmails' => 'Banned emails',
   'admin_navigation.bannedIps' => 'Banned IP addresses',
   'admin_navigation.bannedUsers' => 'Banned users',

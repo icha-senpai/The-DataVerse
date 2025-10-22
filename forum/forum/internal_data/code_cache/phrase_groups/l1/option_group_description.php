@@ -4,7 +4,6 @@ return array (
   'option_group_description.alerts' => 'When events happen that affect individual users, they are alerted via this system. If you are using a supported device, alerts can be sent directly to the device as a push notification. As large volumes of alerts are generated, they are periodically pruned from the database.',
   'option_group_description.appearance' => 'These options control how your site appears to your visitors.',
   'option_group_description.attachments' => 'Attachments are files that are uploaded to the board along with messages.',
-  'option_group_description.audapi' => 'Options for the [Audentio] API add-on.',
   'option_group_description.basicBoard' => '',
   'option_group_description.boardActive' => 'Turn your board on and off here.',
   'option_group_description.censoringOptions' => 'User-generated text will be subject to the censorship rules you define here.',

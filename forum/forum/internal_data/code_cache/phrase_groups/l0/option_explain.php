@@ -27,13 +27,6 @@ You should also provide the maximum video/audio file size in kilobytes (KB). Vid
   'option_explain.attachmentMaxFileSize' => 'Provide the maximum attachment file size in kilobytes (KB). Attachments over this size will be rejected. The configuration of this server limits this value to <b>{serverMaxFileSize}</b> KB.',
   'option_explain.attachmentMaxPerMessage' => 'Use 0 to allow an unlimited number of attachments per message. To disable message attachments, use the permissions system.',
   'option_explain.attachmentThumbnailDimensions' => 'Controls the length of the shortest edge of attachment thumbnail images. The longer edge of the image may be longer than the length entered here. A value of at least 150px is recommended. Note that if this value is changed, you should rebuild attachment thumbnails via the "Rebuild caches" system.',
-  'option_explain.audapi_oauthEncryptionKey' => 'A 32 byte key that has been encoded using base64.',
-  'option_explain.audapi_oauthPrivateKey' => '',
-  'option_explain.audapi_oauthPublicKey' => '',
-  'option_explain.audentioapi_oauthAccessTokenTTL' => 'The amount of time (in seconds) that an OAuth2 access token should be valid for. Set to 0 for no expiration. Changing this value will have no effect on existing access tokens.<br>
-<strong>Default value: 2592000 (30 days)</strong>',
-  'option_explain.audentioapi_oauthRefreshTokenTTL' => 'The default amount of time (in seconds) that an OAuth2 resfresh tokens should be valid for. This value can be overridden per client. Changing this value will have no effect on existing refresh tokens.<br>
-<b>Default value: 5184000 (60 days)</b>',
   'option_explain.autoEmbedMedia' => 'Enable this option to have the system attempt to automatically embed media from URLs posted by visitors that point to registered media sites. If you choose to include a link to the content as well, the media embedding may be duplicated when the message is quoted.',
   'option_explain.blueskyShare' => 'The Bluesky share button lets your users share pages to Bluesky.',
   'option_explain.boardActive' => '',

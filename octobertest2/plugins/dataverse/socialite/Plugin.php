@@ -2,33 +2,49 @@
 
 use System\Classes\PluginBase;
 use Laravel\Socialite\Facades\Socialite;
-use Laravel\Socialite\Two\AbstractProvider;
-use Laravel\Socialite\Two\User as SocialiteUser;
+use Laravel\Socialite\SocialiteServiceProvider;
 use Dataverse\Socialite\Classes\XenforoProvider;
 
 class Plugin extends PluginBase
 {
-    public function pluginDetails()
+    public function pluginDetails(): array
     {
         return [
-            'name' => 'Dataverse Socialite',
-            'description' => 'OAuth login bridge via Laravel Socialite',
-            'author' => 'Dataverse',
-            'icon' => 'icon-share-alt'
+            'name'        => 'Dataverse Socialite (XenForo)',
+            'description' => 'Login with XenForo (OAuth2) and auto-provision RainLab.User accounts.',
+            'author'      => 'Dataverse',
+            'icon'        => 'icon-sign-in'
         ];
     }
-    public function boot()
-    {
-           Socialite::extend('xenforo', function ($app) {
-        $config = $app['config']['services.xenforo'];
 
-        return Socialite::buildProvider(XenforoProvider::class, [
-            'client_id'     => $config['client_id'],
-            'client_secret' => $config['client_secret'],
-            'redirect'      => $config['redirect'],
-            'base_url'      => $config['base_url'],
-        ]);
-    });
+    public function register(): void
+    {
+        // Register Laravel’s Socialite bindings
+        $this->app->register(SocialiteServiceProvider::class);
+
+        // Extend Socialite with our XenForo driver
+        Socialite::extend('xenforo', function ($app) {
+            $cfg = $this->xfConfig();
+
+            return Socialite::buildProvider(
+                XenforoProvider::class,
+                [
+                    'client_id'     => $cfg['client_id'],
+                    'client_secret' => $cfg['client_secret'],
+                    'redirect'      => $cfg['redirect'],
+                    'base_url'      => rtrim($cfg['base_url'], '/'),
+                ]
+            );
+        });
     }
 
+    protected function xfConfig(): array
+    {
+        return [
+            'base_url'      => env('XF_OAUTH_BASE', 'https://forum.test'),
+            'client_id'     => env('XF_OAUTH_CLIENT_ID', ''),
+            'client_secret' => env('XF_OAUTH_CLIENT_SECRET', ''),
+            'redirect'      => env('XF_OAUTH_REDIRECT', url('/auth/callback')),
+        ];
+    }
 }

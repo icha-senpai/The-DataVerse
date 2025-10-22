@@ -1,84 +1,78 @@
 <?php namespace Dataverse\Socialite\Classes;
 
 use Laravel\Socialite\Two\AbstractProvider;
-use Laravel\Socialite\Two\ProviderInterface;
-use Laravel\Socialite\Two\User;
+use Laravel\Socialite\Two\User as SocialiteUser;
 use Illuminate\Support\Arr;
 
-class XenforoProvider extends AbstractProvider implements ProviderInterface
+class XenforoProvider extends AbstractProvider
 {
-    /**
-     * Scopes to request from XenForo (keep empty unless you use the XenForo API add-on scopes)
-     */
     protected $scopes = [];
+    protected $baseUrl;
 
-    /**
-     * Base URL for the XenForo installation.
-     */
-    protected function getBaseUrl()
+    public function __construct($request, $clientId, $clientSecret, $redirectUrl, $guzzle = [], $baseUrl = null)
     {
-        return rtrim(config('services.xenforo.base_url'), '/');
+        parent::__construct($request, $clientId, $clientSecret, $redirectUrl, $guzzle);
+        $this->baseUrl = $baseUrl ?: 'https://forum.test'; // fallback for local dev
     }
 
-    /**
-     * URL to redirect to for authorization.
-     */
     protected function getAuthUrl($state)
     {
-        return $this->buildAuthUrlFromBase($this->getBaseUrl() . '/oauth/authorize', $state);
+        return $this->buildAuthUrlFromBase(rtrim($this->baseUrl, '/') . '/oauth/authorize', $state);
     }
 
-    /**
-     * URL to get an access token from.
-     */
     protected function getTokenUrl()
     {
-        return $this->getBaseUrl() . '/oauth/token';
+        return rtrim($this->baseUrl, '/') . '/oauth/token';
     }
 
-    /**
-     * Exchange the authorization code for an access token.
-     */
-    protected function getTokenFields($code)
-    {
-        return array_merge(parent::getTokenFields($code), [
-            'grant_type' => 'authorization_code',
-        ]);
-    }
-
-    /**
-     * Fetch the authenticated user from XenForo’s API.
-     */
     protected function getUserByToken($token)
     {
-        $response = $this->getHttpClient()->get(
-            $this->getBaseUrl() . '/api/users/me',
-            ['headers' => ['Authorization' => 'Bearer ' . $token]]
-        );
+        $response = $this->getHttpClient()->get(rtrim($this->baseUrl, '/') . '/api/me', [
+            'headers' => [
+                'Accept'        => 'application/json',
+                'Authorization' => 'Bearer ' . $token,
+            ],
+        ]);
 
-        return json_decode($response->getBody(), true);
+        $data = json_decode((string) $response->getBody(), true);
+        return $data ?: [];
     }
 
-    /**
-     * Map the raw XenForo user data to a Socialite user.
-     */
     protected function mapUserToObject(array $user)
     {
-        // XenForo’s “me” endpoint structure example:
-        // {
-        //   "user_id": 123,
-        //   "username": "Icha",
-        //   "email": "icha@example.com",
-        //   "user_title": "Pilot",
-        //   "avatar_urls": { ... }
-        // }
-
-        return (new User())->setRaw($user)->map([
+        return (new SocialiteUser)->setRaw($user)->map([
             'id'       => Arr::get($user, 'user_id'),
             'nickname' => Arr::get($user, 'username'),
             'name'     => Arr::get($user, 'username'),
             'email'    => Arr::get($user, 'email'),
-            'avatar'   => Arr::get($user, 'avatar_urls.o'),
+            'avatar'   => Arr::get($user, 'avatar_urls.l'),
         ]);
+    }
+
+    protected function getTokenFields($code)
+    {
+        return [
+            'grant_type'    => 'authorization_code',
+            'client_id'     => $this->clientId,
+            'client_secret' => $this->clientSecret,
+            'redirect_uri'  => $this->redirectUrl,
+            'code'          => $code,
+        ];
+    }
+
+    protected function getConfig($key, $default = null)
+    {
+        $config = $this->getConfigFromProvider();
+        return $config[$key] ?? $default;
+    }
+
+    protected function getConfigFromProvider(): array
+    {
+        return [
+            'client_id'     => $this->clientId ?? null,
+            'client_secret' => $this->clientSecret ?? null,
+            'redirect'      => $this->redirectUrl ?? null,
+            'base_url'      => $this->baseUrl ?? null,
+        ];
     }
 }
