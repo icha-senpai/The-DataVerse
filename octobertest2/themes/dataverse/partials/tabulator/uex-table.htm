@@ -1,43 +1,82 @@
-<link href="{{ 'assets/vendor/tabulator/tabulator.css'|theme }}" rel="stylesheet">
-<script src="{{ 'assets/vendor/tabulator/tabulator.js'|theme }}"></script>
-<script src="{{ 'assets/vendor/formulajs/formula.js'|theme }}"></script>
+{# ===========================================
+  Star Citizen UEX Commodity Table (Tailwind + Tabulator)
+  =========================================== #}
+<link href="{{ 'assets/vendor/tailwind/tailwind.css'|theme }}" rel="stylesheet">
+<!-- Tabulator CSS (vendor) -->
+{#<link href="{{ 'assets/vendor/tabulator-tables/dist/css/tabulator.css'|theme }}" rel="stylesheet">#}
+<link href="{{ 'assets/vendor/tabulator-tables/dist/css/tabulator.css'|theme }}" rel="stylesheet">
+<!-- Your Tailwind build (MUST come after vendor CSS) -->
 
-<div id="uexTable"></div>
+
+<!-- Dependencies -->
+<script src="{{ 'assets/vendor/jstat/dist/jstat.min.js'|theme }}"></script>
+<script src="{{ 'assets/vendor/bessel/bessel.js'|theme }}"></script>
+
+<!-- Formula.js (UMD) -->
+<script src="{{ 'assets/vendor/formulajs/lib/browser/formula.min.js'|theme }}"></script>
+<script>
+  // Bind global alias
+  window.formula = window.formulajs || window.formula || {};
+</script>
+
+<!-- Tabulator JS -->
+<script src="{{ 'assets/vendor/tabulator-tables/dist/js/tabulator.js'|theme }}"></script>
+
+<!-- Table Container -->
+<div id="uexTable" class="max-w-5xl mx-auto mt-10 shadow-[0_0_20px_rgba(0,255,255,0.3)] rounded-2xl overflow-hidden"></div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   const table = new Tabulator("#uexTable", {
-    ajaxURL: "/uexCommodities/onGetData",
+    ajaxURL: "/uex/data",
     height: "650px",
     layout: "fitColumns",
     reactiveData: true,
     columns: [
-      {title:"Commodity", field:"name", headerFilter:"input"},
-      {title:"Buy", field:"buy_price", editor:"input", hozAlign:"right"},
-      {title:"Sell", field:"sell_price", editor:"input", hozAlign:"right"},
+      { title: "Commodity", field: "name", headerFilter: "input" },
+      { title: "Buy", field: "buy_price", editor: "input", hozAlign: "right" },
+      { title: "Sell", field: "sell_price", editor: "input", hozAlign: "right" },
       {
-        title:"Margin %",
-        field:"margin",
-        mutator:(v,d)=>formula.eval("IF(buy_price>0,(sell_price-buy_price)/buy_price*100,0)",d),
-        formatter:cell=>cell.getValue().toFixed(2)+"%"
+        title: "Margin %",
+        field: "margin",
+        mutator: (value, data) => {
+          try {
+            return formula.IF(data.buy_price > 0,
+              (data.sell_price - data.buy_price) / data.buy_price * 100,
+              0
+            );
+          } catch (e) { return 0; }
+        },
+        formatter: cell => cell.getValue().toFixed(2) + "%"
       },
-      {title:"Buy Status", field:"buy_status", hozAlign:"center", formatter:cell=>cell.getValue()+"%"},
-      {title:"Sell Status", field:"sell_status", hozAlign:"center", formatter:cell=>cell.getValue()+"%"},
       {
-        title:"Est. Profit (SCU=100)",
-        field:"profit",
-        mutator:(v,d)=>formula.eval("(sell_price-buy_price)*100",d),
-        formatter:"money",
-        bottomCalc:"sum"
+        title: "Buy Status",
+        field: "buy_status",
+        hozAlign: "center",
+        formatter: cell => (cell.getValue() ?? 0) + "%"
+      },
+      {
+        title: "Sell Status",
+        field: "sell_status",
+        hozAlign: "center",
+        formatter: cell => (cell.getValue() ?? 0) + "%"
+      },
+      {
+        title: "Est. Profit (SCU=100)",
+        field: "profit",
+        mutator: (v, d) => (d.sell_price - d.buy_price) * 100,
+        formatter: "money",
+        bottomCalc: "sum"
       }
     ],
   });
 
+  // Save edited rows
   table.on("cellEdited", cell => {
-    fetch("/uexCommodities/onUpdateCommodity", {
-      method:"POST",
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify(cell.getRow().getData())
+    fetch("/ajax/uexCommodities/onUpdateCommodity", {
+      method: "POST",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(cell.getRow().getData())
     });
   });
 });

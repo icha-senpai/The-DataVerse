@@ -1,19 +1,30 @@
-/* Import your local fonts first */
+/* ============================================================
+   DataVerse Tailwind Core Input
+   ============================================================ */
+
+/* 1️⃣ Import your local fonts first */
 @import "./fonts.css";
 
-/* Import Tailwind’s base + utilities */
+/* 2️⃣ Import Tailwind base + utilities (Tailwind v4 syntax) */
 @import "tailwindcss";
 
-/* Define your theme variables */
+/* ============================================================
+   DataVerse Neon Core Tokens
+   ============================================================ */
 @theme {
-  --font-tilt: 'Tilt Neon', 'Inter', ui-sans-serif, system-ui;
+  --font-tilt: "Tilt Neon", "Inter", ui-sans-serif, system-ui;
   --color-dv-bg: #000000;
   --color-dv-text: #ffffff;
   --color-dv-accent: #00ffff;
   --color-dv-accent2: #ff00ff;
 }
 
-/* Global font-family fallback (enforces it across everything) */
-body {
-  font-family: var(--font-tilt);
+/* ============================================================
+   Global Defaults
+   ============================================================ */
+@layer base {
+  body {
+    @apply font-tilt bg-dv-bg text-dv-text min-h-screen flex flex-col;
+  }
 }
+

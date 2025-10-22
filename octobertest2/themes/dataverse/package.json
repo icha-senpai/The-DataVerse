@@ -29,12 +29,16 @@
   },
   "scripts": {
     "format": "prettier --write \"themes/dataverse/layouts/**/*.htm\" \"themes/dataverse/partials/**/*.htm\" \"themes/dataverse/assets/**/*.css\" \"themes/dataverse/assets/**/*.js\"",
-  "build": "node ./scripts/build-and-copy.js",
-  "watch": "node ./watch.js",
-  "build:postcss": "node ./scripts/build-and-copy.js --postcss",
-  "watch:postcss": "node ./watch.js --postcss",
+    "build": "node ./scripts/build-and-copy.js",
+    "watch": "node ./watch.js",
+    "build:postcss": "node ./scripts/build-and-copy.js --postcss",
+    "watch:postcss": "node ./watch.js --postcss",
     "copy:vendor": "node ./scripts/copy-to-vendor.js",
     "test:vendor": "node ./scripts/test-vendor-updated.js",
     "publish": "npm run build"
+  },
+  "dependencies": {
+    "@formulajs/formulajs": "^4.5.4",
+    "tabulator-tables": "^6.3.1"
   }
 }

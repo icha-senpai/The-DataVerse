@@ -2,7 +2,6 @@
 
 use Backend;
 use System\Classes\PluginBase;
-use Illuminate\Support\Facades\Log;
 
 /**
  * Dataverse Wiki Bridge
@@ -29,12 +28,10 @@ class Plugin extends PluginBase
         if (class_exists('\Tailor\Classes\BlueprintIndexer')) {
             try {
                 \Tailor\Classes\BlueprintIndexer::instance()->indexNavigation();
-                Log::info('[Dataverse\Wiki] Tailor navigation re-indexed successfully.');
             } catch (\Throwable $e) {
-                Log::error('[Dataverse\Wiki] Tailor index failed: '.$e->getMessage());
+                // Only log actual errors
+                report($e);
             }
-        } else {
-            Log::warning('[Dataverse\Wiki] Tailor not installed — skipping blueprint re-index.');
         }
     }
 

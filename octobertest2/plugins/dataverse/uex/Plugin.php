@@ -1,6 +1,7 @@
 <?php namespace Dataverse\Uex;
 
 use System\Classes\PluginBase;
+use Illuminate\Support\Facades\Route;
 
 /**
  * Dataverse UEX Systems
@@ -25,17 +26,23 @@ class Plugin extends PluginBase
     public function register(): void
     {
         // Register all UEX-related console commands
-        $this->registerConsoleCommand('uex.importall',      \Dataverse\Uex\Console\ImportUexAll::class);
-        $this->registerConsoleCommand('uex.schema-scan',    \Dataverse\Uex\Console\UexSchemaScan::class);
-        $this->registerConsoleCommand('uex.schema-diff',    \Dataverse\Uex\Console\UexSchemaDiff::class);
+        $this->registerConsoleCommand('uex.importall',        \Dataverse\Uex\Console\ImportUexAll::class);
+        $this->registerConsoleCommand('uex.schema-scan',      \Dataverse\Uex\Console\UexSchemaScan::class);
+        $this->registerConsoleCommand('uex.schema-diff',      \Dataverse\Uex\Console\UexSchemaDiff::class);
         $this->registerConsoleCommand('dataverse:schemaverse', \Dataverse\Uex\Console\SchemaVerse::class);
-        $this->registerConsoleCommand('uex.debug',          \Dataverse\Uex\Console\DebugUex::class);
+        $this->registerConsoleCommand('uex.debug',            \Dataverse\Uex\Console\DebugUex::class);
     }
 
     public function registerComponents(): array
     {
         return [
-            'Dataverse\Core\Components\UexCommodities' => 'uexCommodities',
+            \Dataverse\Uex\Components\UexCommodities::class => 'uexCommodities'
         ];
+    }
+
+    public function boot(): void
+    {
+        // Register a direct route for Tabulator to call
+        Route::get('/uex/data', [\Dataverse\Uex\Components\UexCommodities::class, 'onGetData']);
     }
 }

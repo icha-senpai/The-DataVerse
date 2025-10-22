@@ -1,0 +1,180 @@
+/* ============================================================
+   Tabulator Structural Core (Colorless, Minimal)
+   ============================================================ */
+.tabulator {
+  position: relative;
+  font-size: 14px;
+  text-align: left;
+  overflow: hidden;
+  box-sizing: border-box;
+  transform: translateZ(0);
+}
+
+.tabulator[tabulator-layout="fitDataTable"] {
+  display: inline-block;
+}
+
+/* Header */
+.tabulator .tabulator-header {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.tabulator .tabulator-header .tabulator-header-contents {
+  position: relative;
+  overflow: hidden;
+}
+
+.tabulator .tabulator-header .tabulator-headers {
+  display: inline-block;
+}
+
+.tabulator .tabulator-header .tabulator-col {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: relative;
+  box-sizing: border-box;
+  vertical-align: bottom;
+  overflow: hidden;
+}
+
+.tabulator .tabulator-header .tabulator-col .tabulator-col-content {
+  position: relative;
+  padding: 4px;
+  box-sizing: border-box;
+}
+
+.tabulator .tabulator-header .tabulator-col .tabulator-col-title {
+  box-sizing: border-box;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
+}
+
+/* Table holder */
+.tabulator .tabulator-tableholder {
+  position: relative;
+  width: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.tabulator .tabulator-table {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: visible;
+}
+
+/* Rows */
+.tabulator-row {
+  position: relative;
+  box-sizing: border-box;
+  min-height: 22px;
+}
+
+.tabulator-row .tabulator-cell {
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  padding: 4px;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  outline: none;
+}
+
+/* Frozen cells */
+.tabulator-row .tabulator-cell.tabulator-frozen {
+  display: inline-block;
+  position: sticky;
+  left: 0;
+  z-index: 11;
+}
+
+/* Editable & validation states (no color) */
+.tabulator-row .tabulator-cell.tabulator-editing {
+  border: 1px solid currentColor;
+  padding: 0;
+}
+
+.tabulator-row .tabulator-cell.tabulator-editing input,
+.tabulator-row .tabulator-cell.tabulator-editing select {
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+/* Footer */
+.tabulator .tabulator-footer {
+  user-select: none;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.tabulator .tabulator-footer .tabulator-footer-contents {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 10px;
+}
+
+.tabulator .tabulator-footer .tabulator-calcs-holder {
+  box-sizing: border-box;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Resize & overlay logic */
+.tabulator .tabulator-col-resize-handle {
+  position: relative;
+  display: inline-block;
+  width: 6px;
+  margin-left: -3px;
+  margin-right: -3px;
+  vertical-align: middle;
+}
+
+.tabulator .tabulator-col-resize-guide {
+  position: absolute;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  opacity: 0.5;
+}
+
+.tabulator .tabulator-row-resize-guide {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  opacity: 0.5;
+}
+
+/* Popup & tooltips (barebones) */
+.tabulator-popup-container {
+  position: absolute;
+  box-sizing: border-box;
+  font-size: 14px;
+  overflow-y: auto;
+  z-index: 10000;
+}
+
+.tabulator-popup {
+  padding: 5px;
+}
+
+.tabulator-tooltip {
+  max-width: min(500px, 100%);
+  padding: 3px 5px;
+  border-radius: 2px;
+  font-size: 12px;
+  pointer-events: none;
+}

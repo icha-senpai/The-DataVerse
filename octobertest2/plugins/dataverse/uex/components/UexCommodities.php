@@ -16,39 +16,39 @@ class UexCommodities extends ComponentBase
 
     public function onRun()
     {
-        // optional preloads
+        \Log::info('[UexCommodities] Component loaded and active.');
     }
 
     public function onGetData()
     {
-        $data = DB::table('uex_commodities as c')
-            ->leftJoin('uex_commodities_prices_all as p', 'c.code', '=', 'p.code')
-            ->leftJoin('uex_commodities_status_buy as sb', 'c.code', '=', 'sb.code')
-            ->leftJoin('uex_commodities_status_sell as ss', 'c.code', '=', 'ss.code')
-            ->select(
-                'c.id',
-                'c.code',
-                'c.name',
-                'p.buy_price',
-                'p.sell_price',
-                'sb.percentage as buy_status',
-                'ss.percentage as sell_status'
-            )
-            ->orderBy('c.name')
-            ->get();
-
-        return Response::json($data);
+        try {
+            return Response::json([
+                ['name' => 'Test Commodity', 'buy_price' => 100, 'sell_price' => 150]
+            ]);
+        } catch (\Throwable $e) {
+            return Response::make($e->getMessage(), 500);
+        }
     }
 
     public function onUpdateCommodity()
     {
         $data = json_decode(file_get_contents('php://input'), true);
 
+        if (!isset($data['code'])) {
+            return Response::json(['error' => 'Missing code'], 400);
+        }
+
         DB::table('uex_commodities_prices_all')
-            ->where('code', $data['code'])
+            ->where('id_commodity', function ($query) use ($data) {
+                $query->select('id')
+                      ->from('uex_commodities')
+                      ->where('code', $data['code'])
+                      ->limit(1);
+            })
             ->update([
-                'buy_price'  => $data['buy_price'],
-                'sell_price' => $data['sell_price']
+                'price_buy'  => $data['buy_price'] ?? null,
+                'price_sell' => $data['sell_price'] ?? null,
+                'date_modified' => now()->timestamp,
             ]);
 
         return Response::json(['success' => true]);

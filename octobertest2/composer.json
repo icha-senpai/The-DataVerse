@@ -45,7 +45,11 @@
     },
     "autoload": {
         "psr-4": {
-            "System\\Console\\": "modules/system/console"
+            "System\\Console\\": "modules/system/console",
+            "Dataverse\\Core\\": "plugins/dataverse/core/",
+            "Dataverse\\Nav\\": "plugins/dataverse/nav/",
+            "Dataverse\\Uex\\": "plugins/dataverse/uex/",
+            "Dataverse\\Wiki\\": "plugins/dataverse/wiki/"
         }
     },
     "minimum-stability": "stable",
