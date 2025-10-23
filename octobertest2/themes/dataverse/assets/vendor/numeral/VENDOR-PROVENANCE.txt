@@ -1,7 +1,0 @@
-Source: https://unpkg.com/numeral/numeral.js
-Fetched: 2025-10-14
-Note: This file currently contains a small shim. Run dev/fetch-unminified.ps1 to vendor the full unminified source.
-Source: https://unpkg.com/numeral/numeral.js
-Fetched (unminified) and vendored on: 2025-10-14
-License: MIT (see upstream)
-Notes: Used as a global `numeral` for formulajs UMD externals. Keep unminified source and record provenance.

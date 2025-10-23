@@ -1,7 +1,0 @@
-Source: https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.js
-Fetched: 2025-10-14
-Note: Full unminified source should replace the temporary shim in this file. See dev/fetch-unminified.ps1
-Source: https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.js
-Fetched (unminified) and vendored on: 2025-10-14
-License: see upstream (MIT/BSD - included in upstream distribution)
-Notes: Used as a global `numeric` for formulajs UMD externals. Do not replace with a .min.* file; keep unminified source for auditability.

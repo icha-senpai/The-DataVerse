@@ -1,7 +1,0 @@
-Source: https://unpkg.com/jstat/dist/jstat.js
-Fetched: 2025-10-14
-Note: This file currently contains a small shim. Replace with full unminified jStat when ready.
-Source: https://unpkg.com/jstat/dist/jstat.js
-Fetched (unminified) and vendored on: 2025-10-14
-License: MIT (see upstream)
-Notes: Used as a global `jStat` for formulajs UMD externals. Keep unminified source and record provenance.
