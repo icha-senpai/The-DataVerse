@@ -1,6 +1,6 @@
-# -------------------------------
-# SYSTEM / IDE / OS NOISE
-# -------------------------------
+########################################
+# 🧱  SYSTEM / IDE / OS NOISE
+########################################
 .DS_Store
 Thumbs.db
 ehthumbs.db
@@ -8,27 +8,28 @@ Desktop.ini
 .vscode/
 .idea/
 *.code-workspace
+$RECYCLE.BIN/
+Icon?
 
-# -------------------------------
-# ENV FILES / SECRETS
-# -------------------------------
+########################################
+# 🔐  ENV FILES / SECRETS
+########################################
 .env
 .env.*
 *.key
 *.pem
 
-# -------------------------------
-# DEPENDENCIES (rebuildable)
-# -------------------------------
-# vendor/
-# node_modules/
+########################################
+# 📦  DEPENDENCIES (REBUILDABLE)
+########################################
+vendor/
+node_modules/
 
-# -------------------------------
-# CACHE / LOGS / TEMP FILES
-# -------------------------------
+########################################
+# 🗑️  CACHE / LOGS / TEMP FILES
+########################################
+bootstrap/cache/
 internal_data/
-storage/cache/
-storage/logs/
 storage/
 cache/
 logs/
@@ -37,37 +38,32 @@ tmp/
 *.tmp
 *.cache
 
-# -------------------------------
-# BUILD OUTPUT / TRANSPILED FILES
-# -------------------------------
+########################################
+# 🛠️  BUILD OUTPUT / TRANSPILED FILES
+########################################
 public/build/
 public/hot
+dist/
+.cache/
+vite.config.ts.timestamp*
+*.tsbuildinfo
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# -------------------------------
-# DATABASE / BACKUPS
-# -------------------------------
+########################################
+# 🧮  DATABASE / BACKUPS
+########################################
 *.sql
 *.bak
 *.sqlite
 
-# -------------------------------
-# MISC
-# -------------------------------
+########################################
+# 🧹  MISC / EDITOR JUNK
+########################################
 *.swp
 *.swo
 *.orig
-
-# -------------------------------
-# EXTRA
-# -------------------------------
-# emojipy-*/
-# emojipy.egg-info/
-# *.pyc
-# .tox/
-# .sass-cache
 phpunit.xml
 *.phpunit.result.cache
 rootCertificates/mds/*.pem
@@ -75,7 +71,6 @@ rootCertificates/mds/lastMdsFetch.txt
 php_cs.cache
 *.tmproj
 *~
-# prevent binaries from being committed again
 *.exe
 *.zip
 *.rar
@@ -83,3 +78,15 @@ php_cs.cache
 *.tar
 *.gz
 *.iso
+
+########################################
+# ⚙️  CMS / FRONTEND SPECIFIC
+########################################
+composer.lock
+package-lock.json
+pnpm-lock.yaml
+LocalSettings.php
+config.php
+public/storage/
+extensions/*/vendor/
+images/
