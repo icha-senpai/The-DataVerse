@@ -24,6 +24,8 @@ Icon?
 ########################################
 vendor/
 node_modules/
+/**/vendor/
+/**/node_modules/
 
 ########################################
 # 🗑️  CACHE / LOGS / TEMP FILES
