@@ -66,6 +66,10 @@ class Discord extends AbstractService
             $url->addToQuery($key, $val);
         }
 
+        // --- FIX: ensure PHP session lock is released before redirect ---
+        if (session_status() === PHP_SESSION_ACTIVE) {
+            @session_write_close();
+        }
         return $url;
     }
 
