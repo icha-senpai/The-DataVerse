@@ -39,6 +39,14 @@ tmp/
 *.log
 *.tmp
 *.cache
+.nitro
+.tanstack
+.wrangler
+.output
+.vinxi
+todos.json
+count.txt
+*.local
 
 ########################################
 # 🛠️  BUILD OUTPUT / TRANSPILED FILES
@@ -46,6 +54,7 @@ tmp/
 public/build/
 public/hot
 dist/
+dist-ssr/
 .cache/
 vite.config.ts.timestamp*
 *.tsbuildinfo
