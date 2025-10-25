@@ -39,9 +39,7 @@ class AuthManager extends AuthManagerBase
         }
 
         if (method_exists($guard, 'setRequest')) {
-            // Some Laravel/container versions do not provide a refresh() method;
-            // resolve the current request directly from the container instead.
-            $guard->setRequest($this->app->make('request'));
+            $guard->setRequest($this->app->refresh('request', $guard, 'setRequest'));
         }
 
         if (isset($config['remember'])) {
