@@ -1,5 +1,5 @@
 <?php
-// FROM HASH: 864ed2bbbd9589cb34b917326672308f
+// FROM HASH: 599bf9a4925b5c4a2464061810068392
 return array(
 'macros' => array('head' => array(
 'arguments' => function($__templater, array $__vars) { return array(
@@ -247,54 +247,41 @@ return array(
 		})
 	</script>
 	
-	<!-- Default and guard for UI.X JS path -->
-	';
-	$__vars['uixJsPath'] = ($__templater->func('property', array('uix_jsPath', ), false) ?: 'uix');
-	$__finalCompiled .= '
-
 	<!--XF:JS-->
 	';
 	if ($__templater->func('property', array('uix_buttonRipple', ), false)) {
-		$__finalCompiled .= '
-		';
 		$__templater->includeJs(array(
-			'src' => 'themehouse/' . $__vars['uixJsPath'] . '/ripple.js',
-			'min' => 'themehouse/' . $__vars['uixJsPath'] . '/ripple.min.js',
+			'src' => 'themehouse/' . $__templater->func('property', array('uix_jsPath', ), false) . '/ripple.js',
+			'min' => 'themehouse/' . $__templater->func('property', array('uix_jsPath', ), false) . '/ripple.min.js',
 		));
-		$__finalCompiled .= '
-	';
 	}
 	$__finalCompiled .= '
-
 	' . $__templater->includeTemplate('uix_js', $__vars) . '
-
 	';
 	if ($__templater->func('property', array('uix_parallax', ), false)) {
 		$__finalCompiled .= '
 		';
 		$__templater->includeJs(array(
-			'src' => 'themehouse/' . $__vars['uixJsPath'] . '/vendor/parallax/parallax.js',
-			'min' => 'themehouse/' . $__vars['uixJsPath'] . '/vendor/parallax/parallax.min.js',
+			'src' => 'themehouse/' . $__templater->func('property', array('uix_jsPath', ), false) . '/vendor/parallax/parallax.js',
+			'min' => 'themehouse/uix/vendor/parallax/parallax.min.js',
 		));
 		$__finalCompiled .= '
 	';
 	}
 	$__finalCompiled .= '
-
 	';
 	$__templater->includeJs(array(
-		'src' => 'themehouse/' . $__vars['uixJsPath'] . '/vendor/hover-intent/hoverintent.js',
-		'min' => 'themehouse/' . $__vars['uixJsPath'] . '/vendor/hover-intent/hoverintent.min.js',
+		'src' => 'themehouse/' . $__templater->func('property', array('uix_jsPath', ), false) . '/vendor/hover-intent/hoverintent.js',
+		'min' => 'themehouse/uix/vendor/hover-intent/hoverintent.min.js',
 	));
 	$__finalCompiled .= '
-
 	';
 	if ($__templater->func('property', array('uix_backstretch', ), false)) {
 		$__finalCompiled .= '
 		';
 		$__templater->includeJs(array(
-			'src' => 'themehouse/' . $__vars['uixJsPath'] . '/vendor/backstretch/jquery.backstretch.js',
-			'min' => 'themehouse/' . $__vars['uixJsPath'] . '/vendor/backstretch/jquery.backstretch.min.js',
+			'src' => 'themehouse/' . $__templater->func('property', array('uix_jsPath', ), false) . '/vendor/backstretch/jquery.backstretch.js',
+			'min' => 'themehouse/uix/vendor/backstretch/jquery.backstretch.min.js',
 		));
 		$__finalCompiled .= '
 	';
