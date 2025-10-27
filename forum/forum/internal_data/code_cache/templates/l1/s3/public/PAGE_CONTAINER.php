@@ -1,5 +1,5 @@
 <?php
-// FROM HASH: b4425375c151c845c54b3cac04d3675f
+// FROM HASH: 9ab62b8ed3a2ae69347cb1740dbb553c
 return array(
 'macros' => array('uix_sidebarTrigger__component' => array(
 'arguments' => function($__templater, array $__vars) { return array(
@@ -2605,7 +2605,11 @@ return array(
 	$__compilerTemp53 = '';
 	$__compilerTemp54 = '';
 	$__compilerTemp54 .= '
-								
+								' . $__templater->func('copyright') . '
+								' . $__templater->callback('ThemeHouse\\Core\\Branding', 'renderStyleBranding', '', array());
+	$__vars['thBrandingDisplayed'] = '1';
+	$__compilerTemp54 .= '
+								' . '' . '
 							';
 	if (strlen(trim($__compilerTemp54)) > 0) {
 		$__compilerTemp53 .= '

@@ -1,5 +1,5 @@
 <?php
-// FROM HASH: 5ca9a108c0ddaf02fdaae5b8b24127e1
+// FROM HASH: 8778dc5b62d9f8aa1b1c5839fe750560
 return array(
 'macros' => array('article' => array(
 'arguments' => function($__templater, array $__vars) { return array(
@@ -21,7 +21,7 @@ return array(
 	<article class="message message--article js-post js-inlineModContainer
 		' . (($__vars['thread']['discussion_state'] == 'moderated') ? 'is-moderated' : '') . '
 		' . (($__vars['thread']['discussion_state'] == 'deleted') ? 'is-deleted' : '') . '"
-		data-author="' . ($__templater->escape($__vars['post']['User']['username']) ?: $__templater->escape($__vars['post']['username'])) . '"
+		data-author="66002"
 		data-content="post-' . $__templater->escape($__vars['post']['post_id']) . '"
 		id="js-post-' . $__templater->escape($__vars['post']['post_id']) . '">
 

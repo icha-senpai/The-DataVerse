@@ -1,5 +1,5 @@
 <?php
-// FROM HASH: 0fb41cf73b36e4f5eed824c0561a9483
+// FROM HASH: 74593988c3df36e0450721b269a58f02
 return array(
 'macros' => array('comment' => array(
 'arguments' => function($__templater, array $__vars) { return array(
@@ -12,7 +12,7 @@ return array(
 	$__finalCompiled .= '
 
 	<article class="message message--depth' . $__templater->escape($__vars['post']['thpostcomments_depth']) . ' message--simple' . ($__templater->method($__vars['post'], 'isIgnored', array()) ? ' is-ignored' : '') . ' js-inlineModContainer"
-			 data-author="' . ($__templater->escape($__vars['post']['User']['username']) ?: $__templater->escape($__vars['post']['username'])) . '"
+			 data-author="66002"
 			 data-content="profile-post-' . $__templater->escape($__vars['post']['post_id']) . '"
 			 id="js-post-' . $__templater->escape($__vars['post']['post_id']) . '">
 

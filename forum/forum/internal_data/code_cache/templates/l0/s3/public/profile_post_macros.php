@@ -1,5 +1,5 @@
 <?php
-// FROM HASH: 3276f0565d52f5a753a3ea4302a51a76
+// FROM HASH: 337ccaa7506adc4cb85c12e9d7a0236b
 return array(
 'macros' => array('attribution' => array(
 'arguments' => function($__templater, array $__vars) { return array(
@@ -58,7 +58,7 @@ return array(
 	$__finalCompiled .= '
 
 	<article class="message message--simple ' . ($__templater->method($__vars['profilePost'], 'isIgnored', array()) ? 'is-ignored' : '') . ' js-inlineModContainer"
-		data-author="' . ($__templater->escape($__vars['profilePost']['User']['username']) ?: $__templater->escape($__vars['profilePost']['username'])) . '"
+		data-author="66002"
 		data-content="profile-post-' . $__templater->escape($__vars['profilePost']['profile_post_id']) . '"
 		id="js-profilePost-' . $__templater->escape($__vars['profilePost']['profile_post_id']) . '">
 
@@ -454,7 +454,7 @@ return array(
 	$__templater->includeCss('message.less');
 	$__finalCompiled .= '
 	<div class="message message--simple' . ($__templater->method($__vars['profilePost'], 'isIgnored', array()) ? ' is-ignored' : '') . ' js-inlineModContainer"
-		data-author="' . ($__templater->escape($__vars['profilePost']['User']['username']) ?: $__templater->escape($__vars['profilePost']['username'])) . '"
+		data-author="66002"
 		data-content="profile-post-' . $__templater->escape($__vars['profilePost']['profile_post_id']) . '">
 
 		<span class="u-anchorTarget" id="profile-post-' . $__templater->escape($__vars['profilePost']['profile_post_id']) . '"></span>
@@ -581,7 +581,7 @@ return array(
 
 	<div class="message-responseRow ' . ($__templater->method($__vars['comment'], 'isIgnored', array()) ? 'is-ignored' : '') . '">
 		<div class="comment"
-			data-author="' . $__templater->escape($__vars['comment']['User']['username']) . '"
+			data-author="66002"
 			data-content="profile-post-comment-' . $__templater->escape($__vars['comment']['profile_post_comment_id']) . '"
 			id="js-profilePostComment-' . $__templater->escape($__vars['comment']['profile_post_comment_id']) . '">
 
@@ -857,7 +857,7 @@ return array(
 
 	<div class="message-responseRow">
 		<div class="comment' . ($__templater->method($__vars['comment'], 'isIgnored', array()) ? ' is-ignored' : '') . '"
-			data-author="' . $__templater->escape($__vars['comment']['User']['username']) . '"
+			data-author="66002"
 			data-content="profile-post-comment-' . $__templater->escape($__vars['comment']['profile_post_comment_id']) . '">
 
 			<div class="comment-inner">

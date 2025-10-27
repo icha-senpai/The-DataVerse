@@ -1,5 +1,5 @@
 <?php
-// FROM HASH: 9eea1c1d8eb68aa003aa49239304cfa7
+// FROM HASH: 105a349fb89e2e57e87529b3e216317c
 return array(
 'macros' => array('message' => array(
 'arguments' => function($__templater, array $__vars) { return array(
@@ -15,7 +15,7 @@ return array(
 	';
 	$__templater->includeCss('message.less');
 	$__finalCompiled .= '
-	<article class="message message--conversationMessage ' . ($__templater->method($__vars['message'], 'isIgnored', array()) ? ' is-ignored' : '') . ' ' . ($__templater->method($__vars['message'], 'isUnread', array($__vars['lastRead'], )) ? 'is-unread' : '') . ' js-message" data-author="' . ($__templater->escape($__vars['message']['User']['username']) ?: $__templater->escape($__vars['message']['username'])) . '">
+	<article class="message message--conversationMessage ' . ($__templater->method($__vars['message'], 'isIgnored', array()) ? ' is-ignored' : '') . ' ' . ($__templater->method($__vars['message'], 'isUnread', array($__vars['lastRead'], )) ? 'is-unread' : '') . ' js-message" data-author="66002">
 		<span class="u-anchorTarget" id="convMessage-' . $__templater->escape($__vars['message']['message_id']) . '"></span>
 		<div class="message-inner">
 			<div class="message-cell message-cell--user">

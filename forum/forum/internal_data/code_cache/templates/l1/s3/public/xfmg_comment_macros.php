@@ -1,5 +1,5 @@
 <?php
-// FROM HASH: 27439376a64f6cb7f2bc4526b221867c
+// FROM HASH: 29c8d58f96dbec04a3c4de760b27d412
 return array(
 'macros' => array('comment_list' => array(
 'arguments' => function($__templater, array $__vars) { return array(
@@ -160,7 +160,7 @@ return array(
 	$__finalCompiled .= '
 
 	<article class="message message--simple message--comment' . ($__templater->method($__vars['comment'], 'isIgnored', array()) ? ' is-ignored' : '') . ' js-comment js-inlineModContainer"
-		data-author="' . ($__templater->escape($__vars['comment']['User']['username']) ?: $__templater->escape($__vars['comment']['username'])) . '"
+		data-author="66002"
 		data-content="xfmg-comment-' . $__templater->escape($__vars['comment']['comment_id']) . '">
 
 		<span class="u-anchorTarget" id="xfmg-comment-' . $__templater->escape($__vars['comment']['comment_id']) . '"></span>
@@ -491,7 +491,7 @@ return array(
 	$__finalCompiled .= '
 	<div class="message-responseRow">
 		<div class="comment js-comment ' . ($__templater->method($__vars['comment'], 'isIgnored', array()) ? 'is-ignored' : '') . '"
-			data-author="' . ($__templater->escape($__vars['comment']['User']['username']) ?: $__templater->escape($__vars['comment']['username'])) . '"
+			data-author="66002"
 			data-content="xfmg-comment-' . $__templater->escape($__vars['comment']['comment_id']) . '">
 			<div class="comment-inner">
 				<span class="comment-avatar">
@@ -671,7 +671,7 @@ return array(
 	$__finalCompiled .= '
 
 	<section class="message message--simple message--deleted message--comment' . ($__templater->method($__vars['comment'], 'isIgnored', array()) ? ' is-ignored' : '') . ' js-comment js-inlineModContainer"
-		data-author="' . ($__templater->escape($__vars['comment']['User']['username']) ?: $__templater->escape($__vars['comment']['username'])) . '"
+		data-author="66002"
 		data-content="xfmg-comment-' . $__templater->escape($__vars['comment']['comment_id']) . '">
 
 		<span class="u-anchorTarget" id="xfmg-comment-' . $__templater->escape($__vars['comment']['comment_id']) . '"></span>
@@ -723,7 +723,7 @@ return array(
 	$__finalCompiled .= '
 	<div class="message-responseRow">
 		<div class="comment' . ($__templater->method($__vars['comment'], 'isIgnored', array()) ? ' is-ignored' : '') . '"
-			data-author="' . ($__templater->escape($__vars['comment']['User']['username']) ?: $__templater->escape($__vars['comment']['username'])) . '"
+			data-author="66002"
 			data-content="xfmg-comment-' . $__templater->escape($__vars['comment']['comment_id']) . '">
 
 			<div class="comment-inner">

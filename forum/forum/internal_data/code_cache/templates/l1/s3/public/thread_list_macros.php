@@ -1,5 +1,5 @@
 <?php
-// FROM HASH: d6e0b8e923bed1e00002c80b48fde5d7
+// FROM HASH: b0d9e818a7775e2e2c4ac631c89387bb
 return array(
 'macros' => array('item' => array(
 'arguments' => function($__templater, array $__vars) { return array(
@@ -542,7 +542,7 @@ return array(
 	$__templater->includeCss('structured_list.less');
 	$__finalCompiled .= '
 
-	<div class="structItem structItem--thread' . ($__vars['thread']['prefix_id'] ? (' is-prefix' . $__templater->escape($__vars['thread']['prefix_id'])) : '') . ($__templater->method($__vars['thread'], 'isIgnored', array()) ? ' is-ignored' : '') . ((($__templater->method($__vars['thread'], 'isUnread', array()) AND (!$__vars['forceRead']))) ? ' is-unread' : '') . (($__vars['thread']['discussion_state'] == 'moderated') ? ' is-moderated' : '') . (($__vars['thread']['discussion_state'] == 'deleted') ? ' is-deleted' : '') . ' js-inlineModContainer js-threadListItem-' . $__templater->escape($__vars['thread']['thread_id']) . '" data-author="' . ($__templater->escape($__vars['thread']['User']['username']) ?: $__templater->escape($__vars['thread']['username'])) . '">
+	<div class="structItem structItem--thread' . ($__vars['thread']['prefix_id'] ? (' is-prefix' . $__templater->escape($__vars['thread']['prefix_id'])) : '') . ($__templater->method($__vars['thread'], 'isIgnored', array()) ? ' is-ignored' : '') . ((($__templater->method($__vars['thread'], 'isUnread', array()) AND (!$__vars['forceRead']))) ? ' is-unread' : '') . (($__vars['thread']['discussion_state'] == 'moderated') ? ' is-moderated' : '') . (($__vars['thread']['discussion_state'] == 'deleted') ? ' is-deleted' : '') . ' js-inlineModContainer js-threadListItem-' . $__templater->escape($__vars['thread']['thread_id']) . '" data-author="66002">
 
 	' . $__templater->renderExtension('icon_cell', $__vars, $__extensions) . '
 

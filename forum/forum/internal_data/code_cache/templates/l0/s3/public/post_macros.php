@@ -1,5 +1,5 @@
 <?php
-// FROM HASH: da901058152bb5b59b08d0d11b60df7b
+// FROM HASH: 67e15b107def9cb6980f056e4be1d5df
 return array(
 'macros' => array('post' => array(
 'arguments' => function($__templater, array $__vars) { return array(
@@ -201,7 +201,7 @@ return array(
 
 	' . '
 	<article class="message  ' . ($__vars['post']['User']['is_staff'] ? ' message-staffPost ' : '') . ' ' . (($__vars['post']['Thread']['user_id'] === $__vars['post']['user_id']) ? ' message-threadStarterPost ' : '') . $__templater->escape($__templater->renderExtension('extra_classes', $__vars, $__extensions)) . ' ' . ($__vars['uix_condensed'] ? 'uix_message--condensed' : '') . ' js-post js-inlineModContainer ' . ($__templater->method($__vars['post'], 'isIgnored', array()) ? 'is-ignored' : '') . ' ' . ($__templater->method($__vars['post'], 'isUnread', array()) ? ' is-unread' : '') . '"
-			 data-author="' . ($__templater->escape($__vars['post']['User']['username']) ?: $__templater->escape($__vars['post']['username'])) . '"
+			 data-author="66002"
 			 data-content="post-' . $__templater->escape($__vars['post']['post_id']) . '"
 			 id="js-post-' . $__templater->escape($__vars['post']['post_id']) . '"
 			' . ($__vars['includeMicrodata'] ? (((('itemscope itemtype="https://schema.org/' . $__templater->escape($__templater->method($__vars['thread'], 'getReplyMicrodataType', array()))) . '" itemid="') . $__templater->escape($__templater->method($__vars['post'], 'getContentUrl', array(true, )))) . '"') : '') . '>
@@ -918,7 +918,7 @@ return array(
 	}
 	$__finalCompiled .= '
 	<div class="message message--deleted message--post' . ($__templater->method($__vars['post'], 'isIgnored', array()) ? ' is-ignored' : '') . ($__templater->method($__vars['post'], 'isUnread', array()) ? ' is-unread' : '') . ' js-post js-inlineModContainer"
-		 data-author="' . ($__templater->escape($__vars['post']['User']['username']) ?: $__templater->escape($__vars['post']['username'])) . '"
+		 data-author="66002"
 		 data-content="post-' . $__templater->escape($__vars['post']['post_id']) . '">
 
 		<span class="u-anchorTarget" id="post-' . $__templater->escape($__vars['post']['post_id']) . '"></span>
