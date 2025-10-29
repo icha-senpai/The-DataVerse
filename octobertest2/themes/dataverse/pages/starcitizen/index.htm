@@ -4,36 +4,112 @@ title = "Star Citizen"
 ==
 
 {# ---------------------------------------------- #}
-{# Manually toggle between local and production   #}
+{# Environment toggles                            #}
 {# ---------------------------------------------- #}
 
 {# LOCAL (Laragon) #}
-{% set wiki_url = 'http://wiki.test/index.php/Star_Citizen' %}
+{% set forum_url   = 'http://forum.test/forum/' %}
+{% set wiki_url    = 'http://wiki.test/index.php/Main_Page' %}
 
-{# PRODUCTION (ichaa.net) - uncomment for deployment #}
+{# PRODUCTION (ichaa.net) - uncomment when deploying #}
 {#
-{% set wiki_url = 'https://wiki.ichaa.net/index.php/Star_Citizen' %}
+{% set forum_url   = 'https://forum.ichaa.net/forum/' %}
+{% set wiki_url    = 'https://wiki.ichaa.net/Main_Page' %}
 #}
 
-<section class="tv min-h-[90vh] pt-28 pb-16 bg-dv-surface/90 text-dv-text">
-  <div class="max-w-5xl mx-auto px-6 text-center">
+{% set cargo_url = '/starcitizen/cargo' %}
+{% set contracts_url = '/starcitizen/contracts' %}
+{% set twitch_url = '/twitch' %}
 
-    <h1 class="text-5xl font-tilt text-dv-accent mb-4">Star Citizen</h1>
-    <p class="text-gray-300 mb-10">
-      The command hub for your DataVerse Star Citizen tools and info.
-    </p>
+{# ---------------------------------------------- #}
+{# Page content                                   #}
+{# ---------------------------------------------- #}
 
-    <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
-      <a href="{{ 'starcitizen/table'|page }}"
-         class="px-8 py-3 rounded-lg border border-dv-accent text-dv-accent hover:text-dv-accent2 hover:border-dv-accent2 transition-colors duration-300 font-tilt">
-        Cargo Tracker
-      </a>
-      <a href="{{ wiki_url }}"
-         target="_blank"
-         class="px-8 py-3 rounded-lg border border-dv-accent text-dv-accent hover:text-dv-accent2 hover:border-dv-accent2 transition-colors duration-300 font-tilt">
-        Open Wiki
-      </a>
+<div class="relative min-h-[calc(100vh-6rem)] overflow-hidden bg-dv-surface">
+
+  {# Neon glow grid #}
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0">
+    <div class="absolute -top-40 left-1/2 h-[45rem] w-[45rem] -translate-x-1/2 rounded-full blur-3xl opacity-30 bg-gradient-to-r from-dv-accent to-dv-accent2"></div>
+    <div class="absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)]">
+      <div class="grid grid-cols-12 h-full opacity-10">
+        {% for i in 1..12 %}
+          <div class="border-r border-dv-accent/20"></div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <section class="relative mx-auto max-w-6xl px-6 pt-20 pb-14 sm:pt-28 sm:pb-20 text-center">
+    <header>
+      <p class="mb-3 inline-flex items-center gap-2 rounded-full border border-dv-accent/20 px-3 py-1 text-xs tracking-wider text-dv-accent">
+        <span class="h-2 w-2 rounded-full bg-dv-accent2 animate-pulse"></span>
+        The DataVerse • Star Citizen Division
+      </p>
+
+      <h1 class="font-orbitron text-4xl sm:text-5xl md:text-6xl font-black leading-tight">
+        <span class="bg-gradient-to-r from-dv-accent to-dv-accent2 bg-clip-text text-transparent drop-shadow">
+          Flight. Trade. Domination.
+        </span>
+      </h1>
+      <p class="mt-4 text-dv-accent/80 max-w-2xl mx-auto">
+        The interstellar node of The DataVerse. Real-time trade data, cargo manifests, and mission logs — all under one command screen.
+      </p>
+
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+        <a href="{{ cargo_url }}"
+           class="rounded-2xl bg-dv-accent px-5 py-3 font-semibold text-dv-surface shadow-lg shadow-dv-accent/30 hover:shadow-dv-accent/50 transition">
+          Open Cargo Tracker
+        </a>
+        <a href="{{ contracts_url }}"
+           class="rounded-2xl border border-dv-accent2/40 px-5 py-3 font-semibold text-dv-accent2 hover:bg-dv-accent2/10 transition">
+          Browse Contracts
+        </a>
+        <a href="{{ forum_url }}"
+           class="rounded-2xl border border-dv-accent/40 px-5 py-3 font-semibold text-dv-accent hover:bg-dv-accent/10 transition">
+          Fleet Forum
+        </a>
+      </div>
+    </header>
+
+    <div class="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <!-- Card: Cargo Tracker -->
+      <article class="rounded-2xl border border-dv-accent/20 bg-black/30 p-6 backdrop-blur-md hover:border-dv-accent/40 transition">
+        <h3 class="font-orbitron text-xl text-dv-accent">Cargo Tracker</h3>
+        <p class="mt-2 text-dv-accent/80">Commodity data across Stanton and Pyro. UEX-linked, automated, and as ruthless as the market itself.</p>
+      </article>
+
+      <!-- Card: Contracts -->
+      <article class="rounded-2xl border border-dv-accent2/20 bg-black/30 p-6 backdrop-blur-md hover:border-dv-accent2/40 transition">
+        <h3 class="font-orbitron text-xl text-dv-accent2">Contracts</h3>
+        <p class="mt-2 text-dv-accent/80">Cargo hauls, recovery ops, black-ops delivery. Track mission metrics, SCU totals, and payout data live.</p>
+      </article>
+
+      <!-- Card: Wiki -->
+      <article class="rounded-2xl border border-dv-accent/20 bg-black/30 p-6 backdrop-blur-md hover:border-dv-accent/40 transition">
+        <h3 class="font-orbitron text-xl text-dv-accent">Wiki</h3>
+        <p class="mt-2 text-dv-accent/80">Ship profiles, loadouts, system maps, and market intelligence. Explore it all in the <a class="underline decoration-dv-accent2/40 hover:decoration-dv-accent2" href="{{ wiki_url }}">DataVerse Wiki</a>.</p>
+      </article>
     </div>
 
-  </div>
-</section>
+    <div class="mt-16 rounded-2xl border border-dv-accent/20 p-6 lg:p-8 bg-gradient-to-b from-white/5 to-transparent">
+      <div class="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-center">
+        <div>
+          <h2 class="font-orbitron text-2xl text-dv-accent">Status: Online Operations</h2>
+          <p class="mt-1 text-dv-accent/80">Data streams synced. All contracts current. UEX feeds are hot — prepare for deployment.</p>
+        </div>
+        <div class="flex gap-3">
+          <a href="{{ twitch_url }}" class="rounded-xl bg-dv-accent2/90 px-4 py-2 font-semibold text-white shadow-lg shadow-dv-accent2/30 hover:bg-dv-accent2 transition">Watch Missions</a>
+          <a href="{{ forum_url }}" class="rounded-xl border border-dv-accent/40 px-4 py-2 font-semibold text-dv-accent hover:bg-dv-accent/10 transition">Fleet Comm</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="relative mx-auto max-w-6xl px-6 pb-14 text-center text-sm text-dv-accent/60">
+    <span class="opacity-70">The DataVerse • Star Citizen Division</span>
+    <span class="mx-2 opacity-30">•</span>
+    <a href="{{ forum_url }}" class="underline decoration-dv-accent/30 hover:decoration-dv-accent">Forum</a>
+    <span class="mx-2 opacity-30">•</span>
+    <a href="{{ wiki_url }}" class="underline decoration-dv-accent/30 hover:decoration-dv-accent">Wiki</a>
+  </footer>
+</div>

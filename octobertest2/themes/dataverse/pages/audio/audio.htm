@@ -1,16 +1,15 @@
-url = "/osu"
+title = "Audio"
 layout = "default"
-title = "Osu!"
+url = "/audio"
 ==
 
-
 {# ---------------------------------------------- #}
-{# Local vs production routing                    #}
+{# Environment toggles                            #}
 {# ---------------------------------------------- #}
 
 {# LOCAL (Laragon) #}
 {% set forum_url   = 'http://forum.test/forum/' %}
-{% set wiki_url    = 'https://bookstack.test/' %}
+{% set wiki_url    = 'http://wiki.test/index.php/Main_Page' %}
 
 {# PRODUCTION (ichaa.net) - uncomment when deploying #}
 {#
@@ -18,9 +17,9 @@ title = "Osu!"
 {% set wiki_url    = 'https://wiki.ichaa.net/Main_Page' %}
 #}
 
-{% set beatmap_url  = 'https://osu.ppy.sh/beatmapsets' %}
-{% set stats_url    = 'https://osu.ppy.sh/rankings/osu/global' %}
-{% set watch_url    = '/twitch/watch' %}
+{% set music_url = '/audio/music' %}
+{% set audiobooks_url = '/audio/audiobooks' %}
+{% set mixes_url = '/audio/mixes' %}
 
 {# ---------------------------------------------- #}
 {# Page content                                   #}
@@ -28,9 +27,9 @@ title = "Osu!"
 
 <div class="relative min-h-[calc(100vh-6rem)] overflow-hidden bg-dv-surface">
 
-  {# background pulse grid #}
+  {# Pulsing audio glow #}
   <div aria-hidden="true" class="pointer-events-none absolute inset-0">
-    <div class="absolute -top-40 left-1/2 h-[40rem] w-[40rem] -translate-x-1/2 rounded-full blur-3xl opacity-30 bg-gradient-to-r from-dv-accent2 to-dv-accent"></div>
+    <div class="absolute -top-40 left-1/2 h-[45rem] w-[45rem] -translate-x-1/2 rounded-full blur-3xl opacity-30 bg-gradient-to-r from-dv-accent2 via-dv-accent to-purple-500"></div>
     <div class="absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)]">
       <div class="grid grid-cols-12 h-full opacity-10">
         {% for i in 1..12 %}
@@ -44,73 +43,73 @@ title = "Osu!"
     <header>
       <p class="mb-3 inline-flex items-center gap-2 rounded-full border border-dv-accent2/20 px-3 py-1 text-xs tracking-wider text-dv-accent2">
         <span class="h-2 w-2 rounded-full bg-dv-accent animate-pulse"></span>
-        The DataVerse • osu! Node
+        The DataVerse • Audio Division
       </p>
 
       <h1 class="font-orbitron text-4xl sm:text-5xl md:text-6xl font-black leading-tight">
         <span class="bg-gradient-to-r from-dv-accent2 to-dv-accent bg-clip-text text-transparent drop-shadow">
-          Rhythm Is the Law
+          The Sound of Data
         </span>
       </h1>
       <p class="mt-4 text-dv-accent/80 max-w-2xl mx-auto">
-        Precision meets neon delirium. Dive into beatmaps, scoreboards, and community charts built for speed demons and timing gods.
+        From audiobooks to synthwave soundscapes — the Audio Division archives the hum, the rhythm, and the pulse that drives The DataVerse.
       </p>
 
       <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
-        <a href="{{ beatmap_url }}"
+        <a href="{{ music_url }}"
            class="rounded-2xl bg-dv-accent2 px-5 py-3 font-semibold text-dv-surface shadow-lg shadow-dv-accent2/30 hover:shadow-dv-accent2/50 transition">
-          Explore Beatmaps
+          Explore Music
         </a>
-        <a href="{{ stats_url }}"
+        <a href="{{ audiobooks_url }}"
            class="rounded-2xl border border-dv-accent2/40 px-5 py-3 font-semibold text-dv-accent2 hover:bg-dv-accent2/10 transition">
-          View Player Stats
+          Listen to Audiobooks
         </a>
         <a href="{{ forum_url }}"
            class="rounded-2xl border border-dv-accent/40 px-5 py-3 font-semibold text-dv-accent hover:bg-dv-accent/10 transition">
-          Join the Forum
+          Join the Discussion
         </a>
       </div>
     </header>
 
     <div class="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      <!-- Card: Beatmaps -->
+      <!-- Card: Music -->
       <article class="rounded-2xl border border-dv-accent2/20 bg-black/30 p-6 backdrop-blur-md hover:border-dv-accent2/40 transition">
-        <h3 class="font-orbitron text-xl text-dv-accent2">Beatmaps</h3>
-        <p class="mt-2 text-dv-accent/80">Your training grounds. Curated maps and custom packs synchronized with The DataVerse aesthetic.</p>
+        <h3 class="font-orbitron text-xl text-dv-accent2">Music Library</h3>
+        <p class="mt-2 text-dv-accent/80">Synthwave, ambient, and cinematic tracks crafted or curated for the Neon Trinity. Let it loop forever.</p>
       </article>
 
-      <!-- Card: Rankings -->
-      <article class="rounded-2xl border border-dv-accent2/20 bg-black/30 p-6 backdrop-blur-md hover:border-dv-accent2/40 transition">
-        <h3 class="font-orbitron text-xl text-dv-accent2">Stats & Leaderboards</h3>
-        <p class="mt-2 text-dv-accent/80">See who’s dominating the neon grid. Every tap, every miss—etched into data and legend.</p>
+      <!-- Card: Audiobooks -->
+      <article class="rounded-2xl border border-dv-accent/20 bg-black/30 p-6 backdrop-blur-md hover:border-dv-accent/40 transition">
+        <h3 class="font-orbitron text-xl text-dv-accent">Audiobooks</h3>
+        <p class="mt-2 text-dv-accent/80">Voices that burn through static. Lore readings, sci-fi classics, and DataVerse tales narrated in full spectrum.</p>
       </article>
 
-      <!-- Card: Wiki -->
+      <!-- Card: Mixes -->
       <article class="rounded-2xl border border-dv-accent2/20 bg-black/30 p-6 backdrop-blur-md hover:border-dv-accent2/40 transition">
-        <h3 class="font-orbitron text-xl text-dv-accent2">Guides & Wiki</h3>
-        <p class="mt-2 text-dv-accent/80">Read rhythm breakdowns, mod tips, and player profiles on the <a class="underline decoration-dv-accent/40 hover:decoration-dv-accent" href="{{ wiki_url }}">DataVerse Wiki</a>.</p>
+        <h3 class="font-orbitron text-xl text-dv-accent2">Mixes & Loops</h3>
+        <p class="mt-2 text-dv-accent/80">Neon cafe ambience. Ship hums. Coding sessions. Tune in for endless focus soundscapes.</p>
       </article>
     </div>
 
     <div class="mt-16 rounded-2xl border border-dv-accent2/20 p-6 lg:p-8 bg-gradient-to-b from-white/5 to-transparent">
       <div class="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-center">
         <div>
-          <h2 class="font-orbitron text-2xl text-dv-accent2">Stay in Sync</h2>
-          <p class="mt-1 text-dv-accent/80">All rhythm, no filler. Streams, scores, and updates converge here in pure data harmony.</p>
+          <h2 class="font-orbitron text-2xl text-dv-accent2">Status: Streaming Active</h2>
+          <p class="mt-1 text-dv-accent/80">All frequencies operational. Audio logs and playlists synced across the network.</p>
         </div>
         <div class="flex gap-3">
-          <a href="{{ watch_url }}" class="rounded-xl bg-dv-accent/90 px-4 py-2 font-semibold text-white shadow-lg shadow-dv-accent/30 hover:bg-dv-accent transition">Watch Live</a>
-          <a href="{{ forum_url }}" class="rounded-xl border border-dv-accent2/40 px-4 py-2 font-semibold text-dv-accent2 hover:bg-dv-accent2/10 transition">Discuss</a>
+          <a href="{{ music_url }}" class="rounded-xl bg-dv-accent/90 px-4 py-2 font-semibold text-white shadow-lg shadow-dv-accent/30 hover:bg-dv-accent transition">Play Music</a>
+          <a href="{{ audiobooks_url }}" class="rounded-xl border border-dv-accent2/40 px-4 py-2 font-semibold text-dv-accent2 hover:bg-dv-accent2/10 transition">Start Listening</a>
         </div>
       </div>
     </div>
   </section>
 
   <footer class="relative mx-auto max-w-6xl px-6 pb-14 text-center text-sm text-dv-accent/60">
-    <span class="opacity-70">The DataVerse • osu! Division</span>
+    <span class="opacity-70">The DataVerse • Audio Division</span>
     <span class="mx-2 opacity-30">•</span>
-    <a href="{{ forum_url }}" class="underline decoration-dv-accent2/30 hover:decoration-dv-accent2">Forum</a>
+    <a href="{{ forum_url }}" class="underline decoration-dv-accent/30 hover:decoration-dv-accent">Forum</a>
     <span class="mx-2 opacity-30">•</span>
-    <a href="{{ wiki_url }}" class="underline decoration-dv-accent2/30 hover:decoration-dv-accent2">Wiki</a>
+    <a href="{{ wiki_url }}" class="underline decoration-dv-accent/30 hover:decoration-dv-accent">Wiki</a>
   </footer>
 </div>

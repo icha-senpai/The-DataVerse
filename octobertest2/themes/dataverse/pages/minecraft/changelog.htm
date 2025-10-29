@@ -3,6 +3,53 @@ layout = "default"
 title = "Change Log" 
 ==
 
+<div class="relative min-h-[calc(100vh-6rem)] flex flex-col items-center justify-center bg-dv-surface text-center overflow-hidden">
 
-<h1>Welcome to The Minecraft Change Log Page</h1>
-<p>Locally running on Laragon.</p>
+  {# Neon gradient background #}
+  <div aria-hidden="true" class="absolute inset-0">
+    <div class="absolute -top-40 left-1/2 h-[50rem] w-[50rem] -translate-x-1/2 rounded-full blur-3xl opacity-25 bg-gradient-to-r from-dv-accent to-dv-accent2"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.05)_0%,transparent_70%)]"></div>
+  </div>
+
+  {# Content #}
+  <main class="relative z-10 px-6">
+    <h1 class="font-orbitron text-4xl sm:text-5xl md:text-6xl font-black leading-tight">
+      <span class="bg-gradient-to-r from-dv-accent to-dv-accent2 bg-clip-text text-transparent drop-shadow">
+        System Node Offline
+      </span>
+    </h1>
+    <p class="mt-4 text-dv-accent/80 max-w-2xl mx-auto">
+      This section of The DataVerse is still under construction.  
+      Engineers are welding code and ghosts behind the firewall.
+    </p>
+
+    <div class="mt-10 flex flex-wrap justify-center gap-3">
+      <a href="/" class="rounded-2xl bg-dv-accent px-5 py-3 font-semibold text-dv-surface shadow-lg shadow-dv-accent/30 hover:shadow-dv-accent/50 transition">
+        Return to Main Hub
+      </a>
+      <a href="mailto:admin@ichaa.net" class="rounded-2xl border border-dv-accent2/40 px-5 py-3 font-semibold text-dv-accent2 hover:bg-dv-accent2/10 transition">
+        Contact Command
+      </a>
+    </div>
+  </main>
+
+  {# Optional subtle animated grid overlay #}
+  <div aria-hidden="true" class="absolute inset-0 opacity-10 pointer-events-none animate-[pulse_6s_infinite]">
+    <div class="grid grid-cols-12 h-full">
+      {% for i in 1..12 %}
+        <div class="border-r border-dv-accent/20"></div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <footer class="absolute bottom-10 text-sm text-dv-accent/60">
+    <span class="opacity-70">The DataVerse • Offline Node</span>
+  </footer>
+</div>
+
+<style>
+@keyframes pulse {
+  0%, 100% { opacity: 0.08; }
+  50% { opacity: 0.2; }
+}
+</style>

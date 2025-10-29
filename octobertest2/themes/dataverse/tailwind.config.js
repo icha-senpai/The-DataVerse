@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   content: [
     './themes/**/*.htm',
     './themes/**/*.html',
@@ -10,7 +10,7 @@ module.exports = {
     './plugins/**/*.php',
     './modules/**/*.{php,js,vue,ts}',
   ],
-  important: '.tv',
+
   darkMode: 'class', // or 'media'
   theme: {
     extend: {
@@ -22,9 +22,11 @@ module.exports = {
       },
       colors: {
         'dv-bg': '#000000',     // pure black
-        'dv-text': '#ffffff',   // pure white
+        'dv-text': '#cfd8e3',      // default body text (grayish-white, easy on eyes)
         'dv-accent': '#00ffff', // cyan glow
-        'dv-accent2': '#ff00ff' // magenta glow
+        'dv-accent2': '#ff00ff', // magenta glow
+        'dv-textSoft': '#b8e6ff',       // soft cyan-white for readable paragraphs
+        'dv-textAlt': '#ffb0da',      // soft pinkish for accent text
       },
     },
   },

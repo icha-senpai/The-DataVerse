@@ -17,7 +17,10 @@ class NavBuilder
         }
 
         // Parse the base file — this structure stays untouched
-        $nav = Yaml::parseFile($basePath);
+        $baseNav = Yaml::parseFile($basePath);
+        $currentNav = File::exists($targetPath) ? Yaml::parseFile($targetPath) : [];
+        $nav = self::mergeNav($baseNav, $currentNav);
+
 
         // Find "The Verse" node
         $verseIndex = null;
@@ -36,7 +39,11 @@ class NavBuilder
         $verseChildren = $nav['main'][$verseIndex]['children'] ?? [];
 
         // Collect existing URLs
-        $existingUrls = self::collectUrls($verseChildren);
+        $existingUrls = array_unique(array_merge(
+            self::collectUrls($verseChildren),
+            self::collectUrls($currentNav['main'][$verseIndex]['children'] ?? [])
+        ));
+
 
         // Add new CMS pages
         $pages = Page::all();
@@ -94,4 +101,19 @@ class NavBuilder
         }
         return $urls;
     }
+    protected static function mergeNav(array $base, array $manual): array
+    {
+        foreach ($manual as $key => $value) {
+            // If key exists and both are arrays → merge recursively
+            if (isset($base[$key]) && is_array($value) && is_array($base[$key])) {
+                $base[$key] = self::mergeNav($base[$key], $value);
+            } else {
+                // Manual entries override or extend base
+                $base[$key] = $value;
+            }
+        }
+        return $base;
+    }
 }
+
+

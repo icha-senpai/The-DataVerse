@@ -22,9 +22,18 @@ main:
       -
         title: Twitch
         url: /twitch
+        children:
+          - { title: Overview, url: /twitch }
+          - { title: Watch, url: /twitch/watch }
       -
         title: Osu!
         url: /osu
       -
         title: Wiki
         url: wiki_link
+      -
+        title: Audio
+        url: /audio
+      -
+        title: Books
+        url: /books

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="tv dark" data-theme="dataverse">
+<html lang="en" class="dark" data-theme="dataverse">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,7 +7,10 @@
 
     {% framework extras %}
     {% styles %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/handsontable@16.1.1/styles/handsontable.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/handsontable@16.1.1/styles/ht-theme-main.min.css">
     <link rel="stylesheet" href="{{ 'assets/vendor/tailwind/tailwind.css'|theme }}">
+    {% styles %}
   </head>
 
   <body class="bg-dv-bg text-dv-text min-h-screen flex flex-col font-tilt">
@@ -21,5 +24,13 @@
     {% partial 'site/footer' %}
 
     {% scripts %}
+
+    {# ✅ Load cargo scripts only on the cargo page #}
+    {% if this.page.id == 'cargo' %}
+      <script src="https://cdn.jsdelivr.net/npm/numbro@2.0.6/numbro.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/handsontable@16.1.1/dist/handsontable.full.min.js"></script>
+      <script src="{{ 'assets/js/cargo-table.js'|theme }}"></script>
+
+    {% endif %}
   </body>
 </html>

@@ -4,22 +4,112 @@ title = "twitch"
 ==
 
 
-<!-- Twitch Embed Page -->
-<section class="tv w-full flex justify-center items-center 
-                p-6 pt-28 bg-dv-surface/90 shadow-[0_0_25px_#0ff3,inset_0_0_10px_#f0f3]
-                rounded-none min-h-[90vh]">
 
-  <!-- Video Player -->
-  <div class="w-full max-w-[1600px] rounded-xl overflow-hidden 
-              border border-dv-accent shadow-lg aspect-video">
-    <iframe
-      src="https://player.twitch.tv/?channel=IchaTV&parent=octobertest2.test&parent=ichaa.net&parent=localhost"
-      frameborder="0"
-      allowfullscreen="true"
-      scrolling="no"
-      class="w-full h-full"
-    ></iframe>
+{# ---------------------------------------------- #}
+{# Environment toggles (local vs production)      #}
+{# ---------------------------------------------- #}
+
+{# LOCAL (Laragon) #}
+{% set forum_url   = 'http://forum.test/forum/' %}
+{% set wiki_url    = 'https://bookstack.test/' %}
+
+{# PRODUCTION (ichaa.net) - uncomment when deploying #}
+{#
+{% set forum_url   = 'https://forum.ichaa.net/forum/' %}
+{% set wiki_url    = 'https://wiki.ichaa.net/Main_Page' %}
+#}
+
+{# Internal routes #}
+{% set watch_url    = '/twitch/watch' %}
+{% set schedule_url = '/twitch/schedule' %}
+
+{# ---------------------------------------------- #}
+{# Page                                           #}
+{# ---------------------------------------------- #}
+<div class="relative min-h-[calc(100vh-6rem)] overflow-hidden bg-dv-surface">
+
+  {# soft neon grid/glow background #}
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0">
+    <div class="absolute -top-40 left-1/2 h-[40rem] w-[40rem] -translate-x-1/2 rounded-full blur-3xl opacity-30 bg-gradient-to-r from-dv-accent to-dv-accent2"></div>
+    <div class="absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)]">
+      <div class="grid grid-cols-12 h-full opacity-10">
+        {% for i in 1..12 %}
+          <div class="border-r border-dv-accent/20"></div>
+        {% endfor %}
+      </div>
+    </div>
   </div>
-</section>
 
+  <section class="relative mx-auto max-w-6xl px-6 pt-20 pb-14 sm:pt-28 sm:pb-20">
+    <header class="text-center">
+      <p class="mb-3 inline-flex items-center gap-2 rounded-full border border-dv-accent/20 px-3 py-1 text-xs tracking-wider text-dv-accent">
+        <span class="h-2 w-2 rounded-full bg-dv-accent2 animate-pulse"></span>
+        IchaTV • Neon Trinity Online
+      </p>
+      <h1 class="font-orbitron text-4xl sm:text-5xl md:text-6xl font-black leading-tight">
+        <span class="bg-gradient-to-r from-dv-accent to-dv-accent2 bg-clip-text text-transparent drop-shadow">
+          Welcome to the Twitch Deck
+        </span>
+      </h1>
+      <p class="mt-4 text-dv-accent/80 max-w-2xl mx-auto">
+        No embeds here—just the clean airlock. Choose your door: watch live, scan the schedule, or wander the archives like a data-ghost.
+      </p>
 
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+        <a href="{{ watch_url }}"
+           class="rounded-2xl bg-dv-accent px-5 py-3 font-semibold text-dv-surface shadow-lg shadow-dv-accent/30 hover:shadow-dv-accent/50 transition">
+          Go to Watch Page
+        </a>
+        <a href="{{ schedule_url }}"
+           class="rounded-2xl border border-dv-accent/40 px-5 py-3 font-semibold text-dv-accent hover:bg-dv-accent/10 transition">
+          Stream Schedule
+        </a>
+        <a href="{{ forum_url }}"
+           class="rounded-2xl border border-dv-accent2/40 px-5 py-3 font-semibold text-dv-accent2 hover:bg-dv-accent2/10 transition">
+          Community Forum
+        </a>
+      </div>
+    </header>
+
+    <div class="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <!-- Card: What to expect -->
+      <article class="rounded-2xl border border-dv-accent/20 bg-black/30 p-6 backdrop-blur-md hover:border-dv-accent/40 transition">
+        <h3 class="font-orbitron text-xl text-dv-accent">What You’ll See</h3>
+        <p class="mt-2 text-dv-accent/80">Star Citizen sorties, Minecraft contraptions, and the occasional code necromancy. High APM, higher chaos.</p>
+      </article>
+
+      <!-- Card: Schedule -->
+      <article class="rounded-2xl border border-dv-accent/20 bg-black/30 p-6 backdrop-blur-md hover:border-dv-accent/40 transition">
+        <h3 class="font-orbitron text-xl text-dv-accent">Schedule Intel</h3>
+        <p class="mt-2 text-dv-accent/80">The plan survives until chat arrives. Check the <a class="underline decoration-dv-accent/40 hover:decoration-dv-accent" href="{{ schedule_url }}">calendar</a> for intended stream windows.</p>
+      </article>
+
+      <!-- Card: Wiki -->
+      <article class="rounded-2xl border border-dv-accent/20 bg-black/30 p-6 backdrop-blur-md hover:border-dv-accent/40 transition">
+        <h3 class="font-orbitron text-xl text-dv-accent">Lore & Notes</h3>
+        <p class="mt-2 text-dv-accent/80">Build guides, ship loadouts, and VOD notes live in the <a class="underline decoration-dv-accent2/40 hover:decoration-dv-accent2" href="{{ wiki_url }}">DataVerse Wiki</a>. Bring a flashlight.</p>
+      </article>
+    </div>
+
+    <div class="mt-16 rounded-2xl border border-dv-accent/20 p-6 lg:p-8 bg-gradient-to-b from-white/5 to-transparent">
+      <div class="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-center">
+        <div>
+          <h2 class="font-orbitron text-2xl text-dv-accent">Status</h2>
+          <p class="mt-1 text-dv-accent/80">This page never auto-plays, never shouts. It’s the lobby. The action is one click deeper.</p>
+        </div>
+        <div class="flex gap-3">
+          <a href="{{ watch_url }}" class="rounded-xl bg-dv-accent2/90 px-4 py-2 font-semibold text-white shadow-lg shadow-dv-accent2/30 hover:bg-dv-accent2 transition">Enter Watch Page</a>
+          <a href="{{ schedule_url }}" class="rounded-xl border border-dv-accent/40 px-4 py-2 font-semibold text-dv-accent hover:bg-dv-accent/10 transition">View Schedule</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="relative mx-auto max-w-6xl px-6 pb-14 text-center text-sm text-dv-accent/60">
+    <span class="opacity-70">The DataVerse • IchaTV</span>
+    <span class="mx-2 opacity-30">•</span>
+    <a href="{{ forum_url }}" class="underline decoration-dv-accent/30 hover:decoration-dv-accent">Forum</a>
+    <span class="mx-2 opacity-30">•</span>
+    <a href="{{ wiki_url }}" class="underline decoration-dv-accent/30 hover:decoration-dv-accent">Wiki</a>
+  </footer>
+</div>
