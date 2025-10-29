@@ -31,6 +31,7 @@ node_modules/
 # 🗑️  CACHE / LOGS / TEMP FILES
 ########################################
 bootstrap/cache/
+/**/internal_data/
 internal_data/
 storage/
 cache/
