@@ -20,6 +20,16 @@
 
 <style>
 
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 15px #00eaff, inset 0 0 10px #00eaff; }
+  50% { box-shadow: 0 0 25px #ff00aa, inset 0 0 15px #ff00aa; }
+}
+
+#cargoTable {
+  animation: pulse 4s ease-in-out infinite;
+}
+
+
 .neon-glow {
   text-shadow: 0 0 10px #00eaff, 0 0 20px #00eaff, 0 0 40px #ff00aa;
 }
