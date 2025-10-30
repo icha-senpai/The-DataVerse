@@ -361,3 +361,10 @@ header .search-box.search-active:focus-within {
   display: inline-block;
   padding: vars.$s;
 }
+.dropdown-container:hover .dropdown-menu,
+.dropdown-container:focus-within .dropdown-menu {
+  display: block !important;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}

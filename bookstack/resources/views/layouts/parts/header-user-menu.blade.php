@@ -33,11 +33,7 @@
                 <div>{{ trans('preferences.my_account') }}</div>
             </a>
         </li>
-        <li role="presentation"><hr></li>
-        <li>
-            @include('common.dark-mode-toggle', ['classes' => 'icon-item', 'buttonRole' => 'menuitem'])
-        </li>
-        <li role="presentation"><hr></li>
+
         <li>
             @php
                 $logoutPath = match (config('auth.method')) {

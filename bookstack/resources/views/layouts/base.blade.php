@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ isset($locale) ? $locale->htmlLang() : config('app.default_locale') }}"
       dir="{{ isset($locale) ? $locale->htmlDirection() : 'auto' }}"
-      class="{{ setting()->getForCurrentUser('dark-mode-enabled') ? 'dark-mode ' : '' }}">
+      class="dark-mode">
 <head>
     <title>{{ isset($pageTitle) ? $pageTitle . ' | ' : '' }}{{ setting('app-name') }}</title>
 
@@ -18,6 +18,7 @@
     @stack('social-meta')
 
     <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ versioned_asset('dist/styles.css') }}">
 
     <!-- Icons -->
