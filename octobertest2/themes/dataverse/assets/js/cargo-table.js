@@ -1,30 +1,58 @@
 document.addEventListener("DOMContentLoaded", async () => {
+
+  /* ============================================================
+     Local Storage / Persistence Configuration
+     ------------------------------------------------------------
+     We store:
+     - Table row data
+     - Column header names
+     - Timestamp for expiration logic
+
+     Table auto-resets if 60 minutes pass without saving.
+     ============================================================ */
+
   const STORAGE_KEY = "dataverse_cargo_data";
-  const STORAGE_TIME = "dataverse_cargo_timestamp";
   const HEADER_KEY = "dataverse_cargo_headers";
+  const STORAGE_TIME = "dataverse_cargo_timestamp";
   const EXPIRY_MINUTES = 60;
 
-  const COL_KEYS = ["locA", "locB", "locC", "locD", "locE"];
-  const COL_INDEX = { commodity: 0, locA: 1, locB: 2, locC: 3, locD: 4, locE: 5, total: 6, price: 7 };
-
+  // Returns true if stored data is older than defined expiry window
   const isExpired = () => {
-    const t = localStorage.getItem(STORAGE_TIME);
-    return !t || (Date.now() - +t) / 60000 > EXPIRY_MINUTES;
+    const t = Number(localStorage.getItem(STORAGE_TIME) || 0);
+    const diff = (Date.now() - t) / 60000;
+    return diff > EXPIRY_MINUTES;
   };
 
+  // Save table data + timestamp
   const saveData = (data) => {
-    const clean = data.slice(0, data.length - 1);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(clean));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
     localStorage.setItem(STORAGE_TIME, Date.now().toString());
   };
 
-  const loadHeaders = () => JSON.parse(localStorage.getItem(HEADER_KEY) || "[]");
+  // Load saved table data unless expired
+  const loadData = () => {
+    if (isExpired()) return [];
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+  };
+
+  // Save array of column headers + timestamp
   const saveHeaders = (arr) => {
     localStorage.setItem(HEADER_KEY, JSON.stringify(arr));
     localStorage.setItem(STORAGE_TIME, Date.now().toString());
   };
 
-  // fetch commodities
+  // Load saved header labels unless expired
+  const loadHeaders = () => {
+    if (isExpired()) return [];
+    return JSON.parse(localStorage.getItem(HEADER_KEY) || "[]");
+  };
+
+  /* ============================================================
+     Fetch Commodity Names from API
+     ------------------------------------------------------------
+     Used for dropdown/autocomplete list in Commodity column.
+     ============================================================ */
+
   let commodities = [];
   try {
     const res = await fetch("/api/uex/commodities");
@@ -34,123 +62,221 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.warn("Commodity fetch failed:", e);
   }
 
-  const container = document.getElementById("cargoTable");
+  /* ============================================================
+     Table Initialization Data
+     ------------------------------------------------------------
+     If saved rows exist → load them
+     Otherwise → create 15 empty rows
+     ============================================================ */
 
-  const blankRow = () => ({ commodity: "", locA: 0, locB: 0, locC: 0, locD: 0, locE: 0, total: 0, price: 0 });
+  const saved = loadData();
+  const baseData = saved.length
+    ? saved
+    : Array.from({ length: 15 }, () => ({
+        commodity: "",
+        locA: 0, locB: 0, locC: 0, locD: 0, locE: 0,
+        price: 0,
+        total: 0,
+      }));
 
-  const baseData = !isExpired() && localStorage.getItem(STORAGE_KEY)
-    ? JSON.parse(localStorage.getItem(STORAGE_KEY))
-    : Array.from({ length: 15 }, blankRow);
+  /* ============================================================
+     Column Headers Setup
+     ------------------------------------------------------------
+     Load saved custom headers if available
+     Otherwise fall back to default header labels
+     ============================================================ */
 
-  baseData.push({ commodity: "TOTAL", locA: 0, locB: 0, locC: 0, locD: 0, locE: 0, total: 0, price: 0, __summary: true });
+  const savedHeaders = loadHeaders();
+  const defaultHeaders = [
+    "Commodity","Location A","Location B","Location C",
+    "Location D","Location E","Total","Price (aUEC)"
+  ];
 
-  const storedHeaders = loadHeaders();
-  const defaultHeaders = ["Commodity", "Location A", "Location B", "Location C", "Location D", "Location E", "Total", "Price (aUEC)"];
-  const headerMap = defaultHeaders.map((h, i) => storedHeaders[i] ?? h);
+  // Only use saved headers if correct length, otherwise reset
+  const headerMap =
+    savedHeaders.length === defaultHeaders.length
+      ? savedHeaders
+      : defaultHeaders;
 
-  let hot;
 
-  // Summary row renderer
-  function summaryRenderer(instance, td, row, col, prop, value, cellProperties) {
-    td.style.background = "#111";
-    td.style.color = "#00eaff";
-    td.style.fontWeight = "700";
-    td.style.borderTop = "2px solid #ff00aa";
-    Handsontable.renderers.NumericRenderer.call(this, instance, td, row, col, prop, value, cellProperties || {});
-    return td;
-  }
+  /* ============================================================
+     Initialize Tabulator Table
+     ============================================================ */
 
-  function recalcAll(source = "calc") {
-    if (!hot) return;
-    const rows = hot.countRows();
-    if (rows === 0) return;
-    const summaryRow = rows - 1;
-
-    hot.batch(() => {
-      for (let r = 0; r < summaryRow; r++) {
-        let rowSum = 0;
-        for (const key of COL_KEYS) rowSum += Number(hot.getDataAtRowProp(r, key)) || 0;
-        hot.setDataAtCell(r, COL_INDEX.total, rowSum, source);
-      }
-
-      for (const key of [...COL_KEYS, "total", "price"]) {
-        let colSum = 0;
-        for (let r = 0; r < summaryRow; r++) colSum += Number(hot.getDataAtRowProp(r, key)) || 0;
-        hot.setDataAtCell(summaryRow, COL_INDEX[key], colSum, source);
-      }
-
-      hot.setDataAtCell(summaryRow, COL_INDEX.commodity, "TOTAL", source);
-    });
-  }
-
-  hot = new Handsontable(container, {
+  const table = new Tabulator("#cargoTable", {
     data: baseData,
-    themeName: "ht-theme-main-dark",
-    colHeaders: headerMap,
-    columns: [
-      { data: "commodity", type: "autocomplete", source: commodities, strict: false, filter: true, placeholder: "Type or select..." },
-      { data: "locA", type: "numeric", numericFormat: { pattern: "0,0" } },
-      { data: "locB", type: "numeric", numericFormat: { pattern: "0,0" } },
-      { data: "locC", type: "numeric", numericFormat: { pattern: "0,0" } },
-      { data: "locD", type: "numeric", numericFormat: { pattern: "0,0" } },
-      { data: "locE", type: "numeric", numericFormat: { pattern: "0,0" } },
-      { data: "total", type: "numeric", readOnly: true, numericFormat: { pattern: "0,0" } },
-      { data: "price", type: "numeric", numericFormat: { pattern: "0,0.00 ₳" } },
-    ],
-    licenseKey: "non-commercial-and-evaluation",
-    stretchH: "all",
+    layout: "fitColumns",
+    autoResize: true,
     height: 500,
-    rowHeaders: true,
-    contextMenu: true,
-    manualColumnResize: true,
-    manualRowResize: true,
+    theme: "midnight",
+    reactiveData: true,
+    resizableColumns: true,
+    responsiveLayout: "collapse",   // enable automatic row collaps
+    responsiveLayoutCollapseStartOpen: false,
+    // We manage our own persistence, so disable Tabulator's
+    persistence: false,
 
-    cells(row) {
-      const props = {};
-      if (row === this.instance.countRows() - 1) {
-        props.readOnly = true;
-        props.renderer = summaryRenderer;
-      }
-      return props;
+    columnDefaults: {
+      headerSort: false,
+      minWidth: 165,
     },
 
-    afterInit() {
-      setTimeout(() => recalcAll(), 0);
-    },
+    // Table Columns
+    columns: [
+      /* Commodity Column (Dropdown / Editable List) */
+      {
+        title: headerMap[0],
+        field: "commodity",
+        editor: "list",
+        editorParams: {
+          values: commodities,
+          sortValuesList: "asc",
+          clearOnEdit: true,
+          autocomplete: true,
+          listOnEmpty: true,
+        },
+        editable: true,
+      },
 
-    afterChange(changes, source) {
-      if (!changes || source === "loadData" || source === "calc") return;
-      recalcAll();
-      saveData(this.getSourceData());
-    },
+      /* Locations A–E Columns (numbers + bottom totals) */
+      ...["A","B","C","D","E"].map((l,i) => ({
+        title: headerMap[i+1],
+        field: `loc${l}`,
+        editor: "number",
+        bottomCalc: "sum",
+      })),
 
-    afterGetColHeader(col, TH) {
-      const text = TH.querySelector(".colHeader");
-      if (!text || ["Total", "Price (aUEC)"].includes(headerMap[col])) return;
+      /* Total Column (Calculated) */
+      {
+        title: headerMap[6],
+        field: "total",
+        mutator: (value, data) =>
+          ["locA","locB","locC","locD","locE"]
+            .reduce((s,k)=> s + (Number(data[k]) || 0), 0),
+        bottomCalc: "sum",
+      },
 
-      text.style.cursor = "text";
-      text.ondblclick = () => {
-        const oldVal = text.textContent;
-        const input = document.createElement("input");
-        Object.assign(input.style, {
-          width: "90%", background: "#0a0a0f", color: "#00eaff",
-          border: "1px solid #ff00aa", borderRadius: "6px",
-          padding: "2px 6px", fontFamily: "inherit", textAlign: "center",
-        });
-        input.value = oldVal;
-        text.textContent = "";
-        text.appendChild(input);
-        input.focus(); input.select();
-        input.addEventListener("blur", () => {
-          const val = input.value.trim() || oldVal;
-          headerMap[col] = val;
-          saveHeaders(headerMap);
-          hot.updateSettings({ colHeaders: headerMap });
-        });
-        input.addEventListener("keydown", e => { if (e.key === "Enter") input.blur(); });
-      };
-    },
+      /* Price Column */
+      {
+        title: headerMap[7],
+        field: "price",
+        editor: "number",
+        bottomCalc: "sum",
+      },
+    ],
   });
 
-  saveData(hot.getSourceData());
+  /* ============================================================
+     Save Data on Cell Edit
+     ============================================================ */
+  table.on("cellEdited", () => {
+    saveData(table.getData());
+  });
+
+  /* ============================================================
+     Inline Header Editing (single-click rename)
+     ------------------------------------------------------------
+     Replaces Tabulator's default prompt editor.
+     ============================================================ */
+ table.on("headerClick", (e, column) => {
+  const col = column;
+  const def = col.getDefinition();
+
+  // Only allow editing on locA-locE columns
+  if (!def.field || !def.field.startsWith("loc")) return;
+
+  const el = column.getElement();
+
+  // Prevent double inputs
+  if (el.querySelector("input")) return;
+
+  const input = document.createElement("input");
+  input.type = "text";
+  input.value = def.title;
+
+  input.style.width = "100%";
+  input.style.padding = "2px 4px";
+  input.style.background = "rgba(0,0,0,0.7)";
+  input.style.color = "#00eaff";
+  input.style.border = "1px solid #00eaff";
+  input.style.outline = "none";
+  input.style.fontSize = "12px";
+
+  el.innerHTML = "";
+  el.appendChild(input);
+  input.focus();
+  input.select();
+
+  const save = () => {
+    const newVal = input.value.trim() || def.title;
+    table.updateColumnDefinition(col, { title: newVal });
+
+    // Persist only A-E headers
+    const headers = table.getColumns().map(c => c.getDefinition().title);
+    saveHeaders(headers);
+  };
+
+  input.addEventListener("blur", save);
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") save();
+    if (e.key === "Escape") {
+      table.updateColumnDefinition(col, { title: def.title });
+    }
+  });
+  });
+// Clear table data (reset back to blank rows)
+document.getElementById("clearTableBtn").addEventListener("click", () => {
+  if (confirm("Clear all cargo rows? This cannot be undone.")) {
+    const blankRows = Array.from({ length: 15 }, () => ({
+      commodity: "",
+      locA: 0, locB: 0, locC: 0, locD: 0, locE: 0,
+      price: 0,
+      total: 0,
+    }));
+
+    table.setData(blankRows);
+    saveData(blankRows);
+    localStorage.removeItem(STORAGE_TIME);
+  }
+});
+// Reset A–E headers to defaults
+document.getElementById("resetHeadersBtn").addEventListener("click", () => {
+  if (!confirm("Reset headers A–E back to default names?")) return;
+
+  // canonical defaults by FIELD, not index
+  const defaultTitles = {
+    commodity: "Commodity",
+    locA: "Location A",
+    locB: "Location B",
+    locC: "Location C",
+    locD: "Location D",
+    locE: "Location E",
+    total: "Total",
+    price: "Price (aUEC)",
+  };
+
+  // build NEW column defs based on field name NOT index
+  const newColumns = table.getColumns().map(col => {
+    const def = col.getDefinition();
+    const f = def.field;
+
+    if (defaultTitles[f]) {
+      return { ...def, title: defaultTitles[f] };
+    }
+
+    return def; // untouched safety net
+  });
+
+  table.setColumns(newColumns);
+
+  // persist canonical header array in correct order
+  saveHeaders(Object.values(defaultTitles));
+
+  localStorage.setItem(STORAGE_TIME, Date.now().toString());
+
+  setTimeout(() => table.redraw(true), 10);
+});
+
+
+
 });
