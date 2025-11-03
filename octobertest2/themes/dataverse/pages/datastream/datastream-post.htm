@@ -1,0 +1,59 @@
+title = "Transmission"
+url = "/datastream/:slug"
+layout = "default"
+
+[PostPage]
+slug = "{{ :slug }}"
+==
+
+<div class="tv relative min-h-[calc(100vh-6rem)] overflow-hidden bg-dv-bg text-dv-textSoft">
+
+  {# background neon fog + grid #}
+  <div aria-hidden="true" class="absolute inset-0 pointer-events-none">
+    <div class="absolute -top-48 left-1/2 h-[50rem] w-[50rem] -translate-x-1/2 rounded-full blur-3xl opacity-30 bg-gradient-to-r from-dv-accent to-dv-accent2"></div>
+    <div class="absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)]">
+      <div class="grid grid-cols-12 h-full opacity-10">
+        {% for i in 1..12 %}
+        <div class="border-r border-dv-accent/20"></div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <section class="relative mx-auto max-w-5xl px-6 pt-24 pb-20">
+
+    <a href="/datastream"
+       class="inline-flex items-center gap-2 text-xs px-3 py-1 rounded-full border border-dv-accent/40 text-dv-accent/80 hover:bg-dv-accent/10 transition mb-6">
+       ⟵ Return to Datastream
+    </a>
+
+    <!-- Page Badge -->
+    <p class="mb-3 inline-flex items-center gap-2 rounded-full border border-dv-accent2/20 px-3 py-1 text-xs tracking-wider text-dv-accent2 uppercase">
+      <span class="h-2 w-2 rounded-full bg-dv-accent animate-pulse"></span>
+      Datastream Transmission
+    </p>
+
+    <!-- Title -->
+    <h1 class="font-orbitron text-4xl sm:text-5xl md:text-6xl font-black leading-tight bg-gradient-to-r from-dv-accent to-dv-accent2 bg-clip-text text-transparent drop-shadow mb-3">
+      {{ post.title }}
+    </h1>
+
+    <!-- Meta -->
+    <div class="text-xs tracking-widest text-dv-accent/70 mb-10 uppercase font-mono">
+      [ TX // {{ post.published_at|date('Ymd.His') }} ]
+    </div>
+
+    <!-- Content -->
+    <div class="prose prose-invert max-w-none">
+      {{ post.content_html|raw }}
+    </div>
+
+    <!-- Divider -->
+    <div class="mt-16 h-px bg-gradient-to-r from-dv-accent/20 via-dv-accent2/50 to-dv-accent/20"></div>
+
+    <p class="mt-4 text-center text-xs uppercase tracking-widest text-dv-textSoft/60">
+      End of Transmission
+    </p>
+  </section>
+
+</div>

@@ -1,0 +1,5 @@
+plugin:
+    name: BlogSkin
+    description: "Custom Dataverse neon skin and components for RainLab.Blog"
+    author: Dataverse
+    icon: icon-fire

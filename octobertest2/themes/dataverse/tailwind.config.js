@@ -1,3 +1,5 @@
+import typography from '@tailwindcss/typography'
+
 export default {
   content: [
     './themes/**/*.htm',
@@ -31,6 +33,7 @@ export default {
     },
   },
   plugins: [
+    typography,
     require('@tailwindcss/forms'),
     require('@tailwindcss/typography'),
     require('@tailwindcss/aspect-ratio'),
