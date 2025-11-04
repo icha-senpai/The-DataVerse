@@ -1,5 +1,3 @@
-
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss/theme" layer(theme);
 
@@ -7,99 +5,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@theme {
-  --color-dv-bg: #0a0a0f;
-  --color-dv-surface: #12121a;
-  --color-dv-text: #cfd8e3;
-  --color-dv-soft: #66eaffcc;
-  --color-dv-accent: #00fff4;
-  --color-dv-accent2: #ff00ff;
-}
 
 
-@layer base {
-  .forum {
-    font-family: "Inter", sans-serif;
-    font-size: 18px;
-    @apply text-dv-text bg-dv-bg min-h-screen;
-  }
 
-  .forum main {
-    @apply max-w-5xl mx-auto p-6;
-  }
-
-  /* headers */
-  h1, h2, h3 {
-    @apply text-dv-text;
-  }
-
-  h1 {
-    @apply text-4xl font-semibold mb-6;
-    text-shadow: 0 0 8px rgba(0, 255, 255, 0.15);
-  }
-  h2 {
-    @apply text-2xl font-semibold mb-4;
-  }
-  h3 {
-    @apply text-xl font-semibold mb-2;
-  }
-
-  /* links */
-  a:not(.link-button):not(.group-button) {
-    @apply text-dv-soft transition;
-  }
-
-  a:hover:not(.link-button):not(.group-button) {
-    @apply text-dv-accent;
-    text-shadow: 0 0 6px rgba(0,255,255,0.35);
-  }
-
-  /* breadcrumbs */
-  .breadcrumbs ol li {
-    display: inline-block;
-  }
-  .breadcrumbs ol li + li {
-    margin-left: .5rem;
-  }
-  .breadcrumbs ol li + li::before {
-    float: left;
-    padding-right: .5rem;
-    color: #6c757d;
-    content: "/";
-  }
-
-  /* color picker buttons */
-  .forum .clr-field button {
-    @apply w-6 h-6 mr-2 rounded-full;
-  }
-
-  /* sort highlight */
-  .forum .nested-sort .ns-targeted {
-    @apply rounded-md border-dv-accent outline outline-dv-accent;
-  }
-
-  /* category theming */
-  .bg-category {
-    background-color: var(--category-light);
-  }
-  .text-category {
-    color: var(--category-light);
-  }
-
-  /* general content */
-  div, p {
-    font-size: 1rem;
-  }
-
-  /* dark mode */
-  @media (prefers-color-scheme: dark) {
-    .forum {
-      @apply text-dv-soft bg-dv-bg;
-    }
-
-    a:hover:not(.link-button):not(.group-button) {
-      @apply text-dv-accent2;
-      text-shadow: 0 0 6px rgba(255,0,255,0.35);
-    }
-  }
-}

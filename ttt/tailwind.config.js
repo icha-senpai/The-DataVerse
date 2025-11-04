@@ -10,6 +10,9 @@ export default defineConfig({
     './resources/**/*.ts',
     './resources/**/*.tsx',
     './resources/forum/**/*.{blade.php,js,css,vue,ts,tsx}',
+    './resources/views/**/*.blade.php',
+    './resources/views/vendor/forum/**/*.blade.php',
+    './app/**/*.php',
   ],
   theme: {
     extend: {
