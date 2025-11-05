@@ -8,20 +8,21 @@ title = "twitch"
 {# ---------------------------------------------- #}
 {# Environment toggles (local vs production)      #}
 {# ---------------------------------------------- #}
-
 {# LOCAL (Laragon) #}
 {% set forum_url   = 'http://forum.test/forum/' %}
-{% set wiki_url    = 'https://bookstack.test/' %}
+{% set wiki_url    = 'http://wiki.test/index.php/Main_Page' %}
+
 
 {# PRODUCTION (ichaa.net) - uncomment when deploying #}
 {#
-{% set forum_url   = 'https://forum.ichaa.net/forum/' %}
-{% set wiki_url    = 'https://wiki.ichaa.net/Main_Page' %}
+{% set forum_url   = 'https://forum.ichaa.net' %}
+{% set wiki_url    = 'https://wiki.ichaa.net' %}
 #}
+
 
 {# Internal routes #}
 {% set watch_url    = '/twitch/watch' %}
-{% set schedule_url = '/twitch/schedule' %}
+{% set schedule_url = 'https://wiki.ichaa.net/books/stream-schedule' %}
 
 {# ---------------------------------------------- #}
 {# Page                                           #}

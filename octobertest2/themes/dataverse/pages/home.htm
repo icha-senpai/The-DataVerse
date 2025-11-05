@@ -8,6 +8,7 @@ layout = "default"
 {# ---------------------------------------------- #}
 
 {# LOCAL #}
+
 {% set wiki_url  = 'https://bookstack.test/' %}
 {% set forum_url = 'http://forum.test/forum/' %}
 {% set twitch_url = '/twitch' %}
@@ -16,17 +17,21 @@ layout = "default"
 {% set mc_url = '/minecraft' %}
 {% set books_url = '/books' %}
 {% set audio_url = '/audio' %}
+{% set datastream_url = '/datastream' %}
+
 
 {# PRODUCTION (ichaa.net) - uncomment when deploying #}
+
 {#
-{% set wiki_url  = 'https://wiki.ichaa.net/Main_Page' %}
-{% set forum_url = 'https://forum.ichaa.net/forum/' %}
+{% set wiki_url  = 'https://wiki.ichaa.net' %}
+{% set forum_url = 'https://forum.ichaa.net' %}
 {% set twitch_url = 'https://ichaa.net/twitch' %}
 {% set osu_url = 'https://ichaa.net/osu' %}
 {% set star_url = 'https://ichaa.net/starcitizen' %}
 {% set mc_url = 'https://ichaa.net/minecraft' %}
 {% set books_url = 'https://ichaa.net/books' %}
 {% set audio_url = 'https://ichaa.net/audio' %}
+{% set datastream_url = 'https://ichaa.net/datastream' %}
 #}
 
 {# ---------------------------------------------- #}
@@ -103,9 +108,15 @@ layout = "default"
       </a>
 
       <!-- Forum -->
-      <a href="{{ forum_url }}" class="group rounded-2xl border border-dv-accent/20 bg-black/30 p-6 backdrop-blur-md hover:border-dv-accent/40 transition text-left">
+      <a href="{{ forum_url }}" class="group rounded-2xl border border-dv-accent2/20 bg-black/30 p-6 backdrop-blur-md hover:border-dv-accent2/40 transition text-left">
         <h3 class="font-orbitron text-2xl text-dv-accent2 group-hover:text-dv-accent transition">Forum</h3>
         <p class="mt-2 text-dv-accent/80">Join the conversation. Share your thoughts, ideas, and feedback with the community.</p>
+      </a>
+
+      <!-- DataStream -->
+      <a href="{{ datastream_url }}" class="group rounded-2xl border border-dv-accent/20 bg-black/30 p-6 backdrop-blur-md hover:border-dv-accent/40 transition text-left">
+        <h3 class="font-orbitron text-2xl text-dv-accent group-hover:text-dv-accent2 transition">DataStream</h3>
+        <p class="mt-2 text-dv-accent/80">Real-time data feeds, analytics, and insights. The pulse of the DataVerse.</p>
       </a>
 
     </div>
