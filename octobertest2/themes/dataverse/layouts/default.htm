@@ -14,6 +14,7 @@
   <body class="bg-dv-bg text-dv-text min-h-screen flex flex-col font-tilt">
 
     {% partial 'site/navbar' %}
+   
 
     <main class="flex-grow flex items-center justify-center container mx-auto px-4">
       {% page %}
@@ -22,6 +23,7 @@
     {% partial 'site/footer' %}
 
     {% scripts %}
+
 
     {# ✅ Load cargo scripts only on the cargo page #}
     {% if this.page.id == 'cargo' %}

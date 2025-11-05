@@ -11,6 +11,12 @@ export default {
     './partials/**/*.htm',
     './plugins/**/*.php',
     './modules/**/*.{php,js,vue,ts}',
+    './themes/**/partials/**/*.htm',
+    './themes/**/layouts/**/*.htm',
+    './themes/**/pages/**/*.htm',
+    './themes/**/content/**/*.htm',
+    './plugins/**/*.htm',
+    './plugins/**/*.twig',
   ],
 
   darkMode: 'class', // or 'media'
@@ -47,6 +53,11 @@ export default {
     require('flowbite/plugin'),
   ],
   safelist: [
-    
+      'backdrop-blur-md',
+  'supports-[backdrop-filter]:backdrop-blur-md',
+  'bg-transparent',
+  'dv-glass',
+  'bg-dv-surface/70',
+  'border-dv-accent/30',
   ],
 }

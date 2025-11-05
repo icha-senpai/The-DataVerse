@@ -41,8 +41,14 @@
     </button>
 
     <ul
-      class="absolute left-0 top-full mt-2 min-w-[180px] bg-dv-surface border border-gray-700 rounded-lg shadow-lg opacity-0 invisible
-             group-hover:opacity-100 group-hover:visible group-hover:translate-y-1 transform transition-all duration-200 ease-in-out z-50">
+      class="absolute left-0 top-full mt-2 min-w-[180px]
+             bg-transparent dv-glass
+             border border-dv-accent/30 rounded-lg shadow-[0_0_12px_rgba(0,255,255,0.25)]
+             opacity-0 invisible
+             group-hover:opacity-100 group-hover:visible group-hover:translate-y-1
+             transform transition-all duration-200 ease-in-out z-50
+             supports-[backdrop-filter]:backdrop-blur-md">
+
 
       {% for child in children %}
         <li class="relative group/sub">
@@ -68,8 +74,14 @@
               </svg>
             </div>
             <ul
-              class="absolute left-full top-0 ml-2 min-w-[180px] bg-dv-surface border border-gray-700 rounded-lg shadow-lg opacity-0 invisible
-                     group-hover/sub:opacity-100 group-hover/sub:visible transform transition-all duration-200 ease-in-out z-50">
+              class="absolute left-full top-0 ml-2 min-w-[180px]
+                     bg-transparent dv-glass
+                     border border-dv-accent/30 rounded-lg shadow-[0_0_12px_rgba(0,255,255,0.25)]
+                     opacity-0 invisible
+                     group-hover/sub:opacity-100 group-hover/sub:visible
+                     transform transition-all duration-200 ease-in-out z-50
+                     supports-[backdrop-filter]:backdrop-blur-md">
+
               {% for sub in child.children %}
                 <li>
                   <a href="{{ sub.url|raw }}"

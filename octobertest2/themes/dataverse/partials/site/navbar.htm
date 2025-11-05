@@ -50,11 +50,43 @@ function onStart()
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const toggle = document.getElementById('mobile-toggle');
-  const menu = document.getElementById('mobile-menu');
+  const menu   = document.getElementById('mobile-menu');
 
+  // Toggle mobile menu visibility
   toggle.addEventListener('click', () => {
     menu.classList.toggle('hidden');
     menu.classList.toggle('flex');
   });
+
+  // Enable dropdown toggling on both mobile + desktop touch
+  function setupDropdowns(scope) {
+    const triggers = scope.querySelectorAll('button, .flex.items-center.justify-between');
+
+    triggers.forEach(trigger => {
+      trigger.addEventListener('click', e => {
+        // prevent the menu link from navigating
+        e.preventDefault();
+        e.stopPropagation();
+
+        // find the next <ul> sibling (the dropdown)
+        const dropdown = trigger.nextElementSibling;
+        if (!dropdown || dropdown.tagName !== 'UL') return;
+
+        // toggle visibility
+        dropdown.classList.toggle('hidden');
+        dropdown.classList.toggle('flex');
+      });
+    });
+  }
+
+  // setup for mobile panel
+  setupDropdowns(menu);
+
+  // optional: also enable touch toggle for desktop nav on touch devices
+  const desktopNav = document.querySelector('ul.md\\:flex');
+  if (window.matchMedia('(pointer: coarse)').matches && desktopNav) {
+    setupDropdowns(desktopNav);
+  }
 });
 </script>
+
