@@ -44,7 +44,7 @@ class TrafficStatisticsPageview extends Model
      */
     public static function purgeOldRecords()
     {
-        $months = TrafficLogger::getRetentionMonths();
+        $months = TrafficLogger::instance()->getRetentionMonths();
         if (!$months) {
             return;
         }

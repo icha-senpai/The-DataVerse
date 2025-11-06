@@ -28,7 +28,7 @@ class ComponentTokenParser extends TwigTokenParser
         $paramNames = [];
 
         // Parse component name
-        $nodes['name'] = $this->parser->parseExpression();
+        $nodes['__component_name'] = $this->parser->parseExpression();
 
         // Parse parameters
         while (!$stream->test(TwigToken::BLOCK_END_TYPE)) {

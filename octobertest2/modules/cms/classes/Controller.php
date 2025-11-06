@@ -258,7 +258,7 @@ class Controller
 
         // Log the pageview with dashboard module
         if ($originalPageFound && !App::runningUnitTests() && System::hasModule('Dashboard')) {
-            \Dashboard\Classes\TrafficLogger::logPageview();
+            \Dashboard\Classes\TrafficLogger::instance()->logPageview();
         }
 
         // Prepare and return response

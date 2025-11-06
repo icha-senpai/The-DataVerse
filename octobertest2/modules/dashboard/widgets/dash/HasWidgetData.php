@@ -200,6 +200,16 @@ trait HasWidgetData
                 'reportName' => $reportName
             ] + $widgetConfig));
         }
+        else {
+
+            $widgetProps = array_except($widgetConfig, [
+                'type',
+                'reportName',
+                'widgetClass',
+                '_dash_definition'
+            ]);
+            $widget->setProperties($widgetProps);
+        }
 
         return $widget;
     }
