@@ -18,75 +18,183 @@ function onStart()
 ==
 {% set nav = nav %}
 
-<nav class="fixed top-0 z-50 w-full bg-dv-surface/80 backdrop-blur-md border-b border-gray-800 shadow-neon">
-  <div class="max-w-7xl mx-auto px-6 flex justify-between items-center h-16">
-    <a href="{{ 'home'|page }}" class="text-2xl font-tilt font-bold text-dv-accent hover:text-dv-accent2">
-      The DataVerse
-    </a>
+<!-- WRAP EVERYTHING IN ONE ALPINE SCOPE -->
+<div x-data="{ open:false }">
 
-    <ul class="hidden md:flex items-center space-x-4 font-tilt text-dv-text">
-      {% for item in nav %}
-        <li class="relative">{% partial 'site/nav-item' item=item %}</li>
-      {% endfor %}
-    </ul>
+  <!-- NAVBAR -->
+  <nav
+     class="fixed top-0 w-full z-30
+            bg-dv-surface/80 backdrop-blur-xl
+            border-b border-dv-accent/20
+            shadow-[0_0_20px_rgba(102,234,255,0.10)]
+            text-dv-text font-tilt"
+     @keydown.escape.window="open = false">
 
-    <button id="mobile-toggle"
-            class="md:hidden text-dv-accent hover:text-dv-accent2 focus:outline-none">
-      <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+
+      <!-- LOGO -->
+      <a href="{{ 'home'|page }}"
+         class="text-2xl font-bold text-dv-accent hover:text-dv-accent2">
+         The DataVerse
+      </a>
+
+      <!-- MOBILE HAMBURGER -->
+      <button @click="open = !open"
+              class="md:hidden text-dv-accent hover:text-dv-accent2 focus:outline-none">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+
+      <!-- DESKTOP NAV -->
+      <ul class="hidden md:flex space-x-6">
+        {% for item in nav %}
+          {% set children = item.children ?? [] %}
+          {% set href = item.url %}
+          {% if item.url == 'forum_link' %}{% set href = forum_url %}{% endif %}
+          {% if item.url == 'wiki_link' %}{% set href = wiki_url %}{% endif %}
+
+          {% if not children %}
+            <li>
+              <a href="{{ href }}"
+                 class="hover:text-dv-accent2 transition">
+                 {{ item.title }}
+              </a>
+            </li>
+
+          {% else %}
+            <li class="relative" x-data="{ dd:false }"
+                @mouseenter="dd = true" @mouseleave="dd = false">
+
+              <button @click="dd = !dd"
+                      class="flex items-center hover:text-dv-accent2 transition">
+                {{ item.title }}
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor"
+                     viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              <ul x-show="dd" x-transition x-cloak
+                  class="absolute mt-2 left-0 min-w-[180px] dv-glass
+                         border border-dv-accent/30 rounded-lg shadow-xl py-2 z-50">
+
+                {% for child in children %}
+                  {% set hasSub = child.children is defined and child.children|length > 0 %}
+                  {% set child_href = child.url %}
+                  {% if child.url == 'forum_link' %}{% set child_href = forum_url %}{% endif %}
+                  {% if child.url == 'wiki_link'  %}{% set child_href = wiki_url %}{% endif %}
+
+                  {% if not hasSub %}
+                    <li>
+                      <a href="{{ child_href }}"
+                         class="block px-4 py-2 hover:text-dv-accent2 transition">
+                         {{ child.title }}
+                      </a>
+                    </li>
+
+                  {% else %}
+                    <li class="relative" x-data="{ sub:false }"
+                        @mouseenter="sub = true" @mouseleave="sub = false">
+
+                      <div class="flex items-center justify-between px-4 py-2 hover:text-dv-accent2 cursor-pointer">
+                        {{ child.title }}
+                        <svg class="w-3 h-3 ml-2" fill="none" stroke="currentColor"
+                             viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                      </div>
+
+                      <ul x-show="sub" x-transition x-cloak
+                          class="absolute left-full top-0 ml-2 min-w-[180px] dv-glass
+                                 border border-dv-accent/30 rounded-lg shadow-xl py-2">
+                        {% for sub in child.children %}
+                          <li>
+                            <a href="{{ sub.url }}"
+                               class="block px-4 py-2 hover:text-dv-accent2 transition">
+                               {{ sub.title }}
+                            </a>
+                          </li>
+                        {% endfor %}
+                      </ul>
+
+                    </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ✅ MOBILE OVERLAY OUTSIDE NAV BUT INSIDE SAME ALPINE SCOPE -->
+  <div
+       x-show="open"
+       x-transition.opacity
+       x-cloak
+       class="fixed inset-0 z-40 md:hidden
+              bg-gradient-to-b from-[rgba(10,15,25,0.95)] to-[rgba(5,8,12,0.98)]
+              backdrop-blur-2xl ring-1 ring-dv-accent/20
+              shadow-[0_0_40px_rgba(102,234,255,0.15)]
+              font-tilt overflow-y-auto">
+
+    <!-- CLOSE BUTTON -->
+    <button @click="open = false"
+            class="absolute top-4 right-4 text-dv-accent hover:text-dv-accent2 z-50">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M4 6h16M4 12h16M4 18h16" />
+              d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
+
+    <!-- MOBILE MENU RECURSION -->
+    <div class="p-6 space-y-2" @click.stop>
+
+      {% macro mobileTree(items, forum_url, wiki_url) %}
+        {% for item in items %}
+          {% set children = item.children ?? [] %}
+          {% set href = item.url %}
+          {% if item.url == 'forum_link' %}{% set href = forum_url %}{% endif %}
+          {% if item.url == 'wiki_link'  %}{% set href = wiki_url %}{% endif %}
+
+          {% if not children %}
+            <a href="{{ href }}"
+               class="block py-2 px-2 hover:text-dv-accent2 transition"
+               @click="open=false">
+              {{ item.title }}
+            </a>
+
+          {% else %}
+            <div x-data="{ sub:false }">
+              <button @click="sub = !sub"
+                      class="flex justify-between items-center w-full py-2 px-2 hover:text-dv-accent2">
+                <span>{{ item.title }}</span>
+                <svg class="w-4 h-4 transform"
+                     :class="{ 'rotate-180': sub }"
+                     fill="none" stroke="currentColor"
+                     viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              <div x-show="sub"
+                   x-transition x-cloak
+                   class="ml-4 mt-1 space-y-1 border-l border-dv-accent/20 pl-3">
+                {{ _self.mobileTree(children, forum_url, wiki_url) }}
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      {% endmacro %}
+
+      {{ _self.mobileTree(nav, forum_url, wiki_url) }}
+
+    </div>
   </div>
-
-  <div id="mobile-menu"
-       class="hidden flex-col space-y-2 p-6 font-tilt text-dv-text md:hidden bg-dv-surface/90 border-t border-gray-700">
-    {% for item in nav %}
-      <div class="mobile-nav-item">{% partial 'site/nav-item' item=item %}</div>
-    {% endfor %}
-  </div>
-</nav>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const toggle = document.getElementById('mobile-toggle');
-  const menu   = document.getElementById('mobile-menu');
-
-  // Toggle mobile menu visibility
-  toggle.addEventListener('click', () => {
-    menu.classList.toggle('hidden');
-    menu.classList.toggle('flex');
-  });
-
-  // Enable dropdown toggling on both mobile + desktop touch
-  function setupDropdowns(scope) {
-    const triggers = scope.querySelectorAll('button, .flex.items-center.justify-between');
-
-    triggers.forEach(trigger => {
-      trigger.addEventListener('click', e => {
-        // prevent the menu link from navigating
-        e.preventDefault();
-        e.stopPropagation();
-
-        // find the next <ul> sibling (the dropdown)
-        const dropdown = trigger.nextElementSibling;
-        if (!dropdown || dropdown.tagName !== 'UL') return;
-
-        // toggle visibility
-        dropdown.classList.toggle('hidden');
-        dropdown.classList.toggle('flex');
-      });
-    });
-  }
-
-  // setup for mobile panel
-  setupDropdowns(menu);
-
-  // optional: also enable touch toggle for desktop nav on touch devices
-  const desktopNav = document.querySelector('ul.md\\:flex');
-  if (window.matchMedia('(pointer: coarse)').matches && desktopNav) {
-    setupDropdowns(desktopNav);
-  }
-});
-</script>
-
+</div>
