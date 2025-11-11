@@ -1,0 +1,25 @@
+/* Disable Tailwind typography overrides inside .dv-raw */
+.dv-raw h1,
+.dv-raw h2,
+.dv-raw h3,
+.dv-raw h4,
+.dv-raw h5,
+.dv-raw h6,
+.dv-raw p,
+.dv-raw ul,
+.dv-raw ol,
+.dv-raw blockquote {
+    all: revert;
+}
+
+/* Keep your neon text color */
+.dv-raw {
+    color: var(--dv-textSoft);
+}
+
+/* Optional: keep images full-width and nice */
+.dv-raw img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+}

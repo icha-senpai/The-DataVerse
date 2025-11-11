@@ -41,7 +41,8 @@
     "rainlab/pages-plugin": "^2.2",
     "rainlab/userplus-plugin": "^2.0",
     "rainlab/location-plugin": "^2.0",
-    "rainlab/translate-plugin": "^2.2"
+    "rainlab/translate-plugin": "^2.2",
+    "reazzon/editor-plugin": "^2.0"
     },
 
   "require-dev": {

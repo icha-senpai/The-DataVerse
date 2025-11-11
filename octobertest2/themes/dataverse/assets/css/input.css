@@ -7,6 +7,8 @@
 
 /* 2️⃣ Import Tailwind base + utilities (Tailwind v4 syntax) */
 @import "tailwindcss";
+@import "./typography-raw.css";
+
 
 /* ============================================================
    DataVerse Neon Core Tokens
@@ -27,12 +29,4 @@
     @apply font-tilt bg-dv-bg text-dv-text min-h-screen flex flex-col;
   }
 }
-/* Frosted glass for dropdowns */
-.dv-glass {
-backdrop-filter: blur(14px) saturate(160%);
--webkit-backdrop-filter: blur(14px) saturate(160%);
-background-color: rgba(10, 10, 15, 0.30);
-
-}
-[x-cloak] { display: none !important; }
 
