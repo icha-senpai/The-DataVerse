@@ -18,27 +18,33 @@ function onStart()
 ==
 {% set nav = nav %}
 
-<!-- WRAP EVERYTHING IN ONE ALPINE SCOPE -->
+{# LOCAL (Laragon) #}
+{% set forum_url = 'http://forum.test/forum/' %}
+{% set wiki_url  = 'https://bookstack.test/' %}
+
+{# PRODUCTION (ichaa.net) - uncomment these when deploying #}
+{#
+{% set forum_url = 'https://forum.ichaa.net/forum/' %}
+{% set wiki_url  = 'https://bookstack.ichaa.net/' %}
+#}
+
 <div x-data="{ open:false }">
 
-  <!-- NAVBAR -->
   <nav
      class="fixed top-0 w-full z-30
             bg-dv-surface/80 backdrop-blur-xl
             border-b border-dv-accent/20
             shadow-[0_0_20px_rgba(102,234,255,0.10)]
-            text-dv-text font-tilt"
+            text-dv-text font-tilt overflow-visible"
      @keydown.escape.window="open = false">
 
-    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between overflow-visible">
 
-      <!-- LOGO -->
       <a href="{{ 'home'|page }}"
          class="text-2xl font-bold text-dv-accent hover:text-dv-accent2">
          The DataVerse
       </a>
 
-      <!-- MOBILE HAMBURGER -->
       <button @click="open = !open"
               class="md:hidden text-dv-accent hover:text-dv-accent2 focus:outline-none">
         <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -48,12 +54,12 @@ function onStart()
       </button>
 
       <!-- DESKTOP NAV -->
-      <ul class="hidden md:flex space-x-6">
+      <ul class="hidden md:flex space-x-6 overflow-visible">
         {% for item in nav %}
           {% set children = item.children ?? [] %}
           {% set href = item.url %}
           {% if item.url == 'forum_link' %}{% set href = forum_url %}{% endif %}
-          {% if item.url == 'wiki_link' %}{% set href = wiki_url %}{% endif %}
+          {% if item.url == 'wiki_link'  %}{% set href = wiki_url %}{% endif %}
 
           {% if not children %}
             <li>
@@ -64,8 +70,11 @@ function onStart()
             </li>
 
           {% else %}
-            <li class="relative" x-data="{ dd:false }"
-                @mouseenter="dd = true" @mouseleave="dd = false">
+            <!-- Parent dropdown -->
+            <li class="relative overflow-visible"
+                x-data="{ dd:false, timer:null }"
+                @mouseenter="clearTimeout(timer); dd = true"
+                @mouseleave="timer = setTimeout(() => dd = false, 150)">
 
               <button @click="dd = !dd"
                       class="flex items-center hover:text-dv-accent2 transition">
@@ -78,8 +87,9 @@ function onStart()
               </button>
 
               <ul x-show="dd" x-transition x-cloak
-                  class="absolute mt-2 left-0 min-w-[180px] dv-glass
-                         border border-dv-accent/30 rounded-lg shadow-xl py-2 z-50">
+                  class="absolute left-0 top-full translate-y-[0.25rem] min-w-[180px] dv-glass
+                         border border-dv-accent/30 rounded-lg shadow-xl py-2 z-[999]
+                         transition-transform duration-150 ease-out overflow-visible">
 
                 {% for child in children %}
                   {% set hasSub = child.children is defined and child.children|length > 0 %}
@@ -96,8 +106,11 @@ function onStart()
                     </li>
 
                   {% else %}
-                    <li class="relative" x-data="{ sub:false }"
-                        @mouseenter="sub = true" @mouseleave="sub = false">
+                    <!-- Nested dropdown -->
+                    <li class="relative overflow-visible"
+                        x-data="{ sub:false, timer:null }"
+                        @mouseenter="clearTimeout(timer); sub = true"
+                        @mouseleave="timer = setTimeout(() => sub = false, 150)">
 
                       <div class="flex items-center justify-between px-4 py-2 hover:text-dv-accent2 cursor-pointer">
                         {{ child.title }}
@@ -109,8 +122,9 @@ function onStart()
                       </div>
 
                       <ul x-show="sub" x-transition x-cloak
-                          class="absolute left-full top-0 ml-2 min-w-[180px] dv-glass
-                                 border border-dv-accent/30 rounded-lg shadow-xl py-2">
+                          class="absolute left-full top-0 translate-x-[0.25rem] min-w-[180px] dv-glass
+                                 border border-dv-accent/30 rounded-lg shadow-xl py-2 z-[9999]
+                                 transition-transform duration-150 ease-out overflow-visible">
                         {% for sub in child.children %}
                           <li>
                             <a href="{{ sub.url }}"
@@ -132,7 +146,7 @@ function onStart()
     </div>
   </nav>
 
-  <!-- ✅ MOBILE OVERLAY OUTSIDE NAV BUT INSIDE SAME ALPINE SCOPE -->
+  <!-- MOBILE OVERLAY -->
   <div
        x-show="open"
        x-transition.opacity
@@ -143,7 +157,6 @@ function onStart()
               shadow-[0_0_40px_rgba(102,234,255,0.15)]
               font-tilt overflow-y-auto">
 
-    <!-- CLOSE BUTTON -->
     <button @click="open = false"
             class="absolute top-4 right-4 text-dv-accent hover:text-dv-accent2 z-50">
       <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -152,7 +165,6 @@ function onStart()
       </svg>
     </button>
 
-    <!-- MOBILE MENU RECURSION -->
     <div class="p-6 space-y-2" @click.stop>
 
       {% macro mobileTree(items, forum_url, wiki_url) %}
@@ -168,7 +180,6 @@ function onStart()
                @click="open=false">
               {{ item.title }}
             </a>
-
           {% else %}
             <div x-data="{ sub:false }">
               <button @click="sub = !sub"
