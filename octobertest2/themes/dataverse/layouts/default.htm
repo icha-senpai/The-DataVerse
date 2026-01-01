@@ -7,7 +7,7 @@
 
     {% framework extras %}
     {% styles %}
-    <link rel="stylesheet" href="{{ 'assets/vendor/tailwind/tailwind.css'|theme }}">
+    <link rel="stylesheet" href="{{ 'assets/css/output.css'|theme }}">
 
   </head>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -17,7 +17,7 @@
     {% partial 'site/navbar' %}
    
 
-    <main class="flex-grow flex items-center justify-center container mx-auto px-4">
+    <main class="flex-grow w-full bg-dv-surface">
       {% page %}
     </main>
 

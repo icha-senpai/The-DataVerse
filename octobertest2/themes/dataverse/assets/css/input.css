@@ -8,6 +8,11 @@
 /* 2️⃣ Import Tailwind base + utilities (Tailwind v4 syntax) */
 @import "tailwindcss";
 @import "./typography-raw.css";
+@source "../../layouts/**/*.htm";
+@source "../../pages/**/*.htm";
+@source "../../partials/**/*.htm";
+@source "../../content/**/*.htm";
+@source "../js/**/*.js";
 
 
 /* ============================================================
@@ -15,10 +20,14 @@
    ============================================================ */
 @theme {
   --font-tilt: "Tilt Neon", "Inter", ui-sans-serif, system-ui;
-  --color-dv-bg: #000000;
-  --color-dv-text: #ffffff;
-  --color-dv-accent: #00ffff;
-  --color-dv-accent2: #ff00ff;
+
+  --color-dv-bg: #0a0a0f;
+  --color-dv-surface: #111118;
+  --color-dv-text: #cfd8e3;
+  --color-dv-textSoft: #b8e6ff;
+  --color-dv-textAlt: #ffb0da;
+  --color-dv-accent: #00eaff;
+  --color-dv-accent2: #ff00aa;
 }
 
 /* ============================================================
@@ -30,3 +39,195 @@
   }
 }
 
+@layer components {
+  .dv-glass {
+    @apply bg-dv-surface/70 backdrop-blur-md;
+  }
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 15px #00eaff, inset 0 0 10px #00eaff; }
+  50% { box-shadow: 0 0 25px #ff00aa, inset 0 0 15px #ff00aa; }
+}
+
+#cargoTable {
+  width: 100% !important;
+ 
+}
+
+
+#cargoTable {
+  animation: pulse 4s ease-in-out infinite;
+}
+
+/* ==============================
+   Dataverse Neon Buttons
+   ============================== */
+
+ .dv-btn-danger {
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-family: Inter, sans-serif;
+  font-weight: 600;
+  letter-spacing: .6px;
+  cursor: pointer;
+  transition: 0.15s ease-in-out;
+  text-shadow: 0 0 4px #00eaff;
+  backdrop-filter: blur(6px);
+}
+
+/* Reset Headers — gold warning neon */
+.dv-btn-warning {
+  border: 1px solid rgba(255,255,0,0.5);
+  color: #f8ff8a;
+  background: rgba(255,255,0,0.1);
+  box-shadow: 0 0 12px rgba(255,255,0,0.3);
+}
+.dv-btn-warning:hover {
+  background: rgba(255,255,0,0.25);
+  box-shadow: 0 0 18px rgba(255,255,0,0.6);
+  transform: translateY(-1px);
+}
+
+
+/* Clear Table — danger magenta */
+.dv-btn-danger {
+  border: 1px solid rgba(255,0,170,0.5);
+  color: #ff00aa;
+  background: rgba(255,0,170,0.1);
+  box-shadow: 0 0 12px rgba(255,0,170,0.3);
+}
+.dv-btn-danger:hover {
+  background: rgba(255,0,170,0.25);
+  box-shadow: 0 0 18px rgba(255,0,170,0.6);
+  transform: translateY(-1px);
+}
+
+
+
+.neon-glow {
+  text-shadow: 0 0 10px #00eaff, 0 0 20px #00eaff, 0 0 40px #ff00aa;
+}
+/* 💀 Make total row readable and neon-pilled */
+.tabulator .tabulator-row.tabulator-calcs {
+  background-color: rgba(10, 10, 15, 0.85) !important; /* deep dv background w/ transparency */
+  color: #00eaff !important; /* neon cyan text */
+  font-weight: 700;
+  border-top: 2px solid #ff00aa !important; /* magenta trim flex */
+  backdrop-filter: blur(6px);
+}
+
+.tabulator .tabulator-row.tabulator-calcs .tabulator-cell {
+  color: #00eaff !important;
+}
+
+/* Optional — a little glow for that "this number matters" energy */
+.tabulator .tabulator-row.tabulator-calcs:hover {
+  box-shadow: 0 0 12px rgba(0, 234, 255, 0.4);
+}
+
+/* =========================================
+   DATAVERSE TABULATOR SKIN
+   ========================================= */
+
+/* Base container styling */
+#cargoTable .tabulator {
+  background: rgba(10, 10, 15, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 255, 255, 0.25);
+  border-radius: 12px;
+  overflow: hidden;
+  font-family: Inter, sans-serif !important;
+}
+
+/* Remove outer glow animation from table wrapper, apply subtle one instead */
+#cargoTable {
+  width: 100% !important;
+  min-width: 1300px;
+  box-shadow: 0 0 22px rgba(0,255,255,0.25), inset 0 0 12px rgba(255,0,255,0.15);
+  border-radius: 12px;
+}
+
+/* Header row */
+.tabulator .tabulator-header {
+  background: linear-gradient(to bottom, rgba(0,255,255,0.12), rgba(255,0,255,0.07));
+  border-bottom: 1px solid rgba(0,255,255,0.25);
+}
+
+/* Header text */
+.tabulator .tabulator-col .tabulator-col-title {
+  color: #b8e6ff !important;
+  font-weight: 600;
+  letter-spacing: .5px;
+  text-shadow: 0 0 6px rgba(0,255,255,0.4);
+}
+
+/* Editable header input */
+.tabulator .tabulator-col input {
+  background: rgba(0,0,0,0.6);
+  border: 1px solid #00eaff;
+  color: #00eaff;
+  border-radius: 4px;
+}
+
+/* Cells */
+.tabulator .tabulator-row .tabulator-cell {
+  background: rgba(5,5,12,0.5);
+  border-right: 1px solid rgba(0,255,255,0.06);
+  color: #e0f7ff;
+  transition: background .15s ease, box-shadow .15s ease;
+}
+
+/* Row hover */
+.tabulator .tabulator-row:hover {
+  background: rgba(0,255,255,0.06) !important;
+}
+
+/* Active cell (edit mode) */
+.tabulator .tabulator-cell.tabulator-editing {
+  background: rgba(0,0,0,0.7) !important;
+  box-shadow: inset 0 0 8px rgba(0,255,255,0.5);
+}
+
+/* Dropdown list styling (commodity list) */
+.tabulator-editor-list {
+  background: rgba(5,5,12,0.95) !important;
+  border: 1px solid rgba(0,255,255,0.4) !important;
+  border-radius: 6px;
+  color: #b8e6ff !important;
+}
+.tabulator-editor-list-item:hover {
+  background: rgba(0,255,255,0.25) !important;
+  color: #fff !important;
+}
+
+/* Bottom calc row */
+.tabulator .tabulator-row.tabulator-calcs {
+  background: rgba(10,10,20,0.9) !important;
+  border-top: 2px solid #ff00aa !important;
+  color: #00ffff !important;
+  font-weight: 700;
+  text-shadow: 0 0 6px rgba(0,255,255,0.5);
+}
+
+/* Scrollbars — cyber */
+#cargoTable ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+#cargoTable ::-webkit-scrollbar-thumb {
+  background: linear-gradient(#00eaff, #ff00aa);
+  border-radius: 4px;
+}
+#cargoTable ::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.05);
+}
+
+/* Neon hover effect on headers */
+.tabulator-col:hover .tabulator-col-title {
+  color: #00eaff !important;
+  text-shadow: 
+    0 0 6px rgba(0,255,255,0.6),
+    0 0 12px rgba(255,0,0,0.4),
+    0 0 22px rgba(255,0,255,0.5);
+  transform: translateY(-1px);
+}
