@@ -24,8 +24,9 @@ trait HasRelationStore
 
     /**
      * getModelFromIndex returns the model at a given index
+     * @param int|string $index
      */
-    protected function getModelFromIndex(int $index)
+    protected function getModelFromIndex($index)
     {
         return $this->getLoadValueFromRelation()[$index] ?? $this->getRelationModel();
     }
@@ -74,8 +75,9 @@ trait HasRelationStore
 
     /**
      * createRelationAtIndex prepares an empty model and adds it to the index
+     * @param ?string $groupCode
      */
-    protected function createRelationAtIndex(?string $groupCode = null, ?array $attributes = null)
+    protected function createRelationAtIndex($groupCode = null, ?array $attributes = null)
     {
         $model = $this->getRelationModel();
 
@@ -102,8 +104,10 @@ trait HasRelationStore
 
     /**
      * duplicateRelationAtIndex
+     * @param int|string $fromIndex
+     * @param string $groupCode
      */
-    protected function duplicateRelationAtIndex(int $fromIndex, ?string $groupCode = null)
+    protected function duplicateRelationAtIndex($fromIndex, $groupCode = null)
     {
         $model = $this->getModelFromIndex($fromIndex)->replicateWithRelations();
 
@@ -122,8 +126,9 @@ trait HasRelationStore
 
     /**
      * deleteRelationAtIndex
+     * @param int|string $index
      */
-    protected function deleteRelationAtIndex(int $index)
+    protected function deleteRelationAtIndex($index)
     {
         $model = $this->getModelFromIndex($index);
         if (!$model->exists) {
@@ -238,7 +243,7 @@ trait HasRelationStore
     /**
      * processSortOrderForSortable
      */
-    protected function processSortOrderForSortable($model, $sortOrder): void
+    protected function processSortOrderForSortable($model, $sortOrder)
     {
         $orderColumn = $model->getSortOrderColumn();
 

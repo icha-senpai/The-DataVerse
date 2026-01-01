@@ -146,7 +146,7 @@ oc.Modules.register('editor.extension.cms.main', function() {
             this.editorApplication.closeAllTabs();
             this.editorApplication.setNavigatorReadonly(true);
 
-            const changingMessageId = $.oc.snackbar.show(this.trans('cms::lang.theme.setting_edit_theme'), {
+            const changingMessageId = oc.snackbar.show(this.trans('cms::lang.theme.setting_edit_theme'), {
                 timeout: 5000
             });
 
@@ -162,7 +162,7 @@ oc.Modules.register('editor.extension.cms.main', function() {
                 // await this.editorStore.refreshExtensionNavigatorNodes(this.editorNamespace);
                 await this.editorStore.refreshExtensionNavigatorNodes('*');
 
-                $.oc.snackbar.show(this.trans('cms::lang.theme.edit_theme_changed'), { replace: changingMessageId });
+                oc.snackbar.show(this.trans('cms::lang.theme.edit_theme_changed'), { replace: changingMessageId });
                 this.customData['theme'] = theme;
                 this.editorApplication.setNavigatorReadonly(false);
 
@@ -172,7 +172,7 @@ oc.Modules.register('editor.extension.cms.main', function() {
 
             }
             catch (error) {
-                $.oc.snackbar.hide(changingMessageId);
+                oc.snackbar.hide(changingMessageId);
                 $.oc.editor.page.showAjaxErrorAlert(error, this.trans('editor::lang.common.error'));
                 this.editorApplication.setNavigatorReadonly(false);
                 return false;
