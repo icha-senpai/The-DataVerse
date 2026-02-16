@@ -59,7 +59,7 @@ class ServiceProvider extends ModuleServiceProvider
         }
 
         // Backend specific
-        if ($this->app->runningInBackend()) {
+        if ($this->app->runningInBackend() || $this->app->runningInOctane()) {
             $this->extendBackendNavigation();
             $this->extendBackendSettings();
         }
@@ -70,6 +70,8 @@ class ServiceProvider extends ModuleServiceProvider
      */
     public function boot()
     {
+        $this->bootOctaneResets();
+
         // Fix UTF8MB4 support for MariaDB < 10.2 and MySQL < 5.7
         $this->applyDatabaseDefaultStringLength();
 
@@ -110,11 +112,11 @@ class ServiceProvider extends ModuleServiceProvider
         $this->app->singleton('system.resizer', \System\Classes\ResizeImages::class);
         $this->app->singleton('system.combiner', \System\Classes\CombineAssets::class);
         $this->app->singleton('system.mailer', \System\Classes\MailManager::class);
-        $this->app->singleton('system.markup', \System\Classes\MarkupManager::class);
-        $this->app->singleton('system.settings', \System\Classes\SettingsManager::class);
         $this->app->singleton('system.updater', \System\Classes\UpdateManager::class);
         $this->app->singleton('system.versions', \System\Classes\VersionManager::class);
         $this->app->singleton('system.plugins', \System\Classes\PluginManager::class);
+        $this->app->scoped('system.markup', \System\Classes\MarkupManager::class);
+        $this->app->scoped('system.settings', \System\Classes\SettingsManager::class);
     }
 
     /**
@@ -594,6 +596,24 @@ class ServiceProvider extends ModuleServiceProvider
         // Override standard Mailer content with template
         Event::listen('mailer.beforeAddContent', function ($mailer, $message, $view, $data, $raw, $plain) {
             return !MailManager::instance()->addContentFromEvent($message, $view, $plain, $raw, $data);
+        });
+    }
+
+    /**
+     * bootOctaneResets resets singletons when Octane receives a new request.
+     */
+    protected function bootOctaneResets()
+    {
+        if (!class_exists(\Laravel\Octane\Events\RequestReceived::class)) {
+            return;
+        }
+
+        $this->app['events']->listen(\Laravel\Octane\Events\RequestReceived::class, function ($event) {
+            \System\Behaviors\SettingsModel::clearInternalCache();
+            \System\Models\SettingModel::clearInternalCache();
+            \System\Models\Parameter::clearInternalCache();
+            \October\Rain\Auth\Manager::forgetInstance();
+            \Backend\Classes\AuthManager::forgetInstance();
         });
     }
 }
