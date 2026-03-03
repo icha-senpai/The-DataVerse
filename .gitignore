@@ -94,9 +94,6 @@ php_cs.cache
 ########################################
 # ⚙️  CMS / FRONTEND SPECIFIC
 ########################################
-composer.lock
-package-lock.json
-pnpm-lock.yaml
 LocalSettings.php
 config.php
 public/storage/
