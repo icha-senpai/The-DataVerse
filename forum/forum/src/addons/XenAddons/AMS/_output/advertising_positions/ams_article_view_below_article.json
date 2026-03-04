@@ -1,9 +1,0 @@
-{
-    "arguments": [
-        {
-            "argument": "article",
-            "required": true
-        }
-    ],
-    "active": false
-}

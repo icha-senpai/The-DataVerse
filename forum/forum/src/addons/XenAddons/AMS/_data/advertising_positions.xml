@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<advertising_positions>
-  <advertising_position position_id="ams_article_view_above_article" active="1"><![CDATA[[{"argument":"article","required":true}]]]></advertising_position>
-  <advertising_position position_id="ams_article_view_below_article" active="1"><![CDATA[[{"argument":"article","required":true}]]]></advertising_position>
-</advertising_positions>

@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<code_event_listeners>
-  <listener event_id="import_importer_classes" execute_order="10" callback_class="ThemeHouse\ConnectedAccountProviders\Listener\ImportImporterClasses" callback_method="importImporterClasses" active="1"/>
-</code_event_listeners>
