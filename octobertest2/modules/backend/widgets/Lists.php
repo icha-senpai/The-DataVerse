@@ -496,6 +496,9 @@ class Lists extends WidgetBase implements ListElement
                     }
                 }
             }
+
+            // Allow extensions inside the search grouping
+            $this->fireSystemEvent('backend.list.extendSearchQuery', [$innerQuery]);
         });
 
         // Custom select queries
@@ -532,10 +535,15 @@ class Lists extends WidgetBase implements ListElement
                     ? DbDongle::raw("group_concat(" . $sqlSelect . " separator ', ')")
                     : DbDongle::raw($sqlSelect);
 
-                $countQuery->select($joinSql)->reorder();
+                $countQuery->select($joinSql);
 
+                // Only strip ordering for multi-relations (group_concat),
+                // singular relations with LIMIT 1 need ordering for deterministic results
+                if ($isMultiRelation) {
+                    $countQuery->reorder();
+                }
                 // Singular relations need a limit to prevent subquery errors
-                if (!$isMultiRelation) {
+                else {
                     $countQuery->limit(1);
                 }
 
@@ -803,8 +811,9 @@ class Lists extends WidgetBase implements ListElement
         if ($this->pivotMode) {
             $url = RouterHelper::replaceParameters($record->pivot, $this->recordUrl);
         }
-
-        $url = RouterHelper::replaceParameters($record, $this->recordUrl);
+        else {
+            $url = RouterHelper::replaceParameters($record, $this->recordUrl);
+        }
 
         return Backend::url($url);
     }
@@ -1219,7 +1228,7 @@ class Lists extends WidgetBase implements ListElement
                 $value = $record->{$countColumnName};
             }
             else {
-                $value = $record->{$columnName};
+                $value = $record->getAttribute($columnName);
             }
         }
 

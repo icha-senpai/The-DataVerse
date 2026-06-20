@@ -42,19 +42,6 @@ class ServiceProvider extends ModuleServiceProvider
     }
 
     /**
-     * registerReportWidgets
-     */
-    public function registerReportWidgets()
-    {
-        return [
-            \Backend\ReportWidgets\Welcome::class => [
-                'label' => 'backend::lang.dashboard.welcome.widget_title_default',
-                'context' => 'dashboard'
-            ],
-        ];
-    }
-
-    /**
      * registerMailTemplates
      */
     public function registerMailTemplates()
@@ -73,7 +60,7 @@ class ServiceProvider extends ModuleServiceProvider
     {
         // return [
         //     'dashboard' => [
-        //         'label' => 'backend::lang.dashboard.menu_label',
+        //         'label' => "Dashboard",
         //         'icon' => 'icon-dashboard',
         //         'iconSvg' => 'modules/backend/assets/images/dashboard-icon.svg',
         //         'url' => Backend::url('backend'),
@@ -210,6 +197,20 @@ class ServiceProvider extends ModuleServiceProvider
     }
 
     /**
+     * registerFormDesigns
+     */
+    public function registerFormDesigns()
+    {
+        return [
+            \Backend\FormDesigns\BasicDesign::class => 'basic',
+            \Backend\FormDesigns\SurveyDesign::class => 'survey',
+            \Backend\FormDesigns\PopupDesign::class => 'popup',
+            \Backend\FormDesigns\SidebarDesign::class => 'sidebar',
+            \Backend\FormDesigns\DocumentDesign::class => 'document',
+        ];
+    }
+
+    /**
      * registerSettings
      */
     public function registerSettings()
@@ -291,7 +292,8 @@ class ServiceProvider extends ModuleServiceProvider
                 'attributes' => [
                     'data-control' => 'color-mode-switcher',
                     'data-lang-light-mode' => __("Light Mode"),
-                    'data-lang-dark-mode' => __("Dark Mode")
+                    'data-lang-dark-mode' => __("Dark Mode"),
+                    'data-lang-auto-mode' => __("Auto Mode")
                 ],
                 'order' => 620,
                 'context' => 'mysettings'

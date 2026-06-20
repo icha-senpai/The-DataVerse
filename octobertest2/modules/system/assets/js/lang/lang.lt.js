@@ -9,7 +9,7 @@ if (!window.oc.langMessages) {
     window.oc.langMessages = {};
 }
 
-window.oc.langMessages['lt'] = $.extend(
+window.oc.langMessages['lt'] = Object.assign(
     window.oc.langMessages['lt'] || {},
     {
     "markdowneditor": {
@@ -55,7 +55,8 @@ window.oc.langMessages['lt'] = $.extend(
         "dismiss": "Dismiss",
         "confirm_button_text": "GERAI",
         "cancel_button_text": "At\u0161aukti",
-        "widget_remove_confirm": "Pa\u0161alinti \u0161\u012f valdikl\u012f?"
+        "widget_remove_confirm": "Pa\u0161alinti \u0161\u012f valdikl\u012f?",
+        "reload": "Reload"
     },
     "datepicker": {
         "previousMonth": "Ankstenis m\u0117nuo",
@@ -154,139 +155,136 @@ window.oc.langMessages['lt'] = $.extend(
         "cancel": "Cancel",
         "items": "Items"
     },
-    "dashboard": {
-        "widget_data_source": "Data source",
-        "widget_data_source_required": "Please select a data source",
-        "widget_dimension": "Dimension",
-        "widget_dimension_required": "Please select a dimension",
-        "widget_metric": "Metric",
-        "widget_metric_required": "Please select metric(s).",
-        "widget_metrics": "Metrics",
-        "widget_title": "Title",
-        "widget_title_required": "Please provide the widget title",
-        "widget_title_optional_placeholder": "Leave empty to hide the title",
-        "widget_metric_value": "Value",
-        "widget_icon_status": "Icon Status",
-        "widget_href": "Link URL",
-        "widget_icon": "Icon",
-        "widget_icon_required": "Please select an icon",
-        "widget_link_text": "Link Text",
-        "apply": "Apply",
-        "delete": "Delete",
-        "configure": "Configure",
-        "section_show_interval": "Show Date Interval",
-        "widget_chart_type": "Chart type",
-        "widget_chart_type_bar": "Bar",
-        "widget_chart_type_stacked_bar": "Stacked Bar",
-        "widget_chart_type_line": "Line",
-        "sort_by": "Sort by",
-        "sort_by_required": "Select sorting metric or dimension",
-        "sort_by_placeholder": "Select a dimension and metrics",
-        "sort_order": "Order",
-        "sort_asc": "Ascending",
-        "sort_desc": "Descending",
-        "group_sorting": "Sorting",
-        "value_not_set": "[not set]",
-        "limit": "Limit",
-        "limit_placeholder": "Display all records",
-        "limit_number": "Enter a positive number or leave empty to display all records.",
-        "limit_min": "The limit value must be at least 1",
-        "empty_values": "Empty values",
-        "empty_values_hide": "Hide",
-        "empty_values_display_not_set": "Display [not set]",
-        "empty_values_dimension": "Dimension",
-        "date_interval": "Date interval",
-        "date_interval_dashboard_default": "Dashboard interval",
-        "date_interval_this_week": "This week",
-        "date_interval_this_month": "This month",
-        "date_interval_this_quarter": "This quarter",
-        "date_interval_this_year": "This year",
-        "date_interval_past_hour": "Past hour",
-        "date_interval_past_days": "Past X days",
-        "date_interval_past_days_value": "Number of days",
-        "date_interval_past_days_invalid": "Enter a positive number",
-        "prop_date_interval": "Display",
-        "date_interval_past_days_placeholder": "1 day (today) if not set",
-        "widget_bar_direction": "Direction",
-        "widget_bar_direction_vertical": "Vertical",
-        "widget_bar_direction_horizontal": "Horizontal",
-        "prop_color": "Color",
-        "color_required": "Select the metric color",
-        "tab_general": "General",
-        "tab_sorting_filtering": "Sorting & Filtering",
-        "prop_records_per_page": "Records per page",
-        "records_per_page_placeholder": "Leave empty to disable pagination",
-        "records_per_page_invalid": "Enter a positive number or leave empty to display all records.",
-        "prop_display_totals": "Display totals",
-        "prop_display_relative_bar": "Display relative bars",
-        "prop_extra_table_fields": "Extra table fields",
-        "filter_operation_equal_to": "Equal to",
-        "filter_operation_greater_equal": "Greater or equal to",
-        "filter_operation_less_equal": "Less or equal to",
-        "filter_operation_greater": "Greater than",
-        "filter_operation_less": "Less than",
-        "filter_operation_starts_with": "Starts with",
-        "filter_operation_includes": "Includes",
-        "filter_operation_one_of": "One of",
-        "prop_operation": "Operation",
-        "prop_value": "Value",
-        "prop_values": "Values",
-        "prop_values_one_per_line": "One value per line",
-        "prop_filter_attribute": "Attribute",
-        "filter_select_attribute": "Select an attribute",
-        "filter_select_operation": "Select an operation",
-        "prop_filters": "Filters",
-        "icon_status_info": "Information",
-        "icon_status_important": "Important",
-        "icon_status_success": "Success",
-        "icon_status_warning": "Warning",
-        "icon_status_disabled": "Disabled",
-        "range_today": "Today",
-        "range_yesterday": "Yesterday",
-        "range_last_7_days": "Last 7 days",
-        "range_last_30_days": "Last 30 days",
-        "range_this_month": "This month",
-        "range_last_month": "Last month",
-        "range_this_quarter": "This quarter",
-        "range_this_year": "This year",
-        "range_this_week": "This week",
-        "interval_day": "Day",
-        "interval_week": "Week",
-        "interval_month": "Month",
-        "interval_quarter": "Quarter",
-        "interval_year": "Year",
-        "compare_totals": "Compare Totals",
-        "compare_prev_period": "Prev period",
-        "compare_prev_year": "Same period last year",
-        "compare_none": "Disabled",
-        "updated_successfully": "The dashboard was successfully updated.",
-        "edit_dashboard": "Edit Dashboard",
-        "make_default": "Make Default",
-        "make_default_confirm": "Set the current layout as the default?",
-        "make_default_successfully": "This dashboard is now the default layout.",
-        "reset_layout": "Reset Layout",
-        "reset_layout_confirm": "Reset layout back to default?",
-        "reset_layout_successfully": "The dashboard layout has been reset to default.",
-        "manage_dashboards": "Manage Dashboards",
-        "import_success": "The dashboard was successfully imported",
-        "new_dashboard": "New Dashboard",
-        "import_dashboard": "Import Dashboard",
-        "delete_confirm": "Delete the dashboard? This action cannot be reversed. All users with access will be affected.",
-        "delete_success": "The dashboard was successfully deleted.",
-        "menu_item_custom": "Custom",
-        "menu_item_delete_row": "Delete row",
-        "widget_type_indicator": "Indicator",
-        "widget_type_section_title": "Section Title",
-        "widget_type_notice": "Text Notice",
-        "widget_type_chart": "Chart",
-        "widget_type_table": "Table",
-        "notice_text": "Notice text"
-    }
+    "[not set]": "[nenustatyta]",
+    "1 day (today) if not set": "1 diena (\u0161iandien), jei nenustatyta",
+    "Apply": "Taikyti",
+    "Ascending": "Did\u0117jan\u010dia tvarka",
+    "Attribute": "Atributas",
+    "Bar": "Baras",
+    "Cancel": "At\u0161aukti",
+    "Chart": "Diagrama",
+    "Chart type": "Diagramos tipas",
+    "Color": "Spalva",
+    "Compare Totals": "Palyginti sumas",
+    "Configure": "Konfig\u016bruoti",
+    "Custom": "Pasirinktinis",
+    "Custom Range": "Pasirinktinis intervalas",
+    "Dashboard interval": "Prietais\u0173 skydelio intervalas",
+    "Data source": "Duomen\u0173 \u0161altinis",
+    "Date interval": "Datos intervalas",
+    "Day": "Diena",
+    "Delete": "I\u0161trinti",
+    "Delete Dashboard": "I\u0161trinti prietais\u0173 skydel\u012f",
+    "Delete row": "I\u0161trinti eilut\u0119",
+    "Descending": "Ma\u017e\u0117janti",
+    "Dimension": "Matmuo",
+    "Direction": "Kryptis",
+    "Disabled": "Ne\u012fgalus",
+    "Display": "Ekranas",
+    "Display [not set]": "Rodyti [nenustatyta]",
+    "Display all records": "Rodyti visus \u012fra\u0161us",
+    "Display relative bars": "Rodyti santykinius stulpelius",
+    "Display totals": "Rodyti bendras sumas",
+    "Edit Dashboard": "Redaguoti prietais\u0173 skydel\u012f",
+    "Empty values": "Tu\u0161\u010dios reik\u0161m\u0117s",
+    "Enter a positive number": "\u012eveskite teigiam\u0105 skai\u010di\u0173",
+    "Enter a positive number or leave empty to display all records.": "\u012eveskite teigiam\u0105 skai\u010di\u0173 arba palikite lauk\u0105 tu\u0161\u010di\u0105, kad b\u016bt\u0173 rodomi visi \u012fra\u0161ai.",
+    "Equal to": "Lygus",
+    "Export Dashboard": "Eksportuoti ataskait\u0173 suvestin\u0119",
+    "Extra table fields": "Papildomi lentel\u0117s laukai",
+    "Filters": "Filtrai",
+    "General": "Bendra",
+    "Greater or equal to": "Didesnis arba lygus",
+    "Greater than": "Didesnis nei",
+    "Hide": "Sl\u0117pti",
+    "Horizontal": "Horizontaliai",
+    "Icon": "Piktograma",
+    "Icon Status": "Piktograma B\u016bsena",
+    "Important": "Svarbu",
+    "Includes": "\u012eskaitant",
+    "Indicator": "Indikatorius",
+    "Information": "Informacija",
+    "Last 30 days": "Paskutin\u0117s 30 dien\u0173",
+    "Last 7 days": "Paskutin\u0117s 7 dienos",
+    "Last month": "Pra\u0117jus\u012f m\u0117nes\u012f",
+    "Leave empty to disable pagination": "Palikite tu\u0161\u010di\u0105, jei norite i\u0161jungti puslapiavim\u0105",
+    "Leave empty to hide the title": "Palikite tu\u0161\u010di\u0105, jei norite pasl\u0117pti pavadinim\u0105",
+    "Less or equal to": "Ma\u017eesnis arba lygus",
+    "Less than": "Ma\u017eiau nei",
+    "Limit": "Riba",
+    "Line": "Linija",
+    "Link Text": "Nuorodos tekstas",
+    "Link URL": "Nuorodos URL",
+    "Make Default": "Nustatyti kaip numatyt\u0105j\u012f",
+    "Manage Dashboards": "Valdyti ataskait\u0173 sritis",
+    "Metric": "Metrika",
+    "Metrics": "Metrika",
+    "Month": "M\u0117nuo",
+    "My Custom Widget": "Mano pasirinktinis valdiklis",
+    "No Value": "N\u0117ra vert\u0117s",
+    "Notice text": "Prane\u0161imo tekstas",
+    "Number of days": "Dien\u0173 skai\u010dius",
+    "One of": "Vienas i\u0161",
+    "One value per line": "Viena reik\u0161m\u0117 eilut\u0117je",
+    "Operation": "Operacija",
+    "Order": "U\u017esakymas",
+    "Past hour": "Pra\u0117jusi\u0105 valand\u0105",
+    "Past X days": "Pastarosios X dienos",
+    "Please provide the widget title": "Pateikite valdiklio pavadinim\u0105",
+    "Please select a data source": "Pasirinkite duomen\u0173 \u0161altin\u012f",
+    "Please select a dimension": "Pasirinkite aspekt\u0105",
+    "Please select an icon": "Pasirinkite piktogram\u0105",
+    "Please select metric(s).": "Pasirinkite metrik\u0105 (-as).",
+    "Prev period": "Ankstesnis laikotarpis",
+    "Quarter": "Ketvirtis",
+    "Records per page": "\u012era\u0161ai puslapyje",
+    "Refresh every minute": "Atnaujinkite kas minut\u0119",
+    "Rename Dashboard": "Pervardyti prietais\u0173 skydel\u012f",
+    "Reset Layout": "Atstatyti i\u0161d\u0117stym\u0105",
+    "Reset layout back to default?": "Atkurti numatytuosius i\u0161d\u0117stymo parametrus?",
+    "Same period last year": "Tuo pa\u010diu laikotarpiu pra\u0117jusiais metais",
+    "Section": "Skyrius",
+    "Section Title": "Skyriaus pavadinimas",
+    "Select a dimension and metrics": "Pasirinkite aspekt\u0105 ir metrik\u0105",
+    "Select an attribute": "Pasirinkite atribut\u0105",
+    "Select an operation": "Pasirinkite operacij\u0105",
+    "Select sorting metric or dimension": "Pasirinkite r\u016b\u0161iavimo metrik\u0105 arba aspekt\u0105",
+    "Select the metric color": "Pasirinkite metrikos spalv\u0105",
+    "Set the current layout as the default?": "Nustatyti dabartin\u012f i\u0161d\u0117stym\u0105 kaip numatyt\u0105j\u012f?",
+    "Show Date Interval": "Rodyti datos interval\u0105",
+    "Sort by": "R\u016b\u0161iuoti pagal",
+    "Sorting": "R\u016b\u0161iavimas",
+    "Sorting & Filtering": "R\u016b\u0161iavimas ir filtravimas",
+    "Stacked Bar": "Sud\u0117tin\u0117 juosta",
+    "Starts with": "Prasideda nuo",
+    "Success": "S\u0117km\u0117",
+    "Table": "Lentel\u0117",
+    "Text Notice": "Tekstinis prane\u0161imas",
+    "The dashboard layout has been reset to default.": "Prietais\u0173 skydelio i\u0161d\u0117stymas buvo atstatytas \u012f numatytuosius nustatymus.",
+    "The dashboard was successfully updated.": "Prietais\u0173 skydelis s\u0117kmingai atnaujintas.",
+    "The limit value must be at least 1": "Ribin\u0117 vert\u0117 turi b\u016bti bent 1",
+    "This dashboard is now the default layout.": "\u0160i ataskait\u0173 sritis dabar yra numatytasis i\u0161d\u0117stymas.",
+    "This is a text notice widget.": "Tai tekstini\u0173 prane\u0161im\u0173 valdiklis.",
+    "This month": "\u0160\u012f m\u0117nes\u012f",
+    "This quarter": "\u0160\u012f ketvirt\u012f",
+    "This week": "\u0160i\u0105 savait\u0119",
+    "This year": "\u0160iais metais",
+    "Title": "Pavadinimas",
+    "Today": "\u0160iandien",
+    "Value": "Vert\u0117",
+    "Values": "Vertyb\u0117s",
+    "Vertical": "Vertikalus",
+    "Warning": "\u012esp\u0117jimas",
+    "Week": "Savait\u0117",
+    "Year": "Metai",
+    "Yesterday": "Vakar"
 }
 );
 
 
-//! moment.js locale configuration v2.22.2
+//! moment.js locale configuration
+//! locale : Lithuanian [lt]
+//! author : Mindaugas Mozūras : https://github.com/mmozuras
 
 ;(function (global, factory) {
    typeof exports === 'object' && typeof module !== 'undefined'
@@ -295,19 +293,20 @@ window.oc.langMessages['lt'] = $.extend(
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
 
+    //! moment.js locale configuration
 
     var units = {
-        'ss' : 'sekundė_sekundžių_sekundes',
-        'm' : 'minutė_minutės_minutę',
-        'mm': 'minutės_minučių_minutes',
-        'h' : 'valanda_valandos_valandą',
-        'hh': 'valandos_valandų_valandas',
-        'd' : 'diena_dienos_dieną',
-        'dd': 'dienos_dienų_dienas',
-        'M' : 'mėnuo_mėnesio_mėnesį',
-        'MM': 'mėnesiai_mėnesių_mėnesius',
-        'y' : 'metai_metų_metus',
-        'yy': 'metai_metų_metus'
+        ss: 'sekundė_sekundžių_sekundes',
+        m: 'minutė_minutės_minutę',
+        mm: 'minutės_minučių_minutes',
+        h: 'valanda_valandos_valandą',
+        hh: 'valandos_valandų_valandas',
+        d: 'diena_dienos_dieną',
+        dd: 'dienos_dienų_dienas',
+        M: 'mėnuo_mėnesio_mėnesį',
+        MM: 'mėnesiai_mėnesių_mėnesius',
+        y: 'metai_metų_metus',
+        yy: 'metai_metų_metus',
     };
     function translateSeconds(number, withoutSuffix, key, isFuture) {
         if (withoutSuffix) {
@@ -317,7 +316,11 @@ window.oc.langMessages['lt'] = $.extend(
         }
     }
     function translateSingular(number, withoutSuffix, key, isFuture) {
-        return withoutSuffix ? forms(key)[0] : (isFuture ? forms(key)[1] : forms(key)[2]);
+        return withoutSuffix
+            ? forms(key)[0]
+            : isFuture
+              ? forms(key)[1]
+              : forms(key)[2];
     }
     function special(number) {
         return number % 10 === 0 || (number > 10 && number < 20);
@@ -328,7 +331,9 @@ window.oc.langMessages['lt'] = $.extend(
     function translate(number, withoutSuffix, key, isFuture) {
         var result = number + ' ';
         if (number === 1) {
-            return result + translateSingular(number, withoutSuffix, key[0], isFuture);
+            return (
+                result + translateSingular(number, withoutSuffix, key[0], isFuture)
+            );
         } else if (withoutSuffix) {
             return result + (special(number) ? forms(key)[1] : forms(key)[0]);
         } else {
@@ -340,64 +345,74 @@ window.oc.langMessages['lt'] = $.extend(
         }
     }
     var lt = moment.defineLocale('lt', {
-        months : {
-            format: 'sausio_vasario_kovo_balandžio_gegužės_birželio_liepos_rugpjūčio_rugsėjo_spalio_lapkričio_gruodžio'.split('_'),
-            standalone: 'sausis_vasaris_kovas_balandis_gegužė_birželis_liepa_rugpjūtis_rugsėjis_spalis_lapkritis_gruodis'.split('_'),
-            isFormat: /D[oD]?(\[[^\[\]]*\]|\s)+MMMM?|MMMM?(\[[^\[\]]*\]|\s)+D[oD]?/
+        months: {
+            format: 'sausio_vasario_kovo_balandžio_gegužės_birželio_liepos_rugpjūčio_rugsėjo_spalio_lapkričio_gruodžio'.split(
+                '_'
+            ),
+            standalone:
+                'sausis_vasaris_kovas_balandis_gegužė_birželis_liepa_rugpjūtis_rugsėjis_spalis_lapkritis_gruodis'.split(
+                    '_'
+                ),
+            isFormat: /D[oD]?(\[[^\[\]]*\]|\s)+MMMM?|MMMM?(\[[^\[\]]*\]|\s)+D[oD]?/,
         },
-        monthsShort : 'sau_vas_kov_bal_geg_bir_lie_rgp_rgs_spa_lap_grd'.split('_'),
-        weekdays : {
-            format: 'sekmadienį_pirmadienį_antradienį_trečiadienį_ketvirtadienį_penktadienį_šeštadienį'.split('_'),
-            standalone: 'sekmadienis_pirmadienis_antradienis_trečiadienis_ketvirtadienis_penktadienis_šeštadienis'.split('_'),
-            isFormat: /dddd HH:mm/
+        monthsShort: 'sau_vas_kov_bal_geg_bir_lie_rgp_rgs_spa_lap_grd'.split('_'),
+        weekdays: {
+            format: 'sekmadienį_pirmadienį_antradienį_trečiadienį_ketvirtadienį_penktadienį_šeštadienį'.split(
+                '_'
+            ),
+            standalone:
+                'sekmadienis_pirmadienis_antradienis_trečiadienis_ketvirtadienis_penktadienis_šeštadienis'.split(
+                    '_'
+                ),
+            isFormat: /dddd HH:mm/,
         },
-        weekdaysShort : 'Sek_Pir_Ant_Tre_Ket_Pen_Šeš'.split('_'),
-        weekdaysMin : 'S_P_A_T_K_Pn_Š'.split('_'),
-        weekdaysParseExact : true,
-        longDateFormat : {
-            LT : 'HH:mm',
-            LTS : 'HH:mm:ss',
-            L : 'YYYY-MM-DD',
-            LL : 'YYYY [m.] MMMM D [d.]',
-            LLL : 'YYYY [m.] MMMM D [d.], HH:mm [val.]',
-            LLLL : 'YYYY [m.] MMMM D [d.], dddd, HH:mm [val.]',
-            l : 'YYYY-MM-DD',
-            ll : 'YYYY [m.] MMMM D [d.]',
-            lll : 'YYYY [m.] MMMM D [d.], HH:mm [val.]',
-            llll : 'YYYY [m.] MMMM D [d.], ddd, HH:mm [val.]'
+        weekdaysShort: 'Sek_Pir_Ant_Tre_Ket_Pen_Šeš'.split('_'),
+        weekdaysMin: 'S_P_A_T_K_Pn_Š'.split('_'),
+        weekdaysParseExact: true,
+        longDateFormat: {
+            LT: 'HH:mm',
+            LTS: 'HH:mm:ss',
+            L: 'YYYY-MM-DD',
+            LL: 'YYYY [m.] MMMM D [d.]',
+            LLL: 'YYYY [m.] MMMM D [d.], HH:mm [val.]',
+            LLLL: 'YYYY [m.] MMMM D [d.], dddd, HH:mm [val.]',
+            l: 'YYYY-MM-DD',
+            ll: 'YYYY [m.] MMMM D [d.]',
+            lll: 'YYYY [m.] MMMM D [d.], HH:mm [val.]',
+            llll: 'YYYY [m.] MMMM D [d.], ddd, HH:mm [val.]',
         },
-        calendar : {
-            sameDay : '[Šiandien] LT',
-            nextDay : '[Rytoj] LT',
-            nextWeek : 'dddd LT',
-            lastDay : '[Vakar] LT',
-            lastWeek : '[Praėjusį] dddd LT',
-            sameElse : 'L'
+        calendar: {
+            sameDay: '[Šiandien] LT',
+            nextDay: '[Rytoj] LT',
+            nextWeek: 'dddd LT',
+            lastDay: '[Vakar] LT',
+            lastWeek: '[Praėjusį] dddd LT',
+            sameElse: 'L',
         },
-        relativeTime : {
-            future : 'po %s',
-            past : 'prieš %s',
-            s : translateSeconds,
-            ss : translate,
-            m : translateSingular,
-            mm : translate,
-            h : translateSingular,
-            hh : translate,
-            d : translateSingular,
-            dd : translate,
-            M : translateSingular,
-            MM : translate,
-            y : translateSingular,
-            yy : translate
+        relativeTime: {
+            future: 'po %s',
+            past: 'prieš %s',
+            s: translateSeconds,
+            ss: translate,
+            m: translateSingular,
+            mm: translate,
+            h: translateSingular,
+            hh: translate,
+            d: translateSingular,
+            dd: translate,
+            M: translateSingular,
+            MM: translate,
+            y: translateSingular,
+            yy: translate,
         },
         dayOfMonthOrdinalParse: /\d{1,2}-oji/,
-        ordinal : function (number) {
+        ordinal: function (number) {
             return number + '-oji';
         },
-        week : {
-            dow : 1, // Monday is the first day of the week.
-            doy : 4  // The week that contains Jan 4th is the first week of the year.
-        }
+        week: {
+            dow: 1, // Monday is the first day of the week.
+            doy: 4, // The week that contains Jan 4th is the first week of the year.
+        },
     });
 
     return lt;

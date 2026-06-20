@@ -3,11 +3,11 @@
     class="oc-dashboard-container"
 >
     <div
-        class="flex-layout-column full-height"
+        class="d-flex flex-column min-vh-100"
         data-control="dashwidget"
     >
         <div data-vue-template>
-            <dashboard-component-dashboard :store=store></dashboard-component-dashboard>
+            <dashboard-component-dashboard :store="store"></dashboard-component-dashboard>
         </div>
         <script type="text/template" data-vue-state="initial">
             <?= json_encode($initialState) ?>

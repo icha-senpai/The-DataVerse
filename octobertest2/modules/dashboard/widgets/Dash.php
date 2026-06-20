@@ -68,6 +68,26 @@ class Dash extends WidgetBase
     public $showInterval = true;
 
     /**
+     * @var string defaultStart specifies default start keyword: today, week, month, quarter, year
+     */
+    public $defaultStart = 'month';
+
+    /**
+     * @var string defaultEnd specifies default end keyword: today, week, month, quarter, year
+     */
+    public $defaultEnd = 'today';
+
+    /**
+     * @var string defaultInterval specifies default grouping interval: day, week, month, quarter, year
+     */
+    public $defaultInterval = 'day';
+
+    /**
+     * @var string defaultCompare specifies default compare mode: none, prev-period, prev-year
+     */
+    public $defaultCompare = 'none';
+
+    /**
      * @var bool canMakeDefault
      */
     public $canMakeDefault;
@@ -120,6 +140,10 @@ class Dash extends WidgetBase
             'isCustom',
             'manageUrl',
             'showInterval',
+            'defaultStart',
+            'defaultEnd',
+            'defaultInterval',
+            'defaultCompare',
             'canCreateAndEdit',
             'canMakeDefault',
             'canResetLayout',
@@ -152,10 +176,9 @@ class Dash extends WidgetBase
      */
     protected function loadAssets()
     {
-        $this->addJs('js/classes/DashStore.js');
-        $this->addJs('js/controls/control-dashwidget.js');
-        $this->addJs('/modules/backend/assets/js/vendor/daterangepicker/daterangepicker.js');
-        $this->addCss('/modules/backend/assets/js/vendor/daterangepicker/daterangepicker.css');
+        $this->addJs('js/controls/control-dashwidget.js', ['type' => 'module']);
+        $this->addJs('/modules/backend/assets/vendor/daterangepicker/daterangepicker.js');
+        $this->addCss('/modules/backend/assets/vendor/daterangepicker/daterangepicker.css');
     }
 
     /**
@@ -436,12 +459,16 @@ class Dash extends WidgetBase
                 '#64748b' => Lang::get('system::lang.colors.slate')
             ],
             'dashboard' => [
-                'name' => $this->name,
+                'name' => Lang::get($this->name),
                 'code' => $this->code,
-                'rows' => $this->allRows,
+                'rows' => $this->translateRows($this->allRows),
             ],
             'manageUrl' => $this->manageUrl,
             'showInterval' => $this->showInterval,
+            'defaultStart' => $this->defaultStart,
+            'defaultEnd' => $this->defaultEnd,
+            'defaultInterval' => $this->defaultInterval,
+            'defaultCompare' => $this->defaultCompare,
             'canCreateAndEdit' => $this->canCreateAndEdit,
             'canMakeDefault' => $this->canMakeDefault,
             'canResetLayout' => $this->canResetLayout,
@@ -600,6 +627,53 @@ class Dash extends WidgetBase
         }
 
         return ReportMetric::findMetricByCodeStrict($dataSource->getAvailableMetrics(), $metricCode, true);
+    }
+
+    /**
+     * translateRows resolves localizable strings inside the dashboard rows
+     * structure just before it is emitted to the Vue state. This is the edge
+     * where YAML/saved config flows into the frontend.
+     */
+    protected function translateRows(?array $rows): ?array
+    {
+        if (!$rows) {
+            return $rows;
+        }
+
+        $localizable = ['title', 'linkText', 'notice'];
+
+        foreach ($rows as &$row) {
+            if (!isset($row['widgets']) || !is_array($row['widgets'])) {
+                continue;
+            }
+
+            foreach ($row['widgets'] as &$widget) {
+                $config = $widget instanceof DashReport
+                    ? (array) $widget->configuration
+                    : ($widget['configuration'] ?? null);
+
+                if (!is_array($config)) {
+                    continue;
+                }
+
+                foreach ($localizable as $key) {
+                    if (isset($config[$key]) && is_string($config[$key])) {
+                        $config[$key] = Lang::get($config[$key]);
+                    }
+                }
+
+                if ($widget instanceof DashReport) {
+                    $widget->configuration($config);
+                }
+                else {
+                    $widget['configuration'] = $config;
+                }
+            }
+            unset($widget);
+        }
+        unset($row);
+
+        return $rows;
     }
 
     /**

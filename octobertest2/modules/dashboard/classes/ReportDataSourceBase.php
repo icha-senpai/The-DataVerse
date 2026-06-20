@@ -12,6 +12,7 @@ use Dashboard\Classes\ReportMetricConfiguration;
 use Dashboard\Models\ReportDataCache;
 use Carbon\CarbonPeriod;
 use Carbon\Carbon;
+use ApplicationException;
 use SystemException;
 
 /**
@@ -56,15 +57,15 @@ abstract class ReportDataSourceBase
     public function getData(ReportFetchData $data): ReportFetchDataResult
     {
         if ($data->limit !== null && $data->paginationParams) {
-            throw new SystemException('Limit and pagination parameters cannot be both set.');
+            throw new ApplicationException('Limit and pagination parameters cannot be both set.');
         }
 
         if (($data->dateStart || $data->dateEnd) && $data->startTimestamp !== null) {
-            throw new SystemException('Start and end dates cannot be set if the start timestamp is also set.');
+            throw new ApplicationException('Start and end dates cannot be set if the start timestamp is also set.');
         }
 
         if (!$data->dateStart && $data->startTimestamp === null) {
-            throw new SystemException('Either the start and end dates or the start timestamp must be set.');
+            throw new ApplicationException('Either the start and end dates or the start timestamp must be set.');
         }
 
         $dimension = ReportDimension::findDimensionByCode(
@@ -104,7 +105,14 @@ abstract class ReportDataSourceBase
         if ($dimension->isDate() && $data->dateStart) {
             $range = CarbonPeriod::create($data->dateStart, $data->dateEnd);
             $dataset = new ReportDateDataSet($dimension, $metrics, $range, $data->orderRule, $groupInterval, $fetchResult->getRows());
-            $rows = $dataset->aggregateData($groupInterval);
+
+            if ($fetchResult->isPreAggregated()) {
+                $rows = $dataset->getNormalizedData();
+            }
+            else {
+                $rows = $dataset->aggregateData($groupInterval);
+            }
+
             $fetchResult->setRows($rows);
         }
 
@@ -143,11 +151,11 @@ abstract class ReportDataSourceBase
     public function runHandler(string $handlerName)
     {
         if (!preg_match('/^on/i', $handlerName)) {
-            throw new SystemException('Invalid data source handler name ' . $handlerName);
+            throw new ApplicationException('Invalid data source handler name ' . $handlerName);
         }
 
         if (!method_exists($this, $handlerName)) {
-            throw new SystemException('Data source handler method doesn\'t exist ' . $handlerName);
+            throw new ApplicationException('Data source handler method doesn\'t exist ' . $handlerName);
         }
 
         return $this->$handlerName();
@@ -260,7 +268,7 @@ abstract class ReportDataSourceBase
         }
 
         if ($groupInterval && !in_array($groupInterval, $this->knownGroupIntervals)) {
-            throw new SystemException("Invalid group interval: {$groupInterval}");
+            throw new ApplicationException("Invalid group interval: {$groupInterval}");
         }
 
         return $groupInterval;
@@ -275,7 +283,7 @@ abstract class ReportDataSourceBase
             $dimensionField = $dimension->findDimensionFieldByCode($orderRule->getAttributeName());
             if (!$dimensionField->getIsSortable()) {
                 $fieldCode = $dimensionField->getCode();
-                throw new SystemException("Dimension field {$fieldCode} is not sortable.");
+                throw new ApplicationException("Dimension field {$fieldCode} is not sortable.");
             }
         }
     }
@@ -293,7 +301,7 @@ abstract class ReportDataSourceBase
             $dimensionField = $dimension->findDimensionFieldByCode($filter->getAttributeName());
             if (!$dimensionField->getIsFilterable()) {
                 $fieldCode = $dimensionField->getCode();
-                throw new SystemException("Dimension field {$fieldCode} is not filterable.");
+                throw new ApplicationException("Dimension field {$fieldCode} is not filterable.");
             }
         }
     }

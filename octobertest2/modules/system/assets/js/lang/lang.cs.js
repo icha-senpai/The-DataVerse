@@ -9,7 +9,7 @@ if (!window.oc.langMessages) {
     window.oc.langMessages = {};
 }
 
-window.oc.langMessages['cs'] = $.extend(
+window.oc.langMessages['cs'] = Object.assign(
     window.oc.langMessages['cs'] || {},
     {
     "markdowneditor": {
@@ -55,7 +55,8 @@ window.oc.langMessages['cs'] = $.extend(
         "dismiss": "Dismiss",
         "confirm_button_text": "OK",
         "cancel_button_text": "Zru\u0161it",
-        "widget_remove_confirm": "Odstranit widget?"
+        "widget_remove_confirm": "Odstranit widget?",
+        "reload": "Reload"
     },
     "datepicker": {
         "previousMonth": "P\u0159edchoz\u00ed m\u011bs\u00edc",
@@ -152,139 +153,136 @@ window.oc.langMessages['cs'] = $.extend(
         "cancel": "Cancel",
         "items": "Items"
     },
-    "dashboard": {
-        "widget_data_source": "Data source",
-        "widget_data_source_required": "Please select a data source",
-        "widget_dimension": "Dimension",
-        "widget_dimension_required": "Please select a dimension",
-        "widget_metric": "Metric",
-        "widget_metric_required": "Please select metric(s).",
-        "widget_metrics": "Metrics",
-        "widget_title": "Title",
-        "widget_title_required": "Please provide the widget title",
-        "widget_title_optional_placeholder": "Leave empty to hide the title",
-        "widget_metric_value": "Value",
-        "widget_icon_status": "Icon Status",
-        "widget_href": "Link URL",
-        "widget_icon": "Icon",
-        "widget_icon_required": "Please select an icon",
-        "widget_link_text": "Link Text",
-        "apply": "Apply",
-        "delete": "Delete",
-        "configure": "Configure",
-        "section_show_interval": "Show Date Interval",
-        "widget_chart_type": "Chart type",
-        "widget_chart_type_bar": "Bar",
-        "widget_chart_type_stacked_bar": "Stacked Bar",
-        "widget_chart_type_line": "Line",
-        "sort_by": "Sort by",
-        "sort_by_required": "Select sorting metric or dimension",
-        "sort_by_placeholder": "Select a dimension and metrics",
-        "sort_order": "Order",
-        "sort_asc": "Ascending",
-        "sort_desc": "Descending",
-        "group_sorting": "Sorting",
-        "value_not_set": "[not set]",
-        "limit": "Limit",
-        "limit_placeholder": "Display all records",
-        "limit_number": "Enter a positive number or leave empty to display all records.",
-        "limit_min": "The limit value must be at least 1",
-        "empty_values": "Empty values",
-        "empty_values_hide": "Hide",
-        "empty_values_display_not_set": "Display [not set]",
-        "empty_values_dimension": "Dimension",
-        "date_interval": "Date interval",
-        "date_interval_dashboard_default": "Dashboard interval",
-        "date_interval_this_week": "This week",
-        "date_interval_this_month": "This month",
-        "date_interval_this_quarter": "This quarter",
-        "date_interval_this_year": "This year",
-        "date_interval_past_hour": "Past hour",
-        "date_interval_past_days": "Past X days",
-        "date_interval_past_days_value": "Number of days",
-        "date_interval_past_days_invalid": "Enter a positive number",
-        "prop_date_interval": "Display",
-        "date_interval_past_days_placeholder": "1 day (today) if not set",
-        "widget_bar_direction": "Direction",
-        "widget_bar_direction_vertical": "Vertical",
-        "widget_bar_direction_horizontal": "Horizontal",
-        "prop_color": "Color",
-        "color_required": "Select the metric color",
-        "tab_general": "General",
-        "tab_sorting_filtering": "Sorting & Filtering",
-        "prop_records_per_page": "Records per page",
-        "records_per_page_placeholder": "Leave empty to disable pagination",
-        "records_per_page_invalid": "Enter a positive number or leave empty to display all records.",
-        "prop_display_totals": "Display totals",
-        "prop_display_relative_bar": "Display relative bars",
-        "prop_extra_table_fields": "Extra table fields",
-        "filter_operation_equal_to": "Equal to",
-        "filter_operation_greater_equal": "Greater or equal to",
-        "filter_operation_less_equal": "Less or equal to",
-        "filter_operation_greater": "Greater than",
-        "filter_operation_less": "Less than",
-        "filter_operation_starts_with": "Starts with",
-        "filter_operation_includes": "Includes",
-        "filter_operation_one_of": "One of",
-        "prop_operation": "Operation",
-        "prop_value": "Value",
-        "prop_values": "Values",
-        "prop_values_one_per_line": "One value per line",
-        "prop_filter_attribute": "Attribute",
-        "filter_select_attribute": "Select an attribute",
-        "filter_select_operation": "Select an operation",
-        "prop_filters": "Filters",
-        "icon_status_info": "Information",
-        "icon_status_important": "Important",
-        "icon_status_success": "Success",
-        "icon_status_warning": "Warning",
-        "icon_status_disabled": "Disabled",
-        "range_today": "Today",
-        "range_yesterday": "Yesterday",
-        "range_last_7_days": "Last 7 days",
-        "range_last_30_days": "Last 30 days",
-        "range_this_month": "This month",
-        "range_last_month": "Last month",
-        "range_this_quarter": "This quarter",
-        "range_this_year": "This year",
-        "range_this_week": "This week",
-        "interval_day": "Day",
-        "interval_week": "Week",
-        "interval_month": "Month",
-        "interval_quarter": "Quarter",
-        "interval_year": "Year",
-        "compare_totals": "Compare Totals",
-        "compare_prev_period": "Prev period",
-        "compare_prev_year": "Same period last year",
-        "compare_none": "Disabled",
-        "updated_successfully": "The dashboard was successfully updated.",
-        "edit_dashboard": "Edit Dashboard",
-        "make_default": "Make Default",
-        "make_default_confirm": "Set the current layout as the default?",
-        "make_default_successfully": "This dashboard is now the default layout.",
-        "reset_layout": "Reset Layout",
-        "reset_layout_confirm": "Reset layout back to default?",
-        "reset_layout_successfully": "The dashboard layout has been reset to default.",
-        "manage_dashboards": "Manage Dashboards",
-        "import_success": "The dashboard was successfully imported",
-        "new_dashboard": "New Dashboard",
-        "import_dashboard": "Import Dashboard",
-        "delete_confirm": "Delete the dashboard? This action cannot be reversed. All users with access will be affected.",
-        "delete_success": "The dashboard was successfully deleted.",
-        "menu_item_custom": "Custom",
-        "menu_item_delete_row": "Delete row",
-        "widget_type_indicator": "Indicator",
-        "widget_type_section_title": "Section Title",
-        "widget_type_notice": "Text Notice",
-        "widget_type_chart": "Chart",
-        "widget_type_table": "Table",
-        "notice_text": "Notice text"
-    }
+    "[not set]": "[nen\u00ed nastaveno]",
+    "1 day (today) if not set": "1 den (dnes), pokud nen\u00ed nastaveno",
+    "Apply": "Pou\u017e\u00edt",
+    "Ascending": "Vzestupn\u011b",
+    "Attribute": "Atribut",
+    "Bar": "Sloupec",
+    "Cancel": "Zru\u0161it",
+    "Chart": "Sch\u00e9ma",
+    "Chart type": "Typ grafu",
+    "Color": "Barva",
+    "Compare Totals": "Porovnat sou\u010dty",
+    "Configure": "Konfigurovat",
+    "Custom": "Zvyk",
+    "Custom Range": "Vlastn\u00ed rozsah",
+    "Dashboard interval": "Interval \u0159\u00eddic\u00ed desky",
+    "Data source": "Zdroj dat",
+    "Date interval": "Interval data",
+    "Day": "Den",
+    "Delete": "Vymazat",
+    "Delete Dashboard": "Smazat \u0159\u00eddic\u00ed panel",
+    "Delete row": "Smazat \u0159\u00e1dek",
+    "Descending": "Klesaj\u00edc\u00ed",
+    "Dimension": "Dimenze",
+    "Direction": "Sm\u011br",
+    "Disabled": "Zak\u00e1z\u00e1no",
+    "Display": "Zobrazit",
+    "Display [not set]": "Displej [nenastaveno]",
+    "Display all records": "Zobrazit v\u0161echny z\u00e1znamy",
+    "Display relative bars": "Zobrazit relativn\u00ed sloupce",
+    "Display totals": "Zobrazit sou\u010dty",
+    "Edit Dashboard": "Upravit \u0159\u00eddic\u00ed panel",
+    "Empty values": "Pr\u00e1zdn\u00e9 hodnoty",
+    "Enter a positive number": "Zadejte kladn\u00e9 \u010d\u00edslo",
+    "Enter a positive number or leave empty to display all records.": "Zadejte kladn\u00e9 \u010d\u00edslo nebo nechte pole pr\u00e1zdn\u00e9 pro zobrazen\u00ed v\u0161ech z\u00e1znam\u016f.",
+    "Equal to": "Rovn\u00e9",
+    "Export Dashboard": "Exportovat \u0159\u00eddic\u00ed panel",
+    "Extra table fields": "Dal\u0161\u00ed pole tabulky",
+    "Filters": "Filtry",
+    "General": "Gener\u00e1l",
+    "Greater or equal to": "V\u011bt\u0161\u00ed nebo rovno",
+    "Greater than": "V\u011bt\u0161\u00ed ne\u017e",
+    "Hide": "Skr\u00fdt",
+    "Horizontal": "Horizont\u00e1ln\u00ed",
+    "Icon": "Ikona",
+    "Icon Status": "Ikona Stav",
+    "Important": "D\u016fle\u017eit\u00e9",
+    "Includes": "Zahrnuje",
+    "Indicator": "Indik\u00e1tor",
+    "Information": "Informace",
+    "Last 30 days": "Posledn\u00edch 30 dn\u00ed",
+    "Last 7 days": "Posledn\u00edch 7 dn\u00ed",
+    "Last month": "Minul\u00fd m\u011bs\u00edc",
+    "Leave empty to disable pagination": "Pro vypnut\u00ed str\u00e1nkov\u00e1n\u00ed ponechte pr\u00e1zdn\u00e9.",
+    "Leave empty to hide the title": "Pro skryt\u00ed n\u00e1zvu ponechte pr\u00e1zdn\u00e9.",
+    "Less or equal to": "Men\u0161\u00ed nebo rovno",
+    "Less than": "M\u00e9n\u011b ne\u017e",
+    "Limit": "Omezit",
+    "Line": "\u010c\u00e1ra",
+    "Link Text": "Text odkazu",
+    "Link URL": "URL odkazu",
+    "Make Default": "Nastavit jako v\u00fdchoz\u00ed",
+    "Manage Dashboards": "Spr\u00e1va \u0159\u00eddic\u00edch panel\u016f",
+    "Metric": "Metrick\u00fd",
+    "Metrics": "Metriky",
+    "Month": "M\u011bs\u00edc",
+    "My Custom Widget": "M\u016fj vlastn\u00ed widget",
+    "No Value": "\u017d\u00e1dn\u00e1 hodnota",
+    "Notice text": "Text ozn\u00e1men\u00ed",
+    "Number of days": "Po\u010det dn\u00ed",
+    "One of": "Jeden z",
+    "One value per line": "Jedna hodnota na \u0159\u00e1dek",
+    "Operation": "Operace",
+    "Order": "Objedn\u00e1vka",
+    "Past hour": "Posledn\u00ed hodina",
+    "Past X days": "Posledn\u00edch X dn\u00ed",
+    "Please provide the widget title": "Pros\u00edm, uve\u010fte n\u00e1zev widgetu",
+    "Please select a data source": "Vyberte zdroj dat",
+    "Please select a dimension": "Vyberte pros\u00edm dimenzi",
+    "Please select an icon": "Vyberte pros\u00edm ikonu",
+    "Please select metric(s).": "Vyberte pros\u00edm metriku(y).",
+    "Prev period": "P\u0159edchoz\u00ed obdob\u00ed",
+    "Quarter": "\u010ctvrtlet\u00ed",
+    "Records per page": "Z\u00e1znam\u016f na str\u00e1nku",
+    "Refresh every minute": "Obnovovat ka\u017edou minutu",
+    "Rename Dashboard": "P\u0159ejmenovat \u0159\u00eddic\u00ed panel",
+    "Reset Layout": "Obnovit rozvr\u017een\u00ed",
+    "Reset layout back to default?": "Obnovit rozvr\u017een\u00ed zp\u011bt na v\u00fdchoz\u00ed?",
+    "Same period last year": "Stejn\u00e9 obdob\u00ed lo\u0148sk\u00e9ho roku",
+    "Section": "Sekce",
+    "Section Title": "N\u00e1zev sekce",
+    "Select a dimension and metrics": "Vyberte dimenzi a metriky",
+    "Select an attribute": "Vyberte atribut",
+    "Select an operation": "Vyberte operaci",
+    "Select sorting metric or dimension": "Vyberte metriku nebo dimenzi \u0159azen\u00ed",
+    "Select the metric color": "Vyberte barvu metriky",
+    "Set the current layout as the default?": "Nastavit aktu\u00e1ln\u00ed rozvr\u017een\u00ed jako v\u00fdchoz\u00ed?",
+    "Show Date Interval": "Zobrazit interval dat",
+    "Sort by": "Se\u0159adit podle",
+    "Sorting": "\u0158azen\u00ed",
+    "Sorting & Filtering": "\u0158azen\u00ed a filtrov\u00e1n\u00ed",
+    "Stacked Bar": "Skl\u00e1dan\u00fd sloupcov\u00fd graf",
+    "Starts with": "Za\u010d\u00edn\u00e1 s",
+    "Success": "\u00dasp\u011bch",
+    "Table": "Tabulka",
+    "Text Notice": "Textov\u00e9 ozn\u00e1men\u00ed",
+    "The dashboard layout has been reset to default.": "Rozvr\u017een\u00ed \u0159\u00eddic\u00ed desky bylo obnoveno na v\u00fdchoz\u00ed nastaven\u00ed.",
+    "The dashboard was successfully updated.": "\u0158\u00eddic\u00ed panel byl \u00fasp\u011b\u0161n\u011b aktualizov\u00e1n.",
+    "The limit value must be at least 1": "Limitn\u00ed hodnota mus\u00ed b\u00fdt alespo\u0148 1",
+    "This dashboard is now the default layout.": "Tento \u0159\u00eddic\u00ed panel m\u00e1 nyn\u00ed v\u00fdchoz\u00ed rozvr\u017een\u00ed.",
+    "This is a text notice widget.": "Toto je widget s textov\u00fdmi ozn\u00e1men\u00edmi.",
+    "This month": "Tento m\u011bs\u00edc",
+    "This quarter": "Toto \u010dtvrtlet\u00ed",
+    "This week": "Tento t\u00fdden",
+    "This year": "Letos",
+    "Title": "Titul",
+    "Today": "Dnes",
+    "Value": "Hodnota",
+    "Values": "Hodnoty",
+    "Vertical": "Vertik\u00e1ln\u00ed",
+    "Warning": "Varov\u00e1n\u00ed",
+    "Week": "T\u00fdden",
+    "Year": "Rok",
+    "Yesterday": "V\u010dera"
 }
 );
 
 
-//! moment.js locale configuration v2.22.2
+//! moment.js locale configuration
+//! locale : Czech [cs]
+//! author : petrbela : https://github.com/petrbela
 
 ;(function (global, factory) {
    typeof exports === 'object' && typeof module !== 'undefined'
@@ -293,110 +291,122 @@ window.oc.langMessages['cs'] = $.extend(
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
 
+    //! moment.js locale configuration
 
-    var months = 'leden_únor_březen_duben_květen_červen_červenec_srpen_září_říjen_listopad_prosinec'.split('_'),
-        monthsShort = 'led_úno_bře_dub_kvě_čvn_čvc_srp_zář_říj_lis_pro'.split('_');
+    var months = {
+            standalone:
+                'leden_únor_březen_duben_květen_červen_červenec_srpen_září_říjen_listopad_prosinec'.split(
+                    '_'
+                ),
+            format: 'ledna_února_března_dubna_května_června_července_srpna_září_října_listopadu_prosince'.split(
+                '_'
+            ),
+            isFormat: /DD?[o.]?(\[[^\[\]]*\]|\s)+MMMM/,
+        },
+        monthsShort = 'led_úno_bře_dub_kvě_čvn_čvc_srp_zář_říj_lis_pro'.split('_'),
+        monthsParse = [
+            /^led/i,
+            /^úno/i,
+            /^bře/i,
+            /^dub/i,
+            /^kvě/i,
+            /^(čvn|červen$|června)/i,
+            /^(čvc|červenec|července)/i,
+            /^srp/i,
+            /^zář/i,
+            /^říj/i,
+            /^lis/i,
+            /^pro/i,
+        ],
+        // NOTE: 'červen' is substring of 'červenec'; therefore 'červenec' must precede 'červen' in the regex to be fully matched.
+        // Otherwise parser matches '1. červenec' as '1. červen' + 'ec'.
+        monthsRegex =
+            /^(leden|únor|březen|duben|květen|červenec|července|červen|června|srpen|září|říjen|listopad|prosinec|led|úno|bře|dub|kvě|čvn|čvc|srp|zář|říj|lis|pro)/i;
+
     function plural(n) {
-        return (n > 1) && (n < 5) && (~~(n / 10) !== 1);
+        return n > 1 && n < 5 && ~~(n / 10) !== 1;
     }
     function translate(number, withoutSuffix, key, isFuture) {
         var result = number + ' ';
         switch (key) {
-            case 's':  // a few seconds / in a few seconds / a few seconds ago
-                return (withoutSuffix || isFuture) ? 'pár sekund' : 'pár sekundami';
+            case 's': // a few seconds / in a few seconds / a few seconds ago
+                return withoutSuffix || isFuture ? 'pár sekund' : 'pár sekundami';
             case 'ss': // 9 seconds / in 9 seconds / 9 seconds ago
                 if (withoutSuffix || isFuture) {
                     return result + (plural(number) ? 'sekundy' : 'sekund');
                 } else {
                     return result + 'sekundami';
                 }
-                break;
-            case 'm':  // a minute / in a minute / a minute ago
-                return withoutSuffix ? 'minuta' : (isFuture ? 'minutu' : 'minutou');
+            case 'm': // a minute / in a minute / a minute ago
+                return withoutSuffix ? 'minuta' : isFuture ? 'minutu' : 'minutou';
             case 'mm': // 9 minutes / in 9 minutes / 9 minutes ago
                 if (withoutSuffix || isFuture) {
                     return result + (plural(number) ? 'minuty' : 'minut');
                 } else {
                     return result + 'minutami';
                 }
-                break;
-            case 'h':  // an hour / in an hour / an hour ago
-                return withoutSuffix ? 'hodina' : (isFuture ? 'hodinu' : 'hodinou');
+            case 'h': // an hour / in an hour / an hour ago
+                return withoutSuffix ? 'hodina' : isFuture ? 'hodinu' : 'hodinou';
             case 'hh': // 9 hours / in 9 hours / 9 hours ago
                 if (withoutSuffix || isFuture) {
                     return result + (plural(number) ? 'hodiny' : 'hodin');
                 } else {
                     return result + 'hodinami';
                 }
-                break;
-            case 'd':  // a day / in a day / a day ago
-                return (withoutSuffix || isFuture) ? 'den' : 'dnem';
+            case 'd': // a day / in a day / a day ago
+                return withoutSuffix || isFuture ? 'den' : 'dnem';
             case 'dd': // 9 days / in 9 days / 9 days ago
                 if (withoutSuffix || isFuture) {
                     return result + (plural(number) ? 'dny' : 'dní');
                 } else {
                     return result + 'dny';
                 }
-                break;
-            case 'M':  // a month / in a month / a month ago
-                return (withoutSuffix || isFuture) ? 'měsíc' : 'měsícem';
+            case 'M': // a month / in a month / a month ago
+                return withoutSuffix || isFuture ? 'měsíc' : 'měsícem';
             case 'MM': // 9 months / in 9 months / 9 months ago
                 if (withoutSuffix || isFuture) {
                     return result + (plural(number) ? 'měsíce' : 'měsíců');
                 } else {
                     return result + 'měsíci';
                 }
-                break;
-            case 'y':  // a year / in a year / a year ago
-                return (withoutSuffix || isFuture) ? 'rok' : 'rokem';
+            case 'y': // a year / in a year / a year ago
+                return withoutSuffix || isFuture ? 'rok' : 'rokem';
             case 'yy': // 9 years / in 9 years / 9 years ago
                 if (withoutSuffix || isFuture) {
                     return result + (plural(number) ? 'roky' : 'let');
                 } else {
                     return result + 'lety';
                 }
-                break;
         }
     }
 
     var cs = moment.defineLocale('cs', {
-        months : months,
-        monthsShort : monthsShort,
-        monthsParse : (function (months, monthsShort) {
-            var i, _monthsParse = [];
-            for (i = 0; i < 12; i++) {
-                // use custom parser to solve problem with July (červenec)
-                _monthsParse[i] = new RegExp('^' + months[i] + '$|^' + monthsShort[i] + '$', 'i');
-            }
-            return _monthsParse;
-        }(months, monthsShort)),
-        shortMonthsParse : (function (monthsShort) {
-            var i, _shortMonthsParse = [];
-            for (i = 0; i < 12; i++) {
-                _shortMonthsParse[i] = new RegExp('^' + monthsShort[i] + '$', 'i');
-            }
-            return _shortMonthsParse;
-        }(monthsShort)),
-        longMonthsParse : (function (months) {
-            var i, _longMonthsParse = [];
-            for (i = 0; i < 12; i++) {
-                _longMonthsParse[i] = new RegExp('^' + months[i] + '$', 'i');
-            }
-            return _longMonthsParse;
-        }(months)),
-        weekdays : 'neděle_pondělí_úterý_středa_čtvrtek_pátek_sobota'.split('_'),
-        weekdaysShort : 'ne_po_út_st_čt_pá_so'.split('_'),
-        weekdaysMin : 'ne_po_út_st_čt_pá_so'.split('_'),
-        longDateFormat : {
+        months: months,
+        monthsShort: monthsShort,
+        monthsRegex: monthsRegex,
+        monthsShortRegex: monthsRegex,
+        // NOTE: 'červen' is substring of 'červenec'; therefore 'červenec' must precede 'červen' in the regex to be fully matched.
+        // Otherwise parser matches '1. červenec' as '1. červen' + 'ec'.
+        monthsStrictRegex:
+            /^(leden|ledna|února|únor|březen|března|duben|dubna|květen|května|červenec|července|červen|června|srpen|srpna|září|říjen|října|listopadu|listopad|prosinec|prosince)/i,
+        monthsShortStrictRegex:
+            /^(led|úno|bře|dub|kvě|čvn|čvc|srp|zář|říj|lis|pro)/i,
+        monthsParse: monthsParse,
+        longMonthsParse: monthsParse,
+        shortMonthsParse: monthsParse,
+        weekdays: 'neděle_pondělí_úterý_středa_čtvrtek_pátek_sobota'.split('_'),
+        weekdaysShort: 'ne_po_út_st_čt_pá_so'.split('_'),
+        weekdaysMin: 'ne_po_út_st_čt_pá_so'.split('_'),
+        longDateFormat: {
             LT: 'H:mm',
-            LTS : 'H:mm:ss',
-            L : 'DD.MM.YYYY',
-            LL : 'D. MMMM YYYY',
-            LLL : 'D. MMMM YYYY H:mm',
-            LLLL : 'dddd D. MMMM YYYY H:mm',
-            l : 'D. M. YYYY'
+            LTS: 'H:mm:ss',
+            L: 'DD.MM.YYYY',
+            LL: 'D. MMMM YYYY',
+            LLL: 'D. MMMM YYYY H:mm',
+            LLLL: 'dddd D. MMMM YYYY H:mm',
+            l: 'D. M. YYYY',
         },
-        calendar : {
+        calendar: {
             sameDay: '[dnes v] LT',
             nextDay: '[zítra v] LT',
             nextWeek: function () {
@@ -433,30 +443,30 @@ window.oc.langMessages['cs'] = $.extend(
                         return '[minulou sobotu v] LT';
                 }
             },
-            sameElse: 'L'
+            sameElse: 'L',
         },
-        relativeTime : {
-            future : 'za %s',
-            past : 'před %s',
-            s : translate,
-            ss : translate,
-            m : translate,
-            mm : translate,
-            h : translate,
-            hh : translate,
-            d : translate,
-            dd : translate,
-            M : translate,
-            MM : translate,
-            y : translate,
-            yy : translate
+        relativeTime: {
+            future: 'za %s',
+            past: 'před %s',
+            s: translate,
+            ss: translate,
+            m: translate,
+            mm: translate,
+            h: translate,
+            hh: translate,
+            d: translate,
+            dd: translate,
+            M: translate,
+            MM: translate,
+            y: translate,
+            yy: translate,
         },
-        dayOfMonthOrdinalParse : /\d{1,2}\./,
-        ordinal : '%d.',
-        week : {
-            dow : 1, // Monday is the first day of the week.
-            doy : 4  // The week that contains Jan 4th is the first week of the year.
-        }
+        dayOfMonthOrdinalParse: /\d{1,2}\./,
+        ordinal: '%d.',
+        week: {
+            dow: 1, // Monday is the first day of the week.
+            doy: 4, // The week that contains Jan 4th is the first week of the year.
+        },
     });
 
     return cs;

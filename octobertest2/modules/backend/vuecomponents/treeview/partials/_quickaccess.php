@@ -1,4 +1,4 @@
-<backend-component-modal
+<backend-modal
     ref="modal"
     :unique-key="modalUniqueKey"
     :close-by-overlay-click="true"
@@ -12,13 +12,13 @@
     @hidden="onModalHidden"
 >
     <template v-slot:content>
-        <div class="treeview-quick-access flex-layout-column fill-container">
-            <div class="modal-header flex-layout-item fix">
+        <div class="treeview-quick-access d-flex flex-column fill-container">
+            <div class="modal-header flex-shrink-0">
                 <h4 class="modal-title" v-bind:id="labelId"><?= e(trans('backend::lang.treeview.quick_access')) ?></h4>
             </div>
-            <div class="modal-body flex-layout-item stretch relative" :class="{'has-results': nodes.length > 0}">
-                <div class="treeview-quick-access flex-layout-column fill-container">
-                    <div class="input-container backend-icon-background-pseudo flex-layout-item fix">
+            <div class="modal-body flex-fill position-relative" :class="{'has-results': nodes.length > 0}">
+                <div class="treeview-quick-access d-flex flex-column fill-container">
+                    <div class="input-container backend-icon-background-pseudo flex-shrink-0">
                         <input
                             v-model="searchQuery"
                             type="text"
@@ -26,8 +26,8 @@
                             data-default-focus
                         />
                     </div>
-                    <div class="quick-access-list flex-layout-item stretch relative">
-                        <backend-component-scrollable-panel ref="scrollablePanel">
+                    <div class="quick-access-list flex-fill position-relative">
+                        <backend-scrollable-panel ref="scrollablePanel">
                             <ul>
                                 <li class="quick-list-header" v-if="nodes.length > 0">
                                     <?= e(trans('backend::lang.treeview.open')) ?>
@@ -88,10 +88,10 @@
                                     <span class="path-item path-leaf path-leaf-command" v-text="commandData.item.label"></span>
                                 </li>
                             </ul>
-                        </backend-component-scrollable-panel>
+                        </backend-scrollable-panel>
                     </div>
                 </div>
             </div>
         </div>
     </template>
-</backend-component-modal>
+</backend-modal>

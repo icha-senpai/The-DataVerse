@@ -2,6 +2,7 @@
 
 use Lang;
 use Flash;
+use Artisan;
 use Backend;
 use BackendAuth;
 use BackendMenu;
@@ -9,6 +10,7 @@ use System\Models\PluginVersion;
 use System\Classes\UpdateManager;
 use System\Classes\PluginManager;
 use System\Classes\SettingsManager;
+use System\Helpers\Cache as CacheHelper;
 use System\Widgets\Changelog;
 use System\Widgets\Updater;
 use Backend\Classes\Controller;
@@ -25,6 +27,8 @@ use Exception;
  */
 class Updates extends Controller
 {
+    use \System\Controllers\Updates\HasComposerEditor;
+
     /**
      * @var array Extensions implemented by this controller.
      */
@@ -132,23 +136,16 @@ class Updates extends Controller
                     continue;
                 }
 
-                $savePlugin = true;
                 switch ($bulkAction) {
-                    // Disables plugin on the system
                     case 'disable':
-                        $plugin->is_disabled = 1;
-                        $manager->disablePlugin($plugin->code, true);
+                        $plugin->setContextDisabled();
                         break;
 
-                    // Enables plugin on the system
                     case 'enable':
-                        $plugin->is_disabled = 0;
-                        $manager->enablePlugin($plugin->code, true);
+                        $plugin->setContextEnabled();
                         break;
 
-                    // Rebuilds plugin database migrations
                     case 'refresh':
-                        $savePlugin = false;
                         if ($plugin->orphaned) {
                             UpdateManager::instance()->rollbackPlugin($plugin->code);
                         }
@@ -157,23 +154,40 @@ class Updates extends Controller
                         }
                         break;
 
-                    // Rollback and remove plugins from the system
                     case 'remove':
-                        $savePlugin = false;
                         $manager->deletePlugin($plugin->code);
                         break;
-                }
-
-                if ($savePlugin) {
-                    $plugin->save();
                 }
             }
         }
 
         // Reload plugin dependency tree
-        PluginManager::instance()->reloadDisabledCache();
+        PluginManager::instance()->clearDisabledCache();
 
         Flash::success(Lang::get("system::lang.plugins.{$bulkAction}_success"));
+        return $this->listRefresh('manage');
+    }
+
+    /**
+     * manage_onClearCache clears the application cache
+     */
+    public function manage_onClearCache()
+    {
+        CacheHelper::clear();
+
+        Flash::success(__("Cache cleared successfully."));
+    }
+
+    /**
+     * manage_onMigrateDatabase runs all pending migrations
+     */
+    public function manage_onMigrateDatabase()
+    {
+        Artisan::call('october:migrate');
+        Artisan::call('tailor:migrate');
+
+        Flash::success(__("Database migrated successfully."));
+
         return $this->listRefresh('manage');
     }
 
@@ -196,7 +210,7 @@ class Updates extends Controller
             return 'hidden';
         }
 
-        if ($record->orphaned || $record->is_disabled) {
+        if ($record->orphaned || $record->context_disabled) {
             return 'safe disabled';
         }
 

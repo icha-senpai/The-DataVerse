@@ -6,6 +6,7 @@ use Html;
 use Lang;
 use Cache;
 use Config;
+use System;
 use Backend;
 use Less_Parser;
 use System\Models\SettingModel;
@@ -110,7 +111,11 @@ class BrandSetting extends SettingModel
     public function beforeSave()
     {
         if ($this->isDirty('custom_css')) {
-            $this->custom_css = Html::clean($this->custom_css);
+            $this->custom_css = Html::cleanCss($this->custom_css);
+
+            if (System::checkSafeMode()) {
+                $this->custom_css = str_ireplace('@import', 'import', $this->custom_css);
+            }
         }
     }
 
@@ -135,15 +140,22 @@ class BrandSetting extends SettingModel
         $settings = self::instance();
         $allowedModes = [self::COLOR_AUTO, self::COLOR_LIGHT, self::COLOR_DARK];
 
+        // Determine the base mode (user cookie overrides brand setting)
+        $baseMode = null;
         if (isset($_COOKIE['admin_color_mode_user'])) {
             $userMode = $_COOKIE['admin_color_mode_user'];
             if (in_array($userMode, $allowedModes, true)) {
-                return $userMode;
+                $baseMode = $userMode;
             }
         }
 
+        if ($baseMode === null) {
+            $baseMode = (string) $settings->color_mode;
+        }
+
+        // Resolve auto mode using the cached OS preference
         if (
-            $settings->color_mode === 'auto' &&
+            $baseMode === self::COLOR_AUTO &&
             isset($_COOKIE['admin_color_mode_setting'])
         ) {
             $cookieMode = $_COOKIE['admin_color_mode_setting'];
@@ -152,7 +164,19 @@ class BrandSetting extends SettingModel
             }
         }
 
-        return (string) $settings->color_mode;
+        return $baseMode;
+    }
+
+    /**
+     * isColorModeAuto checks if the effective color mode is auto
+     */
+    public static function isColorModeAuto(): bool
+    {
+        if (isset($_COOKIE['admin_color_mode_user'])) {
+            return $_COOKIE['admin_color_mode_user'] === self::COLOR_AUTO;
+        }
+
+        return self::get('color_mode') === self::COLOR_AUTO;
     }
 
     /**
@@ -273,7 +297,7 @@ class BrandSetting extends SettingModel
             });
         }
         catch (Exception $ex) {
-            $customCss = '/* ' . $ex->getMessage() . ' */';
+            $customCss = '/* ' . e($ex->getMessage()) . ' */';
         }
 
         return $customCss;

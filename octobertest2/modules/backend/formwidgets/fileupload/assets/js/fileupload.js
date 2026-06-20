@@ -88,12 +88,12 @@ oc.registerControl('fileupload', class extends oc.ControlBase {
     //
 
     initToolbarExtensionPoint() {
-        if (!this.config.externalToolbarAppState) {
+        if (!this.config.externalToolbarBus) {
             return;
         }
 
         const point = $.oc.vueUtils.getToolbarExtensionPoint(
-            this.config.externalToolbarAppState,
+            this.config.externalToolbarBus,
             this.element,
             'both'
         );
@@ -109,8 +109,8 @@ oc.registerControl('fileupload', class extends oc.ControlBase {
             return;
         }
 
-        this.externalToolbarEventBusObj.$on('toolbarcmd', this.proxy(this.onToolbarExternalCommand));
-        this.externalToolbarEventBusObj.$on('extendapptoolbar', this.proxy(this.extendExternalToolbar));
+        this.externalToolbarEventBusObj.on('toolbarcmd', this.proxy(this.onToolbarExternalCommand));
+        this.externalToolbarEventBusObj.on('extendapptoolbar', this.proxy(this.extendExternalToolbar));
     }
 
     unmountExternalToolbarEventBusEvents() {
@@ -118,8 +118,8 @@ oc.registerControl('fileupload', class extends oc.ControlBase {
             return;
         }
 
-        this.externalToolbarEventBusObj.$off('toolbarcmd', this.proxy(this.onToolbarExternalCommand));
-        this.externalToolbarEventBusObj.$off('extendapptoolbar', this.proxy(this.extendExternalToolbar));
+        this.externalToolbarEventBusObj.off('toolbarcmd', this.proxy(this.onToolbarExternalCommand));
+        this.externalToolbarEventBusObj.off('extendapptoolbar', this.proxy(this.extendExternalToolbar));
     }
 
     onToolbarExternalCommand(ev) {

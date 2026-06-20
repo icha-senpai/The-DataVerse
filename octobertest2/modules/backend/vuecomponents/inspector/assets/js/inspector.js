@@ -1,92 +1,127 @@
+import { utils } from './classes/index.js';
+
 /*
  * Vue Inspector implementation
  */
-oc.Modules.register('backend.component.inspector', function () {
-    Vue.component('backend-component-inspector', {
-        props: {
-            dataSchema: {
-                type: Array,
-                required: true
-            },
-            data: {
-                type: Object,
-                required: true
-            },
-            liveMode: {
-                type: Boolean,
-                default: false
-            },
-            uniqueId: {
-                type: String,
-                required: true
-            },
-            handlerAlias: {
-                type: String
-            },
-            layoutUpdateData: {
-                type: Object
-            },
-            inspectorClass: {
-                type: String
-            },
-            readOnly: {
-                type: Boolean,
-                default: false
-            }
+export default {
+    props: {
+        dataSchema: {
+            type: Array,
+            required: true
         },
-        data: function () {
-            if (typeof this.data !== 'object') {
-                throw new Error('Inspector data.obj must be an object');
-            }
+        data: {
+            type: Object,
+            required: true
+        },
+        liveMode: {
+            type: Boolean,
+            default: false
+        },
+        uniqueId: {
+            type: String,
+            required: true
+        },
+        handlerAlias: {
+            type: String
+        },
+        layoutUpdateData: {
+            type: Object
+        },
+        inspectorClass: {
+            type: String
+        },
+        readOnly: {
+            type: Boolean,
+            default: false
+        },
+        enableExternalParameterEditor: {
+            type: Boolean,
+            default: false
+        }
+    },
+    data: function () {
+        if (typeof this.data !== 'object') {
+            throw new Error('Inspector data.obj must be an object');
+        }
 
+        return {
+            liveObject: this.liveMode ? this.data.obj : $.oc.vueUtils.getCleanObject(this.data.obj),
+            originalData: this.liveMode ? $.oc.vueUtils.getCleanObject(this.data.obj) : null,
+            parentObject: this.data.parentObj ? this.data.parentObj : {}
+        };
+    },
+    computed: {
+        inspectorPreferences: function computeInspectorPreferences() {
             return {
-                liveObject: this.liveMode ? this.data.obj : $.oc.vueUtils.getCleanObject(this.data.obj),
-                originalData: this.liveMode ? $.oc.vueUtils.getCleanObject(this.data.obj) : null,
-                parentObject: this.data.parentObj ? this.data.parentObj : {}
+                readOnly: this.readOnly,
+                inspectorClass: this.inspectorClass,
+                handlerAlias: this.handlerAlias,
+                enableExternalParameterEditor: this.enableExternalParameterEditor
             };
-        },
-        computed: {
-            inspectorPreferences: function computeInspectorPreferences() {
-                return {
-                    readOnly: this.readOnly,
-                    inspectorClass: this.inspectorClass,
-                    handlerAlias: this.handlerAlias
-                };
-            }
-        },
-        methods: {
-            getCleanObject: function getCleanObject() {
-                return $.oc.vueUtils.getCleanObject(this.liveObject);
-            },
+        }
+    },
+    methods: {
+        getCleanObject: function getCleanObject() {
+            var result = $.oc.vueUtils.getCleanObject(this.liveObject);
 
-            applyChanges: function applyChanges() {
-                oc.vueComponentHelpers.inspector.utils.deepCloneObject(this.getCleanObject(), this.data.obj);
-            },
-
-            revertChanges: function cancelChanges() {
-                if (!this.liveMode) {
-                    throw new Error('Changes can only be reverted in live mode.');
+            this.dataSchema.forEach(function(control) {
+                if (!control.property) {
+                    return;
                 }
 
-                oc.vueComponentHelpers.inspector.utils.deepCloneObject(this.originalData, this.data.obj);
-            },
+                var value = utils.getProperty(result, control.property);
 
-            validate: function validate() {
-                return this.$refs.panel.validate();
-            },
+                // ignoreIfEmpty: strip property if the value is empty
+                if (control.ignoreIfEmpty) {
+                    if (utils.isValueEmpty(value)) {
+                        utils.deleteProperty(result, control.property);
+                        return;
+                    }
+                }
 
-            onModalShown: function onModalShown() {
-                this.layoutUpdateData.modalShown++;
-            }
+                // ignoreIfDefault: strip property if the value matches the default
+                if (control.ignoreIfDefault) {
+                    if (control.default !== undefined && utils.compareValues(value, control.default)) {
+                        utils.deleteProperty(result, control.property);
+                        return;
+                    }
+                }
+
+                // Implicit: strip if value matches the defined default
+                if (control.default !== undefined && utils.compareValues(value, control.default)) {
+                    utils.deleteProperty(result, control.property);
+                }
+            });
+
+            return result;
         },
-        created: function created() {
-            var validationError = oc.vueComponentHelpers.inspector.utils.validateDataSchema(this.dataSchema);
 
-            if (typeof validationError === 'string') {
-                console.log(this.dataSchema);
-                throw new Error(validationError);
-            }
+        applyChanges: function applyChanges() {
+            utils.deepCloneObject(this.getCleanObject(), this.data.obj);
         },
-        template: '#backend_vuecomponents_inspector'
-    });
-});
+
+        revertChanges: function cancelChanges() {
+            if (!this.liveMode) {
+                throw new Error('Changes can only be reverted in live mode.');
+            }
+
+            utils.deepCloneObject(this.originalData, this.data.obj);
+        },
+
+        validate: function validate() {
+            return this.$refs.panel.validate();
+        },
+
+        onModalShown: function onModalShown() {
+            this.layoutUpdateData.modalShown++;
+        }
+    },
+    created: function created() {
+        var validationError = utils.validateDataSchema(this.dataSchema);
+
+        if (typeof validationError === 'string') {
+            console.log(this.dataSchema);
+            throw new Error(validationError);
+        }
+    }
+};

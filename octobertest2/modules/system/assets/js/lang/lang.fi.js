@@ -9,7 +9,7 @@ if (!window.oc.langMessages) {
     window.oc.langMessages = {};
 }
 
-window.oc.langMessages['fi'] = $.extend(
+window.oc.langMessages['fi'] = Object.assign(
     window.oc.langMessages['fi'] || {},
     {
     "markdowneditor": {
@@ -55,7 +55,8 @@ window.oc.langMessages['fi'] = $.extend(
         "dismiss": "Poistu",
         "confirm_button_text": "OK",
         "cancel_button_text": "Peruuta",
-        "widget_remove_confirm": "Poista t\u00e4m\u00e4 vimpain?"
+        "widget_remove_confirm": "Poista t\u00e4m\u00e4 vimpain?",
+        "reload": "Reload"
     },
     "datepicker": {
         "previousMonth": "Edellinen kuukausi",
@@ -154,139 +155,136 @@ window.oc.langMessages['fi'] = $.extend(
         "cancel": "Peruuta",
         "items": "Kohteet"
     },
-    "dashboard": {
-        "widget_data_source": "Data source",
-        "widget_data_source_required": "Please select a data source",
-        "widget_dimension": "Dimension",
-        "widget_dimension_required": "Please select a dimension",
-        "widget_metric": "Metric",
-        "widget_metric_required": "Please select metric(s).",
-        "widget_metrics": "Metrics",
-        "widget_title": "Title",
-        "widget_title_required": "Please provide the widget title",
-        "widget_title_optional_placeholder": "Leave empty to hide the title",
-        "widget_metric_value": "Value",
-        "widget_icon_status": "Icon Status",
-        "widget_href": "Link URL",
-        "widget_icon": "Icon",
-        "widget_icon_required": "Please select an icon",
-        "widget_link_text": "Link Text",
-        "apply": "Apply",
-        "delete": "Delete",
-        "configure": "Configure",
-        "section_show_interval": "Show Date Interval",
-        "widget_chart_type": "Chart type",
-        "widget_chart_type_bar": "Bar",
-        "widget_chart_type_stacked_bar": "Stacked Bar",
-        "widget_chart_type_line": "Line",
-        "sort_by": "Sort by",
-        "sort_by_required": "Select sorting metric or dimension",
-        "sort_by_placeholder": "Select a dimension and metrics",
-        "sort_order": "Order",
-        "sort_asc": "Ascending",
-        "sort_desc": "Descending",
-        "group_sorting": "Sorting",
-        "value_not_set": "[not set]",
-        "limit": "Limit",
-        "limit_placeholder": "Display all records",
-        "limit_number": "Enter a positive number or leave empty to display all records.",
-        "limit_min": "The limit value must be at least 1",
-        "empty_values": "Empty values",
-        "empty_values_hide": "Hide",
-        "empty_values_display_not_set": "Display [not set]",
-        "empty_values_dimension": "Dimension",
-        "date_interval": "Date interval",
-        "date_interval_dashboard_default": "Dashboard interval",
-        "date_interval_this_week": "This week",
-        "date_interval_this_month": "This month",
-        "date_interval_this_quarter": "This quarter",
-        "date_interval_this_year": "This year",
-        "date_interval_past_hour": "Past hour",
-        "date_interval_past_days": "Past X days",
-        "date_interval_past_days_value": "Number of days",
-        "date_interval_past_days_invalid": "Enter a positive number",
-        "prop_date_interval": "Display",
-        "date_interval_past_days_placeholder": "1 day (today) if not set",
-        "widget_bar_direction": "Direction",
-        "widget_bar_direction_vertical": "Vertical",
-        "widget_bar_direction_horizontal": "Horizontal",
-        "prop_color": "Color",
-        "color_required": "Select the metric color",
-        "tab_general": "General",
-        "tab_sorting_filtering": "Sorting & Filtering",
-        "prop_records_per_page": "Records per page",
-        "records_per_page_placeholder": "Leave empty to disable pagination",
-        "records_per_page_invalid": "Enter a positive number or leave empty to display all records.",
-        "prop_display_totals": "Display totals",
-        "prop_display_relative_bar": "Display relative bars",
-        "prop_extra_table_fields": "Extra table fields",
-        "filter_operation_equal_to": "Equal to",
-        "filter_operation_greater_equal": "Greater or equal to",
-        "filter_operation_less_equal": "Less or equal to",
-        "filter_operation_greater": "Greater than",
-        "filter_operation_less": "Less than",
-        "filter_operation_starts_with": "Starts with",
-        "filter_operation_includes": "Includes",
-        "filter_operation_one_of": "One of",
-        "prop_operation": "Operation",
-        "prop_value": "Value",
-        "prop_values": "Values",
-        "prop_values_one_per_line": "One value per line",
-        "prop_filter_attribute": "Attribute",
-        "filter_select_attribute": "Select an attribute",
-        "filter_select_operation": "Select an operation",
-        "prop_filters": "Filters",
-        "icon_status_info": "Information",
-        "icon_status_important": "Important",
-        "icon_status_success": "Success",
-        "icon_status_warning": "Warning",
-        "icon_status_disabled": "Disabled",
-        "range_today": "Today",
-        "range_yesterday": "Yesterday",
-        "range_last_7_days": "Last 7 days",
-        "range_last_30_days": "Last 30 days",
-        "range_this_month": "This month",
-        "range_last_month": "Last month",
-        "range_this_quarter": "This quarter",
-        "range_this_year": "This year",
-        "range_this_week": "This week",
-        "interval_day": "Day",
-        "interval_week": "Week",
-        "interval_month": "Month",
-        "interval_quarter": "Quarter",
-        "interval_year": "Year",
-        "compare_totals": "Compare Totals",
-        "compare_prev_period": "Prev period",
-        "compare_prev_year": "Same period last year",
-        "compare_none": "Disabled",
-        "updated_successfully": "The dashboard was successfully updated.",
-        "edit_dashboard": "Edit Dashboard",
-        "make_default": "Make Default",
-        "make_default_confirm": "Set the current layout as the default?",
-        "make_default_successfully": "This dashboard is now the default layout.",
-        "reset_layout": "Reset Layout",
-        "reset_layout_confirm": "Reset layout back to default?",
-        "reset_layout_successfully": "The dashboard layout has been reset to default.",
-        "manage_dashboards": "Manage Dashboards",
-        "import_success": "The dashboard was successfully imported",
-        "new_dashboard": "New Dashboard",
-        "import_dashboard": "Import Dashboard",
-        "delete_confirm": "Delete the dashboard? This action cannot be reversed. All users with access will be affected.",
-        "delete_success": "The dashboard was successfully deleted.",
-        "menu_item_custom": "Custom",
-        "menu_item_delete_row": "Delete row",
-        "widget_type_indicator": "Indicator",
-        "widget_type_section_title": "Section Title",
-        "widget_type_notice": "Text Notice",
-        "widget_type_chart": "Chart",
-        "widget_type_table": "Table",
-        "notice_text": "Notice text"
-    }
+    "[not set]": "[ei asetettu]",
+    "1 day (today) if not set": "1 p\u00e4iv\u00e4 (t\u00e4n\u00e4\u00e4n), jos ei asetettu",
+    "Apply": "K\u00e4yt\u00e4",
+    "Ascending": "Nouseva",
+    "Attribute": "Ominaisuus",
+    "Bar": "Palkki",
+    "Cancel": "Peruuta",
+    "Chart": "Kuvaaja",
+    "Chart type": "Kaaviotyyppi",
+    "Color": "V\u00e4ri",
+    "Compare Totals": "Vertaa kokonaissummia",
+    "Configure": "M\u00e4\u00e4rit\u00e4",
+    "Custom": "Mukautettu",
+    "Custom Range": "Mukautettu aikav\u00e4li",
+    "Dashboard interval": "Koontin\u00e4kym\u00e4n aikav\u00e4li",
+    "Data source": "Tietol\u00e4hde",
+    "Date interval": "P\u00e4iv\u00e4m\u00e4\u00e4r\u00e4v\u00e4li",
+    "Day": "P\u00e4iv\u00e4",
+    "Delete": "Poistaa",
+    "Delete Dashboard": "Poista koontin\u00e4kym\u00e4",
+    "Delete row": "Poista rivi",
+    "Descending": "Laskeva",
+    "Dimension": "Ulottuvuus",
+    "Direction": "Suunta",
+    "Disabled": "Pois k\u00e4yt\u00f6st\u00e4",
+    "Display": "N\u00e4ytt\u00f6",
+    "Display [not set]": "N\u00e4ytt\u00f6 [ei asetettu]",
+    "Display all records": "N\u00e4yt\u00e4 kaikki tietueet",
+    "Display relative bars": "N\u00e4yt\u00e4 suhteelliset palkit",
+    "Display totals": "N\u00e4yt\u00e4 kokonaissummat",
+    "Edit Dashboard": "Muokkaa koontin\u00e4kym\u00e4\u00e4",
+    "Empty values": "Tyhj\u00e4t arvot",
+    "Enter a positive number": "Anna positiivinen luku",
+    "Enter a positive number or leave empty to display all records.": "Sy\u00f6t\u00e4 positiivinen luku tai j\u00e4t\u00e4 tyhj\u00e4ksi, jos haluat n\u00e4ytt\u00e4\u00e4 kaikki tietueet.",
+    "Equal to": "Yht\u00e4 suuri kuin",
+    "Export Dashboard": "Vientihallintapaneeli",
+    "Extra table fields": "Lis\u00e4taulukon kent\u00e4t",
+    "Filters": "Suodattimet",
+    "General": "Yleinen",
+    "Greater or equal to": "Suurempi tai yht\u00e4 suuri kuin",
+    "Greater than": "Suurempi kuin",
+    "Hide": "Piilottaa",
+    "Horizontal": "Vaakasuora",
+    "Icon": "Kuvake",
+    "Icon Status": "Kuvakkeen tila",
+    "Important": "T\u00e4rke\u00e4\u00e4",
+    "Includes": "Sis\u00e4lt\u00e4\u00e4",
+    "Indicator": "Indikaattori",
+    "Information": "Tiedot",
+    "Last 30 days": "Viimeiset 30 p\u00e4iv\u00e4\u00e4",
+    "Last 7 days": "Viimeiset 7 p\u00e4iv\u00e4\u00e4",
+    "Last month": "Viime kuussa",
+    "Leave empty to disable pagination": "J\u00e4t\u00e4 tyhj\u00e4ksi poistaaksesi sivutuksen k\u00e4yt\u00f6st\u00e4",
+    "Leave empty to hide the title": "J\u00e4t\u00e4 tyhj\u00e4ksi, jos haluat piilottaa otsikon",
+    "Less or equal to": "Pienempi tai yht\u00e4 suuri kuin",
+    "Less than": "Alle",
+    "Limit": "Rajoittaa",
+    "Line": "Linja",
+    "Link Text": "Linkin teksti",
+    "Link URL": "Linkin URL-osoite",
+    "Make Default": "Aseta oletukseksi",
+    "Manage Dashboards": "Hallitse koontin\u00e4kymi\u00e4",
+    "Metric": "Metrinen",
+    "Metrics": "Mittarit",
+    "Month": "Kuukausi",
+    "My Custom Widget": "Oma mukautettu widget",
+    "No Value": "Ei arvoa",
+    "Notice text": "Ilmoitusteksti",
+    "Number of days": "P\u00e4ivien lukum\u00e4\u00e4r\u00e4",
+    "One of": "Yksi",
+    "One value per line": "Yksi arvo rivi\u00e4 kohden",
+    "Operation": "Operaatio",
+    "Order": "J\u00e4rjestys",
+    "Past hour": "Viimeisin tunti",
+    "Past X days": "Viimeiset X p\u00e4iv\u00e4\u00e4",
+    "Please provide the widget title": "Anna widgetin otsikko",
+    "Please select a data source": "Valitse tietol\u00e4hde",
+    "Please select a dimension": "Valitse mittasuhde",
+    "Please select an icon": "Valitse kuvake",
+    "Please select metric(s).": "Valitse mittari(t).",
+    "Prev period": "Edellinen ajanjakso",
+    "Quarter": "Nelj\u00e4nnes",
+    "Records per page": "Tietueita sivulla",
+    "Refresh every minute": "P\u00e4ivit\u00e4 joka minuutti",
+    "Rename Dashboard": "Nime\u00e4 koontin\u00e4kym\u00e4 uudelleen",
+    "Reset Layout": "Palauta asettelu",
+    "Reset layout back to default?": "Palautetaanko asettelu oletusasetuksiin?",
+    "Same period last year": "Sama ajanjakso viime vuonna",
+    "Section": "Osio",
+    "Section Title": "Osion otsikko",
+    "Select a dimension and metrics": "Valitse ulottuvuus ja mittarit",
+    "Select an attribute": "Valitse ominaisuus",
+    "Select an operation": "Valitse toiminto",
+    "Select sorting metric or dimension": "Valitse lajittelumittari tai ulottuvuus",
+    "Select the metric color": "Valitse metrij\u00e4rjestelm\u00e4n v\u00e4ri",
+    "Set the current layout as the default?": "Asetetaanko nykyinen asettelu oletukseksi?",
+    "Show Date Interval": "N\u00e4yt\u00e4 p\u00e4iv\u00e4m\u00e4\u00e4r\u00e4v\u00e4li",
+    "Sort by": "Lajittele",
+    "Sorting": "Lajittelu",
+    "Sorting & Filtering": "Lajittelu ja suodatus",
+    "Stacked Bar": "Pinottu palkki",
+    "Starts with": "Alkaa",
+    "Success": "Onnistui",
+    "Table": "Taulukko",
+    "Text Notice": "Tekstiviesti-ilmoitus",
+    "The dashboard layout has been reset to default.": "Koontin\u00e4kym\u00e4n asettelu on palautettu oletusasetuksiin.",
+    "The dashboard was successfully updated.": "Koontin\u00e4kym\u00e4n p\u00e4ivitys onnistui.",
+    "The limit value must be at least 1": "Raja-arvon on oltava v\u00e4hint\u00e4\u00e4n 1",
+    "This dashboard is now the default layout.": "T\u00e4m\u00e4 koontin\u00e4kym\u00e4 on nyt oletusasetteluna.",
+    "This is a text notice widget.": "T\u00e4m\u00e4 on tekstiviesti-ilmoituswidget.",
+    "This month": "T\u00e4ss\u00e4 kuussa",
+    "This quarter": "T\u00e4m\u00e4 nelj\u00e4nnes",
+    "This week": "T\u00e4ll\u00e4 viikolla",
+    "This year": "T\u00e4n\u00e4 vuonna",
+    "Title": "Otsikko",
+    "Today": "T\u00e4n\u00e4\u00e4n",
+    "Value": "Arvo",
+    "Values": "Arvot",
+    "Vertical": "Pystysuora",
+    "Warning": "Varoitus",
+    "Week": "Viikko",
+    "Year": "Vuosi",
+    "Yesterday": "Eilen"
 }
 );
 
 
-//! moment.js locale configuration v2.22.2
+//! moment.js locale configuration
+//! locale : Finnish [fi]
+//! author : Tarmo Aidantausta : https://github.com/bleadof
 
 ;(function (global, factory) {
    typeof exports === 'object' && typeof module !== 'undefined'
@@ -295,11 +293,23 @@ window.oc.langMessages['fi'] = $.extend(
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
 
+    //! moment.js locale configuration
 
-    var numbersPast = 'nolla yksi kaksi kolme neljä viisi kuusi seitsemän kahdeksan yhdeksän'.split(' '),
+    var numbersPast =
+            'nolla yksi kaksi kolme neljä viisi kuusi seitsemän kahdeksan yhdeksän'.split(
+                ' '
+            ),
         numbersFuture = [
-            'nolla', 'yhden', 'kahden', 'kolmen', 'neljän', 'viiden', 'kuuden',
-            numbersPast[7], numbersPast[8], numbersPast[9]
+            'nolla',
+            'yhden',
+            'kahden',
+            'kolmen',
+            'neljän',
+            'viiden',
+            'kuuden',
+            numbersPast[7],
+            numbersPast[8],
+            numbersPast[9],
         ];
     function translate(number, withoutSuffix, key, isFuture) {
         var result = '';
@@ -307,7 +317,8 @@ window.oc.langMessages['fi'] = $.extend(
             case 's':
                 return isFuture ? 'muutaman sekunnin' : 'muutama sekunti';
             case 'ss':
-                return isFuture ? 'sekunnin' : 'sekuntia';
+                result = isFuture ? 'sekunnin' : 'sekuntia';
+                break;
             case 'm':
                 return isFuture ? 'minuutin' : 'minuutti';
             case 'mm':
@@ -338,57 +349,69 @@ window.oc.langMessages['fi'] = $.extend(
         return result;
     }
     function verbalNumber(number, isFuture) {
-        return number < 10 ? (isFuture ? numbersFuture[number] : numbersPast[number]) : number;
+        return number < 10
+            ? isFuture
+                ? numbersFuture[number]
+                : numbersPast[number]
+            : number;
     }
 
     var fi = moment.defineLocale('fi', {
-        months : 'tammikuu_helmikuu_maaliskuu_huhtikuu_toukokuu_kesäkuu_heinäkuu_elokuu_syyskuu_lokakuu_marraskuu_joulukuu'.split('_'),
-        monthsShort : 'tammi_helmi_maalis_huhti_touko_kesä_heinä_elo_syys_loka_marras_joulu'.split('_'),
-        weekdays : 'sunnuntai_maanantai_tiistai_keskiviikko_torstai_perjantai_lauantai'.split('_'),
-        weekdaysShort : 'su_ma_ti_ke_to_pe_la'.split('_'),
-        weekdaysMin : 'su_ma_ti_ke_to_pe_la'.split('_'),
-        longDateFormat : {
-            LT : 'HH.mm',
-            LTS : 'HH.mm.ss',
-            L : 'DD.MM.YYYY',
-            LL : 'Do MMMM[ta] YYYY',
-            LLL : 'Do MMMM[ta] YYYY, [klo] HH.mm',
-            LLLL : 'dddd, Do MMMM[ta] YYYY, [klo] HH.mm',
-            l : 'D.M.YYYY',
-            ll : 'Do MMM YYYY',
-            lll : 'Do MMM YYYY, [klo] HH.mm',
-            llll : 'ddd, Do MMM YYYY, [klo] HH.mm'
+        months: 'tammikuu_helmikuu_maaliskuu_huhtikuu_toukokuu_kesäkuu_heinäkuu_elokuu_syyskuu_lokakuu_marraskuu_joulukuu'.split(
+            '_'
+        ),
+        monthsShort:
+            'tammi_helmi_maalis_huhti_touko_kesä_heinä_elo_syys_loka_marras_joulu'.split(
+                '_'
+            ),
+        weekdays:
+            'sunnuntai_maanantai_tiistai_keskiviikko_torstai_perjantai_lauantai'.split(
+                '_'
+            ),
+        weekdaysShort: 'su_ma_ti_ke_to_pe_la'.split('_'),
+        weekdaysMin: 'su_ma_ti_ke_to_pe_la'.split('_'),
+        longDateFormat: {
+            LT: 'HH.mm',
+            LTS: 'HH.mm.ss',
+            L: 'DD.MM.YYYY',
+            LL: 'Do MMMM[ta] YYYY',
+            LLL: 'Do MMMM[ta] YYYY, [klo] HH.mm',
+            LLLL: 'dddd, Do MMMM[ta] YYYY, [klo] HH.mm',
+            l: 'D.M.YYYY',
+            ll: 'Do MMM YYYY',
+            lll: 'Do MMM YYYY, [klo] HH.mm',
+            llll: 'ddd, Do MMM YYYY, [klo] HH.mm',
         },
-        calendar : {
-            sameDay : '[tänään] [klo] LT',
-            nextDay : '[huomenna] [klo] LT',
-            nextWeek : 'dddd [klo] LT',
-            lastDay : '[eilen] [klo] LT',
-            lastWeek : '[viime] dddd[na] [klo] LT',
-            sameElse : 'L'
+        calendar: {
+            sameDay: '[tänään] [klo] LT',
+            nextDay: '[huomenna] [klo] LT',
+            nextWeek: 'dddd [klo] LT',
+            lastDay: '[eilen] [klo] LT',
+            lastWeek: '[viime] dddd[na] [klo] LT',
+            sameElse: 'L',
         },
-        relativeTime : {
-            future : '%s päästä',
-            past : '%s sitten',
-            s : translate,
-            ss : translate,
-            m : translate,
-            mm : translate,
-            h : translate,
-            hh : translate,
-            d : translate,
-            dd : translate,
-            M : translate,
-            MM : translate,
-            y : translate,
-            yy : translate
+        relativeTime: {
+            future: '%s päästä',
+            past: '%s sitten',
+            s: translate,
+            ss: translate,
+            m: translate,
+            mm: translate,
+            h: translate,
+            hh: translate,
+            d: translate,
+            dd: translate,
+            M: translate,
+            MM: translate,
+            y: translate,
+            yy: translate,
         },
         dayOfMonthOrdinalParse: /\d{1,2}\./,
-        ordinal : '%d.',
-        week : {
-            dow : 1, // Monday is the first day of the week.
-            doy : 4  // The week that contains Jan 4th is the first week of the year.
-        }
+        ordinal: '%d.',
+        week: {
+            dow: 1, // Monday is the first day of the week.
+            doy: 4, // The week that contains Jan 4th is the first week of the year.
+        },
     });
 
     return fi;

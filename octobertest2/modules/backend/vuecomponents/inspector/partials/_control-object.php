@@ -1,6 +1,7 @@
 <div>
-    <backend-component-inspector-group
+    <backend-inspector-group
         :group-name="control.title"
+        :group-description="control.description"
         :obj="editedObject"
         :controls="control.properties"
         :splitter-data="splitterData"
@@ -11,5 +12,5 @@
         :inspector-preferences="inspectorPreferences"
         ref="group"
     >
-    </backend-component-inspector-group>
+    </backend-inspector-group>
 </div>

@@ -1,9 +1,11 @@
-(function () {
+import Sizing from '../../../../assets/js/classes/sizing.js';
+import Dragging from '../../../../assets/js/classes/dragging.js';
+import { host as inspectorHost } from '../../../../../backend/vuecomponents/inspector/assets/js/classes/index.js';
 
-const dashboardSizing = Dashboard_Classes_Sizing.instance();
-const dashboardDragging = Dashboard_Classes_Dragging.instance();
+const dashboardSizing = Sizing.instance();
+const dashboardDragging = Dragging.instance();
 
-Vue.component('dashboard-component-dashboard-report-widget', {
+export default {
     props: {
         widget: Object,
         store: Object,
@@ -21,6 +23,7 @@ Vue.component('dashboard-component-dashboard-report-widget', {
             noData: false,
             menuItems: [],
             autoUpdateTimerId: null,
+            isInspecting: false,
 
             // Resizing
             columnsAvailableForWidget: null,
@@ -31,16 +34,15 @@ Vue.component('dashboard-component-dashboard-report-widget', {
     },
     methods: {
         cancelLoading: function () {
-            this.loadingPromises.forEach(function (promise) {
-                if (promise.isPending()) {
-                    promise.cancel();
-                }
-            })
+            this.loadingPromises.forEach(function (tracker) {
+                tracker.cancelled = true;
+            });
+            this.loadingPromises = [];
         },
         hasActiveLoadingPromise: function () {
-            return this.loadingPromises.filter(function (promise) {
-                return promise.isPending();
-            }).length > 0;
+            return this.loadingPromises.some(function (tracker) {
+                return tracker.pending;
+            });
         },
         load: function (resetCache) {
             const widgetImplementation = this.$refs.widgetImplementation;
@@ -67,7 +69,7 @@ Vue.component('dashboard-component-dashboard-report-widget', {
                 compare = undefined;
             }
 
-            aggregationInterval = widgetImplementation.getRequestInterval(range.interval);
+            const aggregationInterval = widgetImplementation.getRequestInterval(range.interval);
 
             let loadingPromise = null;
             if (widgetConfiguration.type === 'static') {
@@ -103,21 +105,30 @@ Vue.component('dashboard-component-dashboard-report-widget', {
                 );
             }
 
-            this.loadingPromises.push(loadingPromise);
+            const tracker = { pending: true, cancelled: false };
+            this.loadingPromises.push(tracker);
 
-            loadingPromise
+            return loadingPromise
                 .then((data) => {
-                    this.applyData(data);
-                    if (widgetConfiguration.auto_update) {
-                        this.startAutoUpdate();
+                    if (!tracker.cancelled) {
+                        this.applyData(data);
+                        if (widgetConfiguration.auto_update) {
+                            this.startAutoUpdate();
+                        }
                     }
-                }).finally(() => {
-                    this.autoUpdating = false;
-                    this.loading = this.hasActiveLoadingPromise();
-                    this.showInspectorWhenLoaded();
-                }).catch((err) => {
-                    console.error(err)
-                    this.error = true;
+                })
+                .catch((err) => {
+                    if (!tracker.cancelled) {
+                        console.error(err);
+                        this.error = true;
+                    }
+                })
+                .finally(() => {
+                    tracker.pending = false;
+                    if (!tracker.cancelled) {
+                        this.autoUpdating = false;
+                        this.loading = this.hasActiveLoadingPromise();
+                    }
                 });
         },
         applyData: function (data) {
@@ -129,10 +140,12 @@ Vue.component('dashboard-component-dashboard-report-widget', {
             }
 
             if (state.widgetData[dashboardKey] === undefined) {
-                Vue.set(state.widgetData, dashboardKey, {});
+                // Vue 3: Direct assignment is reactive
+                state.widgetData[dashboardKey] = {};
             }
 
-            Vue.set(state.widgetData[dashboardKey], this.widget._unique_key, data);
+            // Vue 3: Direct assignment is reactive
+            state.widgetData[dashboardKey][this.widget._unique_key] = data;
         },
         makeMenuItems: function () {
             const widgetImplementation = this.$refs.widgetImplementation;
@@ -141,14 +154,14 @@ Vue.component('dashboard-component-dashboard-report-widget', {
                 this.menuItems.push({
                     type: 'text',
                     command: 'configure',
-                    label: oc.lang.get('dashboard.configure')
+                    label: oc.t("Configure")
                 });
             }
 
             this.menuItems.push({
                 type: 'text',
                 command: 'delete',
-                label: oc.lang.get('dashboard.delete')
+                label: oc.t("Delete")
             });
         },
         showInspectorWhenLoaded() {
@@ -158,7 +171,6 @@ Vue.component('dashboard-component-dashboard-report-widget', {
 
                 if (widgetImplementation) {
                     widgetImplementation.makeDefaultConfigAndData();
-
                     this.showInspector();
                 }
             }
@@ -167,24 +179,40 @@ Vue.component('dashboard-component-dashboard-report-widget', {
             const dataHolder = this.widget.configuration;
             const widgetImplementation = this.$refs.widgetImplementation;
 
-            dataHolder['_dash_definition'] = this.store.getCurrentDashboard().code;
+            const inspectorCopy = Vue.reactive(
+                Object.assign({}, Vue.toRaw(dataHolder), {
+                    _dash_definition: this.store.getCurrentDashboard().code
+                })
+            );
 
-            oc.vueComponentHelpers.inspector.host
+            this.isInspecting = true;
+
+            inspectorHost
                 .showModal(
-                    oc.lang.get('dashboard.configure'),
-                    dataHolder,
+                    oc.t("Configure"),
+                    inspectorCopy,
                     widgetImplementation.getSettingsConfiguration(),
                     'widget-configuration',
                     {
                         handlerAlias: this.store.state.alias,
-                        buttonText: oc.lang.get('dashboard.apply'),
+                        buttonText: oc.t("Apply"),
                         resizableWidth: true
                     }
                 )
-                .then($.noop, $.noop);
+                .then(
+                    () => {
+                        this.isInspecting = false;
+                        Object.assign(dataHolder, Vue.toRaw(inspectorCopy));
+                        delete dataHolder._dash_definition;
+                        this.load();
+                    },
+                    () => {
+                        this.isInspecting = false;
+                    }
+                );
         },
         isComponentRegistered: function(componentName) {
-            return !!Vue.options.components[componentName];
+            return !!(window.oc && window.oc.vueComponents && window.oc.vueComponents[componentName]);
         },
         isKnownWidgetType: function(widgetType) {
             return [
@@ -327,6 +355,10 @@ Vue.component('dashboard-component-dashboard-report-widget', {
                 'fixed-width-' + this.width
             ];
 
+            if (this.widget.configuration.reportName) {
+                result.push(this.widget.configuration.reportName);
+            }
+
             if (this.store.state.editMode) {
                 result.push('edit-mode');
             }
@@ -356,24 +388,38 @@ Vue.component('dashboard-component-dashboard-report-widget', {
             return this.store.state.range.interval;
         }
     },
-    mounted: function mounted() {
-        // Widgets are dragged together with their data.
-        // No need to reload the widget if its data is
-        // already loaded.
+    mounted: async function mounted() {
+        // Vue report widgets (chart, indicator, table) have their inspector schema
+        // available immediately, so the inspector can open right away.
+        //
+        // Classic report widgets (static) depend on loaded data for their schema,
+        // so we await load() before opening the inspector.
+        const needsConfiguration = this.systemFlags && this.systemFlags.needsConfiguration;
+
+        // Widgets are dragged together with their data. No need to reload the widget
+        // if its data is already loaded.
         if (this.loadedValue === undefined) {
-            this.load();
+            await oc.pageReady();
+            await this.load();
         }
         else {
-            this.showInspectorWhenLoaded();
             this.loading = false;
         }
+
+        if (needsConfiguration) {
+            this.showInspectorWhenLoaded();
+        }
     },
-    beforeDestroy: function beforeDestroy() {
+    beforeUnmount: function beforeUnmount() {
         this.stopAutoUpdate();
     },
     watch: {
         configuration: {
             handler(newVal, oldVal) {
+                if (this.isInspecting) {
+                    return;
+                }
+
                 const widgetImplementation = this.$refs.widgetImplementation;
                 widgetImplementation.onConfigurationUpdated();
 
@@ -394,8 +440,5 @@ Vue.component('dashboard-component-dashboard-report-widget', {
                 this.load();
             }
         }
-    },
-    template: '#dashboard_vuecomponents_dashboard_report_widget'
-});
-
-})();
+    }
+};

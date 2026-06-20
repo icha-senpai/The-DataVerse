@@ -19,8 +19,8 @@ use BadMethodCallException;
 abstract class ComponentBase extends Extendable implements ViewComponentInterface, CallsAnyMethod
 {
     use \System\Traits\AssetMaker;
-    use \System\Traits\EventEmitter;
     use \System\Traits\DependencyMaker;
+    use \System\Traits\EventEmitter;
     use \System\Traits\PropertyContainer;
     use \Larajax\Traits\ViewComponent;
 

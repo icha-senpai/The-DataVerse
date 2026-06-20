@@ -7,6 +7,7 @@ use Cache;
 use BackendAuth;
 use SystemException;
 use ApplicationException;
+use Backend\Models\UserRole;
 use Backend\Models\UserPreference;
 
 /**
@@ -18,6 +19,10 @@ use Backend\Models\UserPreference;
  * @property string $owner_type
  * @property string $owner_field
  * @property string $definition
+ * @property string $default_start
+ * @property string $default_end
+ * @property string $default_interval
+ * @property string $default_compare
  * @property bool $is_global
  * @property bool $is_custom
  * @property int $updated_user_id
@@ -51,6 +56,18 @@ class Dashboard extends Model
         'name' => 'required',
         'code' => 'required|unique:dashboard_dashboards',
         // 'definition' => 'required'
+    ];
+
+    /**
+     * @var array belongsToMany relation
+     */
+    public $belongsToMany = [
+        'roles' => [
+            UserRole::class,
+            'table' => 'dashboard_dashboards_roles',
+            'key' => 'dashboard_id',
+            'otherKey' => 'role_id'
+        ]
     ];
 
     /**
@@ -124,7 +141,7 @@ class Dashboard extends Model
         $dashboard = self::applyOwner($owner)->where('code', $field)->first();
         if (!$dashboard) {
             throw new ApplicationException(
-                Lang::get('backend::lang.dashboard.not_found_by_slug', ['slug' => $field])
+                __("Cannot find a dashboard with the specified slug: \":slug\".", ['slug' => $field])
             );
         }
 
@@ -138,14 +155,40 @@ class Dashboard extends Model
      */
     public function scopeListDashboards($query, $owner)
     {
-        $dashboards = $query->applyOwner($owner)->get();
+        $dashboards = $query->applyOwner($owner)->with('roles')->get();
 
-        $dashboards = $dashboards->reject(function($dashboard) {
-            return $dashboard->created_user_id !== BackendAuth::user()?->id &&
-                !$dashboard->is_global;
+        $user = BackendAuth::user();
+        $userRoleId = $user?->role_id;
+
+        $dashboards = $dashboards->reject(function($dashboard) use ($user, $userRoleId) {
+            if ($dashboard->is_hidden) {
+                return true;
+            }
+
+            if ($dashboard->created_user_id === $user?->id) {
+                return false;
+            }
+
+            if ($dashboard->is_global) {
+                return false;
+            }
+
+            if ($userRoleId && $dashboard->roles->contains('id', $userRoleId)) {
+                return false;
+            }
+
+            return true;
         });
 
         return $dashboards;
+    }
+
+    /**
+     * getRolesOptions
+     */
+    public function getRolesOptions()
+    {
+        return UserRole::pluck('name', 'id')->all();
     }
 
     /**
@@ -185,6 +228,10 @@ class Dashboard extends Model
             $dashboard->name = $definition['name'] ?? 'Unknown';
             $dashboard->icon = $definition['icon'] ?? 'icon-globe';
             $dashboard->is_interval_hidden = !($definition['showInterval'] ?? 1) ? 1 : 0;
+            $dashboard->default_start = $definition['defaultStart'] ?? null;
+            $dashboard->default_end = $definition['defaultEnd'] ?? null;
+            $dashboard->default_interval = $definition['defaultInterval'] ?? null;
+            $dashboard->default_compare = $definition['defaultCompare'] ?? null;
             $dashboard->forceSave();
         }
     }

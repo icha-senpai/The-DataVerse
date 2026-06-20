@@ -29,6 +29,34 @@ trait ReportProcessor
             $this->reports = $this->allRows = $savedDash->definition;
             $this->isCustom = true;
         }
+
+        if ($savedDash) {
+            $this->applyIntervalDefaultsFromDatabase($savedDash);
+        }
+    }
+
+    /**
+     * applyIntervalDefaultsFromDatabase overrides the widget's interval defaults
+     * with values managed by the user via the dashboard form, falling back to
+     * the YAML/property defaults when a column is empty.
+     */
+    protected function applyIntervalDefaultsFromDatabase(DashboardModel $savedDash): void
+    {
+        if (strlen((string) $savedDash->default_start)) {
+            $this->defaultStart = $savedDash->default_start;
+        }
+
+        if (strlen((string) $savedDash->default_end)) {
+            $this->defaultEnd = $savedDash->default_end;
+        }
+
+        if (strlen((string) $savedDash->default_interval)) {
+            $this->defaultInterval = $savedDash->default_interval;
+        }
+
+        if (strlen((string) $savedDash->default_compare)) {
+            $this->defaultCompare = $savedDash->default_compare;
+        }
     }
 
     /**
@@ -37,11 +65,8 @@ trait ReportProcessor
      */
     protected function processPermissionCheck(array $reports)
     {
-        // For custom dashboards, get the list of permitted widgets once
         // listReportWidgets() filters widgets by permission
-        $permittedWidgets = $this->isCustom
-            ? WidgetManager::instance()->listReportWidgets()
-            : null;
+        $permittedWidgets = WidgetManager::instance()->listReportWidgets();
 
         foreach ($reports as $reportName => $report) {
             // Check explicit report permissions
@@ -53,10 +78,14 @@ trait ReportProcessor
                 continue;
             }
 
-            // For custom dashboards, also check widget class permissions
-            if ($permittedWidgets !== null) {
-                $widgetClass = $report->configuration['widgetClass'] ?? null;
-                if ($widgetClass && !isset($permittedWidgets[$widgetClass])) {
+            // Check widget class permissions against registered widgets
+            $widgetClass = $this->isCustom
+                ? ($report->configuration['widgetClass'] ?? null)
+                : ($report->type ?? null);
+
+            if ($widgetClass && $this->isReportWidget($widgetClass)) {
+                $resolvedClass = WidgetManager::instance()->resolveReportWidget($widgetClass);
+                if (!isset($permittedWidgets[$resolvedClass])) {
                     $this->removeReport($reportName);
                 }
             }
@@ -149,7 +178,10 @@ trait ReportProcessor
             ];
 
             if ($report->type === 'widget') {
-                $extraConfig['componentName'] = strtolower(str_replace('\\', '-', $report->widget));
+                $widget = $this->getReportWidget($report->reportName);
+                $extraConfig['componentName'] = $widget
+                    ? $widget->getComponentName()
+                    : strtolower(str_replace('\\', '-', $report->widget));
             }
 
             $report->configuration($extraConfig + $report->config);

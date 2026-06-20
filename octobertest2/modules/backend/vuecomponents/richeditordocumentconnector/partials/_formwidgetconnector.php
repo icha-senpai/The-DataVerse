@@ -1,31 +1,32 @@
-<backend-component-document
+<backend-document
     container-css-class="fill-container"
     :built-in-mode="true"
     :full-screen="fullScreen"
     ref="document"
 >
     <template v-slot:toolbar v-if="!hasExternalToolbar">
-        <backend-component-document-toolbar
+        <backend-document-toolbar
             :elements="toolbarElements"
             :disabled="readOnly"
             @command="onToolbarCommand"
             ref="toolbar"
-        ></backend-component-document-toolbar>
+        ></backend-document-toolbar>
     </template>
 
     <template v-slot:content>
-        <div class="flex-layout-column fill-container" ref="contentContainer">
-            <div class="flex-layout-item stretch editor-panel relative">
-                <backend-component-richeditor-document-connector
+        <div class="d-flex flex-column fill-container" ref="contentContainer">
+            <div class="flex-fill position-relative editor-panel">
+                <backend-richeditor-document-connector
                     :allow-resizing="showMargins"
                     :toolbar-container="toolbarExtensionPointProxy"
-                    :external-toolbar-app-state="externalToolbarAppState"
+                    :external-toolbar-bus="externalToolbarBus"
                     :use-media-manager="useMediaManager"
                     :built-in-mode="true"
                     unique-key="html-editor-form-widget"
                     container-css-class="fill-container"
+                    ref="documentConnector"
                 >
-                    <backend-component-richeditor
+                    <backend-richeditor
                         v-model="value"
                         :read-only="options.readOnly"
                         :use-line-breaks="options.useLineBreaks"
@@ -36,9 +37,9 @@
                         @blur="onBlur"
                         @focus="onFocus"
                     >
-                    </backend-component-richeditor>
-                </backend-component-richeditor-document-connector>
+                    </backend-richeditor>
+                </backend-richeditor-document-connector>
             </div>
         </div>
     </template>
-</backend-component-document>
+</backend-document>

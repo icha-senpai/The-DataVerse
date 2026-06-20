@@ -125,7 +125,26 @@
 
 
     ExceptionBeautifier.prototype.formatMessage = function (str) {
-        var self = this;
+        var self = this,
+            jsonMatch,
+            messagePart,
+            detailsPart;
+
+        // Detect JSON details block appended after double newline
+        jsonMatch = str.match(/^([\s\S]*?)(\r?\n\r?\n)([\[{][\s\S]*[\]}]\s*)$/);
+
+        if (jsonMatch) {
+            messagePart = self.formatLineCode(
+                jsonMatch[1]
+                    .replace(/^\s+/, '')
+                    .replace(/\r\n|\r|\n/g, '{x-newline}')
+                    .replace(/\t| {2}/g, '{x-tabulation}')
+            );
+
+            detailsPart = self.formatJsonDetails(jsonMatch[3]);
+
+            return messagePart + detailsPart;
+        }
 
         return self.formatLineCode(
             str
@@ -133,6 +152,82 @@
                 .replace(/\r\n|\r|\n/g, '{x-newline}')
                 .replace(/\t| {2}/g, '{x-tabulation}')
         );
+    }
+
+    ExceptionBeautifier.prototype.formatJsonDetails = function (str) {
+        var decoded;
+
+        try {
+            decoded = JSON.parse(str.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#039;/g, "'"));
+        }
+        catch (e) {
+            return '{x-newline}{x-newline}' + str
+                .replace(/\r\n|\r|\n/g, '{x-newline}')
+                .replace(/\t| {2}/g, '{x-tabulation}');
+        }
+
+        return '{exception-beautifier-details#div}' +
+            this.buildJsonTree(decoded, 0) +
+            '{/exception-beautifier-details#div}';
+    }
+
+    ExceptionBeautifier.prototype.buildJsonTree = function (data, depth) {
+        var self = this,
+            result = '',
+            keys,
+            isArray = Array.isArray(data),
+            indent = new Array(depth + 1).join('{x-tabulation}{x-tabulation}');
+
+        if (data === null) {
+            return '{exception-beautifier-code}null{/exception-beautifier-code}';
+        }
+
+        if (typeof data === 'string') {
+            return '{exception-beautifier-string}&quot;' + data
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;') + '&quot;{/exception-beautifier-string}';
+        }
+
+        if (typeof data === 'number') {
+            return '{exception-beautifier-number}' + data + '{/exception-beautifier-number}';
+        }
+
+        if (typeof data === 'boolean') {
+            return '{exception-beautifier-code}' + data + '{/exception-beautifier-code}';
+        }
+
+        if (typeof data !== 'object') {
+            return String(data);
+        }
+
+        keys = Object.keys(data);
+        if (keys.length === 0) {
+            return isArray ? '[]' : '{}';
+        }
+
+        result += (isArray ? '[' : '{') + '{x-newline}';
+
+        keys.forEach(function (key, index) {
+            var childIndent = indent + '{x-tabulation}{x-tabulation}';
+            result += childIndent;
+
+            if (!isArray) {
+                result += '{exception-beautifier-code}' + key + '{/exception-beautifier-code}: ';
+            }
+
+            result += self.buildJsonTree(data[key], depth + 1);
+
+            if (index < keys.length - 1) {
+                result += ',';
+            }
+
+            result += '{x-newline}';
+        });
+
+        result += indent + (isArray ? ']' : '}');
+
+        return result;
     }
 
     ExceptionBeautifier.prototype.formatFilePath = function (path, line) {
@@ -224,7 +319,7 @@
         var self = this,
             start = str.indexOf('{exception-beautifier-'),
             cssOffset = 'exception-beautifier-'.length,
-            end, endtag, tmp, matches, tag, html, css, attrs, markup = '';
+            end, endtag, tmp, matches, tag, html, css, markup = '';
 
         if (start >= 0) {
             if (start > 0) {
@@ -247,21 +342,17 @@
                 }
 
                 html = 'span';
-                attrs = '';
                 css = tag;
 
                 if (matches = tag.match(/(.+)#([a-z]+)$/)) {
                     css = matches[1];
-                    html = matches[2];
+                    // Only allow tags actually used by the formatter
+                    html = matches[2] === 'div' ? 'div' : 'span';
                 }
 
                 css = 'beautifier-' + css.substr(cssOffset);
 
-                if (tmp >= 0 && tmp < endtag) {
-                    attrs = str.substring(tmp, endtag);
-                }
-
-                markup += '<' + html + ' class="' + css + '"' + attrs + '>';
+                markup += '<' + html + ' class="' + css + '">';
                 markup += self.buildMarkup(str.substring(start + 1, end));
                 markup += '</' + html + '>';
 
@@ -289,7 +380,8 @@
         var stacktrace,
             messageContainer,
             tabs,
-            iframe;
+            iframe,
+            attachments = [];
 
         markup.find('.beautifier-file').each(function () {
             $(this).find('.beautifier-class').each(function () {
@@ -330,27 +422,60 @@
 
         // Rude check if this is a mail message
         if (rawSource.includes('Message-ID:') && rawSource.includes('Subject:') && rawSource.includes('From:') && rawSource.includes('To:')) {
-            markup = rawSource.trim().replace(/(?:^|<\/html>)[^]*?(?:<html|$)/g, function(m) {
-                return m.replace(/\r\n|\r|\n/g, '<br>').replace(/ {2}/g, '&nbsp;&nbsp;')
-            });
+            // Extract the HTML portion from the MIME message
+            var htmlMatch = rawSource.match(/<html[\s\S]*<\/html>/i);
+            if (htmlMatch) {
+                markup = htmlMatch[0];
+            }
+            else {
+                // Fallback to plain text content
+                var textMatch = rawSource.match(/Content-Type:\s*text\/plain[^\r\n]*[\r\n]+(?:Content-Transfer-Encoding:[^\r\n]*[\r\n]+)*[\r\n]+([\s\S]*?)(?=\r?\n--)/);
+                markup = textMatch
+                    ? '<pre style="font-family:inherit">' + textMatch[1].replace(/</g, '&lt;') + '</pre>'
+                    : rawSource.trim().replace(/\r\n|\r|\n/g, '<br>');
+            }
 
             iframe = $('<iframe id="#beautifier-tab-formatted-iframe" sandbox="" style="width: 100%; height: 500px; padding: 0" frameborder="0"></iframe>');
+            iframe.attr('srcdoc', markup);
+
+            // Extract attachments from MIME parts
+            var parts = rawSource.split(/\r?\n--/);
+            parts.forEach(function(part) {
+                if (!/Content-Disposition:\s*attachment/i.test(part)) {
+                    return;
+                }
+                var typeMatch = part.match(/Content-Type:\s*([^\s;]+)/i);
+                var nameMatch = part.match(/(?:file)?name=["']?([^"';\r\n]+)/i);
+                var bodyMatch = part.match(/\r?\n\r?\n([\s\S]*?)$/);
+                if (typeMatch && nameMatch && bodyMatch) {
+                    attachments.push({
+                        name: nameMatch[1].trim(),
+                        type: typeMatch[1].trim(),
+                        data: bodyMatch[1].trim().replace(/\r?\n/g, '').replace(/--$/, '')
+                    });
+                }
+            });
         }
 
         // Build tab content
         if (iframe) {
             tabs.find('#beautifier-tab-formatted').append(iframe);
             iframe.wrap('<div class="beautifier-formatted-content" />');
-            iframe.on('load', function() {
-                var $html = iframe.contents().find('html');
-                $html.html(markup);
-                $html.css({
-                    'font-family': '-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"',
-                    'font-size': '14px',
-                    'color': '#74787e'
+
+            // Add attachment download links
+            if (attachments.length) {
+                var attachBar = $('<div class="beautifier-attachments" />');
+                attachments.forEach(function(file) {
+                    var dataUri = 'data:' + file.type + ';base64,' + file.data;
+                    $('<a class="beautifier-attachment" />')
+                        .attr('href', dataUri)
+                        .attr('download', file.name)
+                        .text(file.name)
+                        .prepend('<i class="icon-attachment"></i> ')
+                        .appendTo(attachBar);
                 });
-                iframe.height($html.height() + 1);
-            });
+                tabs.find('.beautifier-formatted-content').append(attachBar);
+            }
         }
         else {
             tabs.find('#beautifier-tab-formatted').append(markup);

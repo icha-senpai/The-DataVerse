@@ -11,6 +11,11 @@ use Backend\Classes\VueComponentBase;
  */
 class DocumentMarkdownEditor extends VueComponentBase
 {
+    /**
+     * @var string componentName is the Vue component tag name.
+     */
+    protected $componentName = 'backend-document-markdowneditor';
+
     protected $require = [
         \Backend\VueComponents\Document::class,
         \Backend\VueComponents\Uploader::class,
@@ -26,9 +31,7 @@ class DocumentMarkdownEditor extends VueComponentBase
      */
     protected function loadAssets()
     {
-        $this->addJs('/modules/backend/vuecomponents/documentmarkdowneditor/assets/vendor/easymde@2.12.0/easymde.min.js');
-        $this->addCss('/modules/backend/vuecomponents/documentmarkdowneditor/assets/vendor/easymde@2.12.0/easymde.min.css');
-        $this->addJsBundle('js/formwidget.js');
+        $this->addJs('js/formwidget.js', ['type' => 'module']);
     }
 
     /**
@@ -40,8 +43,8 @@ class DocumentMarkdownEditor extends VueComponentBase
      */
     protected function loadDependencyAssets()
     {
-        $this->addJsBundle('js/utils.js');
-        $this->addJsBundle('js/octobercommands.js');
+        $this->addJs('/modules/backend/vuecomponents/documentmarkdowneditor/assets/vendor/easymde@2.12.0/easymde.min.js');
+        $this->addCss('/modules/backend/vuecomponents/documentmarkdowneditor/assets/vendor/easymde@2.12.0/easymde.min.css');
         $this->addJs('vendor/marked@1.2.0/marked.min.js');
         $this->addJs('vendor/dompurify@2.1.1/purify.min.js');
     }

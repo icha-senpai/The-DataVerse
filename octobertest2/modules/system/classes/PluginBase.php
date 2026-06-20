@@ -1,6 +1,7 @@
 <?php namespace System\Classes;
 
 use Backend;
+use Illuminate\Console\Application as Artisan;
 use October\Contracts\Support\OctoberPackage;
 use October\Rain\Support\ServiceProvider as ServiceProviderBase;
 use ReflectionClass;
@@ -223,6 +224,47 @@ class PluginBase extends ServiceProviderBase implements OctoberPackage
     public function registerMailPartials()
     {
         return [];
+    }
+
+    /**
+     * discoverConsoleCommands automatically finds and registers console
+     * commands from the plugin's console directory
+     */
+    public function discoverConsoleCommands(): void
+    {
+        $reflection = new ReflectionClass(get_class($this));
+        $pluginPath = dirname($reflection->getFileName());
+        $consolePath = $pluginPath . '/console';
+
+        if (!is_dir($consolePath)) {
+            return;
+        }
+
+        $pluginClass = get_class($this);
+        $namespace = substr($pluginClass, 0, strrpos($pluginClass, '\\')) . '\\Console\\';
+
+        Artisan::starting(function ($artisan) use ($consolePath, $namespace) {
+            $commands = [];
+
+            foreach (glob($consolePath . '/*.php') as $file) {
+                $className = $namespace . basename($file, '.php');
+
+                if (!class_exists($className)) {
+                    continue;
+                }
+
+                $ref = new ReflectionClass($className);
+
+                if (
+                    $ref->isSubclassOf(\Illuminate\Console\Command::class) &&
+                    !$ref->isAbstract()
+                ) {
+                    $commands[] = $className;
+                }
+            }
+
+            $artisan->resolveCommands($commands);
+        });
     }
 
     /**

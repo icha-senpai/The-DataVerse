@@ -9,7 +9,7 @@ if (!window.oc.langMessages) {
     window.oc.langMessages = {};
 }
 
-window.oc.langMessages['fa'] = $.extend(
+window.oc.langMessages['fa'] = Object.assign(
     window.oc.langMessages['fa'] || {},
     {
     "markdowneditor": {
@@ -55,7 +55,8 @@ window.oc.langMessages['fa'] = $.extend(
         "dismiss": "Dismiss",
         "confirm_button_text": "\u062a\u0627\u06cc\u06cc\u062f",
         "cancel_button_text": "\u0627\u0646\u0635\u0631\u0627\u0641",
-        "widget_remove_confirm": "\u0627\u06cc\u0646 \u0627\u0628\u0632\u0627\u0631\u06a9 \u062d\u0630\u0641 \u0634\u0648\u062f\u061f"
+        "widget_remove_confirm": "\u0627\u06cc\u0646 \u0627\u0628\u0632\u0627\u0631\u06a9 \u062d\u0630\u0641 \u0634\u0648\u062f\u061f",
+        "reload": "Reload"
     },
     "datepicker": {
         "previousMonth": "\u0645\u0627\u0647 \u0642\u0628\u0644",
@@ -154,139 +155,136 @@ window.oc.langMessages['fa'] = $.extend(
         "cancel": "Cancel",
         "items": "Items"
     },
-    "dashboard": {
-        "widget_data_source": "Data source",
-        "widget_data_source_required": "Please select a data source",
-        "widget_dimension": "Dimension",
-        "widget_dimension_required": "Please select a dimension",
-        "widget_metric": "Metric",
-        "widget_metric_required": "Please select metric(s).",
-        "widget_metrics": "Metrics",
-        "widget_title": "Title",
-        "widget_title_required": "Please provide the widget title",
-        "widget_title_optional_placeholder": "Leave empty to hide the title",
-        "widget_metric_value": "Value",
-        "widget_icon_status": "Icon Status",
-        "widget_href": "Link URL",
-        "widget_icon": "Icon",
-        "widget_icon_required": "Please select an icon",
-        "widget_link_text": "Link Text",
-        "apply": "Apply",
-        "delete": "Delete",
-        "configure": "Configure",
-        "section_show_interval": "Show Date Interval",
-        "widget_chart_type": "Chart type",
-        "widget_chart_type_bar": "Bar",
-        "widget_chart_type_stacked_bar": "Stacked Bar",
-        "widget_chart_type_line": "Line",
-        "sort_by": "Sort by",
-        "sort_by_required": "Select sorting metric or dimension",
-        "sort_by_placeholder": "Select a dimension and metrics",
-        "sort_order": "Order",
-        "sort_asc": "Ascending",
-        "sort_desc": "Descending",
-        "group_sorting": "Sorting",
-        "value_not_set": "[not set]",
-        "limit": "Limit",
-        "limit_placeholder": "Display all records",
-        "limit_number": "Enter a positive number or leave empty to display all records.",
-        "limit_min": "The limit value must be at least 1",
-        "empty_values": "Empty values",
-        "empty_values_hide": "Hide",
-        "empty_values_display_not_set": "Display [not set]",
-        "empty_values_dimension": "Dimension",
-        "date_interval": "Date interval",
-        "date_interval_dashboard_default": "Dashboard interval",
-        "date_interval_this_week": "This week",
-        "date_interval_this_month": "This month",
-        "date_interval_this_quarter": "This quarter",
-        "date_interval_this_year": "This year",
-        "date_interval_past_hour": "Past hour",
-        "date_interval_past_days": "Past X days",
-        "date_interval_past_days_value": "Number of days",
-        "date_interval_past_days_invalid": "Enter a positive number",
-        "prop_date_interval": "Display",
-        "date_interval_past_days_placeholder": "1 day (today) if not set",
-        "widget_bar_direction": "Direction",
-        "widget_bar_direction_vertical": "Vertical",
-        "widget_bar_direction_horizontal": "Horizontal",
-        "prop_color": "Color",
-        "color_required": "Select the metric color",
-        "tab_general": "General",
-        "tab_sorting_filtering": "Sorting & Filtering",
-        "prop_records_per_page": "Records per page",
-        "records_per_page_placeholder": "Leave empty to disable pagination",
-        "records_per_page_invalid": "Enter a positive number or leave empty to display all records.",
-        "prop_display_totals": "Display totals",
-        "prop_display_relative_bar": "Display relative bars",
-        "prop_extra_table_fields": "Extra table fields",
-        "filter_operation_equal_to": "Equal to",
-        "filter_operation_greater_equal": "Greater or equal to",
-        "filter_operation_less_equal": "Less or equal to",
-        "filter_operation_greater": "Greater than",
-        "filter_operation_less": "Less than",
-        "filter_operation_starts_with": "Starts with",
-        "filter_operation_includes": "Includes",
-        "filter_operation_one_of": "One of",
-        "prop_operation": "Operation",
-        "prop_value": "Value",
-        "prop_values": "Values",
-        "prop_values_one_per_line": "One value per line",
-        "prop_filter_attribute": "Attribute",
-        "filter_select_attribute": "Select an attribute",
-        "filter_select_operation": "Select an operation",
-        "prop_filters": "Filters",
-        "icon_status_info": "Information",
-        "icon_status_important": "Important",
-        "icon_status_success": "Success",
-        "icon_status_warning": "Warning",
-        "icon_status_disabled": "Disabled",
-        "range_today": "Today",
-        "range_yesterday": "Yesterday",
-        "range_last_7_days": "Last 7 days",
-        "range_last_30_days": "Last 30 days",
-        "range_this_month": "This month",
-        "range_last_month": "Last month",
-        "range_this_quarter": "This quarter",
-        "range_this_year": "This year",
-        "range_this_week": "This week",
-        "interval_day": "Day",
-        "interval_week": "Week",
-        "interval_month": "Month",
-        "interval_quarter": "Quarter",
-        "interval_year": "Year",
-        "compare_totals": "Compare Totals",
-        "compare_prev_period": "Prev period",
-        "compare_prev_year": "Same period last year",
-        "compare_none": "Disabled",
-        "updated_successfully": "The dashboard was successfully updated.",
-        "edit_dashboard": "Edit Dashboard",
-        "make_default": "Make Default",
-        "make_default_confirm": "Set the current layout as the default?",
-        "make_default_successfully": "This dashboard is now the default layout.",
-        "reset_layout": "Reset Layout",
-        "reset_layout_confirm": "Reset layout back to default?",
-        "reset_layout_successfully": "The dashboard layout has been reset to default.",
-        "manage_dashboards": "Manage Dashboards",
-        "import_success": "The dashboard was successfully imported",
-        "new_dashboard": "New Dashboard",
-        "import_dashboard": "Import Dashboard",
-        "delete_confirm": "Delete the dashboard? This action cannot be reversed. All users with access will be affected.",
-        "delete_success": "The dashboard was successfully deleted.",
-        "menu_item_custom": "Custom",
-        "menu_item_delete_row": "Delete row",
-        "widget_type_indicator": "Indicator",
-        "widget_type_section_title": "Section Title",
-        "widget_type_notice": "Text Notice",
-        "widget_type_chart": "Chart",
-        "widget_type_table": "Table",
-        "notice_text": "Notice text"
-    }
+    "[not set]": "[\u062a\u0646\u0638\u06cc\u0645 \u0646\u0634\u062f\u0647]",
+    "1 day (today) if not set": "\u06f1 \u0631\u0648\u0632 (\u0627\u0645\u0631\u0648\u0632) \u0627\u06af\u0631 \u062a\u0646\u0638\u06cc\u0645 \u0646\u0634\u062f\u0647 \u0628\u0627\u0634\u062f",
+    "Apply": "\u0627\u0639\u0645\u0627\u0644 \u06a9\u0631\u062f\u0646",
+    "Ascending": "\u0635\u0639\u0648\u062f\u06cc",
+    "Attribute": "\u0648\u06cc\u0698\u06af\u06cc",
+    "Bar": "\u0628\u0627\u0631",
+    "Cancel": "\u0644\u063a\u0648",
+    "Chart": "\u0646\u0645\u0648\u062f\u0627\u0631",
+    "Chart type": "\u0646\u0648\u0639 \u0646\u0645\u0648\u062f\u0627\u0631",
+    "Color": "\u0631\u0646\u06af",
+    "Compare Totals": "\u0645\u0642\u0627\u06cc\u0633\u0647 \u0645\u062c\u0645\u0648\u0639\u200c\u0647\u0627",
+    "Configure": "\u067e\u06cc\u06a9\u0631\u0628\u0646\u062f\u06cc",
+    "Custom": "\u0633\u0641\u0627\u0631\u0634\u06cc",
+    "Custom Range": "\u0628\u0627\u0632\u0647 \u0633\u0641\u0627\u0631\u0634\u06cc",
+    "Dashboard interval": "\u0641\u0627\u0635\u0644\u0647 \u062f\u0627\u0634\u0628\u0648\u0631\u062f",
+    "Data source": "\u0645\u0646\u0628\u0639 \u062f\u0627\u062f\u0647",
+    "Date interval": "\u0641\u0627\u0635\u0644\u0647 \u0632\u0645\u0627\u0646\u06cc \u062a\u0627\u0631\u06cc\u062e",
+    "Day": "\u0631\u0648\u0632",
+    "Delete": "\u062d\u0630\u0641",
+    "Delete Dashboard": "\u062d\u0630\u0641 \u062f\u0627\u0634\u0628\u0648\u0631\u062f",
+    "Delete row": "\u062d\u0630\u0641 \u0631\u062f\u06cc\u0641",
+    "Descending": "\u0646\u0632\u0648\u0644\u06cc",
+    "Dimension": "\u0627\u0628\u0639\u0627\u062f",
+    "Direction": "\u062c\u0647\u062a",
+    "Disabled": "\u0645\u0639\u0644\u0648\u0644",
+    "Display": "\u0646\u0645\u0627\u06cc\u0634",
+    "Display [not set]": "\u0646\u0645\u0627\u06cc\u0634 [\u062a\u0646\u0638\u06cc\u0645 \u0646\u0634\u062f\u0647]",
+    "Display all records": "\u0646\u0645\u0627\u06cc\u0634 \u0647\u0645\u0647 \u0631\u06a9\u0648\u0631\u062f\u0647\u0627",
+    "Display relative bars": "\u0646\u0645\u0627\u06cc\u0634 \u0645\u06cc\u0644\u0647\u200c\u0647\u0627\u06cc \u0646\u0633\u0628\u06cc",
+    "Display totals": "\u0646\u0645\u0627\u06cc\u0634 \u0645\u062c\u0645\u0648\u0639",
+    "Edit Dashboard": "\u0648\u06cc\u0631\u0627\u06cc\u0634 \u062f\u0627\u0634\u0628\u0648\u0631\u062f",
+    "Empty values": "\u0645\u0642\u0627\u062f\u06cc\u0631 \u062e\u0627\u0644\u06cc",
+    "Enter a positive number": "\u06cc\u06a9 \u0639\u062f\u062f \u0645\u062b\u0628\u062a \u0648\u0627\u0631\u062f \u06a9\u0646\u06cc\u062f",
+    "Enter a positive number or leave empty to display all records.": "\u06cc\u06a9 \u0639\u062f\u062f \u0645\u062b\u0628\u062a \u0648\u0627\u0631\u062f \u06a9\u0646\u06cc\u062f \u06cc\u0627 \u0628\u0631\u0627\u06cc \u0646\u0645\u0627\u06cc\u0634 \u0647\u0645\u0647 \u0631\u06a9\u0648\u0631\u062f\u0647\u0627\u060c \u0622\u0646 \u0631\u0627 \u062e\u0627\u0644\u06cc \u0628\u06af\u0630\u0627\u0631\u06cc\u062f.",
+    "Equal to": "\u0628\u0631\u0627\u0628\u0631 \u0628\u0627",
+    "Export Dashboard": "\u062f\u0627\u0634\u0628\u0648\u0631\u062f \u062e\u0631\u0648\u062c\u06cc",
+    "Extra table fields": "\u0641\u06cc\u0644\u062f\u0647\u0627\u06cc \u062c\u062f\u0648\u0644 \u0627\u0636\u0627\u0641\u06cc",
+    "Filters": "\u0641\u06cc\u0644\u062a\u0631\u0647\u0627",
+    "General": "\u0639\u0645\u0648\u0645\u06cc",
+    "Greater or equal to": "\u0628\u0632\u0631\u06af\u062a\u0631 \u06cc\u0627 \u0645\u0633\u0627\u0648\u06cc",
+    "Greater than": "\u0628\u0632\u0631\u06af\u062a\u0631 \u0627\u0632",
+    "Hide": "\u067e\u0646\u0647\u0627\u0646 \u06a9\u0631\u062f\u0646",
+    "Horizontal": "\u0627\u0641\u0642\u06cc",
+    "Icon": "\u0622\u06cc\u06a9\u0648\u0646",
+    "Icon Status": "\u0648\u0636\u0639\u06cc\u062a \u0622\u06cc\u06a9\u0648\u0646",
+    "Important": "\u0645\u0647\u0645",
+    "Includes": "\u0634\u0627\u0645\u0644 \u0645\u06cc\u200c\u0634\u0648\u062f",
+    "Indicator": "\u0634\u0627\u062e\u0635",
+    "Information": "\u0627\u0637\u0644\u0627\u0639\u0627\u062a",
+    "Last 30 days": "\u06f3\u06f0 \u0631\u0648\u0632 \u06af\u0630\u0634\u062a\u0647",
+    "Last 7 days": "\u06f7 \u0631\u0648\u0632 \u06af\u0630\u0634\u062a\u0647",
+    "Last month": "\u0645\u0627\u0647 \u06af\u0630\u0634\u062a\u0647",
+    "Leave empty to disable pagination": "\u0628\u0631\u0627\u06cc \u063a\u06cc\u0631\u0641\u0639\u0627\u0644 \u06a9\u0631\u062f\u0646 \u0635\u0641\u062d\u0647\u200c\u0628\u0646\u062f\u06cc\u060c \u062e\u0627\u0644\u06cc \u0628\u06af\u0630\u0627\u0631\u06cc\u062f",
+    "Leave empty to hide the title": "\u0628\u0631\u0627\u06cc \u0645\u062e\u0641\u06cc \u06a9\u0631\u062f\u0646 \u0639\u0646\u0648\u0627\u0646\u060c \u062e\u0627\u0644\u06cc \u0628\u06af\u0630\u0627\u0631\u06cc\u062f",
+    "Less or equal to": "\u06a9\u0645\u062a\u0631 \u06cc\u0627 \u0645\u0633\u0627\u0648\u06cc",
+    "Less than": "\u06a9\u0645\u062a\u0631 \u0627\u0632",
+    "Limit": "\u062d\u062f",
+    "Line": "\u062e\u0637",
+    "Link Text": "\u0645\u062a\u0646 \u067e\u06cc\u0648\u0646\u062f",
+    "Link URL": "\u0622\u062f\u0631\u0633 \u0644\u06cc\u0646\u06a9",
+    "Make Default": "\u067e\u06cc\u0634\u200c\u0641\u0631\u0636 \u0642\u0631\u0627\u0631 \u062f\u0647\u06cc\u062f",
+    "Manage Dashboards": "\u0645\u062f\u06cc\u0631\u06cc\u062a \u062f\u0627\u0634\u0628\u0648\u0631\u062f\u0647\u0627",
+    "Metric": "\u0645\u062a\u0631\u06cc\u06a9",
+    "Metrics": "\u0645\u0639\u06cc\u0627\u0631\u0647\u0627",
+    "Month": "\u0645\u0627\u0647",
+    "My Custom Widget": "\u0627\u0628\u0632\u0627\u0631\u06a9 \u0633\u0641\u0627\u0631\u0634\u06cc \u0645\u0646",
+    "No Value": "\u0628\u062f\u0648\u0646 \u0627\u0631\u0632\u0634",
+    "Notice text": "\u0645\u062a\u0646 \u0627\u0637\u0644\u0627\u0639\u06cc\u0647",
+    "Number of days": "\u062a\u0639\u062f\u0627\u062f \u0631\u0648\u0632\u0647\u0627",
+    "One of": "\u06cc\u06a9\u06cc \u0627\u0632",
+    "One value per line": "\u06cc\u06a9 \u0645\u0642\u062f\u0627\u0631 \u062f\u0631 \u0647\u0631 \u062e\u0637",
+    "Operation": "\u0639\u0645\u0644\u06cc\u0627\u062a",
+    "Order": "\u0633\u0641\u0627\u0631\u0634 \u062f\u0647\u06cc\u062f",
+    "Past hour": "\u0633\u0627\u0639\u062a \u06af\u0630\u0634\u062a\u0647",
+    "Past X days": "X \u0631\u0648\u0632 \u06af\u0630\u0634\u062a\u0647",
+    "Please provide the widget title": "\u0644\u0637\u0641\u0627 \u0639\u0646\u0648\u0627\u0646 \u0627\u0628\u0632\u0627\u0631\u06a9 \u0631\u0627 \u0648\u0627\u0631\u062f \u06a9\u0646\u06cc\u062f",
+    "Please select a data source": "\u0644\u0637\u0641\u0627 \u06cc\u06a9 \u0645\u0646\u0628\u0639 \u062f\u0627\u062f\u0647 \u0627\u0646\u062a\u062e\u0627\u0628 \u06a9\u0646\u06cc\u062f",
+    "Please select a dimension": "\u0644\u0637\u0641\u0627 \u06cc\u06a9 \u0628\u0639\u062f \u0627\u0646\u062a\u062e\u0627\u0628 \u06a9\u0646\u06cc\u062f",
+    "Please select an icon": "\u0644\u0637\u0641\u0627 \u06cc\u06a9 \u0622\u06cc\u06a9\u0648\u0646 \u0627\u0646\u062a\u062e\u0627\u0628 \u06a9\u0646\u06cc\u062f",
+    "Please select metric(s).": "\u0644\u0637\u0641\u0627 \u0645\u0639\u06cc\u0627\u0631(\u0647\u0627\u06cc) \u0645\u0648\u0631\u062f \u0646\u0638\u0631 \u0631\u0627 \u0627\u0646\u062a\u062e\u0627\u0628 \u06a9\u0646\u06cc\u062f.",
+    "Prev period": "\u062f\u0648\u0631\u0647 \u0642\u0628\u0644\u06cc",
+    "Quarter": "\u0631\u0628\u0639",
+    "Records per page": "\u0631\u06a9\u0648\u0631\u062f\u0647\u0627 \u062f\u0631 \u0647\u0631 \u0635\u0641\u062d\u0647",
+    "Refresh every minute": "\u0647\u0631 \u062f\u0642\u06cc\u0642\u0647 \u062a\u0627\u0632\u0647 \u06a9\u0646\u06cc\u062f",
+    "Rename Dashboard": "\u062a\u063a\u06cc\u06cc\u0631 \u0646\u0627\u0645 \u062f\u0627\u0634\u0628\u0648\u0631\u062f",
+    "Reset Layout": "\u062a\u0646\u0638\u06cc\u0645 \u0645\u062c\u062f\u062f \u0637\u0631\u062d\u200c\u0628\u0646\u062f\u06cc",
+    "Reset layout back to default?": "\u0637\u0631\u062d\u200c\u0628\u0646\u062f\u06cc \u0628\u0647 \u062d\u0627\u0644\u062a \u067e\u06cc\u0634\u200c\u0641\u0631\u0636 \u0628\u0631\u06af\u0631\u062f\u0627\u0646\u062f\u0647 \u0634\u0648\u062f\u061f",
+    "Same period last year": "\u0645\u062f\u062a \u0645\u0634\u0627\u0628\u0647 \u0633\u0627\u0644 \u06af\u0630\u0634\u062a\u0647",
+    "Section": "\u0628\u062e\u0634",
+    "Section Title": "\u0639\u0646\u0648\u0627\u0646 \u0628\u062e\u0634",
+    "Select a dimension and metrics": "\u0627\u0646\u062a\u062e\u0627\u0628 \u0627\u0628\u0639\u0627\u062f \u0648 \u0645\u0639\u06cc\u0627\u0631\u0647\u0627",
+    "Select an attribute": "\u06cc\u06a9 \u0648\u06cc\u0698\u06af\u06cc \u0631\u0627 \u0627\u0646\u062a\u062e\u0627\u0628 \u06a9\u0646\u06cc\u062f",
+    "Select an operation": "\u0627\u0646\u062a\u062e\u0627\u0628 \u06cc\u06a9 \u0639\u0645\u0644\u06cc\u0627\u062a",
+    "Select sorting metric or dimension": "\u0627\u0646\u062a\u062e\u0627\u0628 \u0645\u0639\u06cc\u0627\u0631 \u06cc\u0627 \u0628\u064f\u0639\u062f \u0645\u0631\u062a\u0628\u200c\u0633\u0627\u0632\u06cc",
+    "Select the metric color": "\u0631\u0646\u06af \u0645\u062a\u0631\u06cc\u06a9 \u0631\u0627 \u0627\u0646\u062a\u062e\u0627\u0628 \u06a9\u0646\u06cc\u062f",
+    "Set the current layout as the default?": "\u0637\u0631\u062d \u0641\u0639\u0644\u06cc \u0631\u0627 \u0628\u0647 \u0639\u0646\u0648\u0627\u0646 \u0637\u0631\u062d \u067e\u06cc\u0634\u200c\u0641\u0631\u0636 \u062a\u0646\u0638\u06cc\u0645 \u06a9\u0646\u06cc\u062f\u061f",
+    "Show Date Interval": "\u0646\u0645\u0627\u06cc\u0634 \u0628\u0627\u0632\u0647 \u0632\u0645\u0627\u0646\u06cc \u062a\u0627\u0631\u06cc\u062e",
+    "Sort by": "\u0645\u0631\u062a\u0628 \u0633\u0627\u0632\u06cc \u0628\u0631 \u0627\u0633\u0627\u0633",
+    "Sorting": "\u0645\u0631\u062a\u0628\u200c\u0633\u0627\u0632\u06cc",
+    "Sorting & Filtering": "\u0645\u0631\u062a\u0628\u200c\u0633\u0627\u0632\u06cc \u0648 \u0641\u06cc\u0644\u062a\u0631 \u06a9\u0631\u062f\u0646",
+    "Stacked Bar": "\u0645\u06cc\u0644\u0647 \u0627\u0646\u0628\u0627\u0634\u062a\u0647",
+    "Starts with": "\u0634\u0631\u0648\u0639 \u0645\u06cc\u200c\u0634\u0648\u062f \u0628\u0627",
+    "Success": "\u0645\u0648\u0641\u0642\u06cc\u062a",
+    "Table": "\u0645\u06cc\u0632",
+    "Text Notice": "\u0627\u0637\u0644\u0627\u0639\u06cc\u0647 \u0645\u062a\u0646\u06cc",
+    "The dashboard layout has been reset to default.": "\u0637\u0631\u062d \u062f\u0627\u0634\u0628\u0648\u0631\u062f \u0628\u0647 \u062d\u0627\u0644\u062a \u067e\u06cc\u0634\u200c\u0641\u0631\u0636 \u0628\u0627\u0632\u0646\u0634\u0627\u0646\u06cc \u0634\u062f.",
+    "The dashboard was successfully updated.": "\u062f\u0627\u0634\u0628\u0648\u0631\u062f \u0628\u0627 \u0645\u0648\u0641\u0642\u06cc\u062a \u0628\u0647\u200c\u0631\u0648\u0632\u0631\u0633\u0627\u0646\u06cc \u0634\u062f.",
+    "The limit value must be at least 1": "\u0645\u0642\u062f\u0627\u0631 \u062d\u062f \u0628\u0627\u06cc\u062f \u062d\u062f\u0627\u0642\u0644 \u06f1 \u0628\u0627\u0634\u062f",
+    "This dashboard is now the default layout.": "\u0627\u06cc\u0646 \u062f\u0627\u0634\u0628\u0648\u0631\u062f \u0627\u06a9\u0646\u0648\u0646 \u0637\u0631\u062d \u067e\u06cc\u0634\u200c\u0641\u0631\u0636 \u0627\u0633\u062a.",
+    "This is a text notice widget.": "\u0627\u06cc\u0646 \u06cc\u06a9 \u0627\u0628\u0632\u0627\u0631\u06a9 \u0627\u0639\u0644\u0627\u0646 \u0645\u062a\u0646\u06cc \u0627\u0633\u062a.",
+    "This month": "\u0627\u06cc\u0646 \u0645\u0627\u0647",
+    "This quarter": "\u0627\u06cc\u0646 \u0633\u0647 \u0645\u0627\u0647\u0647",
+    "This week": "\u0627\u06cc\u0646 \u0647\u0641\u062a\u0647",
+    "This year": "\u0627\u0645\u0633\u0627\u0644",
+    "Title": "\u0639\u0646\u0648\u0627\u0646",
+    "Today": "\u0627\u0645\u0631\u0648\u0632",
+    "Value": "\u0627\u0631\u0632\u0634",
+    "Values": "\u0627\u0631\u0632\u0634\u200c\u0647\u0627",
+    "Vertical": "\u0639\u0645\u0648\u062f\u06cc",
+    "Warning": "\u0647\u0634\u062f\u0627\u0631",
+    "Week": "\u0647\u0641\u062a\u0647",
+    "Year": "\u0633\u0627\u0644",
+    "Yesterday": "\u062f\u06cc\u0631\u0648\u0632"
 }
 );
 
 
-//! moment.js locale configuration v2.22.2
+//! moment.js locale configuration
+//! locale : Persian [fa]
+//! author : Ebrahim Byagowi : https://github.com/ebraminio
 
 ;(function (global, factory) {
    typeof exports === 'object' && typeof module !== 'undefined'
@@ -295,97 +293,114 @@ window.oc.langMessages['fa'] = $.extend(
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
 
+    //! moment.js locale configuration
 
     var symbolMap = {
-        '1': '۱',
-        '2': '۲',
-        '3': '۳',
-        '4': '۴',
-        '5': '۵',
-        '6': '۶',
-        '7': '۷',
-        '8': '۸',
-        '9': '۹',
-        '0': '۰'
-    }, numberMap = {
-        '۱': '1',
-        '۲': '2',
-        '۳': '3',
-        '۴': '4',
-        '۵': '5',
-        '۶': '6',
-        '۷': '7',
-        '۸': '8',
-        '۹': '9',
-        '۰': '0'
-    };
+            1: '۱',
+            2: '۲',
+            3: '۳',
+            4: '۴',
+            5: '۵',
+            6: '۶',
+            7: '۷',
+            8: '۸',
+            9: '۹',
+            0: '۰',
+        },
+        numberMap = {
+            '۱': '1',
+            '۲': '2',
+            '۳': '3',
+            '۴': '4',
+            '۵': '5',
+            '۶': '6',
+            '۷': '7',
+            '۸': '8',
+            '۹': '9',
+            '۰': '0',
+        };
 
     var fa = moment.defineLocale('fa', {
-        months : 'ژانویه_فوریه_مارس_آوریل_مه_ژوئن_ژوئیه_اوت_سپتامبر_اکتبر_نوامبر_دسامبر'.split('_'),
-        monthsShort : 'ژانویه_فوریه_مارس_آوریل_مه_ژوئن_ژوئیه_اوت_سپتامبر_اکتبر_نوامبر_دسامبر'.split('_'),
-        weekdays : 'یک\u200cشنبه_دوشنبه_سه\u200cشنبه_چهارشنبه_پنج\u200cشنبه_جمعه_شنبه'.split('_'),
-        weekdaysShort : 'یک\u200cشنبه_دوشنبه_سه\u200cشنبه_چهارشنبه_پنج\u200cشنبه_جمعه_شنبه'.split('_'),
-        weekdaysMin : 'ی_د_س_چ_پ_ج_ش'.split('_'),
-        weekdaysParseExact : true,
-        longDateFormat : {
-            LT : 'HH:mm',
-            LTS : 'HH:mm:ss',
-            L : 'DD/MM/YYYY',
-            LL : 'D MMMM YYYY',
-            LLL : 'D MMMM YYYY HH:mm',
-            LLLL : 'dddd, D MMMM YYYY HH:mm'
+        months: 'ژانویه_فوریه_مارس_آوریل_مه_ژوئن_ژوئیه_اوت_سپتامبر_اکتبر_نوامبر_دسامبر'.split(
+            '_'
+        ),
+        monthsShort:
+            'ژانویه_فوریه_مارس_آوریل_مه_ژوئن_ژوئیه_اوت_سپتامبر_اکتبر_نوامبر_دسامبر'.split(
+                '_'
+            ),
+        weekdays:
+            'یک\u200cشنبه_دوشنبه_سه\u200cشنبه_چهارشنبه_پنج\u200cشنبه_جمعه_شنبه'.split(
+                '_'
+            ),
+        weekdaysShort:
+            'یک\u200cشنبه_دوشنبه_سه\u200cشنبه_چهارشنبه_پنج\u200cشنبه_جمعه_شنبه'.split(
+                '_'
+            ),
+        weekdaysMin: 'ی_د_س_چ_پ_ج_ش'.split('_'),
+        weekdaysParseExact: true,
+        longDateFormat: {
+            LT: 'HH:mm',
+            LTS: 'HH:mm:ss',
+            L: 'DD/MM/YYYY',
+            LL: 'D MMMM YYYY',
+            LLL: 'D MMMM YYYY HH:mm',
+            LLLL: 'dddd, D MMMM YYYY HH:mm',
         },
         meridiemParse: /قبل از ظهر|بعد از ظهر/,
         isPM: function (input) {
             return /بعد از ظهر/.test(input);
         },
-        meridiem : function (hour, minute, isLower) {
+        meridiem: function (hour, minute, isLower) {
             if (hour < 12) {
                 return 'قبل از ظهر';
             } else {
                 return 'بعد از ظهر';
             }
         },
-        calendar : {
-            sameDay : '[امروز ساعت] LT',
-            nextDay : '[فردا ساعت] LT',
-            nextWeek : 'dddd [ساعت] LT',
-            lastDay : '[دیروز ساعت] LT',
-            lastWeek : 'dddd [پیش] [ساعت] LT',
-            sameElse : 'L'
+        calendar: {
+            sameDay: '[امروز ساعت] LT',
+            nextDay: '[فردا ساعت] LT',
+            nextWeek: 'dddd [ساعت] LT',
+            lastDay: '[دیروز ساعت] LT',
+            lastWeek: 'dddd [پیش] [ساعت] LT',
+            sameElse: 'L',
         },
-        relativeTime : {
-            future : 'در %s',
-            past : '%s پیش',
-            s : 'چند ثانیه',
-            ss : 'ثانیه d%',
-            m : 'یک دقیقه',
-            mm : '%d دقیقه',
-            h : 'یک ساعت',
-            hh : '%d ساعت',
-            d : 'یک روز',
-            dd : '%d روز',
-            M : 'یک ماه',
-            MM : '%d ماه',
-            y : 'یک سال',
-            yy : '%d سال'
+        relativeTime: {
+            future: 'در %s',
+            past: '%s پیش',
+            s: 'چند ثانیه',
+            ss: '%d ثانیه',
+            m: 'یک دقیقه',
+            mm: '%d دقیقه',
+            h: 'یک ساعت',
+            hh: '%d ساعت',
+            d: 'یک روز',
+            dd: '%d روز',
+            M: 'یک ماه',
+            MM: '%d ماه',
+            y: 'یک سال',
+            yy: '%d سال',
         },
         preparse: function (string) {
-            return string.replace(/[۰-۹]/g, function (match) {
-                return numberMap[match];
-            }).replace(/،/g, ',');
+            return string
+                .replace(/[۰-۹]/g, function (match) {
+                    return numberMap[match];
+                })
+                .replace(/،/g, ',');
         },
         postformat: function (string) {
-            return string.replace(/\d/g, function (match) {
-                return symbolMap[match];
-            }).replace(/,/g, '،');
+            return string
+                .replace(/\d/g, function (match) {
+                    return symbolMap[match];
+                })
+                .replace(/,/g, '،');
         },
         dayOfMonthOrdinalParse: /\d{1,2}م/,
-        ordinal : '%dم',
-        week : {
-            dow : 6, // Saturday is the first day of the week.
-            doy : 12 // The week that contains Jan 1st is the first week of the year.
-        }
+        ordinal: '%dم',
+        week: {
+            dow: 6, // Saturday is the first day of the week.
+            doy: 12, // The week that contains Jan 12th is the first week of the year.
+        },
     });
 
     return fa;

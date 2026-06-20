@@ -3,9 +3,11 @@
 use App;
 use Url;
 use Event;
+use Config;
 use System;
 use Twig\Extension\AbstractExtension as TwigExtension;
 use Twig\Environment as TwigEnvironment;
+use Twig\Runtime\EscaperRuntime;
 use Twig\TwigFilter as TwigSimpleFilter;
 use Twig\TwigFunction as TwigSimpleFunction;
 use October\Rain\Support\Collection;
@@ -42,6 +44,11 @@ class Extension extends TwigExtension
     {
         $twig->addExtension(new static);
 
+        $twig->getRuntime(EscaperRuntime::class)->addSafeClass(
+            \Illuminate\View\ComponentAttributeBag::class,
+            ['html']
+        );
+
         /**
          * @event system.extendTwig
          * Provides an opportunity to extend the Twig environment used by the system
@@ -67,6 +74,9 @@ class Extension extends TwigExtension
             new TwigSimpleFunction('pager', [$this, 'pagerFunction'], ['is_safe' => ['html']]),
             new TwigSimpleFunction('ajaxPager', [$this, 'ajaxPagerFunction'], ['is_safe' => ['html']]),
             new TwigSimpleFunction('collect', [$this, 'collectFunction'], []),
+            new TwigSimpleFunction('__', '__'),
+            new TwigSimpleFunction('trans', '__'),
+            new TwigSimpleFunction('trans_choice', 'trans_choice'),
         ];
 
         // Disabled by safe mode
@@ -90,19 +100,30 @@ class Extension extends TwigExtension
         $filters = [
             new TwigSimpleFilter('app', [$this, 'appFilter'], ['is_safe' => ['html']]),
             new TwigSimpleFilter('resize', [$this, 'resizeFilter'], ['is_safe' => ['html']]),
+
+            // @deprecated
             new TwigSimpleFilter('trans', '__'),
+            new TwigSimpleFilter('transchoice', 'trans_choice'),
             new TwigSimpleFilter('trans_choice', 'trans_choice'),
             new TwigSimpleFilter('_', '__'),
             new TwigSimpleFilter('__', 'trans_choice'),
-
-            // @deprecated
-            new TwigSimpleFilter('transchoice', 'trans_choice'),
         ];
 
         // Include extensions provided by plugins
         $filters = $this->markupManager->makeTwigFilters($filters);
 
         return $filters;
+    }
+
+    /**
+     * getNodeVisitors returns a list of node visitors this extension provides.
+     * @return array
+     */
+    public function getNodeVisitors()
+    {
+        return [
+            new GetAttrAdjuster
+        ];
     }
 
     /**
@@ -143,7 +164,10 @@ class Extension extends TwigExtension
      */
     public function carbonFunction($value)
     {
-        if (App::runningInFrontend() && System::hasModule('Cms')) {
+        if (
+            (App::runningInFrontend() || Config::get('cms.timezone_force')) &&
+            System::hasModule('Cms')
+        ) {
             return \Cms::makeCarbon($value);
         }
 

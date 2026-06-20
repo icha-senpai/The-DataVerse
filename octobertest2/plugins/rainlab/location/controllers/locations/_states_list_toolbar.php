@@ -1,10 +1,10 @@
 <div data-control="toolbar">
-    <?= Ui::popupButton("New Country", 'onRelationButtonCreate')
+    <?= Ui::popupButton("New State", 'onRelationButtonCreate')
         ->icon('icon-file')
         ->secondary() ?>
 
     <?= Ui::popupButton(__("Enable or Disable"), 'onLoadDisableForm')
-        ->ajaxData(['location_type' => 'country'])
+        ->ajaxData(['location_type' => 'state'])
         ->listCheckedTrigger()
         ->listCheckedRequest()
         ->icon('icon-magic')

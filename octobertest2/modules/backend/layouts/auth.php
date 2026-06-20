@@ -12,34 +12,28 @@
         <meta name="turbo-visit-control" content="disable">
         <?php
             $coreBuild = Backend::assetVersion();
-
-            $styles = [
-                Backend::skinAsset('assets/vendor/bootstrap/bootstrap.css'),
-                Backend::skinAsset('assets/css/october.css'),
-            ];
-
-            $scripts = [
-                Url::asset('modules/system/assets/js/vendor/jquery.min.js'),
-                Url::asset('modules/system/assets/js/framework-bundle.min.js'),
-                Backend::skinAsset('assets/vendor/bootstrap/bootstrap.min.js'),
-                Backend::skinAsset('assets/js/vendor-min.js'),
-                Backend::skinAsset('assets/js/october-min.js'),
-                Url::asset('modules/system/assets/js/vue.bundle-min.js'),
-                Url::to('modules/backend/assets/js/auth/auth.js'),
-                Url::asset('modules/system/assets/js/lang/lang.'.App::getLocale().'.js'),
-            ];
+            $vendorPath = Url::asset('modules/system/assets/vendor');
         ?>
-        <?php foreach ($styles as $style): ?>
-            <link href="<?= $style . '?v=' . $coreBuild ?>" rel="stylesheet" fetchpriority="high">
-        <?php endforeach ?>
+        <script type="importmap">
+        {
+            "imports": {
+                "larajax": "<?= Url::asset('modules/system/assets/js/framework.esm.js') ?>",
+                "bootstrap": "<?= $vendorPath ?>/bootstrap/bootstrap.esm.js",
+                "vue": "<?= $vendorPath ?>/vue/vue.esm<?= Config::get('app.debug') ? '' : '.prod' ?>.js"
+            }
+        }
+        </script>
+        <script src="<?= Url::asset('modules/system/assets/js/vendor.js') ?>?v<?= $coreBuild ?>"></script>
+        <script src="<?= Url::asset('modules/system/assets/js/framework-bundle.min.js') ?>?v<?= $coreBuild ?>"></script>
+        <script src="<?= Url::asset('modules/system/assets/js/foundation.js') ?>?v<?= $coreBuild ?>"></script>
+        <script src="<?= Url::asset('modules/system/assets/js/lang/lang.'.App::getLocale().'.js') ?>?v<?= $coreBuild ?>"></script>
+        <script type="module" src="<?= Url::asset('modules/system/assets/js/main.js') ?>?v<?= $coreBuild ?>"></script>
+        <script type="module" src="<?= Url::asset('modules/backend/assets/js/main.js') ?>?v<?= $coreBuild ?>"></script>
+        <script src="<?= Url::asset('modules/backend/assets/js/auth/auth.js') ?>?v<?= $coreBuild ?>"></script>
+        <link href="<?= Url::asset('modules/system/assets/css/main.css') ?>?v<?= $coreBuild ?>" rel="stylesheet" />
+        <link href="<?= Url::asset('modules/backend/assets/css/main.css') ?>?v<?= $coreBuild ?>" rel="stylesheet" />
 
-        <?php foreach ($scripts as $script): ?>
-            <script src="<?= $script . '?v=' . $coreBuild ?>" fetchpriority="high"></script>
-        <?php endforeach ?>
-
-        <?php if (!Config::get('backend.enable_service_workers', false)): ?>
-            <script> unregisterServiceWorkers() </script>
-        <?php endif ?>
+        <?= $this->makeLayoutPartial('service_worker', ['forceUnregister' => true]) ?>
 
         <?= $this->makeAssets() ?>
         <?= Block::placeholder('head') ?>

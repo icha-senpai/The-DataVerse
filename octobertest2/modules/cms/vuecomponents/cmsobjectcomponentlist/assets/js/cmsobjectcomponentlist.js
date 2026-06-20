@@ -1,4 +1,4 @@
-Vue.component('cms-object-component-list', {
+export default {
     props: {
         components: Array
     },
@@ -35,9 +35,9 @@ Vue.component('cms-object-component-list', {
                     continue;
                 }
 
-                var alias = eventData.values.values['oc.alias'];
+                var alias = eventData.values['oc.alias'];
                 if (this.components[index].alias == alias) {
-                    eventData.ev.preventDefault();
+                    eventData.prevented = true;
                     alert('The component alias "' + alias + '" is already used.');
                     return;
                 }
@@ -53,8 +53,7 @@ Vue.component('cms-object-component-list', {
 
         this.expanded = localStorage.getItem(this.storageKey) == '1';
     },
-    beforeDestroy: function beforeDestroy() {
+    beforeUnmount: function beforeUnmount() {
         $(this.$refs.scrollable).dragScroll('dispose');
-    },
-    template: '#cms_vuecomponents_cmsobjectcomponentlist'
-});
+    }
+};

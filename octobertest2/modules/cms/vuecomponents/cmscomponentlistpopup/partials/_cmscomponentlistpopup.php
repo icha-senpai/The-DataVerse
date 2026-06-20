@@ -1,9 +1,9 @@
 <div>
-    <backend-component-modal
+    <backend-modal
         ref="modal"
         unique-key="cms-component-list-popup"
         aria-labeled-by="cms-component-list-popup-title"
-        content-css-class="flex-layout-column"
+        content-css-class="d-flex flex-column"
         :resize-min-height="350"
         :close-by-esc="false"
         :resizable="true"
@@ -26,25 +26,25 @@
                     <small><?= e(trans('cms::lang.editor.component_list_description')) ?></small>
                 </p>
             </div>
-            <div class="flex-layout-item stretch relative cms-component-list-popup-treeview">
+            <div class="flex-fill position-relative cms-component-list-popup-treeview">
                 <div ref="componentDragHostImageContainer" class="cms-component-ghost-image-container">
                     <img
                         ref="componentDragHostImage"
                         src="<?= Url::asset('/modules/cms/assets/images/component-drag-image.svg') ?>" />
                 </div>
-                <backend-component-treeview
+                <backend-treeview
                     aria-label="<?= e(trans('cms::lang.editor.component_list')) ?>"
                     :sections="componentListNodes"
                     :searchable="true"
                     :hide-sections="true"
-                    :container-css-class="'layout-fill-container'"
+                    :container-css-class="'fill-container'"
                     unique-key="cms-component-list-popup-tree"
                     @nonselectablenodeclick="onNodeClick"
                     @customdragstart="onCustomDragStart"
                     ref="treeView"
                 >
-                </backend-component-treeview>
+                </backend-treeview>
             </div>
         </template>
-    </backend-component-modal>
+    </backend-modal>
 </div>

@@ -23,14 +23,24 @@ class PageFinder extends FormWidgetBase
     //
 
     /**
-     * @var bool singleMode only allows items to be selected that resovle to a single URL.
+     * @var bool singleMode only allows items to be selected that resolve to a single URL.
      */
     public $singleMode = false;
 
     /**
-     * @var bool showReference disables link resolution when displaying the selection for performance reasons.
+     * @var bool allowCustomUrl controls whether the free-form URL option appears.
      */
-    public $showReference = false;
+    public $allowCustomUrl = true;
+
+    /**
+     * @var array|null allowedTypes restricts the type dropdown to these types only.
+     */
+    public $allowedTypes = null;
+
+    /**
+     * @var array|null excludedTypes removes these types from the dropdown.
+     */
+    public $excludedTypes = null;
 
     //
     // Object Properties
@@ -58,7 +68,9 @@ class PageFinder extends FormWidgetBase
     {
         $this->fillFromConfig([
             'singleMode',
-            'showReference',
+            'allowCustomUrl',
+            'allowedTypes',
+            'excludedTypes',
         ]);
 
         if ($this->formField->disabled || $this->formField->readOnly) {
@@ -94,6 +106,9 @@ class PageFinder extends FormWidgetBase
         $this->vars['nameValue'] = $this->getNameValue();
         $this->vars['descriptionValue'] = $this->getDescriptionValue();
         $this->vars['singleMode'] = $this->singleMode;
+        $this->vars['allowCustomUrl'] = $this->allowCustomUrl;
+        $this->vars['allowedTypes'] = $this->allowedTypes;
+        $this->vars['excludedTypes'] = $this->excludedTypes;
     }
 
     /**
@@ -127,16 +142,12 @@ class PageFinder extends FormWidgetBase
      */
     public function getNameValue()
     {
-        if ($this->showReference) {
-            return $this->getKeyValue();
-        }
-
-        $reference = $this->getLookupItemValue();
-        if (!$reference) {
+        $item = $this->getLookupItemValue();
+        if (!$item) {
             return '';
         }
 
-        return $reference->title ?: $reference->getTypeLabel();
+        return $item->getReferenceLabel() ?: $item->getTypeLabel();
     }
 
     /**
@@ -144,16 +155,20 @@ class PageFinder extends FormWidgetBase
      */
     public function getDescriptionValue()
     {
-        if ($this->showReference) {
+        $item = $this->getLookupItemValue();
+        if (!$item) {
             return '';
         }
 
-        $linkUrl = $this->getKeyValue();
-        if (str_starts_with($linkUrl, 'october://')) {
-            return Url::makeRelative($this->getLookupItemValue()->url ?? '');
+        if ($item->type === 'url' && $item->url) {
+            return $item->url;
         }
 
-        return $this->getLookupItemValue()->url ?? '';
+        if ($item->cmsPage) {
+            return $item->getCmsPageOptions()[$item->cmsPage] ?? $item->cmsPage;
+        }
+
+        return '';
     }
 
     /**
@@ -165,7 +180,7 @@ class PageFinder extends FormWidgetBase
             return $this->lookupItem;
         }
 
-        return $this->lookupItem = PageLookupItem::resolveFromSchema((string) $this->getKeyValue());
+        return $this->lookupItem = PageLookupItem::fromSchema((string) $this->getKeyValue());
     }
 
     /**

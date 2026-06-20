@@ -9,7 +9,7 @@ if (!window.oc.langMessages) {
     window.oc.langMessages = {};
 }
 
-window.oc.langMessages['hu'] = $.extend(
+window.oc.langMessages['hu'] = Object.assign(
     window.oc.langMessages['hu'] || {},
     {
     "markdowneditor": {
@@ -55,7 +55,8 @@ window.oc.langMessages['hu'] = $.extend(
         "dismiss": "Elutas\u00edt\u00e1s",
         "confirm_button_text": "Igen",
         "cancel_button_text": "M\u00e9gsem",
-        "widget_remove_confirm": "Val\u00f3ban t\u00f6r\u00f6lni akarja?"
+        "widget_remove_confirm": "Val\u00f3ban t\u00f6r\u00f6lni akarja?",
+        "reload": "Reload"
     },
     "datepicker": {
         "previousMonth": "El\u0151z\u0151 h\u00f3nap",
@@ -154,139 +155,137 @@ window.oc.langMessages['hu'] = $.extend(
         "cancel": "Cancel",
         "items": "Items"
     },
-    "dashboard": {
-        "widget_data_source": "Data source",
-        "widget_data_source_required": "Please select a data source",
-        "widget_dimension": "Dimension",
-        "widget_dimension_required": "Please select a dimension",
-        "widget_metric": "Metric",
-        "widget_metric_required": "Please select metric(s).",
-        "widget_metrics": "Metrics",
-        "widget_title": "Title",
-        "widget_title_required": "Please provide the widget title",
-        "widget_title_optional_placeholder": "Leave empty to hide the title",
-        "widget_metric_value": "Value",
-        "widget_icon_status": "Icon Status",
-        "widget_href": "Link URL",
-        "widget_icon": "Icon",
-        "widget_icon_required": "Please select an icon",
-        "widget_link_text": "Link Text",
-        "apply": "Apply",
-        "delete": "Delete",
-        "configure": "Configure",
-        "section_show_interval": "Show Date Interval",
-        "widget_chart_type": "Chart type",
-        "widget_chart_type_bar": "Bar",
-        "widget_chart_type_stacked_bar": "Stacked Bar",
-        "widget_chart_type_line": "Line",
-        "sort_by": "Sort by",
-        "sort_by_required": "Select sorting metric or dimension",
-        "sort_by_placeholder": "Select a dimension and metrics",
-        "sort_order": "Order",
-        "sort_asc": "Ascending",
-        "sort_desc": "Descending",
-        "group_sorting": "Sorting",
-        "value_not_set": "[not set]",
-        "limit": "Limit",
-        "limit_placeholder": "Display all records",
-        "limit_number": "Enter a positive number or leave empty to display all records.",
-        "limit_min": "The limit value must be at least 1",
-        "empty_values": "Empty values",
-        "empty_values_hide": "Hide",
-        "empty_values_display_not_set": "Display [not set]",
-        "empty_values_dimension": "Dimension",
-        "date_interval": "Date interval",
-        "date_interval_dashboard_default": "Dashboard interval",
-        "date_interval_this_week": "This week",
-        "date_interval_this_month": "This month",
-        "date_interval_this_quarter": "This quarter",
-        "date_interval_this_year": "This year",
-        "date_interval_past_hour": "Past hour",
-        "date_interval_past_days": "Past X days",
-        "date_interval_past_days_value": "Number of days",
-        "date_interval_past_days_invalid": "Enter a positive number",
-        "prop_date_interval": "Display",
-        "date_interval_past_days_placeholder": "1 day (today) if not set",
-        "widget_bar_direction": "Direction",
-        "widget_bar_direction_vertical": "Vertical",
-        "widget_bar_direction_horizontal": "Horizontal",
-        "prop_color": "Color",
-        "color_required": "Select the metric color",
-        "tab_general": "General",
-        "tab_sorting_filtering": "Sorting & Filtering",
-        "prop_records_per_page": "Records per page",
-        "records_per_page_placeholder": "Leave empty to disable pagination",
-        "records_per_page_invalid": "Enter a positive number or leave empty to display all records.",
-        "prop_display_totals": "Display totals",
-        "prop_display_relative_bar": "Display relative bars",
-        "prop_extra_table_fields": "Extra table fields",
-        "filter_operation_equal_to": "Equal to",
-        "filter_operation_greater_equal": "Greater or equal to",
-        "filter_operation_less_equal": "Less or equal to",
-        "filter_operation_greater": "Greater than",
-        "filter_operation_less": "Less than",
-        "filter_operation_starts_with": "Starts with",
-        "filter_operation_includes": "Includes",
-        "filter_operation_one_of": "One of",
-        "prop_operation": "Operation",
-        "prop_value": "Value",
-        "prop_values": "Values",
-        "prop_values_one_per_line": "One value per line",
-        "prop_filter_attribute": "Attribute",
-        "filter_select_attribute": "Select an attribute",
-        "filter_select_operation": "Select an operation",
-        "prop_filters": "Filters",
-        "icon_status_info": "Information",
-        "icon_status_important": "Important",
-        "icon_status_success": "Success",
-        "icon_status_warning": "Warning",
-        "icon_status_disabled": "Disabled",
-        "range_today": "Today",
-        "range_yesterday": "Yesterday",
-        "range_last_7_days": "Last 7 days",
-        "range_last_30_days": "Last 30 days",
-        "range_this_month": "This month",
-        "range_last_month": "Last month",
-        "range_this_quarter": "This quarter",
-        "range_this_year": "This year",
-        "range_this_week": "This week",
-        "interval_day": "Day",
-        "interval_week": "Week",
-        "interval_month": "Month",
-        "interval_quarter": "Quarter",
-        "interval_year": "Year",
-        "compare_totals": "Compare Totals",
-        "compare_prev_period": "Prev period",
-        "compare_prev_year": "Same period last year",
-        "compare_none": "Disabled",
-        "updated_successfully": "The dashboard was successfully updated.",
-        "edit_dashboard": "Edit Dashboard",
-        "make_default": "Make Default",
-        "make_default_confirm": "Set the current layout as the default?",
-        "make_default_successfully": "This dashboard is now the default layout.",
-        "reset_layout": "Reset Layout",
-        "reset_layout_confirm": "Reset layout back to default?",
-        "reset_layout_successfully": "The dashboard layout has been reset to default.",
-        "manage_dashboards": "Manage Dashboards",
-        "import_success": "The dashboard was successfully imported",
-        "new_dashboard": "New Dashboard",
-        "import_dashboard": "Import Dashboard",
-        "delete_confirm": "Delete the dashboard? This action cannot be reversed. All users with access will be affected.",
-        "delete_success": "The dashboard was successfully deleted.",
-        "menu_item_custom": "Custom",
-        "menu_item_delete_row": "Delete row",
-        "widget_type_indicator": "Indicator",
-        "widget_type_section_title": "Section Title",
-        "widget_type_notice": "Text Notice",
-        "widget_type_chart": "Chart",
-        "widget_type_table": "Table",
-        "notice_text": "Notice text"
-    }
+    "[not set]": "[nincs be\u00e1ll\u00edtva]",
+    "1 day (today) if not set": "1 nap (ma), ha nincs be\u00e1ll\u00edtva",
+    "Apply": "Jelentkez\u00e9s",
+    "Ascending": "N\u00f6vekv\u0151",
+    "Attribute": "Attrib\u00fatum",
+    "Bar": "B\u00e1r",
+    "Cancel": "M\u00e9gse",
+    "Chart": "Diagram",
+    "Chart type": "Diagram t\u00edpusa",
+    "Color": "Sz\u00edn",
+    "Compare Totals": "\u00d6sszes\u00edt\u00e9sek \u00f6sszehasonl\u00edt\u00e1sa",
+    "Configure": "Konfigur\u00e1l\u00e1s",
+    "Custom": "Szok\u00e1s",
+    "Custom Range": "Egy\u00e9ni tartom\u00e1ny",
+    "Dashboard interval": "M\u0171szerfal intervallum",
+    "Data source": "Adatforr\u00e1s",
+    "Date interval": "D\u00e1tumintervallum",
+    "Day": "Nap",
+    "Delete": "T\u00f6r\u00f6l",
+    "Delete Dashboard": "Ir\u00e1ny\u00edt\u00f3pult t\u00f6rl\u00e9se",
+    "Delete row": "Sor t\u00f6rl\u00e9se",
+    "Descending": "Cs\u00f6kken\u0151",
+    "Dimension": "Dimenzi\u00f3",
+    "Direction": "Ir\u00e1ny",
+    "Disabled": "Mozg\u00e1skorl\u00e1tozott",
+    "Display": "Kijelz\u0151",
+    "Display [not set]": "Kijelz\u0151 [nincs be\u00e1ll\u00edtva]",
+    "Display all records": "Az \u00f6sszes rekord megjelen\u00edt\u00e9se",
+    "Display relative bars": "Relat\u00edv s\u00e1vok megjelen\u00edt\u00e9se",
+    "Display totals": "\u00d6sszes\u00edt\u00e9sek megjelen\u00edt\u00e9se",
+    "Edit Dashboard": "Ir\u00e1ny\u00edt\u00f3pult szerkeszt\u00e9se",
+    "Empty values": "\u00dcres \u00e9rt\u00e9kek",
+    "Enter a positive number": "Adjon meg egy pozit\u00edv sz\u00e1mot",
+    "Enter a positive number or leave empty to display all records.": "Adjon meg egy pozit\u00edv sz\u00e1mot, vagy hagyja \u00fcresen az \u00f6sszes rekord megjelen\u00edt\u00e9s\u00e9hez.",
+    "Equal to": "Egyenl\u0151",
+    "Export Dashboard": "Export\u00e1l\u00e1si ir\u00e1ny\u00edt\u00f3pult",
+    "Extra table fields": "Extra t\u00e1blamez\u0151k",
+    "Filters": "Sz\u0171r\u0151k",
+    "General": "\u00c1ltal\u00e1nos",
+    "Greater or equal to": "Nagyobb vagy egyenl\u0151",
+    "Greater than": "Nagyobb, mint",
+    "Hide": "Elrejt",
+    "Horizontal": "V\u00edzszintes",
+    "Icon": "Ikon",
+    "Icon Status": "Ikon \u00c1llapot",
+    "Important": "Fontos",
+    "Includes": "Tartalmazza",
+    "Indicator": "Indik\u00e1tor",
+    "Information": "Inform\u00e1ci\u00f3",
+    "Last 30 days": "Utols\u00f3 30 nap",
+    "Last 7 days": "Utols\u00f3 7 nap",
+    "Last month": "M\u00falt h\u00f3nap",
+    "Leave empty to disable pagination": "Hagyja \u00fcresen a lapoz\u00e1s letilt\u00e1s\u00e1hoz",
+    "Leave empty to hide the title": "Hagyja \u00fcresen a c\u00edm elrejt\u00e9s\u00e9hez",
+    "Less or equal to": "Kisebb vagy egyenl\u0151",
+    "Less than": "Kevesebb, mint",
+    "Limit": "Hat\u00e1r",
+    "Line": "Vonal",
+    "Link Text": "Hivatkoz\u00e1s sz\u00f6vege",
+    "Link URL": "Link URL-c\u00edme",
+    "Make Default": "Alap\u00e9rtelmezett\u00e9 t\u00e9tel",
+    "Manage Dashboards": "Ir\u00e1ny\u00edt\u00f3pultok kezel\u00e9se",
+    "Metric": "Metrika",
+    "Metrics": "Metrik\u00e1k",
+    "Month": "H\u00f3nap",
+    "My Custom Widget": "Saj\u00e1t widget",
+    "No Value": "Nincs \u00e9rt\u00e9k",
+    "Notice text": "K\u00f6zlem\u00e9ny sz\u00f6vege",
+    "Number of days": "Napok sz\u00e1ma",
+    "One of": "Az egyik",
+    "One value per line": "Egy \u00e9rt\u00e9k soronk\u00e9nt",
+    "Operation": "M\u0171velet",
+    "Order": "Rendel\u00e9s",
+    "Past hour": "M\u00falt \u00f3ra",
+    "Past X days": "Az elm\u00falt X napban",
+    "Please provide the widget title": "K\u00e9rj\u00fck, adja meg a widget c\u00edm\u00e9t",
+    "Please select a data source": "K\u00e9rj\u00fck, v\u00e1lasszon ki egy adatforr\u00e1st",
+    "Please select a dimension": "K\u00e9rj\u00fck, v\u00e1lasszon egy dimenzi\u00f3t",
+    "Please select an icon": "V\u00e1lasszon egy ikont",
+    "Please select metric(s).": "K\u00e9rj\u00fck, v\u00e1lasszon mutat\u00f3(ka)t.",
+    "Prev period": "El\u0151z\u0151 id\u0151szak",
+    "Quarter": "Negyed",
+    "Records per page": "Rekordok oldalonk\u00e9nt",
+    "Refresh every minute": "Friss\u00edt\u00e9s percenk\u00e9nt",
+    "Rename Dashboard": "Ir\u00e1ny\u00edt\u00f3pult \u00e1tnevez\u00e9se",
+    "Reset Layout": "Elrendez\u00e9s vissza\u00e1ll\u00edt\u00e1sa",
+    "Reset layout back to default?": "Vissza\u00e1ll\u00edtja az elrendez\u00e9st az alap\u00e9rtelmezettre?",
+    "Same period last year": "Tavaly \u00e9v azonos id\u0151szak\u00e1ban",
+    "Section": "Szakasz",
+    "Section Title": "Szakasz c\u00edme",
+    "Select a dimension and metrics": "V\u00e1lasszon ki egy dimenzi\u00f3t \u00e9s mutat\u00f3kat",
+    "Select an attribute": "V\u00e1lasszon ki egy attrib\u00fatumot",
+    "Select an operation": "V\u00e1lasszon ki egy m\u0171veletet",
+    "Select sorting metric or dimension": "Rendez\u00e9si mutat\u00f3 vagy dimenzi\u00f3 kiv\u00e1laszt\u00e1sa",
+    "Select the metric color": "V\u00e1lassza ki a metrikus sz\u00ednt",
+    "Set the current layout as the default?": "Be\u00e1ll\u00edtja az aktu\u00e1lis elrendez\u00e9st alap\u00e9rtelmezettk\u00e9nt?",
+    "Show Date Interval": "D\u00e1tumintervallum megjelen\u00edt\u00e9se",
+    "Sort by": "Rendez\u00e9s",
+    "Sorting": "Oszt\u00e1lyoz\u00e1s",
+    "Sorting & Filtering": "Rendez\u00e9s \u00e9s sz\u0171r\u00e9s",
+    "Stacked Bar": "Halmozott s\u00e1v",
+    "Starts with": "Kezd\u0151dik ezzel",
+    "Success": "Siker",
+    "Table": "T\u00e1bl\u00e1zat",
+    "Text Notice": "Sz\u00f6veges \u00e9rtes\u00edt\u00e9s",
+    "The dashboard layout has been reset to default.": "A m\u0171szerfal elrendez\u00e9se vissza\u00e1llt az alap\u00e9rtelmezettre.",
+    "The dashboard was successfully updated.": "A m\u0171szerfal friss\u00edt\u00e9se sikeresen megt\u00f6rt\u00e9nt.",
+    "The limit value must be at least 1": "A hat\u00e1r\u00e9rt\u00e9knek legal\u00e1bb 1-nek kell lennie",
+    "This dashboard is now the default layout.": "Ez az ir\u00e1ny\u00edt\u00f3pult mostant\u00f3l az alap\u00e9rtelmezett elrendez\u00e9s.",
+    "This is a text notice widget.": "Ez egy sz\u00f6veges \u00e9rtes\u00edt\u00e9si widget.",
+    "This month": "Ebben a h\u00f3napban",
+    "This quarter": "Ebben a negyed\u00e9vben",
+    "This week": "Ezen a h\u00e9ten",
+    "This year": "Id\u00e9n",
+    "Title": "C\u00edm",
+    "Today": "Ma",
+    "Value": "\u00c9rt\u00e9k",
+    "Values": "\u00c9rt\u00e9kek",
+    "Vertical": "F\u00fcgg\u0151leges",
+    "Warning": "Figyelmeztet\u00e9s",
+    "Week": "H\u00e9t",
+    "Year": "\u00c9v",
+    "Yesterday": "Tegnap"
 }
 );
 
 
-//! moment.js locale configuration v2.22.2
+//! moment.js locale configuration
+//! locale : Hungarian [hu]
+//! author : Adam Brunner : https://github.com/adambrunner
+//! author : Peter Viszt  : https://github.com/passatgt
 
 ;(function (global, factory) {
    typeof exports === 'object' && typeof module !== 'undefined'
@@ -295,15 +294,21 @@ window.oc.langMessages['hu'] = $.extend(
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
 
+    //! moment.js locale configuration
 
-    var weekEndings = 'vasárnap hétfőn kedden szerdán csütörtökön pénteken szombaton'.split(' ');
+    var weekEndings =
+        'vasárnap hétfőn kedden szerdán csütörtökön pénteken szombaton'.split(' ');
     function translate(number, withoutSuffix, key, isFuture) {
         var num = number;
         switch (key) {
             case 's':
-                return (isFuture || withoutSuffix) ? 'néhány másodperc' : 'néhány másodperce';
+                return isFuture || withoutSuffix
+                    ? 'néhány másodperc'
+                    : 'néhány másodperce';
             case 'ss':
-                return num + (isFuture || withoutSuffix) ? ' másodperc' : ' másodperce';
+                return num + (isFuture || withoutSuffix)
+                    ? ' másodperc'
+                    : ' másodperce';
             case 'm':
                 return 'egy' + (isFuture || withoutSuffix ? ' perc' : ' perce');
             case 'mm':
@@ -328,68 +333,79 @@ window.oc.langMessages['hu'] = $.extend(
         return '';
     }
     function week(isFuture) {
-        return (isFuture ? '' : '[múlt] ') + '[' + weekEndings[this.day()] + '] LT[-kor]';
+        return (
+            (isFuture ? '' : '[múlt] ') +
+            '[' +
+            weekEndings[this.day()] +
+            '] LT[-kor]'
+        );
     }
 
     var hu = moment.defineLocale('hu', {
-        months : 'január_február_március_április_május_június_július_augusztus_szeptember_október_november_december'.split('_'),
-        monthsShort : 'jan_feb_márc_ápr_máj_jún_júl_aug_szept_okt_nov_dec'.split('_'),
-        weekdays : 'vasárnap_hétfő_kedd_szerda_csütörtök_péntek_szombat'.split('_'),
-        weekdaysShort : 'vas_hét_kedd_sze_csüt_pén_szo'.split('_'),
-        weekdaysMin : 'v_h_k_sze_cs_p_szo'.split('_'),
-        longDateFormat : {
-            LT : 'H:mm',
-            LTS : 'H:mm:ss',
-            L : 'YYYY.MM.DD.',
-            LL : 'YYYY. MMMM D.',
-            LLL : 'YYYY. MMMM D. H:mm',
-            LLLL : 'YYYY. MMMM D., dddd H:mm'
+        months: 'január_február_március_április_május_június_július_augusztus_szeptember_október_november_december'.split(
+            '_'
+        ),
+        monthsShort:
+            'jan._feb._márc._ápr._máj._jún._júl._aug._szept._okt._nov._dec.'.split(
+                '_'
+            ),
+        monthsParseExact: true,
+        weekdays: 'vasárnap_hétfő_kedd_szerda_csütörtök_péntek_szombat'.split('_'),
+        weekdaysShort: 'vas_hét_kedd_sze_csüt_pén_szo'.split('_'),
+        weekdaysMin: 'v_h_k_sze_cs_p_szo'.split('_'),
+        longDateFormat: {
+            LT: 'H:mm',
+            LTS: 'H:mm:ss',
+            L: 'YYYY.MM.DD.',
+            LL: 'YYYY. MMMM D.',
+            LLL: 'YYYY. MMMM D. H:mm',
+            LLLL: 'YYYY. MMMM D., dddd H:mm',
         },
         meridiemParse: /de|du/i,
         isPM: function (input) {
             return input.charAt(1).toLowerCase() === 'u';
         },
-        meridiem : function (hours, minutes, isLower) {
+        meridiem: function (hours, minutes, isLower) {
             if (hours < 12) {
                 return isLower === true ? 'de' : 'DE';
             } else {
                 return isLower === true ? 'du' : 'DU';
             }
         },
-        calendar : {
-            sameDay : '[ma] LT[-kor]',
-            nextDay : '[holnap] LT[-kor]',
-            nextWeek : function () {
+        calendar: {
+            sameDay: '[ma] LT[-kor]',
+            nextDay: '[holnap] LT[-kor]',
+            nextWeek: function () {
                 return week.call(this, true);
             },
-            lastDay : '[tegnap] LT[-kor]',
-            lastWeek : function () {
+            lastDay: '[tegnap] LT[-kor]',
+            lastWeek: function () {
                 return week.call(this, false);
             },
-            sameElse : 'L'
+            sameElse: 'L',
         },
-        relativeTime : {
-            future : '%s múlva',
-            past : '%s',
-            s : translate,
-            ss : translate,
-            m : translate,
-            mm : translate,
-            h : translate,
-            hh : translate,
-            d : translate,
-            dd : translate,
-            M : translate,
-            MM : translate,
-            y : translate,
-            yy : translate
+        relativeTime: {
+            future: '%s múlva',
+            past: '%s',
+            s: translate,
+            ss: translate,
+            m: translate,
+            mm: translate,
+            h: translate,
+            hh: translate,
+            d: translate,
+            dd: translate,
+            M: translate,
+            MM: translate,
+            y: translate,
+            yy: translate,
         },
         dayOfMonthOrdinalParse: /\d{1,2}\./,
-        ordinal : '%d.',
-        week : {
-            dow : 1, // Monday is the first day of the week.
-            doy : 4  // The week that contains Jan 4th is the first week of the year.
-        }
+        ordinal: '%d.',
+        week: {
+            dow: 1, // Monday is the first day of the week.
+            doy: 4, // The week that contains Jan 4th is the first week of the year.
+        },
     });
 
     return hu;

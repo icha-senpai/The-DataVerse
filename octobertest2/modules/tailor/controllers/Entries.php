@@ -131,11 +131,11 @@ class Entries extends WildcardController
         }
 
         if ($this->actionMethod) {
-            $this->addJs('/modules/tailor/assets/js/vue-entry-header-controls.js');
-            $this->addJs('/modules/tailor/assets/js/vue-entry-document.js');
-            $this->addJs('/modules/tailor/assets/js/preview-tracker.js');
+            $this->bodyClass = $this->getDesignBodyClass();
 
-            $this->registerVueComponent(\Backend\VueComponents\Document::class);
+            $this->addJs('/modules/tailor/assets/js/vue-entry-header-controls.js', ['type' => 'module']);
+            $this->addJs('/modules/tailor/assets/js/vue-entry-document.js', ['type' => 'module']);
+
             $this->registerVueComponent(\Backend\VueComponents\DropdownMenuButton::class);
             $this->registerVueComponent(\Tailor\VueComponents\PublishingControls::class);
             $this->registerVueComponent(\Tailor\VueComponents\PublishButton::class);
@@ -225,8 +225,6 @@ class Entries extends WildcardController
             return $this->asExtension('DraftController')->create();
         }
 
-        $this->bodyClass = 'compact-container';
-
         $this->setPageTitleFromMessage('titleCreateForm', "Create Entry");
 
         $this->asExtension('FormController')->create();
@@ -241,8 +239,6 @@ class Entries extends WildcardController
      */
     public function update($recordId = null)
     {
-        $this->bodyClass = 'compact-container';
-
         $this->setPageTitleFromMessage('titleUpdateForm', "Update Entry");
 
         if ($this->isVersionMode()) {
@@ -499,6 +495,8 @@ class Entries extends WildcardController
         }
 
         $this->formGetWidget()->setFormValues();
+        $this->prepareVars();
+
         return ['#entryPrimaryTabs' => $this->makePartial('primary_tabs')];
     }
 
@@ -561,18 +559,37 @@ class Entries extends WildcardController
         $model = $widget->getModel();
 
         // Entry type switching
-        if ($model instanceof \Tailor\Classes\BlueprintModel && ($entryType = post('EntryRecord[content_group]'))) {
-            $model->setBlueprintGroup($entryType);
+        if ($model instanceof \Tailor\Classes\BlueprintModel) {
+            if ($entryType = post('_content_group_switch')) {
+                $model->setBlueprintGroup($entryType);
+            }
+            elseif (!$model->exists) {
+                $model->setDefaultContentGroup();
+            }
         }
 
         // Disable adaptive fields
         $widget->bindEvent('form.extendFields', function ($fields) {
             foreach ($fields as $field) {
                 if ($field->span === 'adaptive') {
-                    $field->span('full')->externalToolbarAppState(null);
+                    $field->span('full')->externalToolbarBus(null);
                 }
             }
         });
+    }
+
+    /**
+     * relationBeforeSave
+     */
+    public function relationBeforeSave($field, $model)
+    {
+        // Entry type switching
+        if (
+            $model instanceof \Tailor\Classes\BlueprintModel &&
+            ($entryType = post('_content_group_value'))
+        ) {
+            $model->setBlueprintGroup($entryType);
+        }
     }
 
     /**
@@ -657,6 +674,11 @@ class Entries extends WildcardController
      */
     public function formBeforeSave($model)
     {
+        // Entry type switching
+        if ($entryType = post('_content_group_value')) {
+            $model->setBlueprintGroup($entryType);
+        }
+
         if ($this->isSectionVersionable()) {
             $this->asExtension('VersionController')->versionBeforeSave($model);
         }
@@ -752,7 +774,7 @@ class Entries extends WildcardController
     public function formExtendModel($model)
     {
         // Entry type switching
-        if ($entryType = post('EntryRecord[content_group]')) {
+        if ($entryType = post('_content_group_switch')) {
             $model->setBlueprintGroup($entryType);
         }
     }

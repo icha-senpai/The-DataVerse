@@ -289,5 +289,18 @@
   "Issues found": "Issues found",
   "No issues": "No issues",
   "SMTP Timeout": "SMTP Timeout",
-  "Connection timeout in seconds (default: 30)": "Connection timeout in seconds (default: 30)"
+  "Connection timeout in seconds (default: 30)": "Connection timeout in seconds (default: 30)",
+  "Clear Cache": "Clear Cache",
+  "Are you sure you want to clear the application cache?": "Are you sure you want to clear the application cache?",
+  "Edit Composer": "Edit Composer",
+  "Composer file updated successfully.": "Composer file updated successfully.",
+  "Invalid JSON: :error": "Invalid JSON: :error",
+  "Cache cleared successfully.": "Cache cleared successfully.",
+  "Migrate Database": "Migrate Database",
+  "Are you sure you want to run all pending migrations?": "Are you sure you want to run all pending migrations?",
+  "Database migrated successfully.": "Database migrated successfully.",
+  "Open Link": "Open Link",
+  "Path": "Path",
+  "Copy Path": "Copy Path",
+  "Copied!": "Copied!"
 }

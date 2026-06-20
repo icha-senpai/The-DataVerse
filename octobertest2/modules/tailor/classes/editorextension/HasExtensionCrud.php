@@ -11,6 +11,7 @@ use Tailor\Classes\Blueprint;
 use Tailor\Classes\ThemeBlueprint;
 use Editor\Classes\ApiHelpers;
 use Tailor\Classes\BlueprintIndexer;
+use Tailor\Classes\BlueprintVerifier;
 use Tailor\Classes\BlueprintException;
 use Tailor\Classes\BlueprintErrorData;
 
@@ -90,7 +91,15 @@ trait HasExtensionCrud
             return BlueprintErrorData::fromException($ex)->toResponse();
         }
 
-        return $this->getUpdateResponse($template, $originalContent);
+        $result = $this->getUpdateResponse($template, $originalContent);
+
+        // Attach any blueprint warnings (e.g. duplicate handles) to the response
+        $warnings = BlueprintVerifier::instance()->getWarnings();
+        if ($warnings) {
+            $result['blueprintWarnings'] = $warnings;
+        }
+
+        return $result;
     }
 
     /**
@@ -127,6 +136,8 @@ trait HasExtensionCrud
      */
     protected function command_onBlueprintCreateDirectory()
     {
+        $this->assertBlueprintPermissions();
+
         $documentData = $this->getRequestDocumentData();
         // $metadata = $this->getRequestMetadata();
 
@@ -141,6 +152,8 @@ trait HasExtensionCrud
      */
     protected function command_onBlueprintRename()
     {
+        $this->assertBlueprintPermissions();
+
         $documentData = $this->getRequestDocumentData();
 
         $newName = trim(ApiHelpers::assertGetKey($documentData, 'name'));
@@ -155,6 +168,8 @@ trait HasExtensionCrud
      */
     protected function command_onBlueprintDelete()
     {
+        $this->assertBlueprintPermissions();
+
         $documentData = $this->getRequestDocumentData();
         $fileList = ApiHelpers::assertGetKey($documentData, 'files');
         ApiHelpers::assertIsArray($fileList);
@@ -167,6 +182,8 @@ trait HasExtensionCrud
      */
     protected function command_onBlueprintMove()
     {
+        $this->assertBlueprintPermissions();
+
         $documentData = $this->getRequestDocumentData();
 
         $selectedList = ApiHelpers::assertGetKey($documentData, 'source');
@@ -179,6 +196,8 @@ trait HasExtensionCrud
      */
     protected function command_onBlueprintUpload()
     {
+        $this->assertBlueprintPermissions();
+
         $this->editorUploadFiles($this->getBlueprintsPath(), ['yaml']);
     }
 
@@ -426,6 +445,21 @@ trait HasExtensionCrud
                 ['doctype' => $documentType]
             ));
         }
+    }
+
+    /**
+     * assertBlueprintPermissions checks permissions for blueprint file operations,
+     * resolving the document type from the request.
+     */
+    private function assertBlueprintPermissions()
+    {
+        $type = post('documentType', post('documentMetadata[documentType]'));
+
+        if (!$type) {
+            $type = EditorExtension::DOCUMENT_TYPE_BLUEPRINT;
+        }
+
+        $this->assertDocumentTypePermissions($type);
     }
 
     /**

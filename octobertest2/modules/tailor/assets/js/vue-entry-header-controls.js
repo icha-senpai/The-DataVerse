@@ -1,4 +1,7 @@
-oc.registerControl('vue-entry-header-controls', class extends oc.VueControlBase {
+import { VueControlBase } from '../../../backend/assets/js/vueapp/vue-control-base.js';
+import { modalUtils } from '../../../backend/vuecomponents/modal/assets/js/classes/index.js';
+
+class VueEntryHeaderControls extends VueControlBase {
     init() {
         this.registerState({
             publishingStateChanged: false,
@@ -56,9 +59,7 @@ oc.registerControl('vue-entry-header-controls', class extends oc.VueControlBase 
         try {
             await oc.request(targetElement, 'onChangeEntryType', {
                 data: {
-                    EntryRecord: {
-                        content_group: entryType
-                    }
+                    _content_group_switch: entryType
                 }
             });
 
@@ -66,7 +67,7 @@ oc.registerControl('vue-entry-header-controls', class extends oc.VueControlBase 
             this.makeEntryTypeOptions();
         }
         catch (response) {
-            oc.vueComponentHelpers.modalUtils.showAlert(oc.lang.get('form_error'), response.responseText);
+            modalUtils.showAlert(oc.lang.get('form_error'), response.responseText);
         }
 
         this.state.toolbarDisabled = false;
@@ -98,4 +99,9 @@ oc.registerControl('vue-entry-header-controls', class extends oc.VueControlBase 
     onPublishingStateChanged(changed) {
         this.state.publishingStateChanged = changed;
     }
-});
+}
+
+oc.registerControl('vue-entry-header-controls', VueEntryHeaderControls);
+
+export { VueEntryHeaderControls };
+export default VueEntryHeaderControls;

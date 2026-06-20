@@ -9,7 +9,7 @@ if (!window.oc.langMessages) {
     window.oc.langMessages = {};
 }
 
-window.oc.langMessages['el'] = $.extend(
+window.oc.langMessages['el'] = Object.assign(
     window.oc.langMessages['el'] || {},
     {
     "markdowneditor": {
@@ -55,7 +55,8 @@ window.oc.langMessages['el'] = $.extend(
         "dismiss": "Dismiss",
         "confirm_button_text": "\u0395\u03bd\u03c4\u03ac\u03be\u03b5\u03b9",
         "cancel_button_text": "\u0386\u03ba\u03c5\u03c1\u03bf",
-        "widget_remove_confirm": "Remove this widget?"
+        "widget_remove_confirm": "Remove this widget?",
+        "reload": "Reload"
     },
     "datepicker": {
         "previousMonth": "\u03a0\u03c1\u03bf\u03b7\u03b3\u03bf\u03cd\u03bc\u03b5\u03bd\u03bf\u03c2 \u039c\u03ae\u03bd\u03b1\u03c2",
@@ -152,139 +153,136 @@ window.oc.langMessages['el'] = $.extend(
         "cancel": "Cancel",
         "items": "Items"
     },
-    "dashboard": {
-        "widget_data_source": "Data source",
-        "widget_data_source_required": "Please select a data source",
-        "widget_dimension": "Dimension",
-        "widget_dimension_required": "Please select a dimension",
-        "widget_metric": "Metric",
-        "widget_metric_required": "Please select metric(s).",
-        "widget_metrics": "Metrics",
-        "widget_title": "Title",
-        "widget_title_required": "Please provide the widget title",
-        "widget_title_optional_placeholder": "Leave empty to hide the title",
-        "widget_metric_value": "Value",
-        "widget_icon_status": "Icon Status",
-        "widget_href": "Link URL",
-        "widget_icon": "Icon",
-        "widget_icon_required": "Please select an icon",
-        "widget_link_text": "Link Text",
-        "apply": "Apply",
-        "delete": "Delete",
-        "configure": "Configure",
-        "section_show_interval": "Show Date Interval",
-        "widget_chart_type": "Chart type",
-        "widget_chart_type_bar": "Bar",
-        "widget_chart_type_stacked_bar": "Stacked Bar",
-        "widget_chart_type_line": "Line",
-        "sort_by": "Sort by",
-        "sort_by_required": "Select sorting metric or dimension",
-        "sort_by_placeholder": "Select a dimension and metrics",
-        "sort_order": "Order",
-        "sort_asc": "Ascending",
-        "sort_desc": "Descending",
-        "group_sorting": "Sorting",
-        "value_not_set": "[not set]",
-        "limit": "Limit",
-        "limit_placeholder": "Display all records",
-        "limit_number": "Enter a positive number or leave empty to display all records.",
-        "limit_min": "The limit value must be at least 1",
-        "empty_values": "Empty values",
-        "empty_values_hide": "Hide",
-        "empty_values_display_not_set": "Display [not set]",
-        "empty_values_dimension": "Dimension",
-        "date_interval": "Date interval",
-        "date_interval_dashboard_default": "Dashboard interval",
-        "date_interval_this_week": "This week",
-        "date_interval_this_month": "This month",
-        "date_interval_this_quarter": "This quarter",
-        "date_interval_this_year": "This year",
-        "date_interval_past_hour": "Past hour",
-        "date_interval_past_days": "Past X days",
-        "date_interval_past_days_value": "Number of days",
-        "date_interval_past_days_invalid": "Enter a positive number",
-        "prop_date_interval": "Display",
-        "date_interval_past_days_placeholder": "1 day (today) if not set",
-        "widget_bar_direction": "Direction",
-        "widget_bar_direction_vertical": "Vertical",
-        "widget_bar_direction_horizontal": "Horizontal",
-        "prop_color": "Color",
-        "color_required": "Select the metric color",
-        "tab_general": "General",
-        "tab_sorting_filtering": "Sorting & Filtering",
-        "prop_records_per_page": "Records per page",
-        "records_per_page_placeholder": "Leave empty to disable pagination",
-        "records_per_page_invalid": "Enter a positive number or leave empty to display all records.",
-        "prop_display_totals": "Display totals",
-        "prop_display_relative_bar": "Display relative bars",
-        "prop_extra_table_fields": "Extra table fields",
-        "filter_operation_equal_to": "Equal to",
-        "filter_operation_greater_equal": "Greater or equal to",
-        "filter_operation_less_equal": "Less or equal to",
-        "filter_operation_greater": "Greater than",
-        "filter_operation_less": "Less than",
-        "filter_operation_starts_with": "Starts with",
-        "filter_operation_includes": "Includes",
-        "filter_operation_one_of": "One of",
-        "prop_operation": "Operation",
-        "prop_value": "Value",
-        "prop_values": "Values",
-        "prop_values_one_per_line": "One value per line",
-        "prop_filter_attribute": "Attribute",
-        "filter_select_attribute": "Select an attribute",
-        "filter_select_operation": "Select an operation",
-        "prop_filters": "Filters",
-        "icon_status_info": "Information",
-        "icon_status_important": "Important",
-        "icon_status_success": "Success",
-        "icon_status_warning": "Warning",
-        "icon_status_disabled": "Disabled",
-        "range_today": "Today",
-        "range_yesterday": "Yesterday",
-        "range_last_7_days": "Last 7 days",
-        "range_last_30_days": "Last 30 days",
-        "range_this_month": "This month",
-        "range_last_month": "Last month",
-        "range_this_quarter": "This quarter",
-        "range_this_year": "This year",
-        "range_this_week": "This week",
-        "interval_day": "Day",
-        "interval_week": "Week",
-        "interval_month": "Month",
-        "interval_quarter": "Quarter",
-        "interval_year": "Year",
-        "compare_totals": "Compare Totals",
-        "compare_prev_period": "Prev period",
-        "compare_prev_year": "Same period last year",
-        "compare_none": "Disabled",
-        "updated_successfully": "The dashboard was successfully updated.",
-        "edit_dashboard": "Edit Dashboard",
-        "make_default": "Make Default",
-        "make_default_confirm": "Set the current layout as the default?",
-        "make_default_successfully": "This dashboard is now the default layout.",
-        "reset_layout": "Reset Layout",
-        "reset_layout_confirm": "Reset layout back to default?",
-        "reset_layout_successfully": "The dashboard layout has been reset to default.",
-        "manage_dashboards": "Manage Dashboards",
-        "import_success": "The dashboard was successfully imported",
-        "new_dashboard": "New Dashboard",
-        "import_dashboard": "Import Dashboard",
-        "delete_confirm": "Delete the dashboard? This action cannot be reversed. All users with access will be affected.",
-        "delete_success": "The dashboard was successfully deleted.",
-        "menu_item_custom": "Custom",
-        "menu_item_delete_row": "Delete row",
-        "widget_type_indicator": "Indicator",
-        "widget_type_section_title": "Section Title",
-        "widget_type_notice": "Text Notice",
-        "widget_type_chart": "Chart",
-        "widget_type_table": "Table",
-        "notice_text": "Notice text"
-    }
+    "[not set]": "[\u03b4\u03b5\u03bd \u03ad\u03c7\u03b5\u03b9 \u03bf\u03c1\u03b9\u03c3\u03c4\u03b5\u03af]",
+    "1 day (today) if not set": "1 \u03b7\u03bc\u03ad\u03c1\u03b1 (\u03c3\u03ae\u03bc\u03b5\u03c1\u03b1) \u03b5\u03ac\u03bd \u03b4\u03b5\u03bd \u03ad\u03c7\u03b5\u03b9 \u03bf\u03c1\u03b9\u03c3\u03c4\u03b5\u03af",
+    "Apply": "\u0395\u03c6\u03b1\u03c1\u03bc\u03cc\u03b6\u03c9",
+    "Ascending": "\u0391\u03cd\u03be\u03bf\u03c5\u03c3\u03b1",
+    "Attribute": "\u0399\u03b4\u03b9\u03cc\u03c4\u03b7\u03c2",
+    "Bar": "\u039c\u03c0\u03b1\u03c1",
+    "Cancel": "\u0391\u03ba\u03cd\u03c1\u03c9\u03c3\u03b7",
+    "Chart": "\u0394\u03b9\u03ac\u03b3\u03c1\u03b1\u03bc\u03bc\u03b1",
+    "Chart type": "\u03a4\u03cd\u03c0\u03bf\u03c2 \u03b3\u03c1\u03b1\u03c6\u03ae\u03bc\u03b1\u03c4\u03bf\u03c2",
+    "Color": "\u03a7\u03c1\u03ce\u03bc\u03b1",
+    "Compare Totals": "\u03a3\u03cd\u03b3\u03ba\u03c1\u03b9\u03c3\u03b7 \u03a3\u03c5\u03bd\u03cc\u03bb\u03c9\u03bd",
+    "Configure": "\u03a1\u03cd\u03b8\u03bc\u03b9\u03c3\u03b7 \u03c0\u03b1\u03c1\u03b1\u03bc\u03ad\u03c4\u03c1\u03c9\u03bd",
+    "Custom": "\u0395\u03b8\u03b9\u03bc\u03bf",
+    "Custom Range": "\u03a0\u03c1\u03bf\u03c3\u03b1\u03c1\u03bc\u03bf\u03c3\u03bc\u03ad\u03bd\u03bf \u03b5\u03cd\u03c1\u03bf\u03c2",
+    "Dashboard interval": "\u0394\u03b9\u03ac\u03c3\u03c4\u03b7\u03bc\u03b1 \u03c0\u03af\u03bd\u03b1\u03ba\u03b1 \u03b5\u03bb\u03ad\u03b3\u03c7\u03bf\u03c5",
+    "Data source": "\u03a0\u03b7\u03b3\u03ae \u03b4\u03b5\u03b4\u03bf\u03bc\u03ad\u03bd\u03c9\u03bd",
+    "Date interval": "\u0394\u03b9\u03ac\u03c3\u03c4\u03b7\u03bc\u03b1 \u03b7\u03bc\u03b5\u03c1\u03bf\u03bc\u03b7\u03bd\u03af\u03b1\u03c2",
+    "Day": "\u0397\u03bc\u03ad\u03c1\u03b1",
+    "Delete": "\u0394\u03b9\u03b1\u03b3\u03c1\u03ac\u03c6\u03c9",
+    "Delete Dashboard": "\u0394\u03b9\u03b1\u03b3\u03c1\u03b1\u03c6\u03ae \u03a0\u03af\u03bd\u03b1\u03ba\u03b1 \u0395\u03bb\u03ad\u03b3\u03c7\u03bf\u03c5",
+    "Delete row": "\u0394\u03b9\u03b1\u03b3\u03c1\u03b1\u03c6\u03ae \u03c3\u03b5\u03b9\u03c1\u03ac\u03c2",
+    "Descending": "\u03a6\u03b8\u03af\u03bd\u03c9\u03bd",
+    "Dimension": "\u0394\u03b9\u03ac\u03c3\u03c4\u03b1\u03c3\u03b7",
+    "Direction": "\u039a\u03b1\u03c4\u03b5\u03cd\u03b8\u03c5\u03bd\u03c3\u03b7",
+    "Disabled": "\u0391\u03bd\u03ac\u03c0\u03b7\u03c1\u03bf\u03c2",
+    "Display": "\u0395\u03c0\u03af\u03b4\u03b5\u03b9\u03be\u03b7",
+    "Display [not set]": "\u0395\u03bc\u03c6\u03ac\u03bd\u03b9\u03c3\u03b7 [\u03b4\u03b5\u03bd \u03ad\u03c7\u03b5\u03b9 \u03bf\u03c1\u03b9\u03c3\u03c4\u03b5\u03af]",
+    "Display all records": "\u0395\u03bc\u03c6\u03ac\u03bd\u03b9\u03c3\u03b7 \u03cc\u03bb\u03c9\u03bd \u03c4\u03c9\u03bd \u03b5\u03b3\u03b3\u03c1\u03b1\u03c6\u03ce\u03bd",
+    "Display relative bars": "\u0395\u03bc\u03c6\u03ac\u03bd\u03b9\u03c3\u03b7 \u03c3\u03c7\u03b5\u03c4\u03b9\u03ba\u03ce\u03bd \u03b3\u03c1\u03b1\u03bc\u03bc\u03ce\u03bd",
+    "Display totals": "\u0395\u03bc\u03c6\u03ac\u03bd\u03b9\u03c3\u03b7 \u03c3\u03c5\u03bd\u03cc\u03bb\u03c9\u03bd",
+    "Edit Dashboard": "\u0395\u03c0\u03b5\u03be\u03b5\u03c1\u03b3\u03b1\u03c3\u03af\u03b1 \u03c0\u03af\u03bd\u03b1\u03ba\u03b1 \u03b5\u03bb\u03ad\u03b3\u03c7\u03bf\u03c5",
+    "Empty values": "\u039a\u03b5\u03bd\u03ad\u03c2 \u03c4\u03b9\u03bc\u03ad\u03c2",
+    "Enter a positive number": "\u0395\u03b9\u03c3\u03b1\u03b3\u03ac\u03b3\u03b5\u03c4\u03b5 \u03ad\u03bd\u03b1\u03bd \u03b8\u03b5\u03c4\u03b9\u03ba\u03cc \u03b1\u03c1\u03b9\u03b8\u03bc\u03cc",
+    "Enter a positive number or leave empty to display all records.": "\u0395\u03b9\u03c3\u03b1\u03b3\u03ac\u03b3\u03b5\u03c4\u03b5 \u03ad\u03bd\u03b1\u03bd \u03b8\u03b5\u03c4\u03b9\u03ba\u03cc \u03b1\u03c1\u03b9\u03b8\u03bc\u03cc \u03ae \u03b1\u03c6\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf \u03ba\u03b5\u03bd\u03cc \u03b3\u03b9\u03b1 \u03bd\u03b1 \u03b5\u03bc\u03c6\u03b1\u03bd\u03b9\u03c3\u03c4\u03bf\u03cd\u03bd \u03cc\u03bb\u03b5\u03c2 \u03bf\u03b9 \u03b5\u03b3\u03b3\u03c1\u03b1\u03c6\u03ad\u03c2.",
+    "Equal to": "\u0395\u03c6\u03ac\u03bc\u03b9\u03bb\u03bb\u03bf\u03c2",
+    "Export Dashboard": "\u03a0\u03af\u03bd\u03b1\u03ba\u03b1\u03c2 \u03b5\u03bb\u03ad\u03b3\u03c7\u03bf\u03c5 \u03b5\u03be\u03b1\u03b3\u03c9\u03b3\u03ae\u03c2",
+    "Extra table fields": "\u0395\u03c0\u03b9\u03c0\u03bb\u03ad\u03bf\u03bd \u03c0\u03b5\u03b4\u03af\u03b1 \u03c0\u03af\u03bd\u03b1\u03ba\u03b1",
+    "Filters": "\u03a6\u03af\u03bb\u03c4\u03c1\u03b1",
+    "General": "\u0393\u03b5\u03bd\u03b9\u03ba\u03cc\u03c2",
+    "Greater or equal to": "\u039c\u03b5\u03b3\u03b1\u03bb\u03cd\u03c4\u03b5\u03c1\u03bf \u03ae \u03af\u03c3\u03bf \u03bc\u03b5",
+    "Greater than": "\u039c\u03b5\u03b3\u03b1\u03bb\u03cd\u03c4\u03b5\u03c1\u03bf \u03b1\u03c0\u03cc",
+    "Hide": "\u039a\u03c1\u03cd\u03b2\u03c9",
+    "Horizontal": "\u039f\u03c1\u03b9\u03b6\u03cc\u03bd\u03c4\u03b9\u03bf\u03c2",
+    "Icon": "\u0395\u03b9\u03ba\u03cc\u03bd\u03b9\u03c3\u03bc\u03b1",
+    "Icon Status": "\u039a\u03b1\u03c4\u03ac\u03c3\u03c4\u03b1\u03c3\u03b7 \u03b5\u03b9\u03ba\u03bf\u03bd\u03b9\u03b4\u03af\u03bf\u03c5",
+    "Important": "\u03a3\u03c0\u03bf\u03c5\u03b4\u03b1\u03af\u03bf\u03c2",
+    "Includes": "\u03a0\u03b5\u03c1\u03b9\u03bb\u03b1\u03bc\u03b2\u03ac\u03bd\u03b5\u03b9",
+    "Indicator": "\u0394\u03b5\u03af\u03ba\u03c4\u03b7\u03c2",
+    "Information": "\u03a0\u03bb\u03b7\u03c1\u03bf\u03c6\u03bf\u03c1\u03af\u03b5\u03c2",
+    "Last 30 days": "\u03a4\u03b5\u03bb\u03b5\u03c5\u03c4\u03b1\u03af\u03b5\u03c2 30 \u03b7\u03bc\u03ad\u03c1\u03b5\u03c2",
+    "Last 7 days": "\u03a4\u03b5\u03bb\u03b5\u03c5\u03c4\u03b1\u03af\u03b5\u03c2 7 \u03b7\u03bc\u03ad\u03c1\u03b5\u03c2",
+    "Last month": "\u03a4\u03bf\u03bd \u03c0\u03b5\u03c1\u03b1\u03c3\u03bc\u03ad\u03bd\u03bf \u03bc\u03ae\u03bd\u03b1",
+    "Leave empty to disable pagination": "\u0391\u03c6\u03ae\u03c3\u03c4\u03b5 \u03ba\u03b5\u03bd\u03cc \u03b3\u03b9\u03b1 \u03bd\u03b1 \u03b1\u03c0\u03b5\u03bd\u03b5\u03c1\u03b3\u03bf\u03c0\u03bf\u03b9\u03ae\u03c3\u03b5\u03c4\u03b5 \u03c4\u03b7\u03bd \u03c3\u03b5\u03bb\u03b9\u03b4\u03bf\u03c0\u03bf\u03af\u03b7\u03c3\u03b7",
+    "Leave empty to hide the title": "\u0391\u03c6\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf \u03ba\u03b5\u03bd\u03cc \u03b3\u03b9\u03b1 \u03bd\u03b1 \u03b1\u03c0\u03bf\u03ba\u03c1\u03cd\u03c8\u03b5\u03c4\u03b5 \u03c4\u03bf\u03bd \u03c4\u03af\u03c4\u03bb\u03bf",
+    "Less or equal to": "\u039c\u03b9\u03ba\u03c1\u03cc\u03c4\u03b5\u03c1\u03bf \u03ae \u03af\u03c3\u03bf \u03bc\u03b5",
+    "Less than": "\u039b\u03b9\u03b3\u03cc\u03c4\u03b5\u03c1\u03bf \u03b1\u03c0\u03cc",
+    "Limit": "\u039f\u03c1\u03b9\u03bf",
+    "Line": "\u0393\u03c1\u03b1\u03bc\u03bc\u03ae",
+    "Link Text": "\u039a\u03b5\u03af\u03bc\u03b5\u03bd\u03bf \u03c3\u03c5\u03bd\u03b4\u03ad\u03c3\u03bc\u03bf\u03c5",
+    "Link URL": "URL \u03c3\u03c5\u03bd\u03b4\u03ad\u03c3\u03bc\u03bf\u03c5",
+    "Make Default": "\u039f\u03c1\u03b9\u03c3\u03bc\u03cc\u03c2 \u03c0\u03c1\u03bf\u03b5\u03c0\u03b9\u03bb\u03bf\u03b3\u03ae\u03c2",
+    "Manage Dashboards": "\u0394\u03b9\u03b1\u03c7\u03b5\u03af\u03c1\u03b9\u03c3\u03b7 \u03c0\u03b9\u03bd\u03ac\u03ba\u03c9\u03bd \u03b5\u03bb\u03ad\u03b3\u03c7\u03bf\u03c5",
+    "Metric": "\u039c\u03b5\u03c4\u03c1\u03b9\u03ba\u03cc\u03c2",
+    "Metrics": "\u039c\u03b5\u03c4\u03c1\u03ae\u03c3\u03b5\u03b9\u03c2",
+    "Month": "\u039c\u03ae\u03bd\u03b1\u03c2",
+    "My Custom Widget": "\u03a4\u03bf \u03c0\u03c1\u03bf\u03c3\u03b1\u03c1\u03bc\u03bf\u03c3\u03bc\u03ad\u03bd\u03bf \u03b3\u03c1\u03b1\u03c6\u03b9\u03ba\u03cc \u03bc\u03bf\u03c5 \u03c3\u03c4\u03bf\u03b9\u03c7\u03b5\u03af\u03bf",
+    "No Value": "\u03a7\u03c9\u03c1\u03af\u03c2 \u03b1\u03be\u03af\u03b1",
+    "Notice text": "\u039a\u03b5\u03af\u03bc\u03b5\u03bd\u03bf \u03b5\u03b9\u03b4\u03bf\u03c0\u03bf\u03af\u03b7\u03c3\u03b7\u03c2",
+    "Number of days": "\u0391\u03c1\u03b9\u03b8\u03bc\u03cc\u03c2 \u03b7\u03bc\u03b5\u03c1\u03ce\u03bd",
+    "One of": "\u0388\u03bd\u03b1 \u03b1\u03c0\u03cc",
+    "One value per line": "\u039c\u03af\u03b1 \u03c4\u03b9\u03bc\u03ae \u03b1\u03bd\u03ac \u03b3\u03c1\u03b1\u03bc\u03bc\u03ae",
+    "Operation": "\u039b\u03b5\u03b9\u03c4\u03bf\u03c5\u03c1\u03b3\u03af\u03b1",
+    "Order": "\u03a0\u03b1\u03c1\u03b1\u03b3\u03b3\u03b5\u03bb\u03af\u03b1",
+    "Past hour": "\u03a4\u03b5\u03bb\u03b5\u03c5\u03c4\u03b1\u03af\u03b1 \u03ce\u03c1\u03b1",
+    "Past X days": "\u03a4\u03b5\u03bb\u03b5\u03c5\u03c4\u03b1\u03af\u03b5\u03c2 X \u03b7\u03bc\u03ad\u03c1\u03b5\u03c2",
+    "Please provide the widget title": "\u03a0\u03b1\u03c1\u03b1\u03ba\u03b1\u03bb\u03ce \u03b4\u03ce\u03c3\u03c4\u03b5 \u03c4\u03bf\u03bd \u03c4\u03af\u03c4\u03bb\u03bf \u03c4\u03bf\u03c5 \u03b3\u03c1\u03b1\u03c6\u03b9\u03ba\u03bf\u03cd \u03c3\u03c4\u03bf\u03b9\u03c7\u03b5\u03af\u03bf\u03c5",
+    "Please select a data source": "\u0395\u03c0\u03b9\u03bb\u03ad\u03be\u03c4\u03b5 \u03bc\u03b9\u03b1 \u03c0\u03b7\u03b3\u03ae \u03b4\u03b5\u03b4\u03bf\u03bc\u03ad\u03bd\u03c9\u03bd",
+    "Please select a dimension": "\u0395\u03c0\u03b9\u03bb\u03ad\u03be\u03c4\u03b5 \u03bc\u03b9\u03b1 \u03b4\u03b9\u03ac\u03c3\u03c4\u03b1\u03c3\u03b7",
+    "Please select an icon": "\u0395\u03c0\u03b9\u03bb\u03ad\u03be\u03c4\u03b5 \u03ad\u03bd\u03b1 \u03b5\u03b9\u03ba\u03bf\u03bd\u03af\u03b4\u03b9\u03bf",
+    "Please select metric(s).": "\u0395\u03c0\u03b9\u03bb\u03ad\u03be\u03c4\u03b5 \u03bc\u03b5\u03c4\u03c1\u03ae\u03c3\u03b5\u03b9\u03c2.",
+    "Prev period": "\u03a0\u03c1\u03bf\u03b7\u03b3\u03bf\u03cd\u03bc\u03b5\u03bd\u03b7 \u03c0\u03b5\u03c1\u03af\u03bf\u03b4\u03bf\u03c2",
+    "Quarter": "\u03a3\u03c5\u03bd\u03bf\u03b9\u03ba\u03af\u03b1",
+    "Records per page": "\u0395\u03b3\u03b3\u03c1\u03b1\u03c6\u03ad\u03c2 \u03b1\u03bd\u03ac \u03c3\u03b5\u03bb\u03af\u03b4\u03b1",
+    "Refresh every minute": "\u0391\u03bd\u03b1\u03bd\u03ad\u03c9\u03c3\u03b7 \u03ba\u03ac\u03b8\u03b5 \u03bb\u03b5\u03c0\u03c4\u03cc",
+    "Rename Dashboard": "\u039c\u03b5\u03c4\u03bf\u03bd\u03bf\u03bc\u03b1\u03c3\u03af\u03b1 \u03a0\u03af\u03bd\u03b1\u03ba\u03b1 \u0395\u03bb\u03ad\u03b3\u03c7\u03bf\u03c5",
+    "Reset Layout": "\u0395\u03c0\u03b1\u03bd\u03b1\u03c6\u03bf\u03c1\u03ac \u03b4\u03b9\u03ac\u03c4\u03b1\u03be\u03b7\u03c2",
+    "Reset layout back to default?": "\u0395\u03c0\u03b1\u03bd\u03b1\u03c6\u03bf\u03c1\u03ac \u03b4\u03b9\u03ac\u03c4\u03b1\u03be\u03b7\u03c2 \u03c3\u03c4\u03b7\u03bd \u03c0\u03c1\u03bf\u03b5\u03c0\u03b9\u03bb\u03b5\u03b3\u03bc\u03ad\u03bd\u03b7 \u03c4\u03b9\u03bc\u03ae;",
+    "Same period last year": "\u038a\u03b4\u03b9\u03b1 \u03c0\u03b5\u03c1\u03af\u03bf\u03b4\u03bf\u03c2 \u03c0\u03ad\u03c1\u03c5\u03c3\u03b9",
+    "Section": "\u03a4\u03bc\u03ae\u03bc\u03b1",
+    "Section Title": "\u03a4\u03af\u03c4\u03bb\u03bf\u03c2 \u03b5\u03bd\u03cc\u03c4\u03b7\u03c4\u03b1\u03c2",
+    "Select a dimension and metrics": "\u0395\u03c0\u03b9\u03bb\u03ad\u03be\u03c4\u03b5 \u03bc\u03b9\u03b1 \u03b9\u03b4\u03b9\u03cc\u03c4\u03b7\u03c4\u03b1 \u03ba\u03b1\u03b9 \u03bc\u03b5\u03c4\u03c1\u03ae\u03c3\u03b5\u03b9\u03c2",
+    "Select an attribute": "\u0395\u03c0\u03b9\u03bb\u03ad\u03be\u03c4\u03b5 \u03ad\u03bd\u03b1 \u03c7\u03b1\u03c1\u03b1\u03ba\u03c4\u03b7\u03c1\u03b9\u03c3\u03c4\u03b9\u03ba\u03cc",
+    "Select an operation": "\u0395\u03c0\u03b9\u03bb\u03ad\u03be\u03c4\u03b5 \u03bc\u03b9\u03b1 \u03bb\u03b5\u03b9\u03c4\u03bf\u03c5\u03c1\u03b3\u03af\u03b1",
+    "Select sorting metric or dimension": "\u0395\u03c0\u03b9\u03bb\u03ad\u03be\u03c4\u03b5 \u03bc\u03ad\u03c4\u03c1\u03b7\u03c3\u03b7 \u03ae \u03b9\u03b4\u03b9\u03cc\u03c4\u03b7\u03c4\u03b1 \u03c4\u03b1\u03be\u03b9\u03bd\u03cc\u03bc\u03b7\u03c3\u03b7\u03c2",
+    "Select the metric color": "\u0395\u03c0\u03b9\u03bb\u03ad\u03be\u03c4\u03b5 \u03c4\u03bf \u03c7\u03c1\u03ce\u03bc\u03b1 \u03c4\u03b7\u03c2 \u03bc\u03ad\u03c4\u03c1\u03b7\u03c3\u03b7\u03c2",
+    "Set the current layout as the default?": "\u039f\u03c1\u03b9\u03c3\u03bc\u03cc\u03c2 \u03c4\u03b7\u03c2 \u03c4\u03c1\u03ad\u03c7\u03bf\u03c5\u03c3\u03b1\u03c2 \u03b4\u03b9\u03ac\u03c4\u03b1\u03be\u03b7\u03c2 \u03c9\u03c2 \u03c0\u03c1\u03bf\u03b5\u03c0\u03b9\u03bb\u03bf\u03b3\u03ae\u03c2;",
+    "Show Date Interval": "\u0395\u03bc\u03c6\u03ac\u03bd\u03b9\u03c3\u03b7 \u03b4\u03b9\u03b1\u03c3\u03c4\u03ae\u03bc\u03b1\u03c4\u03bf\u03c2 \u03b7\u03bc\u03b5\u03c1\u03bf\u03bc\u03b7\u03bd\u03af\u03b1\u03c2",
+    "Sort by": "\u03a4\u03b1\u03be\u03b9\u03bd\u03cc\u03bc\u03b7\u03c3\u03b7 \u03ba\u03b1\u03c4\u03ac",
+    "Sorting": "\u03a4\u03b1\u03be\u03b9\u03bd\u03cc\u03bc\u03b7\u03c3\u03b7",
+    "Sorting & Filtering": "\u03a4\u03b1\u03be\u03b9\u03bd\u03cc\u03bc\u03b7\u03c3\u03b7 & \u03a6\u03b9\u03bb\u03c4\u03c1\u03ac\u03c1\u03b9\u03c3\u03bc\u03b1",
+    "Stacked Bar": "\u03a3\u03c4\u03bf\u03b9\u03b2\u03b1\u03b3\u03bc\u03ad\u03bd\u03b7 \u03c1\u03ac\u03b2\u03b4\u03bf\u03c2",
+    "Starts with": "\u039e\u03b5\u03ba\u03b9\u03bd\u03ac \u03bc\u03b5",
+    "Success": "\u0395\u03c0\u03b9\u03c4\u03c5\u03c7\u03af\u03b1",
+    "Table": "\u03a4\u03c1\u03b1\u03c0\u03ad\u03b6\u03b9",
+    "Text Notice": "\u0395\u03b9\u03b4\u03bf\u03c0\u03bf\u03af\u03b7\u03c3\u03b7 \u03ba\u03b5\u03b9\u03bc\u03ad\u03bd\u03bf\u03c5",
+    "The dashboard layout has been reset to default.": "\u0397 \u03b4\u03b9\u03ac\u03c4\u03b1\u03be\u03b7 \u03c4\u03bf\u03c5 \u03c0\u03af\u03bd\u03b1\u03ba\u03b1 \u03b5\u03bb\u03ad\u03b3\u03c7\u03bf\u03c5 \u03ad\u03c7\u03b5\u03b9 \u03b5\u03c0\u03b1\u03bd\u03ad\u03bb\u03b8\u03b5\u03b9 \u03c3\u03c4\u03b9\u03c2 \u03c0\u03c1\u03bf\u03b5\u03c0\u03b9\u03bb\u03b5\u03b3\u03bc\u03ad\u03bd\u03b5\u03c2 \u03c1\u03c5\u03b8\u03bc\u03af\u03c3\u03b5\u03b9\u03c2.",
+    "The dashboard was successfully updated.": "\u039f \u03c0\u03af\u03bd\u03b1\u03ba\u03b1\u03c2 \u03b5\u03bb\u03ad\u03b3\u03c7\u03bf\u03c5 \u03b5\u03bd\u03b7\u03bc\u03b5\u03c1\u03ce\u03b8\u03b7\u03ba\u03b5 \u03bc\u03b5 \u03b5\u03c0\u03b9\u03c4\u03c5\u03c7\u03af\u03b1.",
+    "The limit value must be at least 1": "\u0397 \u03bf\u03c1\u03b9\u03b1\u03ba\u03ae \u03c4\u03b9\u03bc\u03ae \u03c0\u03c1\u03ad\u03c0\u03b5\u03b9 \u03bd\u03b1 \u03b5\u03af\u03bd\u03b1\u03b9 \u03c4\u03bf\u03c5\u03bb\u03ac\u03c7\u03b9\u03c3\u03c4\u03bf\u03bd 1",
+    "This dashboard is now the default layout.": "\u0391\u03c5\u03c4\u03cc\u03c2 \u03bf \u03c0\u03af\u03bd\u03b1\u03ba\u03b1\u03c2 \u03b5\u03bb\u03ad\u03b3\u03c7\u03bf\u03c5 \u03b5\u03af\u03bd\u03b1\u03b9 \u03c0\u03bb\u03ad\u03bf\u03bd \u03b7 \u03c0\u03c1\u03bf\u03b5\u03c0\u03b9\u03bb\u03b5\u03b3\u03bc\u03ad\u03bd\u03b7 \u03b4\u03b9\u03ac\u03c4\u03b1\u03be\u03b7.",
+    "This is a text notice widget.": "\u0391\u03c5\u03c4\u03cc \u03b5\u03af\u03bd\u03b1\u03b9 \u03ad\u03bd\u03b1 \u03b3\u03c1\u03b1\u03c6\u03b9\u03ba\u03cc \u03c3\u03c4\u03bf\u03b9\u03c7\u03b5\u03af\u03bf \u03b5\u03b9\u03b4\u03bf\u03c0\u03bf\u03af\u03b7\u03c3\u03b7\u03c2 \u03ba\u03b5\u03b9\u03bc\u03ad\u03bd\u03bf\u03c5.",
+    "This month": "\u0391\u03c5\u03c4\u03cc\u03bd \u03c4\u03bf\u03bd \u03bc\u03ae\u03bd\u03b1",
+    "This quarter": "\u0391\u03c5\u03c4\u03cc \u03c4\u03bf \u03c4\u03c1\u03af\u03bc\u03b7\u03bd\u03bf",
+    "This week": "\u0391\u03c5\u03c4\u03ae \u03c4\u03b7\u03bd \u03b5\u03b2\u03b4\u03bf\u03bc\u03ac\u03b4\u03b1",
+    "This year": "\u03a6\u03ad\u03c4\u03bf\u03c2",
+    "Title": "\u03a4\u03af\u03c4\u03bb\u03bf\u03c2",
+    "Today": "\u03a3\u03ae\u03bc\u03b5\u03c1\u03b1",
+    "Value": "\u0391\u03be\u03af\u03b1",
+    "Values": "\u0391\u03be\u03af\u03b5\u03c2",
+    "Vertical": "\u039a\u03b1\u03c4\u03b1\u03ba\u03cc\u03c1\u03c5\u03c6\u03bf\u03c2",
+    "Warning": "\u03a0\u03c1\u03bf\u03b5\u03b9\u03b4\u03bf\u03c0\u03bf\u03af\u03b7\u03c3\u03b7",
+    "Week": "\u0395\u03b2\u03b4\u03bf\u03bc\u03ac\u03b4\u03b1",
+    "Year": "\u0395\u03c4\u03bf\u03c2",
+    "Yesterday": "\u0395\u03c7\u03b8\u03ad\u03c2"
 }
 );
 
 
-//! moment.js locale configuration v2.22.2
+//! moment.js locale configuration
+//! locale : Greek [el]
+//! author : Aggelos Karalias : https://github.com/mehiel
 
 ;(function (global, factory) {
    typeof exports === 'object' && typeof module !== 'undefined'
@@ -293,52 +291,68 @@ window.oc.langMessages['el'] = $.extend(
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
 
+    //! moment.js locale configuration
+
     function isFunction(input) {
-        return input instanceof Function || Object.prototype.toString.call(input) === '[object Function]';
+        return (
+            (typeof Function !== 'undefined' && input instanceof Function) ||
+            Object.prototype.toString.call(input) === '[object Function]'
+        );
     }
 
-
     var el = moment.defineLocale('el', {
-        monthsNominativeEl : 'Ιανουάριος_Φεβρουάριος_Μάρτιος_Απρίλιος_Μάιος_Ιούνιος_Ιούλιος_Αύγουστος_Σεπτέμβριος_Οκτώβριος_Νοέμβριος_Δεκέμβριος'.split('_'),
-        monthsGenitiveEl : 'Ιανουαρίου_Φεβρουαρίου_Μαρτίου_Απριλίου_Μαΐου_Ιουνίου_Ιουλίου_Αυγούστου_Σεπτεμβρίου_Οκτωβρίου_Νοεμβρίου_Δεκεμβρίου'.split('_'),
-        months : function (momentToFormat, format) {
+        monthsNominativeEl:
+            'Ιανουάριος_Φεβρουάριος_Μάρτιος_Απρίλιος_Μάιος_Ιούνιος_Ιούλιος_Αύγουστος_Σεπτέμβριος_Οκτώβριος_Νοέμβριος_Δεκέμβριος'.split(
+                '_'
+            ),
+        monthsGenitiveEl:
+            'Ιανουαρίου_Φεβρουαρίου_Μαρτίου_Απριλίου_Μαΐου_Ιουνίου_Ιουλίου_Αυγούστου_Σεπτεμβρίου_Οκτωβρίου_Νοεμβρίου_Δεκεμβρίου'.split(
+                '_'
+            ),
+        months: function (momentToFormat, format) {
             if (!momentToFormat) {
                 return this._monthsNominativeEl;
-            } else if (typeof format === 'string' && /D/.test(format.substring(0, format.indexOf('MMMM')))) { // if there is a day number before 'MMMM'
+            } else if (
+                typeof format === 'string' &&
+                /D/.test(format.substring(0, format.indexOf('MMMM')))
+            ) {
+                // if there is a day number before 'MMMM'
                 return this._monthsGenitiveEl[momentToFormat.month()];
             } else {
                 return this._monthsNominativeEl[momentToFormat.month()];
             }
         },
-        monthsShort : 'Ιαν_Φεβ_Μαρ_Απρ_Μαϊ_Ιουν_Ιουλ_Αυγ_Σεπ_Οκτ_Νοε_Δεκ'.split('_'),
-        weekdays : 'Κυριακή_Δευτέρα_Τρίτη_Τετάρτη_Πέμπτη_Παρασκευή_Σάββατο'.split('_'),
-        weekdaysShort : 'Κυρ_Δευ_Τρι_Τετ_Πεμ_Παρ_Σαβ'.split('_'),
-        weekdaysMin : 'Κυ_Δε_Τρ_Τε_Πε_Πα_Σα'.split('_'),
-        meridiem : function (hours, minutes, isLower) {
+        monthsShort: 'Ιαν_Φεβ_Μαρ_Απρ_Μαϊ_Ιουν_Ιουλ_Αυγ_Σεπ_Οκτ_Νοε_Δεκ'.split('_'),
+        weekdays: 'Κυριακή_Δευτέρα_Τρίτη_Τετάρτη_Πέμπτη_Παρασκευή_Σάββατο'.split(
+            '_'
+        ),
+        weekdaysShort: 'Κυρ_Δευ_Τρι_Τετ_Πεμ_Παρ_Σαβ'.split('_'),
+        weekdaysMin: 'Κυ_Δε_Τρ_Τε_Πε_Πα_Σα'.split('_'),
+        meridiem: function (hours, minutes, isLower) {
             if (hours > 11) {
                 return isLower ? 'μμ' : 'ΜΜ';
             } else {
                 return isLower ? 'πμ' : 'ΠΜ';
             }
         },
-        isPM : function (input) {
-            return ((input + '').toLowerCase()[0] === 'μ');
+        isPM: function (input) {
+            return (input + '').toLowerCase()[0] === 'μ';
         },
-        meridiemParse : /[ΠΜ]\.?Μ?\.?/i,
-        longDateFormat : {
-            LT : 'h:mm A',
-            LTS : 'h:mm:ss A',
-            L : 'DD/MM/YYYY',
-            LL : 'D MMMM YYYY',
-            LLL : 'D MMMM YYYY h:mm A',
-            LLLL : 'dddd, D MMMM YYYY h:mm A'
+        meridiemParse: /[ΠΜ]\.?Μ?\.?/i,
+        longDateFormat: {
+            LT: 'h:mm A',
+            LTS: 'h:mm:ss A',
+            L: 'DD/MM/YYYY',
+            LL: 'D MMMM YYYY',
+            LLL: 'D MMMM YYYY h:mm A',
+            LLLL: 'dddd, D MMMM YYYY h:mm A',
         },
-        calendarEl : {
-            sameDay : '[Σήμερα {}] LT',
-            nextDay : '[Αύριο {}] LT',
-            nextWeek : 'dddd [{}] LT',
-            lastDay : '[Χθες {}] LT',
-            lastWeek : function () {
+        calendarEl: {
+            sameDay: '[Σήμερα {}] LT',
+            nextDay: '[Αύριο {}] LT',
+            nextWeek: 'dddd [{}] LT',
+            lastDay: '[Χθες {}] LT',
+            lastWeek: function () {
                 switch (this.day()) {
                     case 6:
                         return '[το προηγούμενο] dddd [{}] LT';
@@ -346,38 +360,38 @@ window.oc.langMessages['el'] = $.extend(
                         return '[την προηγούμενη] dddd [{}] LT';
                 }
             },
-            sameElse : 'L'
+            sameElse: 'L',
         },
-        calendar : function (key, mom) {
+        calendar: function (key, mom) {
             var output = this._calendarEl[key],
                 hours = mom && mom.hours();
             if (isFunction(output)) {
                 output = output.apply(mom);
             }
-            return output.replace('{}', (hours % 12 === 1 ? 'στη' : 'στις'));
+            return output.replace('{}', hours % 12 === 1 ? 'στη' : 'στις');
         },
-        relativeTime : {
-            future : 'σε %s',
-            past : '%s πριν',
-            s : 'λίγα δευτερόλεπτα',
-            ss : '%d δευτερόλεπτα',
-            m : 'ένα λεπτό',
-            mm : '%d λεπτά',
-            h : 'μία ώρα',
-            hh : '%d ώρες',
-            d : 'μία μέρα',
-            dd : '%d μέρες',
-            M : 'ένας μήνας',
-            MM : '%d μήνες',
-            y : 'ένας χρόνος',
-            yy : '%d χρόνια'
+        relativeTime: {
+            future: 'σε %s',
+            past: '%s πριν',
+            s: 'λίγα δευτερόλεπτα',
+            ss: '%d δευτερόλεπτα',
+            m: 'ένα λεπτό',
+            mm: '%d λεπτά',
+            h: 'μία ώρα',
+            hh: '%d ώρες',
+            d: 'μία μέρα',
+            dd: '%d μέρες',
+            M: 'ένας μήνας',
+            MM: '%d μήνες',
+            y: 'ένας χρόνος',
+            yy: '%d χρόνια',
         },
         dayOfMonthOrdinalParse: /\d{1,2}η/,
         ordinal: '%dη',
-        week : {
-            dow : 1, // Monday is the first day of the week.
-            doy : 4  // The week that contains Jan 4st is the first week of the year.
-        }
+        week: {
+            dow: 1, // Monday is the first day of the week.
+            doy: 4, // The week that contains Jan 4st is the first week of the year.
+        },
     });
 
     return el;

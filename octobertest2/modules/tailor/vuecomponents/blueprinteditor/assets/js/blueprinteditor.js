@@ -1,7 +1,10 @@
-Vue.component('tailor-editor-component-blueprint-editor', {
-    extends: oc.Modules.import('tailor.editor.extension.documentcomponent.base'),
+import { TailorDocumentComponentBase } from '../../../../assets/js/tailor.editor.extension.documentcomponent.base.js';
+import EditorModelDefinition from '../../../../../backend/vuecomponents/monacoeditor/assets/js/modeldefinition.js';
+import { modalUtils } from '../../../../../backend/vuecomponents/modal/assets/js/classes/index.js';
+
+export default {
+    extends: TailorDocumentComponentBase,
     data: function() {
-        const EditorModelDefinition = oc.Modules.import('backend.vuecomponents.monacoeditor.modeldefinition');
         const defMarkup = new EditorModelDefinition(
             'yaml',
             this.trans('tailor::lang.blueprint.editor_yaml'),
@@ -12,8 +15,6 @@ Vue.component('tailor-editor-component-blueprint-editor', {
         );
 
         return {
-            documentData: {
-            },
             documentDeletedMessage: this.trans('tailor::lang.blueprint.deleted'),
             documentTitleProperty: 'fileName',
             codeEditorModelDefinitions: [defMarkup],
@@ -137,7 +138,7 @@ Vue.component('tailor-editor-component-blueprint-editor', {
             } catch (error) {
                 this.processing = false;
                 oc.snackbar.hide(messageId);
-                oc.vueComponentHelpers.modalUtils.showAlert(
+                modalUtils.showAlert(
                     $.oc.editor.getLangStr('editor::lang.common.error'),
                     error.responseText
                 );
@@ -156,6 +157,23 @@ Vue.component('tailor-editor-component-blueprint-editor', {
             try {
                 const data = await this.saveDocument(false, null, null, noSavedMessage);
                 this.$refs.editor.updateDecorations([]);
+
+                // Show warning decorations for duplicate handles/UUIDs
+                if (data.blueprintWarnings && data.blueprintWarnings.length) {
+                    const decorations = data.blueprintWarnings.map(function(warning) {
+                        return {
+                            range: this.$refs.editor.makeRange(warning.line, 1, warning.line, 100),
+                            options: {
+                                isWholeLine: true,
+                                className: 'monaco-warning-line',
+                                glyphMarginClassName: 'monaco-warning-glyph',
+                                hoverMessage: [{ value: warning.message }],
+                                glyphMarginHoverMessage: [{ value: warning.message }]
+                            }
+                        };
+                    }.bind(this));
+                    this.$refs.editor.updateDecorations(decorations);
+                }
 
                 if (data.contentChanged) {
                     this.processing = true;
@@ -212,6 +230,5 @@ Vue.component('tailor-editor-component-blueprint-editor', {
                 this.applyBlueprint();
             }
         }
-    },
-    template: '#tailor_vuecomponents_blueprinteditor'
-});
+    }
+};

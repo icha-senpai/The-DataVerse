@@ -1,7 +1,9 @@
-Vue.component('cms-editor-component-content-editor', {
-    extends: oc.Modules.import('cms.editor.extension.documentcomponent.base'),
+import { CmsDocumentComponentBase } from '../../../../assets/js/cms.editor.extension.documentcomponent.base.js';
+import EditorModelDefinition from '../../../../../backend/vuecomponents/monacoeditor/assets/js/modeldefinition.js';
+
+export default {
+    extends: CmsDocumentComponentBase,
     data: function() {
-        const EditorModelDefinition = oc.Modules.import('backend.vuecomponents.monacoeditor.modeldefinition');
         const defMarkup = new EditorModelDefinition(
             'html',
             this.trans('cms::lang.content.editor_content'),
@@ -11,10 +13,6 @@ Vue.component('cms-editor-component-content-editor', {
         );
 
         return {
-            documentData: {
-                markup: '',
-                components: []
-            },
             documentSettingsPopupTitle: this.trans('cms::lang.editor.content'),
             documentTitleProperty: 'fileName',
             codeEditorModelDefinitions: [defMarkup],
@@ -144,6 +142,19 @@ Vue.component('cms-editor-component-content-editor', {
             this.updateDocumentLanguage();
         },
 
+        onToolbarCommand: function onToolbarCommand(command, isHotkey, ev) {
+            this.handleBasicDocumentCommands(command, isHotkey);
+
+            if (command === 'show-template-info') {
+                this.showTemplateInfo();
+            }
+
+            var connector = this.$refs.richEditorDocumentConnector || this.$refs.markdownEditor;
+            if (connector && connector.internalEventBus) {
+                connector.internalEventBus.emit('toolbarcmd', { command: command, ev: ev });
+            }
+        },
+
         onParentTabSelected: function onParentTabSelected() {
             if (this.$refs.editor) {
                 this.$nextTick(() => this.$refs.editor.layout());
@@ -166,6 +177,5 @@ Vue.component('cms-editor-component-content-editor', {
                 this.toolbarExtensionPoint = [];
             }
         }
-    },
-    template: '#cms_vuecomponents_contenteditor'
-});
+    }
+};

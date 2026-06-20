@@ -10,7 +10,10 @@
     data-control="pagefinder"
     data-refresh-handler="<?= $this->getEventHandler('onRefresh') ?>"
     data-data-locker="#<?= $field->getId() ?>"
-    data-single-mode="<?= $singleMode ? 1 : 0 ?>">
+    data-single-mode="<?= $singleMode ? 1 : 0 ?>"
+    data-allow-custom-url="<?= $allowCustomUrl ? 1 : 0 ?>"
+    data-allowed-types="<?= e(json_encode($allowedTypes)) ?>"
+    data-excluded-types="<?= e(json_encode($excludedTypes)) ?>">
 
     <div class="pagefinder-control-container d-flex">
         <?php if ($value): ?>
@@ -22,9 +25,13 @@
                                 <i class="icon-chain"></i>
                             </div>
                             <div class="info">
-                                <span class="recordname"><?= e(__($nameValue)) ?: __('Link') ?></span>
+                                <span class="recordname">
+                                    <?= e($nameValue) ?: __('Link') ?>
+                                </span>
                                 <?php if ($descriptionValue): ?>
-                                    <span class="description"> - <?= e(__($descriptionValue)) ?></span>
+                                    <span class="description">
+                                        <?= e($descriptionValue) ?>
+                                    </span>
                                 <?php endif ?>
                             </div>
                         </div>

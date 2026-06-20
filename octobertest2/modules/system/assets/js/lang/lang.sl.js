@@ -9,7 +9,7 @@ if (!window.oc.langMessages) {
     window.oc.langMessages = {};
 }
 
-window.oc.langMessages['sl'] = $.extend(
+window.oc.langMessages['sl'] = Object.assign(
     window.oc.langMessages['sl'] || {},
     {
     "markdowneditor": {
@@ -55,7 +55,8 @@ window.oc.langMessages['sl'] = $.extend(
         "dismiss": "Dismiss",
         "confirm_button_text": "V redu",
         "cancel_button_text": "Prekli\u010di",
-        "widget_remove_confirm": "Odstrani ta vti\u010dnik?"
+        "widget_remove_confirm": "Odstrani ta vti\u010dnik?",
+        "reload": "Reload"
     },
     "datepicker": {
         "previousMonth": "Prej\u0161nji mesec",
@@ -154,139 +155,136 @@ window.oc.langMessages['sl'] = $.extend(
         "cancel": "Cancel",
         "items": "Items"
     },
-    "dashboard": {
-        "widget_data_source": "Data source",
-        "widget_data_source_required": "Please select a data source",
-        "widget_dimension": "Dimension",
-        "widget_dimension_required": "Please select a dimension",
-        "widget_metric": "Metric",
-        "widget_metric_required": "Please select metric(s).",
-        "widget_metrics": "Metrics",
-        "widget_title": "Title",
-        "widget_title_required": "Please provide the widget title",
-        "widget_title_optional_placeholder": "Leave empty to hide the title",
-        "widget_metric_value": "Value",
-        "widget_icon_status": "Icon Status",
-        "widget_href": "Link URL",
-        "widget_icon": "Icon",
-        "widget_icon_required": "Please select an icon",
-        "widget_link_text": "Link Text",
-        "apply": "Apply",
-        "delete": "Delete",
-        "configure": "Configure",
-        "section_show_interval": "Show Date Interval",
-        "widget_chart_type": "Chart type",
-        "widget_chart_type_bar": "Bar",
-        "widget_chart_type_stacked_bar": "Stacked Bar",
-        "widget_chart_type_line": "Line",
-        "sort_by": "Sort by",
-        "sort_by_required": "Select sorting metric or dimension",
-        "sort_by_placeholder": "Select a dimension and metrics",
-        "sort_order": "Order",
-        "sort_asc": "Ascending",
-        "sort_desc": "Descending",
-        "group_sorting": "Sorting",
-        "value_not_set": "[not set]",
-        "limit": "Limit",
-        "limit_placeholder": "Display all records",
-        "limit_number": "Enter a positive number or leave empty to display all records.",
-        "limit_min": "The limit value must be at least 1",
-        "empty_values": "Empty values",
-        "empty_values_hide": "Hide",
-        "empty_values_display_not_set": "Display [not set]",
-        "empty_values_dimension": "Dimension",
-        "date_interval": "Date interval",
-        "date_interval_dashboard_default": "Dashboard interval",
-        "date_interval_this_week": "This week",
-        "date_interval_this_month": "This month",
-        "date_interval_this_quarter": "This quarter",
-        "date_interval_this_year": "This year",
-        "date_interval_past_hour": "Past hour",
-        "date_interval_past_days": "Past X days",
-        "date_interval_past_days_value": "Number of days",
-        "date_interval_past_days_invalid": "Enter a positive number",
-        "prop_date_interval": "Display",
-        "date_interval_past_days_placeholder": "1 day (today) if not set",
-        "widget_bar_direction": "Direction",
-        "widget_bar_direction_vertical": "Vertical",
-        "widget_bar_direction_horizontal": "Horizontal",
-        "prop_color": "Color",
-        "color_required": "Select the metric color",
-        "tab_general": "General",
-        "tab_sorting_filtering": "Sorting & Filtering",
-        "prop_records_per_page": "Records per page",
-        "records_per_page_placeholder": "Leave empty to disable pagination",
-        "records_per_page_invalid": "Enter a positive number or leave empty to display all records.",
-        "prop_display_totals": "Display totals",
-        "prop_display_relative_bar": "Display relative bars",
-        "prop_extra_table_fields": "Extra table fields",
-        "filter_operation_equal_to": "Equal to",
-        "filter_operation_greater_equal": "Greater or equal to",
-        "filter_operation_less_equal": "Less or equal to",
-        "filter_operation_greater": "Greater than",
-        "filter_operation_less": "Less than",
-        "filter_operation_starts_with": "Starts with",
-        "filter_operation_includes": "Includes",
-        "filter_operation_one_of": "One of",
-        "prop_operation": "Operation",
-        "prop_value": "Value",
-        "prop_values": "Values",
-        "prop_values_one_per_line": "One value per line",
-        "prop_filter_attribute": "Attribute",
-        "filter_select_attribute": "Select an attribute",
-        "filter_select_operation": "Select an operation",
-        "prop_filters": "Filters",
-        "icon_status_info": "Information",
-        "icon_status_important": "Important",
-        "icon_status_success": "Success",
-        "icon_status_warning": "Warning",
-        "icon_status_disabled": "Disabled",
-        "range_today": "Today",
-        "range_yesterday": "Yesterday",
-        "range_last_7_days": "Last 7 days",
-        "range_last_30_days": "Last 30 days",
-        "range_this_month": "This month",
-        "range_last_month": "Last month",
-        "range_this_quarter": "This quarter",
-        "range_this_year": "This year",
-        "range_this_week": "This week",
-        "interval_day": "Day",
-        "interval_week": "Week",
-        "interval_month": "Month",
-        "interval_quarter": "Quarter",
-        "interval_year": "Year",
-        "compare_totals": "Compare Totals",
-        "compare_prev_period": "Prev period",
-        "compare_prev_year": "Same period last year",
-        "compare_none": "Disabled",
-        "updated_successfully": "The dashboard was successfully updated.",
-        "edit_dashboard": "Edit Dashboard",
-        "make_default": "Make Default",
-        "make_default_confirm": "Set the current layout as the default?",
-        "make_default_successfully": "This dashboard is now the default layout.",
-        "reset_layout": "Reset Layout",
-        "reset_layout_confirm": "Reset layout back to default?",
-        "reset_layout_successfully": "The dashboard layout has been reset to default.",
-        "manage_dashboards": "Manage Dashboards",
-        "import_success": "The dashboard was successfully imported",
-        "new_dashboard": "New Dashboard",
-        "import_dashboard": "Import Dashboard",
-        "delete_confirm": "Delete the dashboard? This action cannot be reversed. All users with access will be affected.",
-        "delete_success": "The dashboard was successfully deleted.",
-        "menu_item_custom": "Custom",
-        "menu_item_delete_row": "Delete row",
-        "widget_type_indicator": "Indicator",
-        "widget_type_section_title": "Section Title",
-        "widget_type_notice": "Text Notice",
-        "widget_type_chart": "Chart",
-        "widget_type_table": "Table",
-        "notice_text": "Notice text"
-    }
+    "[not set]": "[ni nastavljeno]",
+    "1 day (today) if not set": "1 dan (danes), \u010de ni nastavljeno",
+    "Apply": "Uporabi",
+    "Ascending": "Nara\u0161\u010dajo\u010de",
+    "Attribute": "Atribut",
+    "Bar": "Bar",
+    "Cancel": "Prekli\u010di",
+    "Chart": "Grafikon",
+    "Chart type": "Vrsta grafikona",
+    "Color": "Barva",
+    "Compare Totals": "Primerjaj skupne zneske",
+    "Configure": "Konfiguriraj",
+    "Custom": "Po meri",
+    "Custom Range": "Razpon po meri",
+    "Dashboard interval": "Interval nadzorne plo\u0161\u010de",
+    "Data source": "Vir podatkov",
+    "Date interval": "Datumski interval",
+    "Day": "Dan",
+    "Delete": "Izbri\u0161i",
+    "Delete Dashboard": "Izbri\u0161i nadzorno plo\u0161\u010do",
+    "Delete row": "Izbri\u0161i vrstico",
+    "Descending": "Padajo\u010de",
+    "Dimension": "Dimenzija",
+    "Direction": "Smer",
+    "Disabled": "Onemogo\u010deno",
+    "Display": "Prikaz",
+    "Display [not set]": "Prikaz [ni nastavljeno]",
+    "Display all records": "Prika\u017ei vse zapise",
+    "Display relative bars": "Prikaz relativnih stolpcev",
+    "Display totals": "Prika\u017ei skupne zneske",
+    "Edit Dashboard": "Uredi nadzorno plo\u0161\u010do",
+    "Empty values": "Prazne vrednosti",
+    "Enter a positive number": "Vnesite pozitivno \u0161tevilo",
+    "Enter a positive number or leave empty to display all records.": "Vnesite pozitivno \u0161tevilo ali pustite prazno, da prika\u017eete vse zapise.",
+    "Equal to": "Enako kot",
+    "Export Dashboard": "Izvozi nadzorno plo\u0161\u010do",
+    "Extra table fields": "Dodatna polja tabele",
+    "Filters": "Filtri",
+    "General": "Splo\u0161no",
+    "Greater or equal to": "Ve\u010dje ali enako kot",
+    "Greater than": "Ve\u010dje kot",
+    "Hide": "Skrij",
+    "Horizontal": "Vodoravno",
+    "Icon": "Ikona",
+    "Icon Status": "Ikona Stanje",
+    "Important": "Pomembno",
+    "Includes": "Vklju\u010duje",
+    "Indicator": "Kazalnik",
+    "Information": "Informacije",
+    "Last 30 days": "Zadnjih 30 dni",
+    "Last 7 days": "Zadnjih 7 dni",
+    "Last month": "Prej\u0161nji mesec",
+    "Leave empty to disable pagination": "Pustite prazno, \u010de \u017eelite onemogo\u010diti o\u0161tevil\u010denje strani.",
+    "Leave empty to hide the title": "Pustite prazno, \u010de \u017eelite skriti naslov",
+    "Less or equal to": "Manj\u0161e ali enako",
+    "Less than": "Manj kot",
+    "Limit": "Omejitev",
+    "Line": "\u010crta",
+    "Link Text": "Besedilo povezave",
+    "Link URL": "URL povezave",
+    "Make Default": "Nastavi kot privzeto",
+    "Manage Dashboards": "Upravljanje nadzornih plo\u0161\u010d",
+    "Metric": "Metrika",
+    "Metrics": "Metrike",
+    "Month": "Mesec",
+    "My Custom Widget": "Moj pripomo\u010dek po meri",
+    "No Value": "Brez vrednosti",
+    "Notice text": "Besedilo obvestila",
+    "Number of days": "\u0160tevilo dni",
+    "One of": "Eden od",
+    "One value per line": "Ena vrednost na vrstico",
+    "Operation": "Operacija",
+    "Order": "Naro\u010dilo",
+    "Past hour": "Pretekla ura",
+    "Past X days": "Preteklih X dni",
+    "Please provide the widget title": "Prosimo, navedite naslov gradnika",
+    "Please select a data source": "Izberite vir podatkov",
+    "Please select a dimension": "Izberite dimenzijo",
+    "Please select an icon": "Izberite ikono",
+    "Please select metric(s).": "Izberite metriko(-e).",
+    "Prev period": "Prej\u0161nje obdobje",
+    "Quarter": "\u010cetrt",
+    "Records per page": "Zapisov na stran",
+    "Refresh every minute": "Osve\u017ei vsako minuto",
+    "Rename Dashboard": "Preimenuj nadzorno plo\u0161\u010do",
+    "Reset Layout": "Ponastavi postavitev",
+    "Reset layout back to default?": "Ponastavitev postavitve nazaj na privzeto?",
+    "Same period last year": "Enako obdobje lani",
+    "Section": "Oddelek",
+    "Section Title": "Naslov razdelka",
+    "Select a dimension and metrics": "Izberite dimenzijo in meritve",
+    "Select an attribute": "Izberite atribut",
+    "Select an operation": "Izberite operacijo",
+    "Select sorting metric or dimension": "Izberite metriko ali dimenzijo razvr\u0161\u010danja",
+    "Select the metric color": "Izberite barvo metrike",
+    "Set the current layout as the default?": "Naj trenutno postavitev nastavim kot privzeto?",
+    "Show Date Interval": "Prika\u017ei datumski interval",
+    "Sort by": "Razvrsti po",
+    "Sorting": "Razvr\u0161\u010danje",
+    "Sorting & Filtering": "Razvr\u0161\u010danje in filtriranje",
+    "Stacked Bar": "Zlo\u017eena \u010drtna grafika",
+    "Starts with": "Za\u010dne se z",
+    "Success": "Uspeh",
+    "Table": "Tabela",
+    "Text Notice": "Besedilno obvestilo",
+    "The dashboard layout has been reset to default.": "Postavitev nadzorne plo\u0161\u010de je bila ponastavljena na privzete nastavitve.",
+    "The dashboard was successfully updated.": "Nadzorna plo\u0161\u010da je bila uspe\u0161no posodobljena.",
+    "The limit value must be at least 1": "Mejna vrednost mora biti vsaj 1",
+    "This dashboard is now the default layout.": "Ta nadzorna plo\u0161\u010da je zdaj privzeta postavitev.",
+    "This is a text notice widget.": "To je pripomo\u010dek za besedilna obvestila.",
+    "This month": "Ta mesec",
+    "This quarter": "To \u010detrtletje",
+    "This week": "Ta teden",
+    "This year": "Letos",
+    "Title": "Naslov",
+    "Today": "Danes",
+    "Value": "Vrednost",
+    "Values": "Vrednote",
+    "Vertical": "Navpi\u010dno",
+    "Warning": "Opozorilo",
+    "Week": "Teden",
+    "Year": "Leto",
+    "Yesterday": "V\u010deraj"
 }
 );
 
 
-//! moment.js locale configuration v2.22.2
+//! moment.js locale configuration
+//! locale : Slovenian [sl]
+//! author : Robert Sedovšek : https://github.com/sedovsek
 
 ;(function (global, factory) {
    typeof exports === 'object' && typeof module !== 'undefined'
@@ -295,12 +293,15 @@ window.oc.langMessages['sl'] = $.extend(
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
 
+    //! moment.js locale configuration
 
     function processRelativeTime(number, withoutSuffix, key, isFuture) {
         var result = number + ' ';
         switch (key) {
             case 's':
-                return withoutSuffix || isFuture ? 'nekaj sekund' : 'nekaj sekundami';
+                return withoutSuffix || isFuture
+                    ? 'nekaj sekund'
+                    : 'nekaj sekundami';
             case 'ss':
                 if (number === 1) {
                     result += withoutSuffix ? 'sekundo' : 'sekundi';
@@ -309,7 +310,7 @@ window.oc.langMessages['sl'] = $.extend(
                 } else if (number < 5) {
                     result += withoutSuffix || isFuture ? 'sekunde' : 'sekundah';
                 } else {
-                    result += withoutSuffix || isFuture ? 'sekund' : 'sekund';
+                    result += 'sekund';
                 }
                 return result;
             case 'm':
@@ -379,26 +380,31 @@ window.oc.langMessages['sl'] = $.extend(
     }
 
     var sl = moment.defineLocale('sl', {
-        months : 'januar_februar_marec_april_maj_junij_julij_avgust_september_oktober_november_december'.split('_'),
-        monthsShort : 'jan._feb._mar._apr._maj._jun._jul._avg._sep._okt._nov._dec.'.split('_'),
+        months: 'januar_februar_marec_april_maj_junij_julij_avgust_september_oktober_november_december'.split(
+            '_'
+        ),
+        monthsShort:
+            'jan._feb._mar._apr._maj._jun._jul._avg._sep._okt._nov._dec.'.split(
+                '_'
+            ),
         monthsParseExact: true,
-        weekdays : 'nedelja_ponedeljek_torek_sreda_četrtek_petek_sobota'.split('_'),
-        weekdaysShort : 'ned._pon._tor._sre._čet._pet._sob.'.split('_'),
-        weekdaysMin : 'ne_po_to_sr_če_pe_so'.split('_'),
-        weekdaysParseExact : true,
-        longDateFormat : {
-            LT : 'H:mm',
-            LTS : 'H:mm:ss',
-            L : 'DD.MM.YYYY',
-            LL : 'D. MMMM YYYY',
-            LLL : 'D. MMMM YYYY H:mm',
-            LLLL : 'dddd, D. MMMM YYYY H:mm'
+        weekdays: 'nedelja_ponedeljek_torek_sreda_četrtek_petek_sobota'.split('_'),
+        weekdaysShort: 'ned._pon._tor._sre._čet._pet._sob.'.split('_'),
+        weekdaysMin: 'ne_po_to_sr_če_pe_so'.split('_'),
+        weekdaysParseExact: true,
+        longDateFormat: {
+            LT: 'H:mm',
+            LTS: 'H:mm:ss',
+            L: 'DD. MM. YYYY',
+            LL: 'D. MMMM YYYY',
+            LLL: 'D. MMMM YYYY H:mm',
+            LLLL: 'dddd, D. MMMM YYYY H:mm',
         },
-        calendar : {
-            sameDay  : '[danes ob] LT',
-            nextDay  : '[jutri ob] LT',
+        calendar: {
+            sameDay: '[danes ob] LT',
+            nextDay: '[jutri ob] LT',
 
-            nextWeek : function () {
+            nextWeek: function () {
                 switch (this.day()) {
                     case 0:
                         return '[v] [nedeljo] [ob] LT';
@@ -413,8 +419,8 @@ window.oc.langMessages['sl'] = $.extend(
                         return '[v] dddd [ob] LT';
                 }
             },
-            lastDay  : '[včeraj ob] LT',
-            lastWeek : function () {
+            lastDay: '[včeraj ob] LT',
+            lastWeek: function () {
                 switch (this.day()) {
                     case 0:
                         return '[prejšnjo] [nedeljo] [ob] LT';
@@ -429,30 +435,30 @@ window.oc.langMessages['sl'] = $.extend(
                         return '[prejšnji] dddd [ob] LT';
                 }
             },
-            sameElse : 'L'
+            sameElse: 'L',
         },
-        relativeTime : {
-            future : 'čez %s',
-            past   : 'pred %s',
-            s      : processRelativeTime,
-            ss     : processRelativeTime,
-            m      : processRelativeTime,
-            mm     : processRelativeTime,
-            h      : processRelativeTime,
-            hh     : processRelativeTime,
-            d      : processRelativeTime,
-            dd     : processRelativeTime,
-            M      : processRelativeTime,
-            MM     : processRelativeTime,
-            y      : processRelativeTime,
-            yy     : processRelativeTime
+        relativeTime: {
+            future: 'čez %s',
+            past: 'pred %s',
+            s: processRelativeTime,
+            ss: processRelativeTime,
+            m: processRelativeTime,
+            mm: processRelativeTime,
+            h: processRelativeTime,
+            hh: processRelativeTime,
+            d: processRelativeTime,
+            dd: processRelativeTime,
+            M: processRelativeTime,
+            MM: processRelativeTime,
+            y: processRelativeTime,
+            yy: processRelativeTime,
         },
         dayOfMonthOrdinalParse: /\d{1,2}\./,
-        ordinal : '%d.',
-        week : {
-            dow : 1, // Monday is the first day of the week.
-            doy : 7  // The week that contains Jan 1st is the first week of the year.
-        }
+        ordinal: '%d.',
+        week: {
+            dow: 1, // Monday is the first day of the week.
+            doy: 7, // The week that contains Jan 7th is the first week of the year.
+        },
     });
 
     return sl;

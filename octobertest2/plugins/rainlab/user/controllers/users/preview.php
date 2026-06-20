@@ -19,6 +19,11 @@
 <div class="loading-indicator-container mb-3">
     <div class="control-toolbar form-toolbar" data-control="toolbar">
         <?= Ui::button("Back", 'user/users')->icon('icon-arrow-left')->outline() ?>
+
+        <div class="toolbar-divider"></div>
+
+        <?= Ui::button("Edit", "user/users/update/{$formModel->id}")->icon('icon-pencil')->outline()->primary() ?>
+
         <?php if ($canDoGeneralActions): ?>
             <?php if ($this->user->hasAccess('rainlab.users.impersonate_user')): ?>
                 <div class="toolbar-divider"></div>
@@ -27,8 +32,6 @@
                     ->ajaxSuccess("window.open(data.baseUrl)") ?>
             <?php endif ?>
         <?php endif ?>
-
-        <?= Ui::button("Edit", "user/users/update/{$formModel->id}")->icon('icon-pencil')->outline()->primary() ?>
 
         <div class="toolbar-divider"></div>
 
@@ -42,7 +45,7 @@
                 ->confirmMessage("Ban this user? It will prevent them from logging in and holding an active session.") ?>
         <?php endif ?>
 
-        <?php if (!$formModel->trashed()): ?> ?>
+        <?php if (!$formModel->trashed()): ?>
             <?= Ui::ajaxButton("Delete", 'onDelete')->icon('icon-delete')->outline()->danger()
                 ->confirmMessage("Are you sure?") ?>
         <?php endif ?>
@@ -82,7 +85,7 @@
     /**
      * @event rainlab.user.view.extendPreviewTabs
      * Provides an opportunity to add tabs to the user preview page in the admin panel.
-     * The event should return an array of `[Tab Name => ~/path/to/partial.php]`
+     * The event should return an array of `[Tab Name => ~/path/to/partial.php]`.
      *
      * Example usage:
      *

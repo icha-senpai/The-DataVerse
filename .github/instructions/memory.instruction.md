@@ -11,13 +11,13 @@ Project summary:
 - name: The DataVerse
 - theme: Dark neon synthwave (background #0a0a0f; accents #0ff cyan, #f0f magenta)
 - primary fonts: Tilt Neon (preferred), Orbitron (headings), Inter (body)
-- platforms: OctoberCMS (octobertest2), MediaWiki (wiki), XenForo (forum)
+- platforms: OctoberCMS (octobertest2), Bookstack (wiki)
 - top-level asset folder: `assets/` (fonts, images, CSS/JS vendor files)
 - orchestrator app: `octobertest2/` (OctoberCMS 4.x, Laravel 12)
 
 Development environment:
 
-- Local: Laragon (PHP 8.2, MariaDB, Apache, Node.js for Tailwind builds)
+- Local: Laragon (PHP 8.5, MariaDB, Apache, Node.js for Tailwind builds)
 - Production: iFastNet shared hosting; builds are packaged and uploaded manually (no Composer/NPM on server)
 
 Coding focus and restrictions:

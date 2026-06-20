@@ -1,9 +1,14 @@
 <?php namespace System\Models;
 
 use Str;
+use File;
 use Model;
+use Config;
 use System;
 use Exception;
+use Throwable;
+use Illuminate\Log\Events\MessageLogged;
+use October\Rain\Log\LogManager;
 
 /**
  * EventLog model for logging system errors and debug trace messages
@@ -47,6 +52,32 @@ class EventLog extends Model
     }
 
     /**
+     * addFromMessageLogged adds a log record from a Laravel MessageLogged event,
+     * respecting the useLogging() gate and only accepting records from the
+     * default log channel.
+     *
+     * If the channel name cannot be determined (e.g. when running on a stock
+     * LogManager that doesn't tag records), the record is accepted to preserve
+     * legacy behaviour.
+     */
+    public static function addFromMessageLogged(MessageLogged $event): ?EventLog
+    {
+        if (!static::useLogging()) {
+            return null;
+        }
+
+        $channel = $event->context[LogManager::CHANNEL_CONTEXT_KEY] ?? null;
+        if ($channel !== null && $channel !== Config::get('logging.default')) {
+            return null;
+        }
+
+        $context = $event->context;
+        unset($context[LogManager::CHANNEL_CONTEXT_KEY]);
+
+        return static::add($event->message, $event->level, $context);
+    }
+
+    /**
      * add a log record
      * @param string $message Specifies the message text
      * @param string $level Specifies the logging level
@@ -59,7 +90,7 @@ class EventLog extends Model
         $record->level = $level;
 
         if ($details !== null) {
-            $record->details = (array) $details;
+            $record->details = static::normalizeDetails((array) $details);
         }
 
         try {
@@ -69,6 +100,57 @@ class EventLog extends Model
         }
 
         return $record;
+    }
+
+    /**
+     * normalizeDetails converts non-serializable values in the details array,
+     * such as Throwable objects, into structured data that survives JSON encoding.
+     */
+    protected static function normalizeDetails(array $details): array
+    {
+        foreach ($details as $key => $value) {
+            if ($value instanceof Throwable) {
+                $details[$key] = static::normalizeException($value);
+            }
+        }
+
+        return $details;
+    }
+
+    /**
+     * normalizeException converts a Throwable into a JSON-safe array.
+     */
+    protected static function normalizeException(Throwable $exception): array
+    {
+        $result = [
+            'class' => get_class($exception),
+            'message' => $exception->getMessage(),
+            'code' => $exception->getCode(),
+            'file' => File::nicePath($exception->getFile()),
+            'line' => $exception->getLine(),
+            'trace' => array_map(function ($frame) {
+                $parts = [];
+                if (isset($frame['file'])) {
+                    $parts['file'] = File::nicePath($frame['file']);
+                }
+                if (isset($frame['line'])) {
+                    $parts['line'] = $frame['line'];
+                }
+                if (isset($frame['class'])) {
+                    $parts['call'] = $frame['class'] . ($frame['type'] ?? '') . ($frame['function'] ?? '');
+                }
+                elseif (isset($frame['function'])) {
+                    $parts['call'] = $frame['function'];
+                }
+                return $parts;
+            }, $exception->getTrace()),
+        ];
+
+        if ($exception->getPrevious()) {
+            $result['previous'] = static::normalizeException($exception->getPrevious());
+        }
+
+        return $result;
     }
 
     /**
@@ -105,8 +187,11 @@ class EventLog extends Model
     {
         $formatted = $this->message;
 
-        if (is_array($this->details)) {
-            $formatted .= " " . json_encode($this->details, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRESERVE_ZERO_FRACTION | JSON_INVALID_UTF8_SUBSTITUTE | JSON_PARTIAL_OUTPUT_ON_ERROR);
+        if (is_array($this->details) && count($this->details) > 0) {
+            $formatted .= "\n\n" . json_encode(
+                $this->details,
+                JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRESERVE_ZERO_FRACTION | JSON_INVALID_UTF8_SUBSTITUTE | JSON_PARTIAL_OUTPUT_ON_ERROR
+            );
         }
 
         return $formatted;

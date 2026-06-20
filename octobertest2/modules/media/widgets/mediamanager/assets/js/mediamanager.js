@@ -1,3 +1,6 @@
+import { ControlBase, registerControl } from 'larajax';
+import MediaManagerImageCropPopup from './mediamanager.imagecroppopup.js';
+
 /*
  * Media manager control class
  *
@@ -10,13 +13,11 @@
  * Dependencies:
  * - Scrollpad (october.scrollpad.js)
  */
-'use strict';
-
 if (oc.mediaManager === undefined) {
     oc.mediaManager = {};
 }
 
-oc.registerControl('media-manager', class extends oc.ControlBase {
+registerControl('media-manager', class extends ControlBase {
     init() {
         this.$el = $(this.element);
         this.$form = this.$el.closest('form');
@@ -48,7 +49,9 @@ oc.registerControl('media-manager', class extends oc.ControlBase {
             selectSingleImage: 'Please select a single image.',
             selectionNotImage: 'The selected item is not an image.',
             overwriteConfirm: 'Some files already exist. Do you want to replace them?',
+            pathCopiedMessage: 'Copied!',
             bottomToolbar: false,
+            maxFilesize: 256,
             cropAndInsertButton: false,
             readOnly: false
         }, this.config);
@@ -144,6 +147,7 @@ oc.registerControl('media-manager', class extends oc.ControlBase {
     registerHandlers() {
         this.$el.on('dblclick', this.proxy(this.onNavigate));
         this.$el.on('click.tree-path', 'ul.tree-path, [data-media-sidebar-labels]', this.proxy(this.onNavigate));
+        this.$el.on('click.copy-path', '[data-media-copy-path]', this.proxy(this.onCopyPathClick));
 
         this.$el.on('click.command', '[data-command]', this.proxy(this.onCommandClick));
 
@@ -170,6 +174,7 @@ oc.registerControl('media-manager', class extends oc.ControlBase {
     unregisterHandlers() {
         this.$el.off('dblclick', this.proxy(this.onNavigate));
         this.$el.off('click.tree-path', this.proxy(this.onNavigate));
+        this.$el.off('click.copy-path', this.proxy(this.onCopyPathClick));
         this.$el.off('click.command', this.proxy(this.onCommandClick));
 
         this.$el.off('click.item', this.proxy(this.onItemClick));
@@ -234,7 +239,7 @@ oc.registerControl('media-manager', class extends oc.ControlBase {
     //
 
     removeAttachedControls() {
-        this.$el.find('[data-control=toolbar]').toolbar('dispose');
+        this.$el.find('[data-control=toolbar]').dragScroll('dispose');
         this.$el.find('[data-media-sorting]').select2('destroy');
     }
 
@@ -752,6 +757,7 @@ oc.registerControl('media-manager', class extends oc.ControlBase {
             clickable: this.$el.find('[data-media-upload]').get(0),
             url: this.config.url,
             paramName: 'file_data',
+            maxFilesize: this.config.maxFilesize || 256,
             headers: {},
             timeout: 0,
             createImageThumbnails: false,
@@ -966,7 +972,7 @@ oc.registerControl('media-manager', class extends oc.ControlBase {
 
         var path = selectedItems[0].getAttribute('data-path');
 
-        new oc.mediaManager.imageCropPopup(path, {
+        new MediaManagerImageCropPopup(path, {
             alias: this.config.alias,
             onDone: callback
         });
@@ -1186,8 +1192,43 @@ oc.registerControl('media-manager', class extends oc.ControlBase {
 
         this.navigateToItem($item);
 
-        if ($(ev.target).data('label') != 'public-url') {
+        if ($(ev.target).data('label') != 'public-url'
+            && !$(ev.target).closest('[data-media-copy-path]').length) {
             return false;
+        }
+    }
+
+    onCopyPathClick(ev) {
+        ev.preventDefault();
+        ev.stopPropagation();
+
+        var items = this.$el.get(0).querySelectorAll('[data-type="media-item"].selected');
+        if (items.length === 1) {
+            var textarea = document.createElement('textarea');
+            textarea.value = items[0].getAttribute('data-path');
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+
+            var link = ev.currentTarget,
+                originalText = link.textContent;
+
+            link.textContent = this.config.pathCopiedMessage;
+            link.style.transition = 'none';
+            link.style.opacity = '1';
+
+            setTimeout(function() {
+                link.style.transition = 'opacity 0.3s ease';
+                link.style.opacity = '0';
+                setTimeout(function() {
+                    link.textContent = originalText;
+                    link.style.opacity = '';
+                    link.style.transition = '';
+                }, 300);
+            }, 800);
         }
     }
 

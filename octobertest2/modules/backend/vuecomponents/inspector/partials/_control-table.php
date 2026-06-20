@@ -3,13 +3,15 @@
     data-lang-add-item="<?= e(trans('backend::lang.table.add_item')) ?>"
 >
     <table>
-        <backend-component-inspector-control-table-head
+        <backend-inspector-control-table-head
+            v-if="!control.noHeader"
             :columns="columns"
         >
-        </backend-component-inspector-control-table-head>
+        </backend-inspector-control-table-head>
         <tbody>
-            <backend-component-inspector-control-table-row
+            <backend-inspector-control-table-row
                 v-for="(row, index) in value"
+                :ref="el => setRowRef(el, index)"
                 :row="row"
                 :key="index"
                 :columns="columns"
@@ -18,7 +20,7 @@
                 :table-configuration="tableConfiguration"
                 @removerow="onRemoveRowClick"
             >
-            </backend-component-inspector-control-table-row>
+            </backend-inspector-control-table-row>
         </tbody>
     </table>
 

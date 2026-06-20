@@ -1,7 +1,7 @@
 /*
  * Media manager image editor popup
  */
-class MediaManagerImageCropPopup
+export default class MediaManagerImageCropPopup
 {
     static DEFAULTS = {
         alias: undefined,
@@ -88,7 +88,7 @@ class MediaManagerImageCropPopup
             // Note - the controls are destroyed and removed from DOM. If they're just destroyed,
             // the JS plugins could be re-attached to them on window.onresize. -ab
             this.$popupElement.find('[data-media-selection-mode]').select2('destroy').remove();
-            this.$popupElement.find('[data-control=toolbar]').toolbar('dispose').remove();
+            this.$popupElement.find('[data-control=toolbar]').dragScroll('dispose').remove();
 
             this.jCrop.destroy();
         }
@@ -473,4 +473,3 @@ class MediaManagerImageCropPopup
     }
 }
 
-oc.mediaManager.imageCropPopup = MediaManagerImageCropPopup;

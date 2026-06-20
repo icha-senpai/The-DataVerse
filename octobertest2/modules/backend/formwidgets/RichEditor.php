@@ -2,7 +2,6 @@
 
 use App;
 use Config;
-use Request;
 use BackendAuth;
 use Backend\Classes\FormWidgetBase;
 use Backend\Models\EditorSetting;
@@ -51,12 +50,10 @@ class RichEditor extends FormWidgetBase
     public $useLineBreaks = false;
 
     /**
-     * @var string Defines a mount point for the editor toolbar.
-     * Must include a module name that exports the Vue application and a state element name.
-     * Format: stateElementName
+     * @var string externalToolbarBus defines a mount point for the editor toolbar.
      * Only works in Vue applications and form document layouts.
      */
-    public $externalToolbarAppState = null;
+    public $externalToolbarBus = null;
 
     /**
      * @var array|null editorOptions configured in the Froala editor. For example:
@@ -93,7 +90,7 @@ class RichEditor extends FormWidgetBase
             'showMargins',
             'useLineBreaks',
             'editorOptions',
-            'externalToolbarAppState',
+            'externalToolbarBus',
             'externalToolbarEventBus'
         ]);
 
@@ -125,7 +122,7 @@ class RichEditor extends FormWidgetBase
         $this->vars['size'] = $this->formField->size;
         $this->vars['readOnly'] = $this->readOnly;
         $this->vars['showMargins'] = $this->showMargins;
-        $this->vars['externalToolbarAppState'] = $this->externalToolbarAppState;
+        $this->vars['externalToolbarBus'] = $this->externalToolbarBus;
         $this->vars['name'] = $this->getFieldName();
         $this->vars['value'] = $this->getLoadValue();
         $this->vars['toolbarButtons'] = $this->evalToolbarButtons();
@@ -147,8 +144,6 @@ class RichEditor extends FormWidgetBase
         $this->vars['inlineStyles'] = EditorSetting::getConfiguredStyles('html_style_inline');
         $this->vars['tableStyles'] = EditorSetting::getConfiguredStyles('html_style_table');
         $this->vars['tableCellStyles'] = EditorSetting::getConfiguredStyles('html_style_table_cell');
-
-        $this->vars['isAjax'] = Request::ajax();
     }
 
     /**
@@ -174,7 +169,7 @@ class RichEditor extends FormWidgetBase
     protected function loadAssets()
     {
         $this->addCss('css/richeditor.css');
-        $this->addJs('js/richeditor.js');
+        $this->addJs('js/richeditor.js', ['type' => 'module']);
         $this->addJs('/modules/backend/formwidgets/codeeditor/assets/js/build-min.js');
     }
 

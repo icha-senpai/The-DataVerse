@@ -9,7 +9,7 @@ if (!window.oc.langMessages) {
     window.oc.langMessages = {};
 }
 
-window.oc.langMessages['ja'] = $.extend(
+window.oc.langMessages['ja'] = Object.assign(
     window.oc.langMessages['ja'] || {},
     {
     "markdowneditor": {
@@ -55,7 +55,8 @@ window.oc.langMessages['ja'] = $.extend(
         "dismiss": "Dismiss",
         "confirm_button_text": "OK",
         "cancel_button_text": "Cancel",
-        "widget_remove_confirm": "Remove this widget?"
+        "widget_remove_confirm": "Remove this widget?",
+        "reload": "Reload"
     },
     "datepicker": {
         "previousMonth": "Previous Month",
@@ -154,139 +155,136 @@ window.oc.langMessages['ja'] = $.extend(
         "cancel": "Cancel",
         "items": "Items"
     },
-    "dashboard": {
-        "widget_data_source": "Data source",
-        "widget_data_source_required": "Please select a data source",
-        "widget_dimension": "Dimension",
-        "widget_dimension_required": "Please select a dimension",
-        "widget_metric": "Metric",
-        "widget_metric_required": "Please select metric(s).",
-        "widget_metrics": "Metrics",
-        "widget_title": "Title",
-        "widget_title_required": "Please provide the widget title",
-        "widget_title_optional_placeholder": "Leave empty to hide the title",
-        "widget_metric_value": "Value",
-        "widget_icon_status": "Icon Status",
-        "widget_href": "Link URL",
-        "widget_icon": "Icon",
-        "widget_icon_required": "Please select an icon",
-        "widget_link_text": "Link Text",
-        "apply": "Apply",
-        "delete": "Delete",
-        "configure": "Configure",
-        "section_show_interval": "Show Date Interval",
-        "widget_chart_type": "Chart type",
-        "widget_chart_type_bar": "Bar",
-        "widget_chart_type_stacked_bar": "Stacked Bar",
-        "widget_chart_type_line": "Line",
-        "sort_by": "Sort by",
-        "sort_by_required": "Select sorting metric or dimension",
-        "sort_by_placeholder": "Select a dimension and metrics",
-        "sort_order": "Order",
-        "sort_asc": "Ascending",
-        "sort_desc": "Descending",
-        "group_sorting": "Sorting",
-        "value_not_set": "[not set]",
-        "limit": "Limit",
-        "limit_placeholder": "Display all records",
-        "limit_number": "Enter a positive number or leave empty to display all records.",
-        "limit_min": "The limit value must be at least 1",
-        "empty_values": "Empty values",
-        "empty_values_hide": "Hide",
-        "empty_values_display_not_set": "Display [not set]",
-        "empty_values_dimension": "Dimension",
-        "date_interval": "Date interval",
-        "date_interval_dashboard_default": "Dashboard interval",
-        "date_interval_this_week": "This week",
-        "date_interval_this_month": "This month",
-        "date_interval_this_quarter": "This quarter",
-        "date_interval_this_year": "This year",
-        "date_interval_past_hour": "Past hour",
-        "date_interval_past_days": "Past X days",
-        "date_interval_past_days_value": "Number of days",
-        "date_interval_past_days_invalid": "Enter a positive number",
-        "prop_date_interval": "Display",
-        "date_interval_past_days_placeholder": "1 day (today) if not set",
-        "widget_bar_direction": "Direction",
-        "widget_bar_direction_vertical": "Vertical",
-        "widget_bar_direction_horizontal": "Horizontal",
-        "prop_color": "Color",
-        "color_required": "Select the metric color",
-        "tab_general": "General",
-        "tab_sorting_filtering": "Sorting & Filtering",
-        "prop_records_per_page": "Records per page",
-        "records_per_page_placeholder": "Leave empty to disable pagination",
-        "records_per_page_invalid": "Enter a positive number or leave empty to display all records.",
-        "prop_display_totals": "Display totals",
-        "prop_display_relative_bar": "Display relative bars",
-        "prop_extra_table_fields": "Extra table fields",
-        "filter_operation_equal_to": "Equal to",
-        "filter_operation_greater_equal": "Greater or equal to",
-        "filter_operation_less_equal": "Less or equal to",
-        "filter_operation_greater": "Greater than",
-        "filter_operation_less": "Less than",
-        "filter_operation_starts_with": "Starts with",
-        "filter_operation_includes": "Includes",
-        "filter_operation_one_of": "One of",
-        "prop_operation": "Operation",
-        "prop_value": "Value",
-        "prop_values": "Values",
-        "prop_values_one_per_line": "One value per line",
-        "prop_filter_attribute": "Attribute",
-        "filter_select_attribute": "Select an attribute",
-        "filter_select_operation": "Select an operation",
-        "prop_filters": "Filters",
-        "icon_status_info": "Information",
-        "icon_status_important": "Important",
-        "icon_status_success": "Success",
-        "icon_status_warning": "Warning",
-        "icon_status_disabled": "Disabled",
-        "range_today": "Today",
-        "range_yesterday": "Yesterday",
-        "range_last_7_days": "Last 7 days",
-        "range_last_30_days": "Last 30 days",
-        "range_this_month": "This month",
-        "range_last_month": "Last month",
-        "range_this_quarter": "This quarter",
-        "range_this_year": "This year",
-        "range_this_week": "This week",
-        "interval_day": "Day",
-        "interval_week": "Week",
-        "interval_month": "Month",
-        "interval_quarter": "Quarter",
-        "interval_year": "Year",
-        "compare_totals": "Compare Totals",
-        "compare_prev_period": "Prev period",
-        "compare_prev_year": "Same period last year",
-        "compare_none": "Disabled",
-        "updated_successfully": "The dashboard was successfully updated.",
-        "edit_dashboard": "Edit Dashboard",
-        "make_default": "Make Default",
-        "make_default_confirm": "Set the current layout as the default?",
-        "make_default_successfully": "This dashboard is now the default layout.",
-        "reset_layout": "Reset Layout",
-        "reset_layout_confirm": "Reset layout back to default?",
-        "reset_layout_successfully": "The dashboard layout has been reset to default.",
-        "manage_dashboards": "Manage Dashboards",
-        "import_success": "The dashboard was successfully imported",
-        "new_dashboard": "New Dashboard",
-        "import_dashboard": "Import Dashboard",
-        "delete_confirm": "Delete the dashboard? This action cannot be reversed. All users with access will be affected.",
-        "delete_success": "The dashboard was successfully deleted.",
-        "menu_item_custom": "Custom",
-        "menu_item_delete_row": "Delete row",
-        "widget_type_indicator": "Indicator",
-        "widget_type_section_title": "Section Title",
-        "widget_type_notice": "Text Notice",
-        "widget_type_chart": "Chart",
-        "widget_type_table": "Table",
-        "notice_text": "Notice text"
-    }
+    "[not set]": "[\u672a\u8a2d\u5b9a]",
+    "1 day (today) if not set": "\u8a2d\u5b9a\u3055\u308c\u3066\u3044\u306a\u3044\u5834\u5408\u306f1\u65e5\uff08\u4eca\u65e5\uff09",
+    "Apply": "\u9069\u7528\u3059\u308b",
+    "Ascending": "\u4e0a\u6607",
+    "Attribute": "\u5c5e\u6027",
+    "Bar": "\u30d0\u30fc",
+    "Cancel": "\u30ad\u30e3\u30f3\u30bb\u30eb",
+    "Chart": "\u30c1\u30e3\u30fc\u30c8",
+    "Chart type": "\u30c1\u30e3\u30fc\u30c8\u306e\u7a2e\u985e",
+    "Color": "\u8272",
+    "Compare Totals": "\u5408\u8a08\u3092\u6bd4\u8f03\u3059\u308b",
+    "Configure": "\u8a2d\u5b9a",
+    "Custom": "\u30ab\u30b9\u30bf\u30e0",
+    "Custom Range": "\u30ab\u30b9\u30bf\u30e0\u7bc4\u56f2",
+    "Dashboard interval": "\u30c0\u30c3\u30b7\u30e5\u30dc\u30fc\u30c9\u9593\u9694",
+    "Data source": "\u30c7\u30fc\u30bf\u30bd\u30fc\u30b9",
+    "Date interval": "\u65e5\u4ed8\u9593\u9694",
+    "Day": "\u65e5",
+    "Delete": "\u6d88\u53bb",
+    "Delete Dashboard": "\u30c0\u30c3\u30b7\u30e5\u30dc\u30fc\u30c9\u3092\u524a\u9664",
+    "Delete row": "\u884c\u3092\u524a\u9664",
+    "Descending": "\u964d\u9806",
+    "Dimension": "\u5bf8\u6cd5",
+    "Direction": "\u65b9\u5411",
+    "Disabled": "\u7121\u52b9",
+    "Display": "\u753b\u9762",
+    "Display [not set]": "\u8868\u793a [\u672a\u8a2d\u5b9a]",
+    "Display all records": "\u3059\u3079\u3066\u306e\u30ec\u30b3\u30fc\u30c9\u3092\u8868\u793a",
+    "Display relative bars": "\u76f8\u5bfe\u30d0\u30fc\u3092\u8868\u793a",
+    "Display totals": "\u5408\u8a08\u3092\u8868\u793a",
+    "Edit Dashboard": "\u30c0\u30c3\u30b7\u30e5\u30dc\u30fc\u30c9\u3092\u7de8\u96c6",
+    "Empty values": "\u7a7a\u306e\u5024",
+    "Enter a positive number": "\u6b63\u306e\u6570\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044",
+    "Enter a positive number or leave empty to display all records.": "\u6b63\u306e\u6570\u3092\u5165\u529b\u3059\u308b\u304b\u3001\u7a7a\u767d\u306e\u307e\u307e\u306b\u3057\u3066\u3059\u3079\u3066\u306e\u30ec\u30b3\u30fc\u30c9\u3092\u8868\u793a\u3057\u307e\u3059\u3002",
+    "Equal to": "\u7b49\u3057\u3044",
+    "Export Dashboard": "\u30c0\u30c3\u30b7\u30e5\u30dc\u30fc\u30c9\u306e\u30a8\u30af\u30b9\u30dd\u30fc\u30c8",
+    "Extra table fields": "\u8ffd\u52a0\u306e\u30c6\u30fc\u30d6\u30eb\u30d5\u30a3\u30fc\u30eb\u30c9",
+    "Filters": "\u30d5\u30a3\u30eb\u30bf\u30fc",
+    "General": "\u4e00\u822c\u7684\u306a",
+    "Greater or equal to": "\u3088\u308a\u5927\u304d\u3044\u304b\u7b49\u3057\u3044",
+    "Greater than": "\u3088\u308a\u5927\u304d\u3044",
+    "Hide": "\u96a0\u308c\u308b",
+    "Horizontal": "\u6c34\u5e73",
+    "Icon": "\u30a2\u30a4\u30b3\u30f3",
+    "Icon Status": "\u30a2\u30a4\u30b3\u30f3\u306e\u30b9\u30c6\u30fc\u30bf\u30b9",
+    "Important": "\u91cd\u8981",
+    "Includes": "\u542b\u307e\u308c\u308b\u3082\u306e",
+    "Indicator": "\u30a4\u30f3\u30b8\u30b1\u30fc\u30bf",
+    "Information": "\u60c5\u5831",
+    "Last 30 days": "\u904e\u53bb30\u65e5\u9593",
+    "Last 7 days": "\u904e\u53bb7\u65e5\u9593",
+    "Last month": "\u5148\u6708",
+    "Leave empty to disable pagination": "\u30da\u30fc\u30b8\u533a\u5207\u308a\u3092\u7121\u52b9\u306b\u3059\u308b\u306b\u306f\u7a7a\u767d\u306e\u307e\u307e\u306b\u3057\u3066\u304f\u3060\u3055\u3044",
+    "Leave empty to hide the title": "\u30bf\u30a4\u30c8\u30eb\u3092\u975e\u8868\u793a\u306b\u3059\u308b\u306b\u306f\u7a7a\u767d\u306e\u307e\u307e\u306b\u3057\u3066\u304f\u3060\u3055\u3044",
+    "Less or equal to": "\u4ee5\u4e0b",
+    "Less than": "\u672a\u6e80",
+    "Limit": "\u5236\u9650",
+    "Line": "\u30e9\u30a4\u30f3",
+    "Link Text": "\u30ea\u30f3\u30af\u30c6\u30ad\u30b9\u30c8",
+    "Link URL": "\u30ea\u30f3\u30afURL",
+    "Make Default": "\u30c7\u30d5\u30a9\u30eb\u30c8\u306b\u3059\u308b",
+    "Manage Dashboards": "\u30c0\u30c3\u30b7\u30e5\u30dc\u30fc\u30c9\u306e\u7ba1\u7406",
+    "Metric": "\u30e1\u30c8\u30ea\u30c3\u30af",
+    "Metrics": "\u30e1\u30c8\u30ea\u30af\u30b9",
+    "Month": "\u6708",
+    "My Custom Widget": "\u30ab\u30b9\u30bf\u30e0\u30a6\u30a3\u30b8\u30a7\u30c3\u30c8",
+    "No Value": "\u4fa1\u5024\u306a\u3057",
+    "Notice text": "\u901a\u77e5\u30c6\u30ad\u30b9\u30c8",
+    "Number of days": "\u65e5\u6570",
+    "One of": "1\u3064",
+    "One value per line": "1\u884c\u306b1\u3064\u306e\u5024",
+    "Operation": "\u624b\u8853",
+    "Order": "\u6ce8\u6587",
+    "Past hour": "\u904e\u53bb1\u6642\u9593",
+    "Past X days": "\u904e\u53bbX\u65e5\u9593",
+    "Please provide the widget title": "\u30a6\u30a3\u30b8\u30a7\u30c3\u30c8\u306e\u30bf\u30a4\u30c8\u30eb\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044",
+    "Please select a data source": "\u30c7\u30fc\u30bf\u30bd\u30fc\u30b9\u3092\u9078\u629e\u3057\u3066\u304f\u3060\u3055\u3044",
+    "Please select a dimension": "\u5bf8\u6cd5\u3092\u9078\u629e\u3057\u3066\u304f\u3060\u3055\u3044",
+    "Please select an icon": "\u30a2\u30a4\u30b3\u30f3\u3092\u9078\u629e\u3057\u3066\u304f\u3060\u3055\u3044",
+    "Please select metric(s).": "\u30e1\u30c8\u30ea\u30c3\u30af\u3092\u9078\u629e\u3057\u3066\u304f\u3060\u3055\u3044\u3002",
+    "Prev period": "\u524d\u671f",
+    "Quarter": "\u56db\u534a\u671f",
+    "Records per page": "\u30da\u30fc\u30b8\u3042\u305f\u308a\u306e\u30ec\u30b3\u30fc\u30c9\u6570",
+    "Refresh every minute": "1\u5206\u3054\u3068\u306b\u66f4\u65b0",
+    "Rename Dashboard": "\u30c0\u30c3\u30b7\u30e5\u30dc\u30fc\u30c9\u306e\u540d\u524d\u3092\u5909\u66f4\u3059\u308b",
+    "Reset Layout": "\u30ec\u30a4\u30a2\u30a6\u30c8\u3092\u30ea\u30bb\u30c3\u30c8",
+    "Reset layout back to default?": "\u30ec\u30a4\u30a2\u30a6\u30c8\u3092\u30c7\u30d5\u30a9\u30eb\u30c8\u306b\u623b\u3057\u307e\u3059\u304b?",
+    "Same period last year": "\u524d\u5e74\u540c\u671f",
+    "Section": "\u30bb\u30af\u30b7\u30e7\u30f3",
+    "Section Title": "\u30bb\u30af\u30b7\u30e7\u30f3\u30bf\u30a4\u30c8\u30eb",
+    "Select a dimension and metrics": "\u30c7\u30a3\u30e1\u30f3\u30b7\u30e7\u30f3\u3068\u6307\u6a19\u3092\u9078\u629e\u3059\u308b",
+    "Select an attribute": "\u5c5e\u6027\u3092\u9078\u629e",
+    "Select an operation": "\u64cd\u4f5c\u3092\u9078\u629e",
+    "Select sorting metric or dimension": "\u4e26\u3079\u66ff\u3048\u306e\u6307\u6a19\u307e\u305f\u306f\u30c7\u30a3\u30e1\u30f3\u30b7\u30e7\u30f3\u3092\u9078\u629e",
+    "Select the metric color": "\u30e1\u30c8\u30ea\u30c3\u30af\u306e\u8272\u3092\u9078\u629e",
+    "Set the current layout as the default?": "\u73fe\u5728\u306e\u30ec\u30a4\u30a2\u30a6\u30c8\u3092\u30c7\u30d5\u30a9\u30eb\u30c8\u3068\u3057\u3066\u8a2d\u5b9a\u3057\u307e\u3059\u304b?",
+    "Show Date Interval": "\u65e5\u4ed8\u9593\u9694\u3092\u8868\u793a",
+    "Sort by": "\u4e26\u3079\u66ff\u3048",
+    "Sorting": "\u30bd\u30fc\u30c8",
+    "Sorting & Filtering": "\u4e26\u3079\u66ff\u3048\u3068\u30d5\u30a3\u30eb\u30bf\u30ea\u30f3\u30b0",
+    "Stacked Bar": "\u7a4d\u307f\u4e0a\u3052\u68d2\u30b0\u30e9\u30d5",
+    "Starts with": "\u59cb\u307e\u308a\u306f",
+    "Success": "\u6210\u529f",
+    "Table": "\u30c6\u30fc\u30d6\u30eb",
+    "Text Notice": "\u30c6\u30ad\u30b9\u30c8\u901a\u77e5",
+    "The dashboard layout has been reset to default.": "\u30c0\u30c3\u30b7\u30e5\u30dc\u30fc\u30c9\u306e\u30ec\u30a4\u30a2\u30a6\u30c8\u304c\u30c7\u30d5\u30a9\u30eb\u30c8\u306b\u30ea\u30bb\u30c3\u30c8\u3055\u308c\u307e\u3057\u305f\u3002",
+    "The dashboard was successfully updated.": "\u30c0\u30c3\u30b7\u30e5\u30dc\u30fc\u30c9\u306f\u6b63\u5e38\u306b\u66f4\u65b0\u3055\u308c\u307e\u3057\u305f\u3002",
+    "The limit value must be at least 1": "\u5236\u9650\u5024\u306f\u5c11\u306a\u304f\u3068\u30821\u3067\u3042\u308b\u5fc5\u8981\u304c\u3042\u308a\u307e\u3059",
+    "This dashboard is now the default layout.": "\u3053\u306e\u30c0\u30c3\u30b7\u30e5\u30dc\u30fc\u30c9\u304c\u30c7\u30d5\u30a9\u30eb\u30c8\u306e\u30ec\u30a4\u30a2\u30a6\u30c8\u306b\u306a\u308a\u307e\u3057\u305f\u3002",
+    "This is a text notice widget.": "\u30c6\u30ad\u30b9\u30c8\u901a\u77e5\u30a6\u30a3\u30b8\u30a7\u30c3\u30c8\u3067\u3059\u3002",
+    "This month": "\u4eca\u6708",
+    "This quarter": "\u4eca\u56db\u534a\u671f",
+    "This week": "\u4eca\u9031",
+    "This year": "\u4eca\u5e74",
+    "Title": "\u30bf\u30a4\u30c8\u30eb",
+    "Today": "\u4eca\u65e5",
+    "Value": "\u4fa1\u5024",
+    "Values": "\u4fa1\u5024\u89b3",
+    "Vertical": "\u5782\u76f4",
+    "Warning": "\u8b66\u544a",
+    "Week": "\u9031",
+    "Year": "\u5e74",
+    "Yesterday": "\u6628\u65e5"
 }
 );
 
 
-//! moment.js locale configuration v2.22.2
+//! moment.js locale configuration
+//! locale : Japanese [ja]
+//! author : LI Long : https://github.com/baryon
 
 ;(function (global, factory) {
    typeof exports === 'object' && typeof module !== 'undefined'
@@ -295,59 +293,125 @@ window.oc.langMessages['ja'] = $.extend(
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
 
+    //! moment.js locale configuration
 
     var ja = moment.defineLocale('ja', {
-        months : '1月_2月_3月_4月_5月_6月_7月_8月_9月_10月_11月_12月'.split('_'),
-        monthsShort : '1月_2月_3月_4月_5月_6月_7月_8月_9月_10月_11月_12月'.split('_'),
-        weekdays : '日曜日_月曜日_火曜日_水曜日_木曜日_金曜日_土曜日'.split('_'),
-        weekdaysShort : '日_月_火_水_木_金_土'.split('_'),
-        weekdaysMin : '日_月_火_水_木_金_土'.split('_'),
-        longDateFormat : {
-            LT : 'HH:mm',
-            LTS : 'HH:mm:ss',
-            L : 'YYYY/MM/DD',
-            LL : 'YYYY年M月D日',
-            LLL : 'YYYY年M月D日 HH:mm',
-            LLLL : 'YYYY年M月D日 dddd HH:mm',
-            l : 'YYYY/MM/DD',
-            ll : 'YYYY年M月D日',
-            lll : 'YYYY年M月D日 HH:mm',
-            llll : 'YYYY年M月D日(ddd) HH:mm'
+        eras: [
+            {
+                since: '2019-05-01',
+                offset: 1,
+                name: '令和',
+                narrow: '㋿',
+                abbr: 'R',
+            },
+            {
+                since: '1989-01-08',
+                until: '2019-04-30',
+                offset: 1,
+                name: '平成',
+                narrow: '㍻',
+                abbr: 'H',
+            },
+            {
+                since: '1926-12-25',
+                until: '1989-01-07',
+                offset: 1,
+                name: '昭和',
+                narrow: '㍼',
+                abbr: 'S',
+            },
+            {
+                since: '1912-07-30',
+                until: '1926-12-24',
+                offset: 1,
+                name: '大正',
+                narrow: '㍽',
+                abbr: 'T',
+            },
+            {
+                since: '1873-01-01',
+                until: '1912-07-29',
+                offset: 6,
+                name: '明治',
+                narrow: '㍾',
+                abbr: 'M',
+            },
+            {
+                since: '0001-01-01',
+                until: '1873-12-31',
+                offset: 1,
+                name: '西暦',
+                narrow: 'AD',
+                abbr: 'AD',
+            },
+            {
+                since: '0000-12-31',
+                until: -Infinity,
+                offset: 1,
+                name: '紀元前',
+                narrow: 'BC',
+                abbr: 'BC',
+            },
+        ],
+        eraYearOrdinalRegex: /(元|\d+)年/,
+        eraYearOrdinalParse: function (input, match) {
+            return match[1] === '元' ? 1 : parseInt(match[1] || input, 10);
+        },
+        months: '1月_2月_3月_4月_5月_6月_7月_8月_9月_10月_11月_12月'.split('_'),
+        monthsShort: '1月_2月_3月_4月_5月_6月_7月_8月_9月_10月_11月_12月'.split(
+            '_'
+        ),
+        weekdays: '日曜日_月曜日_火曜日_水曜日_木曜日_金曜日_土曜日'.split('_'),
+        weekdaysShort: '日_月_火_水_木_金_土'.split('_'),
+        weekdaysMin: '日_月_火_水_木_金_土'.split('_'),
+        longDateFormat: {
+            LT: 'HH:mm',
+            LTS: 'HH:mm:ss',
+            L: 'YYYY/MM/DD',
+            LL: 'YYYY年M月D日',
+            LLL: 'YYYY年M月D日 HH:mm',
+            LLLL: 'YYYY年M月D日 dddd HH:mm',
+            l: 'YYYY/MM/DD',
+            ll: 'YYYY年M月D日',
+            lll: 'YYYY年M月D日 HH:mm',
+            llll: 'YYYY年M月D日(ddd) HH:mm',
         },
         meridiemParse: /午前|午後/i,
-        isPM : function (input) {
+        isPM: function (input) {
             return input === '午後';
         },
-        meridiem : function (hour, minute, isLower) {
+        meridiem: function (hour, minute, isLower) {
             if (hour < 12) {
                 return '午前';
             } else {
                 return '午後';
             }
         },
-        calendar : {
-            sameDay : '[今日] LT',
-            nextDay : '[明日] LT',
-            nextWeek : function (now) {
-                if (now.week() < this.week()) {
+        calendar: {
+            sameDay: '[今日] LT',
+            nextDay: '[明日] LT',
+            nextWeek: function (now) {
+                if (now.week() !== this.week()) {
                     return '[来週]dddd LT';
                 } else {
                     return 'dddd LT';
                 }
             },
-            lastDay : '[昨日] LT',
-            lastWeek : function (now) {
-                if (this.week() < now.week()) {
+            lastDay: '[昨日] LT',
+            lastWeek: function (now) {
+                if (this.week() !== now.week()) {
                     return '[先週]dddd LT';
                 } else {
                     return 'dddd LT';
                 }
             },
-            sameElse : 'L'
+            sameElse: 'L',
         },
-        dayOfMonthOrdinalParse : /\d{1,2}日/,
-        ordinal : function (number, period) {
+        dayOfMonthOrdinalParse: /\d{1,2}日/,
+        ordinal: function (number, period) {
             switch (period) {
+                case 'y':
+                    return number === 1 ? '元年' : number + '年';
                 case 'd':
                 case 'D':
                 case 'DDD':
@@ -356,22 +420,22 @@ window.oc.langMessages['ja'] = $.extend(
                     return number;
             }
         },
-        relativeTime : {
-            future : '%s後',
-            past : '%s前',
-            s : '数秒',
-            ss : '%d秒',
-            m : '1分',
-            mm : '%d分',
-            h : '1時間',
-            hh : '%d時間',
-            d : '1日',
-            dd : '%d日',
-            M : '1ヶ月',
-            MM : '%dヶ月',
-            y : '1年',
-            yy : '%d年'
-        }
+        relativeTime: {
+            future: '%s後',
+            past: '%s前',
+            s: '数秒',
+            ss: '%d秒',
+            m: '1分',
+            mm: '%d分',
+            h: '1時間',
+            hh: '%d時間',
+            d: '1日',
+            dd: '%d日',
+            M: '1ヶ月',
+            MM: '%dヶ月',
+            y: '1年',
+            yy: '%d年',
+        },
     });
 
     return ja;

@@ -1,7 +1,9 @@
-Vue.component('cms-editor-component-layout-editor', {
-    extends: oc.Modules.import('cms.editor.extension.documentcomponent.base'),
+import { CmsDocumentComponentBase } from '../../../../assets/js/cms.editor.extension.documentcomponent.base.js';
+import EditorModelDefinition from '../../../../../backend/vuecomponents/monacoeditor/assets/js/modeldefinition.js';
+
+export default {
+    extends: CmsDocumentComponentBase,
     data: function() {
-        const EditorModelDefinition = oc.Modules.import('backend.vuecomponents.monacoeditor.modeldefinition');
         const defMarkup = new EditorModelDefinition(
             'twig',
             this.trans('cms::lang.page.editor_markup'),
@@ -23,11 +25,6 @@ Vue.component('cms-editor-component-layout-editor', {
         defCode.setAutoPrefix('<?php\n\n', /^\s*\<\?(php)?\n*/);
 
         return {
-            documentData: {
-                markup: '',
-                code: '',
-                components: []
-            },
             documentSettingsPopupTitle: this.trans('cms::lang.editor.layout'),
             documentTitleProperty: 'fileName',
             codeEditorModelDefinitions: [defMarkup, defCode],
@@ -118,6 +115,5 @@ Vue.component('cms-editor-component-layout-editor', {
             this.defMarkup.setHolderObject(this.documentData);
             this.defCode.setHolderObject(this.documentData);
         }
-    },
-    template: '#cms_vuecomponents_layouteditor'
-});
+    }
+};

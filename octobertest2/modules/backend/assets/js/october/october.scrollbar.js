@@ -229,8 +229,13 @@ oc.registerControl('scrollbar', class extends oc.ControlBase {
         let offset = 1;
         let thumbSizeRatio = viewportSize / (canvasSize - offset);
         let thumbSize = viewportSize * thumbSizeRatio;
-        let thumbPositionRatio = scrollAmount / (canvasSize - viewportSize);
+
+        let maxScroll = Math.max(0, canvasSize - viewportSize);
+        let thumbPositionRatio = maxScroll > 0 ? scrollAmount / maxScroll : 0;
         let thumbPosition = ((viewportSize - thumbSize) * thumbPositionRatio) + scrollAmount;
+
+        let maxThumbPosition = Math.max(0, canvasSize - thumbSize);
+        thumbPosition = Math.max(0, Math.min(thumbPosition, maxThumbPosition));
 
         return { viewportSize, canvasSize, scrollAmount, thumbSizeRatio, thumbSize, thumbPosition };
     }
@@ -280,6 +285,7 @@ oc.registerControl('scrollbar', class extends oc.ControlBase {
             this.smoothScrollTo(scrollProp, maxScroll, {
                 duration: 300,
                 complete: () => {
+                    this.setThumbPosition();
                     if (callback) {
                         callback();
                     }
@@ -287,12 +293,12 @@ oc.registerControl('scrollbar', class extends oc.ControlBase {
             });
         } else {
             this.el[scrollProp] = maxScroll;
+            this.setThumbPosition();
             if (callback) {
                 callback();
             }
         }
 
-        this.scrollWheel(maxScroll);
         return this;
     }
 

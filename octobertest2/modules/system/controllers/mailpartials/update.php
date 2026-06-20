@@ -7,9 +7,9 @@
 
 <?php if (!$this->fatalError): ?>
 
-    <?= Form::open(['class'=>'layout']) ?>
+    <?= Form::open(['class'=>'d-flex flex-column h-100']) ?>
 
-        <div class="layout-row min-size">
+        <div>
             <div class="scoreboard">
                 <div data-control="toolbar">
                     <div class="scoreboard-item title-value">
@@ -20,39 +20,44 @@
             </div>
         </div>
 
-        <div class="layout-row">
+        <div class="flex-grow-1">
             <?= $this->formRender() ?>
         </div>
 
         <div class="form-buttons pt-4">
-            <div class="loading-indicator-container">
-                <button
-                    type="submit"
-                    data-request="onSave"
-                    data-request-data="redirect:0"
-                    data-hotkey="ctrl+s, cmd+s"
-                    data-load-indicator="<?= e(trans('system::lang.mail_templates.saving_layout')) ?>"
-                    class="btn btn-primary">
-                    <?= e(trans('backend::lang.form.save')) ?>
-                </button>
-                <button
-                    type="button"
-                    data-request="onSave"
-                    data-request-data="close:1"
-                    data-hotkey="ctrl+enter, cmd+enter"
-                    data-load-indicator="<?= e(trans('system::lang.mail_templates.saving_layout')) ?>"
-                    class="btn btn-default">
-                    <?= e(trans('backend::lang.form.save_and_close')) ?>
-                </button>
-                <button
-                    type="button"
-                    class="oc-icon-trash btn-icon danger pull-right"
-                    data-request="onDelete"
-                    data-load-indicator="<?= e(trans('system::lang.mail_templates.deleting_layout')) ?>"
-                    data-request-confirm="<?= e(trans('system::lang.mail_templates.delete_layout_confirm')) ?>">
-                </button>
+            <div data-control="loader-container" class="control-loader-container">
+                <?= Ui::ajaxButton(
+                    label: __("Save"),
+                    handler: 'onSave',
+                    primary: true,
+                    hotkey: ['ctrl+s', 'cmd+s'],
+                    dataRequestData: "redirect: false",
+                    dataRequestMessage: __("Saving :name...", ['name' => $formRecordName])
+                ) ?>
+                <?= Ui::ajaxButton(
+                    label: __("Save & Close"),
+                    handler: 'onSave',
+                    secondary: true,
+                    hotkey: ['ctrl+enter', 'cmd+enter'],
+                    dataRequestData: "close: true",
+                    dataRequestMessage: __("Saving :name...", ['name' => $formRecordName])
+                ) ?>
+                <?= Ui::iconButton(
+                    label: __("Delete"),
+                    icon: 'oc-icon-delete',
+                    handler: 'onDelete',
+                    danger: true,
+                    class: 'pull-right',
+                    dataRequestConfirm: __("Are you sure?"),
+                    dataRequestMessage: __("Deleting :name...", ['name' => $formRecordName])
+                ) ?>
                 <span class="btn-text">
-                    <?= e(trans('backend::lang.form.or')) ?> <a href="<?= Backend::url('system/mailtemplates/index/partials') ?>"><?= e(trans('backend::lang.form.cancel')) ?></a>
+                    <span class="button-separator"><?= __("or") ?></span>
+                    <?= Ui::button(
+                        label: __("Cancel"),
+                        href: Backend::url('system/mailtemplates/index/partials'),
+                        class: 'btn-link p-0'
+                    ) ?>
                 </span>
             </div>
         </div>
@@ -62,6 +67,12 @@
 <?php else: ?>
 
     <p class="flash-message static error"><?= e(__($this->fatalError)) ?></p>
-    <p><a href="<?= Backend::url('system/mailtemplates/index/partials') ?>" class="btn btn-default"><?= e(trans('system::lang.mail_templates.return')) ?></a></p>
+    <p>
+        <?= Ui::button(
+            label: __("Return to Mail Templates"),
+            href: Backend::url('system/mailtemplates/index/partials'),
+            secondary: true
+        ) ?>
+    </p>
 
 <?php endif ?>

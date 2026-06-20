@@ -72,15 +72,7 @@ class ServiceProvider extends ModuleServiceProvider
      */
     protected function registerConsole()
     {
-        $this->registerConsoleCommand('theme.install', \Cms\Console\ThemeInstall::class);
-        $this->registerConsoleCommand('theme.remove', \Cms\Console\ThemeRemove::class);
-        $this->registerConsoleCommand('theme.list', \Cms\Console\ThemeList::class);
-        $this->registerConsoleCommand('theme.use', \Cms\Console\ThemeUse::class);
-        $this->registerConsoleCommand('theme.copy', \Cms\Console\ThemeCopy::class);
-        $this->registerConsoleCommand('theme.check', \Cms\Console\ThemeCheck::class);
-        $this->registerConsoleCommand('theme.seed', \Cms\Console\ThemeSeed::class);
-        $this->registerConsoleCommand('theme.clear', \Cms\Console\ThemeClear::class);
-        $this->registerConsoleCommand('theme.cache', \Cms\Console\ThemeCache::class);
+        $this->discoverConsoleCommands('cms');
     }
 
     /**
@@ -147,19 +139,6 @@ class ServiceProvider extends ModuleServiceProvider
     }
 
     /**
-     * registerReportWidgets
-     */
-    public function registerReportWidgets()
-    {
-        return [
-            \Cms\ReportWidgets\ActiveTheme::class => [
-                'label' => 'cms::lang.dashboard.active_theme.widget_title_default',
-                'context' => 'dashboard'
-            ],
-        ];
-    }
-
-    /**
      * registerPermissions
      */
     public function registerPermissions()
@@ -186,6 +165,13 @@ class ServiceProvider extends ModuleServiceProvider
                 'tab' => 'Editor',
                 'roles' => UserRole::CODE_DEVELOPER,
                 'order' => 300
+            ],
+            'editor.cms_langs' => [
+                'label' => 'Manage Language Files',
+                'comment' => 'cms::lang.permissions.manage_langs',
+                'tab' => 'Editor',
+                'roles' => UserRole::CODE_DEVELOPER,
+                'order' => 350
             ],
             'editor.cms_pages' => [
                 'label' => 'Manage Pages',

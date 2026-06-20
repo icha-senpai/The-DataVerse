@@ -1,16 +1,16 @@
 <div
-    class="component-backend-tabs flex-layout-column"
+    class="component-backend-tabs"
     :class="cssClass"
     data-lang-close="<?= e(trans('backend::lang.tabs.close')) ?>"
     data-lang-close-all="<?= e(trans('backend::lang.tabs.close_all')) ?>"
     data-lang-close-others="<?= e(trans('backend::lang.tabs.close_others')) ?>"
     data-lang-close-saved="<?= e(trans('backend::lang.tabs.close_saved')) ?>"
 >
-    <div class="tablist-container flex-layout-item fix" v-show="!hideTabPanel">
-        <div class="flex-layout-row tablist-scrollable-container" :class="{'has-fixed-panel': supportsFullScreen && hasTabs}" ref="scrollableTabsContainer">
-            <div class="tabs-scrollable flex-layout-item stretch" ref="scrollable">
+    <div class="tablist-container flex-shrink-0" v-show="!hideTabPanel">
+        <div class="d-flex flex-row tablist-scrollable-container" :class="{'has-fixed-panel': supportsFullScreen && hasTabs}" ref="scrollableTabsContainer">
+            <div class="tabs-scrollable flex-fill" ref="scrollable">
                 <div
-                    class="tablist flex-layout-row"
+                    class="tablist d-flex flex-row"
                     role="tablist"
                     ref="tabList"
                     v-bind:aria-label="ariaLabel"
@@ -20,11 +20,10 @@
                         v-for="tab in tabs"
                         role="tab"
                         data-component-backend-tab
-                        class="flex-layout-item"
                         :class="{
                             active: currentTabKey == tab.key,
-                            stretch: tabsStyle == 'document',
-                            fix: tabsStyle == 'form',
+                            'flex-fill': tabsStyle == 'document',
+                            'flex-shrink-0': tabsStyle == 'form',
                             'has-icon': tab.icon || tab.fatalError,
                             'has-close-button': closeable
                         }"
@@ -63,7 +62,6 @@
                             v-bind:tabindex="currentTabKey == tab.key ? 0 : -1"
                             v-if="closeable"
                             role="button"
-                            aria-hidden="true"
                             aria-label="<?= e(trans('backend::lang.tabs.close')) ?>"
                             v-bind:title="closeTooltip ? '' : '<?= e(trans('backend::lang.tabs.close')) ?>'"
                             v-bind:data-tooltip-text="closeTooltip"
@@ -73,7 +71,7 @@
                     </button>
                 </div>
             </div>
-            <div class="flex-layout-item fix fixed-right tabs-toolbar" v-if="supportsFullScreen && hasTabs">
+            <div class="flex-shrink-0 fixed-right tabs-toolbar" v-if="supportsFullScreen && hasTabs">
                 <div class="toolbar-container">
                     <button
                         class="backend-toolbar-button icon-only"
@@ -97,7 +95,7 @@
             v-show="currentTabKey == tab.key"
             v-bind:id="getTabId(tab, 'panel')"
             v-bind:aria-labelledby="getTabId(tab, 'tab')"
-            class="tabpanel flex-layout-item stretch relative"
+            class="tabpanel flex-fill position-relative"
             :class="tabPanelCssClass"
         >
             <component
@@ -115,11 +113,11 @@
 
     <slot v-if="!tabs.length" name="noTabsView"></slot>
 
-    <backend-component-dropdownmenu
+    <backend-dropdown-menu
         :items="contextMenuItems"
         :menu-id="contextMenuId"
         :labeled-by-id="contextMenuLabeledById"
         ref="contextmenu"
         @command="onMenuItemCommand"
-    ></backend-component-dropdownmenu>
+    ></backend-dropdown-menu>
 </div>

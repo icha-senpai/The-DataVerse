@@ -11,6 +11,15 @@ use Backend\Classes\VueComponentBase;
 class CmsObjectComponentList extends VueComponentBase
 {
     /**
+     * @var string componentName is the Vue component tag name.
+     */
+    protected $componentName = 'cms-component-cmsobjectcomponentlist';
+
+    protected $require = [
+        \Backend\VueComponents\Inspector::class,
+    ];
+
+    /**
      * registerSubcomponents
      */
     protected function registerSubcomponents()

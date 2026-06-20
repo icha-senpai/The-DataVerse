@@ -1,7 +1,7 @@
 <div
     data-default-button-text="<?= e(trans('backend::lang.form.ok')) ?>"
 >
-    <backend-component-modal
+    <backend-modal
         ref="modal"
         :aria-labeled-by="modalTitleId"
         :unique-key="uniqueId"
@@ -29,17 +29,19 @@
                     ></button>
             </div>
             <div class="modal-body inspector-modal-host">
-                <backend-component-inspector
+                <backend-inspector
                     :data-schema="dataSchema"
                     :data="data"
                     :live-mode="liveMode"
                     :unique-id="uniqueId"
                     :handler-alias="handlerAlias"
+                    :inspector-class="inspectorClass"
                     :layout-update-data="layoutUpdateData"
                     :read-only="readOnly"
+                    :enable-external-parameter-editor="enableExternalParameterEditor"
                     ref="inspector"
                 >
-                </backend-component-inspector>
+                </backend-inspector>
             </div>
             <div class="modal-footer">
                 <button
@@ -58,5 +60,5 @@
                 ><?= e(trans('backend::lang.form.cancel')) ?></button>
             </div>
         </template>
-    </backend-component-modal>
+    </backend-modal>
 </div>

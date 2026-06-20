@@ -107,6 +107,12 @@ class BlueprintIndexer
             }
         }
 
+        // Output any duplicate handle/UUID warnings
+        $warnings = BlueprintVerifier::instance()->getWarnings();
+        foreach ($warnings as $warning) {
+            $this->note('- <comment>Warning</comment>: ' . $warning['message']);
+        }
+
         // Migrate blueprints
         foreach ($allBlueprints as $blueprint) {
             if ($blueprint instanceof EntryBlueprint) {
@@ -270,5 +276,20 @@ class BlueprintIndexer
     public static function clearCache()
     {
         CacheHelper::instance()->clearBlueprintCache();
+    }
+
+    /**
+     * getActiveThemeDatasource returns the dirname for the active theme, used
+     * to filter blueprint lookups when multiple themes define the same handle.
+     */
+    protected function getActiveThemeDatasource(): ?string
+    {
+        if (!System::hasModule('Cms')) {
+            return null;
+        }
+
+        $theme = Theme::getEditTheme() ?: Theme::getActiveTheme();
+
+        return $theme ? $theme->getDirName() : null;
     }
 }

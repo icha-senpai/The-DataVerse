@@ -51,12 +51,12 @@ class RelationController extends ControllerBehavior
     const PARAM_EXTRA_CONFIG = '_relation_extra_config';
 
     /**
-     * @var Backend\Widgets\Search searchWidget
+     * @var \Backend\Widgets\Search searchWidget
      */
     protected $searchWidget;
 
     /**
-     * @var Backend\Widgets\Toolbar toolbarWidget
+     * @var \Backend\Widgets\Toolbar toolbarWidget
      */
     protected $toolbarWidget;
 
@@ -166,12 +166,10 @@ class RelationController extends ControllerBehavior
     public $popupSize = 'huge';
 
     /**
-     * @var string externalToolbarAppState defines a mount point for the editor toolbar.
-     * Must include a module name that exports the Vue application and a state element name.
-     * Format: stateElementName
+     * @var string externalToolbarBus defines a mount point for the editor toolbar.
      * Only works in Vue applications and form document layouts.
      */
-    public $externalToolbarAppState;
+    public $externalToolbarBus;
 
     /**
      * @var array customMessages contains default messages that you can override
@@ -212,7 +210,7 @@ class RelationController extends ControllerBehavior
 
     /**
      * __construct the behavior
-     * @param Backend\Classes\Controller $controller
+     * @param \Backend\Classes\Controller $controller
      */
     public function __construct($controller)
     {
@@ -289,7 +287,7 @@ class RelationController extends ControllerBehavior
         $this->vars['relationPivotWidget'] = $this->pivotWidget;
 
         // Misc
-        $this->vars['externalToolbarAppState'] = $this->externalToolbarAppState;
+        $this->vars['externalToolbarBus'] = $this->externalToolbarBus;
         $this->vars['formSessionKey'] = post('_form_session_key', post('_session_key', FormHelper::getSessionKey()));
 
         // @deprecated
@@ -404,7 +402,7 @@ class RelationController extends ControllerBehavior
 
         $this->readOnly = $this->getConfig('readOnly');
         $this->popupSize = $this->getConfig('popupSize', 950);
-        $this->externalToolbarAppState = $this->getConfig('externalToolbarAppState');
+        $this->externalToolbarBus = $this->getConfig('externalToolbarBus');
         $this->eventTarget = $this->evalEventTarget();
         $this->deferredBinding = $this->evalDeferredBinding();
         $this->viewMode = $this->evalViewMode();
@@ -486,6 +484,27 @@ class RelationController extends ControllerBehavior
     {
         if ($this->originalConfig === null) {
             $this->config = $this->originalConfig = $this->controller->relationGetConfig();
+        }
+
+        $this->originalConfig->{$relationName} = $config;
+    }
+
+    /**
+     * relationApplyConfigDefaults merges default values into a relation's config,
+     * without overwriting values already set in YAML or via relationRegisterField.
+     */
+    public function relationApplyConfigDefaults(string $relationName, array $defaults)
+    {
+        if ($this->originalConfig === null) {
+            $this->config = $this->originalConfig = $this->controller->relationGetConfig();
+        }
+
+        $config = (array) ($this->originalConfig->{$relationName} ?? []);
+
+        foreach ($defaults as $key => $value) {
+            if (!array_key_exists($key, $config)) {
+                $config[$key] = $value;
+            }
         }
 
         $this->originalConfig->{$relationName} = $config;

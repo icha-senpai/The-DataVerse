@@ -136,20 +136,13 @@ trait ManagesThemes
     public function seedTheme(string $name)
     {
         $themeName = str_replace('.', '-', strtolower($name));
-        if (!CmsTheme::exists($themeName)) {
+        $theme = CmsTheme::load($themeName);
+
+        if (!$theme->isValid()) {
             throw new ApplicationException("Theme [$name] not found");
         }
-
-        $theme = CmsTheme::load($themeName);
         $model = new ThemeSeed;
 
-        // Seed everything
-        $allFolders = [
-            'blueprints' => true,
-            'data' => true,
-            'lang' => true,
-        ];
-
-        $model->seed($theme, ['folders' => $allFolders]);
+        $model->seed($theme);
     }
 }

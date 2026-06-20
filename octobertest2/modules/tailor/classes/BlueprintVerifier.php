@@ -20,6 +20,11 @@ class BlueprintVerifier
     protected $registeredBlueprints = [];
 
     /**
+     * @var array warnings collects non-fatal validation warnings
+     */
+    protected $warnings = [];
+
+    /**
      * @var array|null knownSources stores known blueprint handles and UUIDs for source validation
      */
     protected $knownSources;
@@ -78,11 +83,20 @@ class BlueprintVerifier
     }
 
     /**
+     * getWarnings returns collected validation warnings
+     */
+    public function getWarnings(): array
+    {
+        return $this->warnings;
+    }
+
+    /**
      * clearCache resets all validation caches
      */
     public function clearCache(): void
     {
         $this->registeredBlueprints = [];
+        $this->warnings = [];
         $this->knownSources = null;
     }
 
@@ -154,38 +168,43 @@ class BlueprintVerifier
     protected function validateUniqueBlueprint(Blueprint $blueprint)
     {
         $filePath = $blueprint->getFilePath();
+        $theme = $blueprint->getDatasourceTheme();
 
         // Check handle uniqueness (all blueprints share the same namespace)
         if ($handle = $blueprint->handle) {
-            $this->validateUniqueProperty($blueprint, 'handle', $handle, $filePath);
+            $this->validateUniqueProperty($blueprint, 'handle', $handle, $filePath, $theme);
         }
 
         // Check UUID uniqueness
         if ($uuid = $blueprint->uuid) {
-            $this->validateUniqueProperty($blueprint, 'uuid', $uuid, $filePath);
+            $this->validateUniqueProperty($blueprint, 'uuid', $uuid, $filePath, $theme);
         }
     }
 
     /**
-     * validateUniqueProperty checks a property value is unique across blueprints
+     * validateUniqueProperty checks a property value is unique across blueprints.
+     * Duplicates are collected as warnings instead of throwing exceptions since
+     * the first registered blueprint (by priority order) takes precedence.
      */
-    protected function validateUniqueProperty(Blueprint $blueprint, string $property, string $key, string $filePath)
+    protected function validateUniqueProperty(Blueprint $blueprint, string $property, string $key, string $filePath, ?string $theme = null)
     {
         $cacheKey = $property . ':' . $key;
 
         if (isset($this->registeredBlueprints[$cacheKey])) {
-            $existingPath = File::nicePath($this->registeredBlueprints[$cacheKey]);
+            $existing = $this->registeredBlueprints[$cacheKey];
+            $existingPath = File::nicePath($existing['path']);
             $value = $blueprint->$property;
             $lineNo = $this->findLineFromKeyValPair($blueprint->content, $property, $value);
 
-            throw new BlueprintException(
-                $blueprint,
-                "Duplicate {$property} '{$value}'. Already defined in: {$existingPath}",
-                $lineNo
-            );
+            $this->warnings[] = [
+                'message' => "Duplicate {$property} '{$value}'. Already defined in: {$existingPath}",
+                'line' => $lineNo,
+                'file' => $filePath,
+            ];
+            return;
         }
 
-        $this->registeredBlueprints[$cacheKey] = $filePath;
+        $this->registeredBlueprints[$cacheKey] = ['path' => $filePath, 'theme' => $theme];
     }
 
     /**

@@ -7,6 +7,7 @@ use Event;
 use Cms\Classes\Page;
 use Cms\Classes\Content;
 use System\Classes\MailManager;
+use System\Models\MailTemplate;
 use RainLab\Translate\Models\Message;
 use RainLab\Translate\Classes\Locale as LocaleModel;
 use RainLab\Translate\Classes\Translator;
@@ -65,6 +66,10 @@ class EventCoreRegistry
      */
     protected function extendCmsPageObject()
     {
+        if (!class_exists(Page::class)) {
+            return;
+        }
+
         Page::extend(function($model) {
             if (!$model->propertyExists('translatable')) {
                 $model->addDynamicProperty('translatable', []);
@@ -243,6 +248,11 @@ class EventCoreRegistry
                 return;
             }
 
+            // Closures cannot be localized as file-based views
+            if ((!empty($view) && !is_string($view)) || (!empty($plain) && !is_string($plain))) {
+                return;
+            }
+
             // Get the locale to use for this template
             $locale = !empty($data['_current_locale']) ? $data['_current_locale'] : App::getLocale();
 
@@ -363,11 +373,24 @@ class EventCoreRegistry
             $searchPaths[] = $lang;
         }
 
+        // Resolve the mail template code to its registered view path
+        $viewPath = MailManager::instance()->getViewPathForTemplate($code);
+
         foreach ($searchPaths as $path) {
-            $localizedView = sprintf('%s-%s', $code, $path);
+            $localizedCode = sprintf('%s-%s', $code, $path);
+
+            // Check database-stored templates
+            if (MailTemplate::where('code', $localizedCode)->exists()) {
+                return $localizedCode;
+            }
+
+            // Check file-based view templates
+            $localizedView = $viewPath
+                ? sprintf('%s-%s', $viewPath, $path)
+                : $localizedCode;
 
             if ($factory->exists($localizedView)) {
-                return $localizedView;
+                return $localizedCode;
             }
         }
 

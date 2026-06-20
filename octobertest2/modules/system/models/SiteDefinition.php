@@ -158,6 +158,26 @@ class SiteDefinition extends Model
     }
 
     /**
+     * beforeSave
+     */
+    public function beforeSave()
+    {
+        if (!$this->group_id) {
+            $this->group_id = SiteGroup::first()?->id;
+        }
+    }
+
+    /**
+     * afterDelete
+     */
+    public function afterDelete()
+    {
+        PluginSiteGroup::where('site_id', $this->id)->delete();
+
+        Site::resetCache();
+    }
+
+    /**
      * afterSave
      */
     public function afterSave()
@@ -387,11 +407,17 @@ class SiteDefinition extends Model
      */
     public function getShortLocaleOptions()
     {
-        return [
+        $options = [
             '' => '- '.__('Use Default').' -',
         ] + PresetHelper::flags('short') + [
             'custom' => '- '.__('Use Custom').' -'
         ];
+
+        if ($this->locale && $this->isCustomLocale($this->locale)) {
+            $options[$this->locale] = [$this->locale, 'flag-un'];
+        }
+
+        return $options;
     }
 
     /**

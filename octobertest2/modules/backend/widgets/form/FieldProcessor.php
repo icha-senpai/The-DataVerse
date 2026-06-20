@@ -54,7 +54,7 @@ trait FieldProcessor
                 // Adaptive sizing
                 if (strtolower($field->span) === 'adaptive') {
                     $field->size = 'adaptive';
-                    $field->stretch = true;
+                    $field->stretch ??= true;
                     $tabs->stretch = true;
                     $tabs->addAdaptive($field->tab ?: $tabs->defaultTab);
                 }
@@ -90,6 +90,11 @@ trait FieldProcessor
             }
 
             $newConfig = ['widget' => $field->type];
+
+            // Auto-wire adaptive fields to the toolbar extension point
+            if (strtolower($field->span) === 'adaptive') {
+                $newConfig['externalToolbarBus'] = 'document';
+            }
 
             if (is_array($field->config)) {
                 $newConfig += $field->config;
@@ -160,6 +165,10 @@ trait FieldProcessor
      */
     protected function processRequiredAttributes(array $fields)
     {
+        if (!$this->model->isClassInstanceOf(\October\Contracts\Database\ValidationInterface::class)) {
+            return;
+        }
+
         if (!$this->model || !method_exists($this->model, 'isAttributeRequired')) {
             return;
         }
@@ -180,23 +189,89 @@ trait FieldProcessor
      */
     protected function processTranslatableAttributes(array $fields)
     {
-        if (!$this->model || !method_exists($this->model, 'isMultisiteSyncEnabled')) {
+        if ($this->useTranslatable === false) {
             return;
         }
 
-        if (!$this->model->isMultisiteSyncEnabled()) {
+        if (!$this->model) {
             return;
         }
+
+        // Multisite trait: non-propagatable attributes are translatable
+        if (
+            $this->model->isClassInstanceOf(\October\Contracts\Database\MultisiteInterface::class) &&
+            $this->model->isMultisiteSyncEnabled()
+        ) {
+            foreach ($fields as $field) {
+                if ($field->translatable !== null) {
+                    continue;
+                }
+
+                $attrName = HtmlHelper::nameToDot($field->fieldName);
+                if (!$this->model->isAttributePropagatable($attrName)) {
+                    $field->translatable = true;
+                }
+            }
+        }
+
+        // Translatable trait: attributes listed in $translatable are translatable
+        if (
+            $this->model->isClassInstanceOf(\October\Contracts\Database\TranslatableInterface::class) &&
+            $this->model->isTranslatableEnabled()
+        ) {
+            $translatableAttrs = $this->model->getTranslatableAttributes();
+
+            foreach ($fields as $field) {
+                if ($field->translatable !== null) {
+                    continue;
+                }
+
+                $attrName = HtmlHelper::nameToDot($field->fieldName);
+                if (in_array($attrName, $translatableAttrs)) {
+                    $field->translatable = true;
+                }
+            }
+        }
+
+        // Currencyable trait: attributes listed in $currencyable.
+        // Only show the globe icon for existing records since overrides
+        // are stored in a sidecar table that requires a saved record.
+        if (
+            $this->model->exists &&
+            $this->model->isClassInstanceOf(\October\Contracts\Database\CurrencyableInterface::class) &&
+            $this->model->isCurrencyableEnabled()
+        ) {
+            $currencyableAttrs = $this->model->getCurrencyableAttributes();
+
+            foreach ($fields as $field) {
+                if ($field->translatable !== null) {
+                    continue;
+                }
+
+                $attrName = HtmlHelper::nameToDot($field->fieldName);
+                if (in_array($attrName, $currencyableAttrs)) {
+                    $field->translatable = 'currency';
+                }
+            }
+        }
+    }
+
+    /**
+     * processUntranslatableWidgets removes the translatable flag from widget types
+     * that use nested forms, since the translate popup cannot reliably handle
+     * their AJAX lifecycle (e.g. adding repeater items inside the popup).
+     */
+    protected function processUntranslatableWidgets(array $fields)
+    {
+        $unsupported = ['repeater', 'nestedform'];
 
         foreach ($fields as $field) {
-            if ($field->translatable !== null) {
-                continue;
-            }
-
-            // Does not propagate therefore translatable
-            $attrName = HtmlHelper::nameToDot($field->fieldName);
-            if (!$this->model->isAttributePropagatable($attrName)) {
-                $field->translatable = true;
+            if (
+                $field->translatable &&
+                isset($field->config['widget']) &&
+                in_array($field->config['widget'], $unsupported)
+            ) {
+                $field->translatable = false;
             }
         }
     }

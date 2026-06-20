@@ -1,37 +1,39 @@
-'use strict';
+import { ControlBase, registerControl } from 'larajax';
+import DashStore from '../classes/dash-store.js';
 
-oc.registerControl('dashwidget', class extends oc.ControlBase
+registerControl('dashwidget', class extends ControlBase
 {
     connect() {
         this.universalDateFormat = 'YYYY-MM-DD';
         this.vueElement = this.element.querySelector('[data-vue-template]');
         this.store = this.createStore();
 
+        const initialSearchParams = this.initDefaultQueryParameters();
+        this.setIntervalRange(initialSearchParams);
         this.initVue();
-        this.initDefaultQueryParameters();
-
-        this.setIntervalRange();
     }
 
     disconnect() {
         this.store = null;
-        if (this.vm) {
-            this.vm.$destroy();
+        if (this.app) {
+            this.app.unmount();
         }
     }
 
     initVue() {
-        this.vm = new Vue({
-            data: {
+        const { app, vm } = oc.mountVueApp(this.vueElement, {
+            data: () => ({
                 store: this.store
-            },
-            el: this.vueElement
+            })
         });
+
+        this.app = app;
+        this.vm = vm;
     }
 
     createStore() {
         const initialState = this.element.querySelector('[data-vue-state=initial]').innerHTML;
-        const store = new Dashboard_Widgets_Dash_Classes_DashStore(this);
+        const store = new DashStore(this);
         store.setInitialState(JSON.parse(initialState));
         return store;
     }
@@ -39,7 +41,7 @@ oc.registerControl('dashwidget', class extends oc.ControlBase
     initDefaultQueryParameters() {
         // Skip interval parameters if interval is hidden
         if (!this.store.state.showInterval) {
-            return;
+            return null;
         }
 
         const searchParams = new URLSearchParams(window.location.search);
@@ -61,12 +63,14 @@ oc.registerControl('dashwidget', class extends oc.ControlBase
             searchParams.delete('compare');
         }
 
-        // Set defaults
+        // Resolution order: URL > sessionStorage (sticky) > dashboard configuration
+        const stickyRange = this.readStickyRange();
+
         const requiredQueryParams = {
-            start: moment().startOf('month').format(this.universalDateFormat),
-            end: moment().format(this.universalDateFormat),
-            interval: 'day',
-            compare: 'none'
+            start: stickyRange.start || this.resolveRangeKeyword(this.store.state.defaultStart),
+            end: stickyRange.end || this.resolveRangeKeyword(this.store.state.defaultEnd),
+            interval: stickyRange.interval || this.store.state.defaultInterval,
+            compare: stickyRange.compare || this.store.state.defaultCompare
         };
 
         let isDirty = false;
@@ -81,22 +85,102 @@ oc.registerControl('dashwidget', class extends oc.ControlBase
         if (isDirty) {
             this.store.setQueryParams(searchParams);
         }
+
+        return searchParams;
     }
 
-    setIntervalRange() {
+    getStickyStorageKey() {
+        const dashboardCode = this.store.state.dashboard && this.store.state.dashboard.code
+            ? this.store.state.dashboard.code
+            : this.store.state.alias;
+
+        return 'oc.dashboard.range.' + dashboardCode;
+    }
+
+    readStickyRange() {
+        try {
+            const raw = window.sessionStorage.getItem(this.getStickyStorageKey());
+            if (!raw) {
+                return {};
+            }
+
+            const parsed = JSON.parse(raw);
+            const result = {};
+
+            if (moment(parsed.start, this.universalDateFormat, true).isValid()) {
+                result.start = parsed.start;
+            }
+
+            if (moment(parsed.end, this.universalDateFormat, true).isValid()) {
+                result.end = parsed.end;
+            }
+
+            if (this.store.isIntervalCodeValid(parsed.interval)) {
+                result.interval = parsed.interval;
+            }
+
+            if (this.store.isCompareModeValid(parsed.compare)) {
+                result.compare = parsed.compare;
+            }
+
+            return result;
+        }
+        catch (e) {
+            return {};
+        }
+    }
+
+    writeStickyRange() {
+        try {
+            window.sessionStorage.setItem(this.getStickyStorageKey(), JSON.stringify({
+                start: this.store.state.range.dateStart,
+                end: this.store.state.range.dateEnd,
+                interval: this.store.state.range.interval,
+                compare: this.store.state.compareMode
+            }));
+        }
+        catch (e) {
+            // sessionStorage may be unavailable (private mode, quota)
+        }
+    }
+
+    setIntervalRange(searchParams = null) {
         let dateStart, dateEnd, interval, compareMode;
+        const getQueryParam = (name) => this.store.getQueryParam(name, searchParams);
 
         if (this.store.state.showInterval) {
-            dateStart = moment(this.store.getQueryParam('start'), this.universalDateFormat, true);
-            dateEnd = moment(this.store.getQueryParam('end'), this.universalDateFormat, true);
-            interval = this.store.getQueryParam('interval');
-            compareMode = this.store.getQueryParam('compare');
+            dateStart = moment(getQueryParam('start'), this.universalDateFormat, true);
+            dateEnd = moment(getQueryParam('end'), this.universalDateFormat, true);
+            interval = getQueryParam('interval');
+            compareMode = getQueryParam('compare');
         }
         else {
-            dateStart = moment().startOf('month');
-            dateEnd = moment();
-            interval = 'day';
-            compareMode = 'none';
+            dateStart = moment(this.resolveRangeKeyword(this.store.state.defaultStart), this.universalDateFormat, true);
+            dateEnd = moment(this.resolveRangeKeyword(this.store.state.defaultEnd), this.universalDateFormat, true);
+            interval = this.store.state.defaultInterval;
+            compareMode = this.store.state.defaultCompare;
+        }
+
+        if (!dateStart.isValid()) {
+            dateStart = moment(this.resolveRangeKeyword(this.store.state.defaultStart), this.universalDateFormat, true);
+        }
+
+        if (!dateEnd.isValid()) {
+            dateEnd = moment(this.resolveRangeKeyword(this.store.state.defaultEnd), this.universalDateFormat, true);
+        }
+
+        if (dateStart.isAfter(dateEnd)) {
+            const swappedStart = dateEnd;
+            dateEnd = dateStart;
+            dateStart = swappedStart;
+        }
+
+        if (!this.store.isIntervalCodeValid(interval)) {
+            interval = this.store.state.defaultInterval;
+        }
+
+        if (!this.store.isCompareModeValid(compareMode)) {
+            compareMode = this.store.state.defaultCompare;
         }
 
         this.store.state.range.dateStart = dateStart.format(this.universalDateFormat);
@@ -105,6 +189,21 @@ oc.registerControl('dashwidget', class extends oc.ControlBase
         this.store.state.intervalName = this.makeIntervalName(dateStart.toDate(), dateEnd.toDate());
         this.store.state.compareMode = compareMode;
         this.store.resetData();
+
+        if (this.store.state.showInterval) {
+            this.writeStickyRange();
+        }
+    }
+
+    resolveRangeKeyword(keyword) {
+        switch (keyword) {
+            case 'today': return moment().format(this.universalDateFormat);
+            case 'week': return moment().startOf('isoWeek').format(this.universalDateFormat);
+            case 'month': return moment().startOf('month').format(this.universalDateFormat);
+            case 'quarter': return moment().startOf('quarter').format(this.universalDateFormat);
+            case 'year': return moment().startOf('year').format(this.universalDateFormat);
+            default: return keyword;
+        }
     }
 
     makeIntervalName(startDate, endDate) {

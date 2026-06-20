@@ -7,16 +7,22 @@
         <div :style="nameStyle">
             <span
                 v-text="nameAndValue"
-                class="backend-icon-background-pseudo"
+                class="group-name-text backend-icon-background-pseudo"
             ></span>
 
-            <backend-component-loading-indicator v-if="loading"
+            <backend-loading-indicator v-if="loading"
                 size="tiny"
-            ></backend-component-loading-indicator>
+            ></backend-loading-indicator>
         </div>
+        <span
+            v-if="groupDescription"
+            class="property-description backend-icon-background-pseudo"
+            v-bind:data-tooltip-text="groupDescription"
+            @click.stop
+        ></span>
     </div>
     <transition name="group-fade-in">
-        <backend-component-inspector-controlhost
+        <backend-inspector-controlhost
             v-show="expanded"
             :controls="controls"
             :obj="obj"
@@ -28,6 +34,6 @@
             :inspector-unique-id="inspectorUniqueId"
             @inspectorcommand="$emit('inspectorcommand', $event)"
         >
-        </backend-component-inspector-controlhost>
+        </backend-inspector-controlhost>
     </transition>
 </div>

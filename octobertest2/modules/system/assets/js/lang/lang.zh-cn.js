@@ -9,7 +9,7 @@ if (!window.oc.langMessages) {
     window.oc.langMessages = {};
 }
 
-window.oc.langMessages['zh-cn'] = $.extend(
+window.oc.langMessages['zh-cn'] = Object.assign(
     window.oc.langMessages['zh-cn'] || {},
     {
     "markdowneditor": {
@@ -55,7 +55,8 @@ window.oc.langMessages['zh-cn'] = $.extend(
         "dismiss": "\u53d6\u6d88",
         "confirm_button_text": "\u786e\u5b9a",
         "cancel_button_text": "\u53d6\u6d88",
-        "widget_remove_confirm": "\u5220\u9664\u8fd9\u4e2a\u5c0f\u90e8\u4ef6?"
+        "widget_remove_confirm": "\u5220\u9664\u8fd9\u4e2a\u5c0f\u90e8\u4ef6?",
+        "reload": "Reload"
     },
     "datepicker": {
         "previousMonth": "\u4e0a\u4e00\u4e2a\u6708",
@@ -154,139 +155,138 @@ window.oc.langMessages['zh-cn'] = $.extend(
         "cancel": "\u53d6\u6d88",
         "items": "\u9879\u76ee"
     },
-    "dashboard": {
-        "widget_data_source": "Data source",
-        "widget_data_source_required": "Please select a data source",
-        "widget_dimension": "Dimension",
-        "widget_dimension_required": "Please select a dimension",
-        "widget_metric": "Metric",
-        "widget_metric_required": "Please select metric(s).",
-        "widget_metrics": "Metrics",
-        "widget_title": "Title",
-        "widget_title_required": "Please provide the widget title",
-        "widget_title_optional_placeholder": "Leave empty to hide the title",
-        "widget_metric_value": "Value",
-        "widget_icon_status": "Icon Status",
-        "widget_href": "Link URL",
-        "widget_icon": "Icon",
-        "widget_icon_required": "Please select an icon",
-        "widget_link_text": "Link Text",
-        "apply": "Apply",
-        "delete": "Delete",
-        "configure": "Configure",
-        "section_show_interval": "Show Date Interval",
-        "widget_chart_type": "Chart type",
-        "widget_chart_type_bar": "Bar",
-        "widget_chart_type_stacked_bar": "Stacked Bar",
-        "widget_chart_type_line": "Line",
-        "sort_by": "Sort by",
-        "sort_by_required": "Select sorting metric or dimension",
-        "sort_by_placeholder": "Select a dimension and metrics",
-        "sort_order": "Order",
-        "sort_asc": "Ascending",
-        "sort_desc": "Descending",
-        "group_sorting": "Sorting",
-        "value_not_set": "[not set]",
-        "limit": "Limit",
-        "limit_placeholder": "Display all records",
-        "limit_number": "Enter a positive number or leave empty to display all records.",
-        "limit_min": "The limit value must be at least 1",
-        "empty_values": "Empty values",
-        "empty_values_hide": "Hide",
-        "empty_values_display_not_set": "Display [not set]",
-        "empty_values_dimension": "Dimension",
-        "date_interval": "Date interval",
-        "date_interval_dashboard_default": "Dashboard interval",
-        "date_interval_this_week": "This week",
-        "date_interval_this_month": "This month",
-        "date_interval_this_quarter": "This quarter",
-        "date_interval_this_year": "This year",
-        "date_interval_past_hour": "Past hour",
-        "date_interval_past_days": "Past X days",
-        "date_interval_past_days_value": "Number of days",
-        "date_interval_past_days_invalid": "Enter a positive number",
-        "prop_date_interval": "Display",
-        "date_interval_past_days_placeholder": "1 day (today) if not set",
-        "widget_bar_direction": "Direction",
-        "widget_bar_direction_vertical": "Vertical",
-        "widget_bar_direction_horizontal": "Horizontal",
-        "prop_color": "Color",
-        "color_required": "Select the metric color",
-        "tab_general": "General",
-        "tab_sorting_filtering": "Sorting & Filtering",
-        "prop_records_per_page": "Records per page",
-        "records_per_page_placeholder": "Leave empty to disable pagination",
-        "records_per_page_invalid": "Enter a positive number or leave empty to display all records.",
-        "prop_display_totals": "Display totals",
-        "prop_display_relative_bar": "Display relative bars",
-        "prop_extra_table_fields": "Extra table fields",
-        "filter_operation_equal_to": "Equal to",
-        "filter_operation_greater_equal": "Greater or equal to",
-        "filter_operation_less_equal": "Less or equal to",
-        "filter_operation_greater": "Greater than",
-        "filter_operation_less": "Less than",
-        "filter_operation_starts_with": "Starts with",
-        "filter_operation_includes": "Includes",
-        "filter_operation_one_of": "One of",
-        "prop_operation": "Operation",
-        "prop_value": "Value",
-        "prop_values": "Values",
-        "prop_values_one_per_line": "One value per line",
-        "prop_filter_attribute": "Attribute",
-        "filter_select_attribute": "Select an attribute",
-        "filter_select_operation": "Select an operation",
-        "prop_filters": "Filters",
-        "icon_status_info": "Information",
-        "icon_status_important": "Important",
-        "icon_status_success": "Success",
-        "icon_status_warning": "Warning",
-        "icon_status_disabled": "Disabled",
-        "range_today": "Today",
-        "range_yesterday": "Yesterday",
-        "range_last_7_days": "Last 7 days",
-        "range_last_30_days": "Last 30 days",
-        "range_this_month": "This month",
-        "range_last_month": "Last month",
-        "range_this_quarter": "This quarter",
-        "range_this_year": "This year",
-        "range_this_week": "This week",
-        "interval_day": "Day",
-        "interval_week": "Week",
-        "interval_month": "Month",
-        "interval_quarter": "Quarter",
-        "interval_year": "Year",
-        "compare_totals": "Compare Totals",
-        "compare_prev_period": "Prev period",
-        "compare_prev_year": "Same period last year",
-        "compare_none": "Disabled",
-        "updated_successfully": "The dashboard was successfully updated.",
-        "edit_dashboard": "Edit Dashboard",
-        "make_default": "Make Default",
-        "make_default_confirm": "Set the current layout as the default?",
-        "make_default_successfully": "This dashboard is now the default layout.",
-        "reset_layout": "Reset Layout",
-        "reset_layout_confirm": "Reset layout back to default?",
-        "reset_layout_successfully": "The dashboard layout has been reset to default.",
-        "manage_dashboards": "Manage Dashboards",
-        "import_success": "The dashboard was successfully imported",
-        "new_dashboard": "New Dashboard",
-        "import_dashboard": "Import Dashboard",
-        "delete_confirm": "Delete the dashboard? This action cannot be reversed. All users with access will be affected.",
-        "delete_success": "The dashboard was successfully deleted.",
-        "menu_item_custom": "Custom",
-        "menu_item_delete_row": "Delete row",
-        "widget_type_indicator": "Indicator",
-        "widget_type_section_title": "Section Title",
-        "widget_type_notice": "Text Notice",
-        "widget_type_chart": "Chart",
-        "widget_type_table": "Table",
-        "notice_text": "Notice text"
-    }
+    "[not set]": "[not set]",
+    "1 day (today) if not set": "1 day (today) if not set",
+    "Apply": "Apply",
+    "Ascending": "Ascending",
+    "Attribute": "Attribute",
+    "Bar": "Bar",
+    "Cancel": "Cancel",
+    "Chart": "Chart",
+    "Chart type": "Chart type",
+    "Color": "Color",
+    "Compare Totals": "Compare Totals",
+    "Configure": "Configure",
+    "Custom": "Custom",
+    "Custom Range": "Custom Range",
+    "Dashboard interval": "Dashboard interval",
+    "Data source": "Data source",
+    "Date interval": "Date interval",
+    "Day": "Day",
+    "Delete": "Delete",
+    "Delete Dashboard": "Delete Dashboard",
+    "Delete row": "Delete row",
+    "Descending": "Descending",
+    "Dimension": "Dimension",
+    "Direction": "Direction",
+    "Disabled": "Disabled",
+    "Display": "Display",
+    "Display [not set]": "Display [not set]",
+    "Display all records": "Display all records",
+    "Display relative bars": "Display relative bars",
+    "Display totals": "Display totals",
+    "Edit Dashboard": "Edit Dashboard",
+    "Empty values": "Empty values",
+    "Enter a positive number": "Enter a positive number",
+    "Enter a positive number or leave empty to display all records.": "Enter a positive number or leave empty to display all records.",
+    "Equal to": "Equal to",
+    "Export Dashboard": "Export Dashboard",
+    "Extra table fields": "Extra table fields",
+    "Filters": "Filters",
+    "General": "General",
+    "Greater or equal to": "Greater or equal to",
+    "Greater than": "Greater than",
+    "Hide": "Hide",
+    "Horizontal": "Horizontal",
+    "Icon": "Icon",
+    "Icon Status": "Icon Status",
+    "Important": "Important",
+    "Includes": "Includes",
+    "Indicator": "Indicator",
+    "Information": "Information",
+    "Last 30 days": "Last 30 days",
+    "Last 7 days": "Last 7 days",
+    "Last month": "Last month",
+    "Leave empty to disable pagination": "Leave empty to disable pagination",
+    "Leave empty to hide the title": "Leave empty to hide the title",
+    "Less or equal to": "Less or equal to",
+    "Less than": "Less than",
+    "Limit": "Limit",
+    "Line": "Line",
+    "Link Text": "Link Text",
+    "Link URL": "Link URL",
+    "Make Default": "Make Default",
+    "Manage Dashboards": "Manage Dashboards",
+    "Metric": "Metric",
+    "Metrics": "Metrics",
+    "Month": "Month",
+    "My Custom Widget": "My Custom Widget",
+    "No Value": "No Value",
+    "Notice text": "Notice text",
+    "Number of days": "Number of days",
+    "One of": "One of",
+    "One value per line": "One value per line",
+    "Operation": "Operation",
+    "Order": "Order",
+    "Past hour": "Past hour",
+    "Past X days": "Past X days",
+    "Please provide the widget title": "Please provide the widget title",
+    "Please select a data source": "Please select a data source",
+    "Please select a dimension": "Please select a dimension",
+    "Please select an icon": "Please select an icon",
+    "Please select metric(s).": "Please select metric(s).",
+    "Prev period": "Prev period",
+    "Quarter": "Quarter",
+    "Records per page": "Records per page",
+    "Refresh every minute": "Refresh every minute",
+    "Rename Dashboard": "Rename Dashboard",
+    "Reset Layout": "Reset Layout",
+    "Reset layout back to default?": "Reset layout back to default?",
+    "Same period last year": "Same period last year",
+    "Section": "Section",
+    "Section Title": "Section Title",
+    "Select a dimension and metrics": "Select a dimension and metrics",
+    "Select an attribute": "Select an attribute",
+    "Select an operation": "Select an operation",
+    "Select sorting metric or dimension": "Select sorting metric or dimension",
+    "Select the metric color": "Select the metric color",
+    "Set the current layout as the default?": "Set the current layout as the default?",
+    "Show Date Interval": "Show Date Interval",
+    "Sort by": "Sort by",
+    "Sorting": "Sorting",
+    "Sorting & Filtering": "Sorting & Filtering",
+    "Stacked Bar": "Stacked Bar",
+    "Starts with": "Starts with",
+    "Success": "Success",
+    "Table": "Table",
+    "Text Notice": "Text Notice",
+    "The dashboard layout has been reset to default.": "The dashboard layout has been reset to default.",
+    "The dashboard was successfully updated.": "The dashboard was successfully updated.",
+    "The limit value must be at least 1": "The limit value must be at least 1",
+    "This dashboard is now the default layout.": "This dashboard is now the default layout.",
+    "This is a text notice widget.": "This is a text notice widget.",
+    "This month": "This month",
+    "This quarter": "This quarter",
+    "This week": "This week",
+    "This year": "This year",
+    "Title": "Title",
+    "Today": "Today",
+    "Value": "Value",
+    "Values": "Values",
+    "Vertical": "Vertical",
+    "Warning": "Warning",
+    "Week": "Week",
+    "Year": "Year",
+    "Yesterday": "Yesterday"
 }
 );
 
 
-//! moment.js locale configuration v2.22.2
+//! moment.js locale configuration
+//! locale : Chinese (China) [zh-cn]
+//! author : suupic : https://github.com/suupic
+//! author : Zeno Zeng : https://github.com/zenozeng
+//! author : uu109 : https://github.com/uu109
 
 ;(function (global, factory) {
    typeof exports === 'object' && typeof module !== 'undefined'
@@ -295,32 +295,36 @@ window.oc.langMessages['zh-cn'] = $.extend(
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
 
+    //! moment.js locale configuration
 
     var zhCn = moment.defineLocale('zh-cn', {
-        months : '一月_二月_三月_四月_五月_六月_七月_八月_九月_十月_十一月_十二月'.split('_'),
-        monthsShort : '1月_2月_3月_4月_5月_6月_7月_8月_9月_10月_11月_12月'.split('_'),
-        weekdays : '星期日_星期一_星期二_星期三_星期四_星期五_星期六'.split('_'),
-        weekdaysShort : '周日_周一_周二_周三_周四_周五_周六'.split('_'),
-        weekdaysMin : '日_一_二_三_四_五_六'.split('_'),
-        longDateFormat : {
-            LT : 'HH:mm',
-            LTS : 'HH:mm:ss',
-            L : 'YYYY/MM/DD',
-            LL : 'YYYY年M月D日',
-            LLL : 'YYYY年M月D日Ah点mm分',
-            LLLL : 'YYYY年M月D日ddddAh点mm分',
-            l : 'YYYY/M/D',
-            ll : 'YYYY年M月D日',
-            lll : 'YYYY年M月D日 HH:mm',
-            llll : 'YYYY年M月D日dddd HH:mm'
+        months: '一月_二月_三月_四月_五月_六月_七月_八月_九月_十月_十一月_十二月'.split(
+            '_'
+        ),
+        monthsShort: '1月_2月_3月_4月_5月_6月_7月_8月_9月_10月_11月_12月'.split(
+            '_'
+        ),
+        weekdays: '星期日_星期一_星期二_星期三_星期四_星期五_星期六'.split('_'),
+        weekdaysShort: '周日_周一_周二_周三_周四_周五_周六'.split('_'),
+        weekdaysMin: '日_一_二_三_四_五_六'.split('_'),
+        longDateFormat: {
+            LT: 'HH:mm',
+            LTS: 'HH:mm:ss',
+            L: 'YYYY/MM/DD',
+            LL: 'YYYY年M月D日',
+            LLL: 'YYYY年M月D日Ah点mm分',
+            LLLL: 'YYYY年M月D日ddddAh点mm分',
+            l: 'YYYY/M/D',
+            ll: 'YYYY年M月D日',
+            lll: 'YYYY年M月D日 HH:mm',
+            llll: 'YYYY年M月D日dddd HH:mm',
         },
         meridiemParse: /凌晨|早上|上午|中午|下午|晚上/,
         meridiemHour: function (hour, meridiem) {
             if (hour === 12) {
                 hour = 0;
             }
-            if (meridiem === '凌晨' || meridiem === '早上' ||
-                    meridiem === '上午') {
+            if (meridiem === '凌晨' || meridiem === '早上' || meridiem === '上午') {
                 return hour;
             } else if (meridiem === '下午' || meridiem === '晚上') {
                 return hour + 12;
@@ -329,7 +333,7 @@ window.oc.langMessages['zh-cn'] = $.extend(
                 return hour >= 11 ? hour : hour + 12;
             }
         },
-        meridiem : function (hour, minute, isLower) {
+        meridiem: function (hour, minute, isLower) {
             var hm = hour * 100 + minute;
             if (hm < 600) {
                 return '凌晨';
@@ -345,16 +349,28 @@ window.oc.langMessages['zh-cn'] = $.extend(
                 return '晚上';
             }
         },
-        calendar : {
-            sameDay : '[今天]LT',
-            nextDay : '[明天]LT',
-            nextWeek : '[下]ddddLT',
-            lastDay : '[昨天]LT',
-            lastWeek : '[上]ddddLT',
-            sameElse : 'L'
+        calendar: {
+            sameDay: '[今天]LT',
+            nextDay: '[明天]LT',
+            nextWeek: function (now) {
+                if (now.week() !== this.week()) {
+                    return '[下]dddLT';
+                } else {
+                    return '[本]dddLT';
+                }
+            },
+            lastDay: '[昨天]LT',
+            lastWeek: function (now) {
+                if (this.week() !== now.week()) {
+                    return '[上]dddLT';
+                } else {
+                    return '[本]dddLT';
+                }
+            },
+            sameElse: 'L',
         },
         dayOfMonthOrdinalParse: /\d{1,2}(日|月|周)/,
-        ordinal : function (number, period) {
+        ordinal: function (number, period) {
             switch (period) {
                 case 'd':
                 case 'D':
@@ -369,27 +385,29 @@ window.oc.langMessages['zh-cn'] = $.extend(
                     return number;
             }
         },
-        relativeTime : {
-            future : '%s内',
-            past : '%s前',
-            s : '几秒',
-            ss : '%d 秒',
-            m : '1 分钟',
-            mm : '%d 分钟',
-            h : '1 小时',
-            hh : '%d 小时',
-            d : '1 天',
-            dd : '%d 天',
-            M : '1 个月',
-            MM : '%d 个月',
-            y : '1 年',
-            yy : '%d 年'
+        relativeTime: {
+            future: '%s后',
+            past: '%s前',
+            s: '几秒',
+            ss: '%d 秒',
+            m: '1 分钟',
+            mm: '%d 分钟',
+            h: '1 小时',
+            hh: '%d 小时',
+            d: '1 天',
+            dd: '%d 天',
+            w: '1 周',
+            ww: '%d 周',
+            M: '1 个月',
+            MM: '%d 个月',
+            y: '1 年',
+            yy: '%d 年',
         },
-        week : {
+        week: {
             // GB/T 7408-1994《数据元和交换格式·信息交换·日期和时间表示法》与ISO 8601:1988等效
-            dow : 1, // Monday is the first day of the week.
-            doy : 4  // The week that contains Jan 4th is the first week of the year.
-        }
+            dow: 1, // Monday is the first day of the week.
+            doy: 4, // The week that contains Jan 4th is the first week of the year.
+        },
     });
 
     return zhCn;

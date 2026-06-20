@@ -194,7 +194,8 @@ class RecordFinderField extends FallbackField
                 $relatedModel::class,
                 'table' => 'tailor_content_joins',
                 'relationClass' => CustomNestedJoinRelation::class,
-                'relatedKey' => $relatedMultisite ? 'site_root_id' : 'id'
+                'relatedKey' => $relatedMultisite ? 'site_root_id' : 'id',
+                'relatedMultisite' => $relatedMultisite
             ];
         }
         else {
@@ -203,7 +204,8 @@ class RecordFinderField extends FallbackField
                 'table' => $model->getBlueprintDefinition()->getJoinTableName(),
                 'name' => $this->fieldName,
                 'relationClass' => CustomMultiJoinRelation::class,
-                'relatedKey' => ($relatedMultisite && !$isDualMultisite) ? 'site_root_id' : 'id'
+                'relatedKey' => ($relatedMultisite && !$isDualMultisite) ? 'site_root_id' : 'id',
+                'relatedMultisite' => $relatedMultisite
             ];
         }
     }
@@ -263,7 +265,8 @@ class RecordFinderField extends FallbackField
                 'relationClass' => CustomMultiJoinRelation::class,
                 'relatedKey' => $useRelatedRootKey ? 'site_root_id' : 'id',
                 'parentKey' => $useParentRootKey ? 'site_root_id' : 'id',
-                'replicate' => false
+                'replicate' => false,
+                'relatedMultisite' => $relatedMultisite
             ];
         }
     }
@@ -299,10 +302,6 @@ class RecordFinderField extends FallbackField
         //         'showTree' => $blueprint->hasTree(),
         //     ] + ((array) $blueprint->structure);
         // }
-
-        if ($this->span === 'adaptive') {
-            $fieldConfig['externalToolbarAppState'] = 'toolbarExtensionPoint';
-        }
 
         // Transfer custom configuration
         $toTransfer = ['label', 'list', 'form', 'view', 'manage'];
