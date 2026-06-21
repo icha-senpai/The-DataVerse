@@ -28,8 +28,8 @@ class PostPage extends ComponentBase
 
             'notFoundRedirect' => [
                 'title'       => 'Redirect if not found',
-                'description' => 'Page to redirect to if the post does not exist',
-                'default'     => '/',
+                'description' => 'Use 404 for a proper not found response, or set a path to redirect elsewhere',
+                'default'     => '404',
                 'type'        => 'string',
             ]
         ];
@@ -40,7 +40,13 @@ class PostPage extends ComponentBase
         $this->post = $this->loadPost();
 
         if (!$this->post) {
-            return Redirect::to($this->property('notFoundRedirect'));
+            $fallback = trim((string) $this->property('notFoundRedirect'));
+
+            if ($fallback !== '' && $fallback !== '404') {
+                return Redirect::to($fallback);
+            }
+
+            abort(404);
         }
 
         $this->page['post'] = $this->post;

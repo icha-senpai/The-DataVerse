@@ -16,15 +16,18 @@ class UexCommodities extends ComponentBase
 
     public function onRun()
     {
-        \Log::info('[UexCommodities] Component loaded and active.');
+        //
     }
 
     public function onGetData()
     {
         try {
-            return Response::json([
-                ['name' => 'Test Commodity', 'buy_price' => 100, 'sell_price' => 150]
-            ]);
+            $data = DB::table('uex_commodities')
+                ->select('id', 'code', 'name')
+                ->orderBy('name')
+                ->get();
+
+            return Response::json($data);
         } catch (\Throwable $e) {
             return Response::make($e->getMessage(), 500);
         }

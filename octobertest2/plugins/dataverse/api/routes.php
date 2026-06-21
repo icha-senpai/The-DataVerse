@@ -9,9 +9,8 @@ Route::group(['prefix' => 'api/uex'], function () {
     Route::get('outposts', [Uex::class, 'onOutposts']);
     Route::get('poi', [Uex::class, 'onPoi']);
     Route::get('prices', [Uex::class, 'onPrices']);
-    Route::get('space_stations', [Uex::class, 'onSpace_stations']);
+    Route::get('space_stations', [Uex::class, 'onSpaceStations']);
     Route::get('terminals', [Uex::class, 'onTerminals']);
-    Route::get('star_systems', [Uex::class, 'onStar_systems']);
+    Route::get('star_systems', [Uex::class, 'onStarSystems']);
     Route::get('vehicles', [Uex::class, 'onVehicles']);
-
 });

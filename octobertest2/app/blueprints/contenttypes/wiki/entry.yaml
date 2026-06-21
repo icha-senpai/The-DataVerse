@@ -118,4 +118,4 @@ fields:
   #   readOnly: true
 
 use:
-  list: app/contenttypes/tailor/wiki/entry/columns.yaml
+  list: app/tailor/wiki/entry/columns.yaml

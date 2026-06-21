@@ -21,6 +21,10 @@ class NavBuilder
         $currentNav = File::exists($targetPath) ? Yaml::parseFile($targetPath) : [];
         $nav = self::mergeNav($baseNav, $currentNav);
 
+        if (isset($nav['main']) && is_array($nav['main'])) {
+            $nav['main'] = self::cleanItems($nav['main']);
+        }
+
 
         // Find "The Verse" node
         $verseIndex = null;
@@ -36,7 +40,7 @@ class NavBuilder
         }
 
         // Gather current "The Verse" children
-        $verseChildren = $nav['main'][$verseIndex]['children'] ?? [];
+        $verseChildren = self::cleanItems($nav['main'][$verseIndex]['children'] ?? []);
 
         // Collect existing URLs
         $existingUrls = array_unique(array_merge(
@@ -81,7 +85,7 @@ class NavBuilder
         }
 
         // Update the final structure
-        $nav['main'][$verseIndex]['children'] = $verseChildren;
+        $nav['main'][$verseIndex]['children'] = self::cleanItems($verseChildren);
 
         // Write the new generated file
         $yaml = Yaml::dump($nav, 6, 2);
@@ -114,6 +118,42 @@ class NavBuilder
         }
         return $base;
     }
-}
 
+    protected static function cleanItems(array $items): array
+    {
+        $clean = [];
+
+        foreach ($items as $item) {
+            if (!is_array($item)) {
+                continue;
+            }
+
+            $title = trim((string) ($item['title'] ?? ''));
+            $url = isset($item['url']) ? trim((string) $item['url']) : null;
+            $children = isset($item['children']) && is_array($item['children'])
+                ? self::cleanItems($item['children'])
+                : [];
+
+            if ($title === '' && $url === null && !$children) {
+                continue;
+            }
+
+            if ($title !== '') {
+                $item['title'] = $title;
+            } else {
+                unset($item['title']);
+            }
+
+            if ($children) {
+                $item['children'] = $children;
+            } else {
+                unset($item['children']);
+            }
+
+            $clean[] = $item;
+        }
+
+        return array_values($clean);
+    }
+}
 

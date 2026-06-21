@@ -14,17 +14,31 @@ function onStart()
     ];
 
     $resolveNav = function (array $items) use (&$resolveNav, $externalLinks) {
-        return array_map(function ($item) use (&$resolveNav, $externalLinks) {
+        $resolved = [];
+
+        foreach ($items as $item) {
+            if (!is_array($item)) {
+                continue;
+            }
+
             $children = isset($item['children']) && is_array($item['children'])
                 ? $resolveNav($item['children'])
                 : [];
 
-            $url = $item['url'] ?? '#';
+            $title = trim((string) ($item['title'] ?? ''));
+            $url = isset($item['url']) ? trim((string) $item['url']) : '#';
+
+            if ($title === '' && $url === '#' && !$children) {
+                continue;
+            }
+
+            $item['title'] = $title;
             $item['url'] = $externalLinks[$url] ?? $url;
             $item['children'] = $children;
+            $resolved[] = $item;
+        }
 
-            return $item;
-        }, $items);
+        return $resolved;
     };
 
     if (file_exists($path)) {

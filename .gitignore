@@ -1,5 +1,5 @@
 ########################################
-# 🧱  SYSTEM / IDE / OS NOISE
+# SYSTEM / IDE / OS NOISE
 ########################################
 .DS_Store
 Thumbs.db
@@ -12,34 +12,43 @@ $RECYCLE.BIN/
 Icon?
 
 ########################################
-# 🔐  ENV FILES / SECRETS
+# ENV FILES / SECRETS
 ########################################
 .env
 .env.*
+!.env.example
 *.key
 *.pem
+*.local
 
 ########################################
-# 📦  DEPENDENCIES (REBUILDABLE)
+# DEPENDENCIES (REBUILDABLE)
 ########################################
 vendor/
 node_modules/
 /**/vendor/
 /**/node_modules/
+extensions/*/vendor/
 
 ########################################
-# 🗑️  CACHE / LOGS / TEMP FILES
+# OCTOBER / LARAVEL RUNTIME
 ########################################
-bootstrap/cache/
+octobertest2/bootstrap/cache/
+octobertest2/storage/
+octobertest2/public/storage/
+
+########################################
+# CACHE / LOGS / TEMP FILES
+########################################
 /**/internal_data/
 internal_data/
-storage/
 cache/
 logs/
 tmp/
 *.log
 *.tmp
 *.cache
+.cache/
 .nitro
 .tanstack
 .wrangler
@@ -47,16 +56,14 @@ tmp/
 .vinxi
 todos.json
 count.txt
-*.local
 
 ########################################
-# 🛠️  BUILD OUTPUT / TRANSPILED FILES
+# BUILD OUTPUT / TRANSPILED FILES
 ########################################
 public/build/
 public/hot
 dist/
 dist-ssr/
-.cache/
 vite.config.ts.timestamp*
 *.tsbuildinfo
 npm-debug.log*
@@ -64,14 +71,14 @@ yarn-debug.log*
 yarn-error.log*
 
 ########################################
-# 🧮  DATABASE / BACKUPS
+# DATABASE / BACKUPS
 ########################################
 *.sql
 *.bak
 *.sqlite
 
 ########################################
-# 🧹  MISC / EDITOR JUNK
+# MISC / EDITOR JUNK
 ########################################
 *.swp
 *.swo
@@ -92,10 +99,7 @@ php_cs.cache
 *.iso
 
 ########################################
-# ⚙️  CMS / FRONTEND SPECIFIC
+# CMS / APP SPECIFIC
 ########################################
 LocalSettings.php
 config.php
-public/storage/
-extensions/*/vendor/
-images/

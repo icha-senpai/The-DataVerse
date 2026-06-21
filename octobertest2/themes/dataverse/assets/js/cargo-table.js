@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   let commodities = [];
   try {
-    const res = await fetch("/api/uex/commodities");
+    const res = await fetch("/uex/data");
     const json = await res.json();
     commodities = json.map(i => i.name).filter(Boolean);
   } catch (e) {

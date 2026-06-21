@@ -47,27 +47,27 @@ class Plugin extends PluginBase
                     'entries' => [
                         'label' => 'Entries',
                         'icon'  => 'icon-file-text',
-                        'url'   => Backend::url('tailor/entries/wiki_entry'),
+                        'url'   => Backend::url('tailor/entries/wiki-entry'),
                     ],
                     'categories' => [
                         'label' => 'Categories',
                         'icon'  => 'icon-folder',
-                        'url'   => Backend::url('tailor/entries/wiki_category'),
+                        'url'   => Backend::url('tailor/entries/wiki-category'),
                     ],
                     'tags' => [
                         'label' => 'Tags',
                         'icon'  => 'icon-tags',
-                        'url'   => Backend::url('tailor/entries/wiki_tag'),
+                        'url'   => Backend::url('tailor/entries/wiki-tag'),
                     ],
                     'sources' => [
                         'label' => 'Sources',
                         'icon'  => 'icon-link',
-                        'url'   => Backend::url('tailor/entries/wiki_source'),
+                        'url'   => Backend::url('tailor/entries/wiki-source'),
                     ],
                     'revisions' => [
                         'label' => 'Revisions',
                         'icon'  => 'icon-history',
-                        'url'   => Backend::url('tailor/entries/wiki_revision'),
+                        'url'   => Backend::url('tailor/entries/wiki-revision'),
                     ],
                 ],
             ],

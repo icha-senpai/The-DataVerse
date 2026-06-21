@@ -7,62 +7,56 @@ class Uex extends \Cms\Classes\Controller
 {
     public function onCities()
     {
-        $data = DB::table('uex_cities')->get();
-        return Response::json($data);
+        return $this->respondWithTable('uex_cities');
     }
 
     public function onCommodities()
     {
-        $data = DB::table('uex_commodities')->get();
-        return Response::json($data);
+        return $this->respondWithTable('uex_commodities');
     }
 
     public function onPlanets()
     {
-        $data = DB::table('uex_planets')->get();
-        return Response::json($data);
+        return $this->respondWithTable('uex_planets');
     }
 
     public function onOutposts()
     {
-        $data = DB::table('uex_outposts')->get();
-        return Response::json($data);
+        return $this->respondWithTable('uex_outposts');
     }
 
     public function onPoi()
     {
-        $data = DB::table('uex_poi')->get();
-        return Response::json($data);
+        return $this->respondWithTable('uex_poi');
     }
 
     public function onPrices()
     {
-        $data = DB::table('uex_prices')->get();
-        return Response::json($data);
+        return $this->respondWithTable('uex_prices');
     }
 
-    public function onSpace_stations()
+    public function onSpaceStations()
     {
-        $data = DB::table('uex_space_stations')->get();
-        return Response::json($data);
+        return $this->respondWithTable('uex_space_stations');
     }
 
     public function onTerminals()
     {
-        $data = DB::table('uex_terminals')->get();
-        return Response::json($data);
+        return $this->respondWithTable('uex_terminals');
     }
 
-    public function onStar_systems()
+    public function onStarSystems()
     {
-        $data = DB::table('uex_star_systems')->get();
-        return Response::json($data);
+        return $this->respondWithTable('uex_star_systems');
     }
 
     public function onVehicles()
     {
-        $data = DB::table('uex_vehicles')->get();
-        return Response::json($data);
+        return $this->respondWithTable('uex_vehicles');
     }
- // Add more for each table you need
+
+    protected function respondWithTable(string $table)
+    {
+        return Response::json(DB::table($table)->get());
+    }
 }

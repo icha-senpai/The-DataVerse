@@ -8,7 +8,7 @@ main:
       - { title: Forum, url: forum_link }
       - { title: Minecraft, children: [
           { title: Overview, url: /minecraft },
-          { title: Modpack, url: /minecraft/modpack },
+          { title: Modpack, url: https://www.curseforge.com/minecraft/modpacks/tnp-limitless-8 },
           { title: Changelog, url: /minecraft/changelog }
         ]
         }
