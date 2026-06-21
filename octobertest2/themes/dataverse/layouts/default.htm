@@ -7,13 +7,14 @@
 
     {% framework extras %}
     {% styles %}
+    <style>[x-cloak] { display: none !important; }</style>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="stylesheet" href="{{ 'assets/css/output.css'|theme }}">
-
   </head>
-  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
   <body class="bg-dv-bg text-dv-text min-h-screen flex flex-col font-tilt">
 
+    {% partial 'site/external-links' %}
     {% partial 'site/navbar' %}
    
 
@@ -24,13 +25,5 @@
     {% partial 'site/footer' %}
 
     {% scripts %}
-
-
-    {# ✅ Load cargo scripts only on the cargo page #}
-    {% if this.page.id == 'cargo' %}
-
-      <script src="{{ 'assets/js/cargo-table.js'|theme }}"></script>
-
-    {% endif %}
   </body>
 </html>

@@ -6,10 +6,31 @@ use Symfony\Component\Yaml\Yaml;
 function onStart()
 {
     $path = themes_path('dataverse/meta/navigation.yaml');
+    $forumUrl = rtrim((string) ($this['forum_url'] ?? 'https://forum.ichaa.net'), '/');
+    $wikiUrl = rtrim((string) ($this['wiki_url'] ?? 'https://wiki.ichaa.net'), '/');
+    $externalLinks = [
+        'forum_link' => $forumUrl,
+        'wiki_link' => $wikiUrl,
+    ];
+
+    $resolveNav = function (array $items) use (&$resolveNav, $externalLinks) {
+        return array_map(function ($item) use (&$resolveNav, $externalLinks) {
+            $children = isset($item['children']) && is_array($item['children'])
+                ? $resolveNav($item['children'])
+                : [];
+
+            $url = $item['url'] ?? '#';
+            $item['url'] = $externalLinks[$url] ?? $url;
+            $item['children'] = $children;
+
+            return $item;
+        }, $items);
+    };
+
     if (file_exists($path)) {
         $yaml = file_get_contents($path);
         $data = Yaml::parse($yaml);
-        $this['nav'] = isset($data['main']) ? $data['main'] : [];
+        $this['nav'] = $resolveNav(isset($data['main']) && is_array($data['main']) ? $data['main'] : []);
     } else {
         $this['nav'] = [];
     }
@@ -17,18 +38,6 @@ function onStart()
 ?>
 ==
 {% set nav = nav %}
-
-{# LOCAL (Laragon) #}
-{#
-{% set forum_url = 'http://forum.test/forum/' %}
-{% set wiki_url  = 'https://bookstack.test/' %}
-#}
-
-{# PRODUCTION (ichaa.net) - uncomment these when deploying #}
-
-{% set forum_url = 'https://forum.ichaa.net/forum/' %}
-{% set wiki_url  = 'https://bookstack.ichaa.net/' %}
-
 
 <div x-data="{ open:false }">
 
@@ -47,7 +56,9 @@ function onStart()
          The DataVerse
       </a>
 
-      <button @click="open = !open"
+      <button type="button"
+              @click="open = !open"
+              aria-label="Toggle navigation menu"
               class="md:hidden text-dv-accent hover:text-dv-accent2 focus:outline-none">
         <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -59,13 +70,10 @@ function onStart()
       <ul class="hidden md:flex space-x-6 overflow-visible">
         {% for item in nav %}
           {% set children = item.children ?? [] %}
-          {% set href = item.url %}
-          {% if item.url == 'forum_link' %}{% set href = forum_url %}{% endif %}
-          {% if item.url == 'wiki_link'  %}{% set href = wiki_url %}{% endif %}
 
           {% if not children %}
             <li>
-              <a href="{{ href }}"
+              <a href="{{ item.url }}"
                  class="hover:text-dv-accent2 transition">
                  {{ item.title }}
               </a>
@@ -78,7 +86,8 @@ function onStart()
                 @mouseenter="clearTimeout(timer); dd = true"
                 @mouseleave="timer = setTimeout(() => dd = false, 150)">
 
-              <button @click="dd = !dd"
+              <button type="button"
+                      @click="dd = !dd"
                       class="flex items-center hover:text-dv-accent2 transition">
                 {{ item.title }}
                 <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor"
@@ -95,13 +104,10 @@ function onStart()
 
                 {% for child in children %}
                   {% set hasSub = child.children is defined and child.children|length > 0 %}
-                  {% set child_href = child.url %}
-                  {% if child.url == 'forum_link' %}{% set child_href = forum_url %}{% endif %}
-                  {% if child.url == 'wiki_link'  %}{% set child_href = wiki_url %}{% endif %}
 
                   {% if not hasSub %}
                     <li>
-                      <a href="{{ child_href }}"
+                      <a href="{{ child.url }}"
                          class="block px-4 py-2 hover:text-dv-accent2 transition">
                          {{ child.title }}
                       </a>
@@ -114,24 +120,26 @@ function onStart()
                         @mouseenter="clearTimeout(timer); sub = true"
                         @mouseleave="timer = setTimeout(() => sub = false, 150)">
 
-                      <div class="flex items-center justify-between px-4 py-2 hover:text-dv-accent2 cursor-pointer">
-                        {{ child.title }}
+                      <button type="button"
+                              @click="sub = !sub"
+                              class="flex w-full items-center justify-between px-4 py-2 hover:text-dv-accent2 cursor-pointer">
+                        <span>{{ child.title }}</span>
                         <svg class="w-3 h-3 ml-2" fill="none" stroke="currentColor"
                              viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-linejoin="round"
                                 stroke-width="2" d="M9 5l7 7-7 7" />
                         </svg>
-                      </div>
+                      </button>
 
                       <ul x-show="sub" x-transition x-cloak
                           class="absolute left-full top-0 translate-x-[0.25rem] min-w-[180px] dv-glass
                                  border border-dv-accent/30 rounded-lg shadow-xl py-2 z-[9999]
                                  transition-transform duration-150 ease-out overflow-visible">
-                        {% for sub in child.children %}
+                        {% for grandchild in child.children %}
                           <li>
-                            <a href="{{ sub.url }}"
+                            <a href="{{ grandchild.url }}"
                                class="block px-4 py-2 hover:text-dv-accent2 transition">
-                               {{ sub.title }}
+                               {{ grandchild.title }}
                             </a>
                           </li>
                         {% endfor %}
@@ -153,13 +161,16 @@ function onStart()
        x-show="open"
        x-transition.opacity
        x-cloak
+       @click="open = false"
        class="fixed inset-0 z-40 md:hidden
               bg-gradient-to-b from-[rgba(10,15,25,0.95)] to-[rgba(5,8,12,0.98)]
               backdrop-blur-2xl ring-1 ring-dv-accent/20
               shadow-[0_0_40px_rgba(102,234,255,0.15)]
               font-tilt overflow-y-auto">
 
-    <button @click="open = false"
+    <button type="button"
+            @click="open = false"
+            aria-label="Close navigation menu"
             class="absolute top-4 right-4 text-dv-accent hover:text-dv-accent2 z-50">
       <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -169,22 +180,20 @@ function onStart()
 
     <div class="p-6 space-y-2" @click.stop>
 
-      {% macro mobileTree(items, forum_url, wiki_url) %}
+      {% macro mobileTree(items) %}
         {% for item in items %}
           {% set children = item.children ?? [] %}
-          {% set href = item.url %}
-          {% if item.url == 'forum_link' %}{% set href = forum_url %}{% endif %}
-          {% if item.url == 'wiki_link'  %}{% set href = wiki_url %}{% endif %}
 
           {% if not children %}
-            <a href="{{ href }}"
+            <a href="{{ item.url }}"
                class="block py-2 px-2 hover:text-dv-accent2 transition"
                @click="open=false">
               {{ item.title }}
             </a>
           {% else %}
             <div x-data="{ sub:false }">
-              <button @click="sub = !sub"
+              <button type="button"
+                      @click="sub = !sub"
                       class="flex justify-between items-center w-full py-2 px-2 hover:text-dv-accent2">
                 <span>{{ item.title }}</span>
                 <svg class="w-4 h-4 transform"
@@ -199,14 +208,14 @@ function onStart()
               <div x-show="sub"
                    x-transition x-cloak
                    class="ml-4 mt-1 space-y-1 border-l border-dv-accent/20 pl-3">
-                {{ _self.mobileTree(children, forum_url, wiki_url) }}
+                {{ _self.mobileTree(children) }}
               </div>
             </div>
           {% endif %}
         {% endfor %}
       {% endmacro %}
 
-      {{ _self.mobileTree(nav, forum_url, wiki_url) }}
+      {{ _self.mobileTree(nav) }}
 
     </div>
   </div>

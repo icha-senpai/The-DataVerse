@@ -24,25 +24,20 @@
     "october/dashboard": "4.*",
     "october/tailor": "4.*",
     "laravel/framework": "^12.0",
-    "laravel/socialite": "^5.23",
     "laravel/sanctum": "^4.2",
     "spatie/laravel-csp": "^3.14",
     "spatie/laravel-activitylog": "^4.9",
     "spatie/laravel-backup": "^9.0",
     "doctrine/dbal": "^3.8",
     "sentry/sentry-laravel": "^4.13",
-    "bacon/bacon-qr-code": "2.0.8",
-    "composer/installers": "~1.12",
+    "bacon/bacon-qr-code": "^3.1",
+    "composer/installers": "^2.3",
     "dasprid/enum": "1.0.7",
     "mobiledetect/mobiledetectlib": "^4.8.09",
-    "rainlab/user-plugin": "^3.5.1",
     "rainlab/blog-plugin": "^2.0.0",
     "rainlab/builder-plugin": "^3.0.5",
-    "rainlab/pages-plugin": "^2.2.4",
-    "rainlab/userplus-plugin": "^2.0.2",
     "rainlab/location-plugin": "^2.0.3",
-    "rainlab/translate-plugin": "^2.2.16",
-    "reazzon/editor-plugin": "^2.0.0"
+    "rainlab/translate-plugin": "^2.2.16"
     },
 
   "require-dev": {

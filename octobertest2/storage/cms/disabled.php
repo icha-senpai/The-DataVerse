@@ -1,4 +1,12 @@
 <?php return array (
-  'October.Demo' => true,
-  'ReaZzon.Editor' => true,
+  'global' => 
+  array (
+    'October.Demo' => true,
+  ),
+  'sites' => 
+  array (
+  ),
+  'groups' => 
+  array (
+  ),
 );

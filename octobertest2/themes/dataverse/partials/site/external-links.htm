@@ -1,0 +1,18 @@
+[viewBag]
+==
+<?php
+function onStart()
+{
+    $defaultForumUrl = app()->environment('local')
+        ? 'http://forum.test/forum'
+        : 'https://forum.ichaa.net';
+
+    $defaultWikiUrl = app()->environment('local')
+        ? 'https://bookstack.test'
+        : 'https://wiki.ichaa.net';
+
+    $this['forum_url'] = rtrim((string) env('DATAVERSE_FORUM_URL', $defaultForumUrl), '/');
+    $this['wiki_url'] = rtrim((string) env('DATAVERSE_WIKI_URL', $defaultWikiUrl), '/');
+}
+?>
+==

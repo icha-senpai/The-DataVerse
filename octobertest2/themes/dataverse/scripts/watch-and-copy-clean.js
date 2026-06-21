@@ -6,9 +6,20 @@ const { spawn } = require('child_process');
 // Clean watcher: runs tailwind/postcss in watch mode and copies output.css to vendor when updated.
 const themeRoot = path.resolve(__dirname, '..');
 const cssDir = path.join(themeRoot, 'assets', 'css');
-const outputCss = path.join(cssDir, 'output.css');
-
 const usePostCSS = process.argv.includes('--postcss');
+const watchedDirectories = [
+  path.join(themeRoot, 'assets', 'css'),
+  path.join(themeRoot, 'assets', 'js'),
+  path.join(themeRoot, 'layouts'),
+  path.join(themeRoot, 'pages'),
+  path.join(themeRoot, 'partials'),
+  path.join(themeRoot, 'content'),
+];
+const watchedFiles = [
+  path.join(themeRoot, 'tailwind.config.js'),
+  path.join(themeRoot, 'postcss.config.js'),
+  path.join(themeRoot, 'package.json'),
+];
 
 // Watcher that invokes the single-run build script on changes.
 // This keeps watch mode consistent with the single-run flow (it runs build-and-copy.js).
@@ -53,34 +64,46 @@ function startWatcher() {
     }, 200);
   }
 
-  // Watch the CSS directory and tailwind config for changes that should trigger a rebuild.
+  // Watch the theme files Tailwind scans so class changes rebuild immediately.
   try {
-    fs.watch(path.join(themeRoot, 'assets', 'css'), { persistent: true }, (ev, fn) => {
-      if (!fn) return;
-      const name = String(fn || '');
-      // watch for changes to input.css or any CSS in the folder
-      if (name.endsWith('.css')) scheduleBuild();
-    });
+    for (const dir of watchedDirectories) {
+      if (!fs.existsSync(dir)) continue;
 
-    const tailwindConfig = path.join(themeRoot, 'tailwind.config.js');
-    if (fs.existsSync(tailwindConfig)) {
-      fs.watchFile(tailwindConfig, { interval: 500 }, (curr, prev) => {
+      fs.watch(dir, { persistent: true, recursive: true }, (ev, fn) => {
+        if (!fn) return;
+
+        const name = String(fn || '').toLowerCase();
+        if (/\.(css|js|htm|html|twig|php|vue|ts)$/.test(name)) {
+          scheduleBuild();
+        }
+      });
+    }
+
+    for (const filePath of watchedFiles) {
+      if (!fs.existsSync(filePath)) continue;
+
+      fs.watchFile(filePath, { interval: 500 }, (curr, prev) => {
         if (curr.mtimeMs !== prev.mtimeMs) scheduleBuild();
       });
     }
   } catch (err) {
-    console.warn('[watch-and-copy-clean] failed to attach fs.watch; falling back to polling input.css');
-    const inputCss = path.join(themeRoot, 'assets', 'css', 'input.css');
-    let lastM = 0;
+    console.warn('[watch-and-copy-clean] failed to attach fs.watch; falling back to polling theme sources');
+    const polledPaths = watchedDirectories.concat(watchedFiles).filter((filePath) => fs.existsSync(filePath));
+    const lastSeen = new Map();
+
     setInterval(() => {
       try {
-        const st = fs.statSync(inputCss);
-        if (st.mtimeMs > lastM) {
-          lastM = st.mtimeMs;
-          scheduleBuild();
+        for (const filePath of polledPaths) {
+          const st = fs.statSync(filePath);
+          const previous = lastSeen.get(filePath) || 0;
+
+          if (st.mtimeMs > previous) {
+            lastSeen.set(filePath, st.mtimeMs);
+            scheduleBuild();
+          }
         }
       } catch (e) {
-        // ignore until file exists
+        // ignore until paths exist
       }
     }, 1000);
   }

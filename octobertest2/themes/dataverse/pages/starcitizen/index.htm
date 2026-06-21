@@ -2,31 +2,9 @@ url = "/starcitizen"
 layout = "default" 
 title = "Star Citizen" 
 ==
-
-{# ---------------------------------------------- #}
-{# Environment toggles                            #}
-{# ---------------------------------------------- #}
-
-{# LOCAL (Laragon) #}
-{#
-{% set forum_url   = 'http://forum.test/forum/' %}
-{% set wiki_url    = 'http://wiki.test/index.php/Main_Page' %}
-#}
-
-
-{# PRODUCTION (ichaa.net) - uncomment when deploying #}
-
-{% set forum_url   = 'https://forum.ichaa.net' %}
-{% set wiki_url    = 'https://wiki.ichaa.net' %}
-
-
 {% set cargo_url = '/starcitizen/table' %}
-{% set contracts_url = 'http://wiki.test/index.php' %}
+{% set contracts_url = wiki_url %}
 {% set twitch_url = '/twitch/watch' %}
-
-{# ---------------------------------------------- #}
-{# Page content                                   #}
-{# ---------------------------------------------- #}
 
 <div class="relative min-h-screen overflow-hidden bg-dv-bg">
 
