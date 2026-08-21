@@ -1,27 +1,44 @@
-<#
-clear-october-caches.ps1
-
-Clears OctoberCMS cache folders under storage/ so templates and cached views are regenerated.
-
-Usage:
-  .\clear-october-caches.ps1
-  # or to run from anywhere:
-  powershell -NoProfile -ExecutionPolicy Bypass -File .\clear-october-caches.ps1
-#>
-
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
 $scriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Definition
 if (-not $scriptRoot) { $scriptRoot = Get-Location }
 
-Write-Host "Clearing OctoberCMS caches under: $scriptRoot\storage" -ForegroundColor Cyan
+function Invoke-Artisan {
+    param([string]$Command)
+
+    Write-Host "Running: php artisan $Command" -ForegroundColor Cyan
+    & php artisan $Command
+
+    if ($LASTEXITCODE -ne 0) {
+        throw "Artisan command failed: php artisan $Command"
+    }
+}
+
+Push-Location $scriptRoot
+try {
+    if (-not (Test-Path (Join-Path $scriptRoot 'artisan'))) {
+        throw "Could not find artisan at $scriptRoot"
+    }
+
+    Write-Host "Clearing Laravel and October caches for: $scriptRoot" -ForegroundColor Cyan
+
+    Invoke-Artisan 'cache:clear'
+    Invoke-Artisan 'config:clear'
+    Invoke-Artisan 'route:clear'
+    Invoke-Artisan 'view:clear'
+}
+finally {
+    Pop-Location
+}
+
+Write-Host "Clearing OctoberCMS cache folders under: $scriptRoot\storage" -ForegroundColor Cyan
 
 $targets = @(
     "$scriptRoot\storage\cms\twig\*",
     "$scriptRoot\storage\framework\cache\*",
     "$scriptRoot\storage\framework\views\*",
-    "$scriptRoot\storage\logs\*"
+    "$scriptRoot\storage\temp\*"
 )
 
 foreach ($t in $targets) {
@@ -33,4 +50,4 @@ foreach ($t in $targets) {
     }
 }
 
-Write-Host "Cache clear complete. Restart any dev server and hard-refresh your browser (Ctrl+F5)." -ForegroundColor Green
+Write-Host "Cache clear complete." -ForegroundColor Green
