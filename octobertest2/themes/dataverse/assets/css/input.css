@@ -13,6 +13,7 @@
 @source "../../partials/**/*.htm";
 @source "../../content/**/*.htm";
 @source "../js/**/*.js";
+@source "../../../../plugins/dataverse/**/*.{htm,html,twig,php,js,vue,ts}";
 
 
 /* ============================================================
@@ -20,6 +21,8 @@
    ============================================================ */
 @theme {
   --font-tilt: "Tilt Neon", "Inter", ui-sans-serif, system-ui;
+  --font-orbitron: "Orbitron", "Inter", ui-sans-serif, system-ui;
+  --font-inter: "Inter", ui-sans-serif, system-ui;
 
   --color-dv-bg: #0a0a0f;
   --color-dv-surface: #111118;

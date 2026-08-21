@@ -14,7 +14,7 @@
 
 /* Keep your neon text color */
 .dv-raw {
-    color: var(--dv-textSoft);
+    color: var(--color-dv-textSoft);
 }
 
 /* Optional: keep images full-width and nice */
