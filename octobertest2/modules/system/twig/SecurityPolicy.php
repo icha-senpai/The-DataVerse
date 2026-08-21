@@ -34,7 +34,7 @@ final class SecurityPolicy implements SecurityPolicyInterface
             'increment', 'incrementEach', 'decrement', 'decrementEach',
             'from', 'fromRaw', 'fromSub',
             'getConnection', 'toRawSql',
-            'selectRaw', 'whereRaw', 'orWhereRaw',
+            'selectRaw', 'selectSub', 'whereRaw', 'orWhereRaw',
             'havingRaw', 'orHavingRaw',
             'orderByRaw', 'groupByRaw',
             'joinSub', 'leftJoinSub', 'rightJoinSub', 'crossJoinSub',
@@ -53,6 +53,10 @@ final class SecurityPolicy implements SecurityPolicyInterface
             'save', 'saveQuietly', 'saveOrFail',
             'push', 'pushQuietly',
             'fill', 'forceFill',
+            'setTable',
+        ],
+        \Illuminate\Pagination\AbstractPaginator::class => [
+            'through', 'setCollection', 'getCollection',
         ],
     ];
 

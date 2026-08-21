@@ -67,14 +67,19 @@ trait HasTranslatable
             $siteModel = $this->getTranslatableSiteModel($model, $site);
             $formWidget = $this->makeTranslateFormWidget($field, $siteModel, $site);
             $saveData = $formWidget->getSaveData();
-            $this->controller->formBeforeSave($model);
+
+            if ($this->controller->methodExists('formBeforeSave')) {
+                $this->controller->formBeforeSave($model);
+            }
 
             $formWidget->performSaveOnModel($siteModel, $saveData, [
                 'sessionKey' => $formWidget->getSessionKey(),
                 'force' => true
             ]);
 
-            $this->controller->formAfterSave($model);
+            if ($this->controller->methodExists('formAfterSave')) {
+                $this->controller->formAfterSave($model);
+            }
         });
     }
 
@@ -197,7 +202,7 @@ trait HasTranslatable
                 'type' => $field->config['widget'] ?? ($field->config['type'] ?? null),
                 'required' => false,
                 'span' => 'full'
-            ]), ['value', 'arrayName'])
+            ]), ['value', 'arrayName', 'stretch', 'trigger'])
         ];
 
         $widget = $this->makeWidget(FormWidget::class, $config);

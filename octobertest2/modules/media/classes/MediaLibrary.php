@@ -6,6 +6,7 @@ use Str;
 use Lang;
 use Cache;
 use Config;
+use System;
 use Storage;
 use October\Rain\Filesystem\Definitions as FileDefinitions;
 use ApplicationException;
@@ -342,6 +343,7 @@ class MediaLibrary
     public function put($path, $contents)
     {
         $path = self::validatePath($path);
+        self::validateExtension($path);
         return $this->getStorageDisk()->put($path, $contents);
     }
 
@@ -354,6 +356,7 @@ class MediaLibrary
     public function putFile($path, $file)
     {
         $path = self::validatePath($path);
+        self::validateExtension($path);
         return $this->getStorageDisk()->putFileAs(dirname($path), $file, basename($path));
     }
 
@@ -487,26 +490,18 @@ class MediaLibrary
             return $path;
         }
 
-        // Validate folder names
-        $regexAllowlist = [
-            '\w', // any word character
-            preg_quote('@', '/'),
-            preg_quote('.', '/'),
-            '\s', // whitespace character
-            preg_quote('-', '/'),
-            preg_quote('_', '/'),
-            preg_quote('/', '/'),
-            preg_quote('(', '/'),
-            preg_quote(')', '/'),
-            preg_quote('[', '/'),
-            preg_quote(']', '/'),
-            preg_quote(',', '/'),
-            preg_quote('=', '/'),
-            preg_quote("'", '/'),
-            preg_quote('&', '/'),
-        ];
+        // Reject paths that are not valid UTF-8
+        if (!mb_check_encoding($path, 'UTF-8')) {
+            throw new ApplicationException(Lang::get('system::lang.media.invalid_path_encoding', ['path' => mb_scrub($path)]));
+        }
 
-        if (!preg_match('/^[' . implode('', $regexAllowlist) . ']+$/iu', $path)) {
+        // Reject control, format and other invisible characters
+        if (preg_match('/[\p{C}]/u', $path)) {
+            throw new ApplicationException(Lang::get('system::lang.media.invalid_path', compact('path')));
+        }
+
+        // Reject characters reserved by file systems and URLs
+        if (preg_match('/[<>:"|?*]/', $path)) {
             throw new ApplicationException(Lang::get('system::lang.media.invalid_path', compact('path')));
         }
 
@@ -530,6 +525,26 @@ class MediaLibrary
         }
 
         return $path;
+    }
+
+    /**
+     * validateExtension enforces the Media Library extension allow-list on a destination
+     * path. Every write entry point should pass through here so callers cannot drop a file
+     * with an arbitrary extension into the public media folder.
+     */
+    public static function validateExtension(string $path): void
+    {
+        $extension = strtolower(pathinfo($path, PATHINFO_EXTENSION));
+
+        $allowedFileTypes = FileDefinitions::get('default_extensions');
+
+        if (!in_array($extension, $allowedFileTypes)) {
+            throw new ApplicationException(Lang::get('backend::lang.media.type_blocked'));
+        }
+
+        if (System::checkSafeMode() && in_array($extension, ['less', 'sass', 'scss'])) {
+            throw new ApplicationException(Lang::get('backend::lang.media.type_blocked'));
+        }
     }
 
     /**
@@ -605,7 +620,7 @@ class MediaLibrary
      */
     protected function initLibraryItem($path, $itemType): ?MediaLibraryItem
     {
-        $path = self::validatePath($path, true);
+        $path = self::validatePath($path);
 
         if (!$this->isVisible($path)) {
             return null;

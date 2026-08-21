@@ -17,6 +17,7 @@ Icon?
 .env
 .env.*
 !.env.example
+auth.json
 *.key
 *.pem
 *.local

@@ -46,7 +46,6 @@ export default {
     require('@tailwindcss/line-clamp'),
     require('@tailwindcss/container-queries'),
     require('tailwind-scrollbar'),
-    require('tailwindcss-textshadow'),
     require('tailwindcss-filters'),
     require('tailwindcss-gradients'),
     require('daisyui'),

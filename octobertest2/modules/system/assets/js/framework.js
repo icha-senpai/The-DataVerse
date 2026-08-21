@@ -428,8 +428,8 @@
       return promise;
     }
     async loadCollection(collection = {}) {
-      const jsList = (collection.js ?? []).map(normalizeAsset).filter((asset) => asset.inline || !document.querySelector(`head script[src="${htmlEscape(asset.url)}"]`));
-      const cssList = (collection.css ?? []).map(normalizeAsset).filter((asset) => !document.querySelector(`head link[href="${htmlEscape(asset.url)}"]`));
+      const jsList = (collection.js ?? []).map(normalizeAsset).filter((asset) => asset.inline || !jsInDom(asset.url));
+      const cssList = (collection.css ?? []).map(normalizeAsset).filter((asset) => !cssInDom(asset.url));
       const imgList = (collection.img ?? []).map(normalizeAsset);
       if (!jsList.length && !cssList.length && !imgList.length) {
         return;
@@ -443,6 +443,10 @@
     loadStyleSheet(asset) {
       const { url, attributes = {} } = asset;
       return new Promise((resolve, reject) => {
+        if (cssInDom(url)) {
+          resolve(null);
+          return;
+        }
         const el = document.createElement("link");
         el.rel = "stylesheet";
         el.type = "text/css";
@@ -493,6 +497,10 @@ window['${id}']();`;
         }
         const { url, attributes = {} } = asset;
         return p.then(() => new Promise((resolve, reject) => {
+          if (jsInDom(url)) {
+            resolve(null);
+            return;
+          }
           const el = document.createElement("script");
           if (attributes.type) {
             el.type = attributes.type;
@@ -526,6 +534,12 @@ window['${id}']();`;
     }
   };
   var inlineModuleId = 0;
+  function jsInDom(url) {
+    return !!document.querySelector(`head script[src="${htmlEscape(url)}"]`);
+  }
+  function cssInDom(url) {
+    return !!document.querySelector(`head link[href="${htmlEscape(url)}"]`);
+  }
   function normalizeAsset(asset) {
     return typeof asset === "string" ? { url: asset } : asset;
   }
@@ -1036,11 +1050,13 @@ window['${id}']();`;
       if (isTurboEnabled()) {
         turboVisit(href);
       } else {
+        this.delegate.markNavigating();
         location.assign(href);
       }
     }
     // Custom function, reload the browser
     handleReloadResponse() {
+      this.delegate.markNavigating();
       location.reload();
     }
     // Mark known elements as being updated
@@ -1446,8 +1462,9 @@ window['${id}']();`;
       if (this.options.htmlOnly && !contentTypeIsHTML(contentType)) {
         this.failed = true;
         this.notifyApplicationAfterRequestEnd();
-        this.delegate.requestFailedWithStatusCode(SystemStatusCode.contentTypeMismatch);
-        this.destroy();
+        await this.settleWithDelegate(
+          () => this.delegate.requestFailedWithStatusCode(SystemStatusCode.contentTypeMismatch)
+        );
         return;
       }
       let responseData;
@@ -1460,16 +1477,27 @@ window['${id}']();`;
       }
       if (response.status >= 200 && response.status < 300) {
         this.notifyApplicationAfterRequestEnd();
-        this.delegate.requestCompletedWithResponse(
-          responseData,
-          response.status,
-          this.getRedirectLocation(response)
+        await this.settleWithDelegate(
+          () => this.delegate.requestCompletedWithResponse(
+            responseData,
+            response.status,
+            this.getRedirectLocation(response)
+          )
         );
-        this.destroy();
       } else {
         this.failed = true;
         this.notifyApplicationAfterRequestEnd();
-        this.delegate.requestFailedWithStatusCode(response.status, responseData);
+        await this.settleWithDelegate(
+          () => this.delegate.requestFailedWithStatusCode(response.status, responseData)
+        );
+      }
+    }
+    async settleWithDelegate(callback) {
+      try {
+        await callback();
+      } catch (error) {
+        Promise.reject(error);
+      } finally {
         this.destroy();
       }
     }
@@ -1684,6 +1712,7 @@ window['${id}']();`;
   }
 
   // ../../vendor/larajax/larajax/resources/src/request/request.js
+  var appNavigating = false;
   var Request = class _Request {
     constructor(element, handler, options) {
       this.el = element;
@@ -1773,6 +1802,12 @@ window['${id}']();`;
         element = document.querySelector(element);
       }
       return new _Request(element, handler, options).start();
+    }
+    static markNavigating() {
+      appNavigating = true;
+    }
+    markNavigating() {
+      appNavigating = true;
     }
     toggleRedirect(redirectUrl) {
       if (!redirectUrl) {
@@ -1866,7 +1901,8 @@ window['${id}']();`;
       return dispatch("ajax:error-message", { target: window, detail: { message } });
     }
     notifyApplicationCustomEvent(name, data) {
-      return dispatch(name, { target: this.el, detail: data });
+      const target = this.el instanceof Node && document.contains(this.el) ? this.el : document;
+      return dispatch(name, { target, detail: data });
     }
     // HTTP request delegate
     requestStarted() {
@@ -1896,6 +1932,13 @@ window['${id}']();`;
       this.promise.reject(data);
     }
     requestFinished() {
+      if (appNavigating) {
+        window.addEventListener("pageshow", () => {
+          appNavigating = false;
+          this.requestFinished();
+        }, { once: true });
+        return;
+      }
       this.markAsProgress(false);
       this.toggleLoadingElement(false);
       if (this.options.progressBar) {
@@ -2850,6 +2893,7 @@ window['${id}']();`;
       AjaxRequest,
       AssetManager: AssetManager2,
       ajax: AjaxRequest.send,
+      markNavigating: AjaxRequest.markNavigating,
       // Core
       AjaxFramework,
       request: AjaxFramework.requestElement,
